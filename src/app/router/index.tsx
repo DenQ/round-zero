@@ -1,0 +1,18 @@
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
+import { AboutPage } from '@pages/about'
+import { HomePage } from '@pages/home'
+import { AppLayout } from '@widgets/app-layout'
+
+export function AppRouter() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route element={<AppLayout />}>
+          <Route index element={<HomePage />} />
+          <Route path="about" element={<AboutPage />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  )
+}

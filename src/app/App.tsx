@@ -1,5 +1,10 @@
-import { HomePage } from '@pages/home'
+import { AppThemeProvider } from '@shared/lib/theme'
+import { AppRouter } from './router'
 
 export function App() {
-  return <HomePage />
+  return (
+    <AppThemeProvider>
+      <AppRouter />
+    </AppThemeProvider>
+  )
 }
