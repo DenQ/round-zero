@@ -53,7 +53,8 @@
       "react": "React"
     },
     "topics": {
-      "eventLoop": "Event Loop"
+      "eventLoop": "Event Loop",
+      "context": "Контекст"
     },
     "levels": {
       "junior": "Junior",

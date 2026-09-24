@@ -311,6 +311,298 @@
       "type": "recall",
       "text": "How is a macrotask different from a microtask?",
       "answer": "A macrotask (setTimeout, setInterval, I/O) is one turn of the “big” loop: after it finishes, the event loop drains every microtask. Microtasks (Promise.then, queueMicrotask) have higher priority and run back-to-back until that queue is empty."
+    },
+    {
+      "id": 79,
+      "type": "code",
+      "language": "js",
+      "text": "setTimeout(() => console.log(1), 0);\nPromise.resolve().then(() => console.log(2));",
+      "options": [
+        "1, 2",
+        "2, 1",
+        "2",
+        "1, 2, 1"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 80,
+      "type": "code",
+      "language": "js",
+      "text": "console.log(1);\nqueueMicrotask(() => console.log(2));\nconsole.log(3);",
+      "options": [
+        "1, 2, 3",
+        "1, 3, 2",
+        "2, 1, 3",
+        "3, 1, 2"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 81,
+      "type": "code",
+      "language": "js",
+      "text": "console.log(1);\nfor (let i = 2; i <= 3; i++) {\n  Promise.resolve().then(() => console.log(i));\n}\nconsole.log(4);",
+      "options": [
+        "1, 2, 3, 4",
+        "1, 4, 2, 3",
+        "1, 4, 3, 2",
+        "4, 1, 2, 3"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 82,
+      "type": "code",
+      "language": "js",
+      "text": "function schedule() {\n  setTimeout(() => console.log(1), 0);\n}\nschedule();\nschedule();\nconsole.log(2);",
+      "options": [
+        "1, 1, 2",
+        "2, 1, 1",
+        "1, 2, 1",
+        "2, 1"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 83,
+      "type": "text",
+      "text": "What runs before either event-loop queue?",
+      "options": [
+        "Synchronous code on the current call stack",
+        "The earliest setTimeout callback",
+        "The earliest Promise.then callback",
+        "The next paint frame"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 84,
+      "type": "text",
+      "text": "Where does setTimeout(fn, 0) put fn?",
+      "options": [
+        "Onto the call stack immediately, before the next line",
+        "On the macrotask (timer) queue",
+        "On the microtask queue",
+        "On the requestAnimationFrame queue"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 85,
+      "type": "text",
+      "text": "When does the executor in new Promise(executor) run?",
+      "options": [
+        "As a microtask, after the current stack",
+        "As a macrotask, with the timers",
+        "Immediately, synchronously, when new Promise is called",
+        "Only after a then is attached"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 86,
+      "type": "text",
+      "text": "How many macrotasks does the event loop take in one turn before draining microtasks again?",
+      "options": [
+        "Every macrotask already queued",
+        "None, while any then is pending",
+        "Two: the current one and the next",
+        "One"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 87,
+      "type": "text",
+      "text": "Is console.log a job from an event-loop queue?",
+      "options": [
+        "No. It is a synchronous call on the current stack",
+        "Yes, it is a microtask",
+        "Yes, it is a macrotask",
+        "Yes, when the argument is a number"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 88,
+      "type": "text",
+      "text": "Why does for (let i ...) { setTimeout(() => console.log(i), 0) } give each timer its own i?",
+      "options": [
+        "setTimeout copies i into a separate argument",
+        "Each iteration has its own let binding, and the timer closes over it",
+        "var and let print the same values here",
+        "The event loop resets i before each timer"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 89,
+      "type": "text",
+      "text": "What does the event loop do when the stack is empty and both queues are empty?",
+      "options": [
+        "It closes the browser tab",
+        "It restarts the script",
+        "It waits for a new task: a timer, I/O, or input",
+        "It enqueues an empty microtask"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 90,
+      "type": "text",
+      "text": "When does a setTimeout(0) scheduled inside another setTimeout(0) start?",
+      "options": [
+        "Immediately, still inside the current callback",
+        "As a microtask before the current callback ends",
+        "Before the outer timer",
+        "As a separate macrotask after the current callback finishes"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 91,
+      "type": "text",
+      "text": "The line right after a .then(fn) call runs…",
+      "options": [
+        "Before fn: it is still synchronous code",
+        "After fn, but before any timers",
+        "Interleaved with the lines inside fn",
+        "Only on the next frame"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 92,
+      "type": "text",
+      "text": "Two setTimeout(0) callbacks queued one after another run like this:",
+      "options": [
+        "The event loop interleaves them line by line",
+        "The first runs to completion, then the second starts",
+        "The shorter callback cuts into the longer one",
+        "The order is random because the delay is 0"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 93,
+      "type": "boolean",
+      "text": "A setTimeout callback can start before the current synchronous function returns.",
+      "correct": false
+    },
+    {
+      "id": 94,
+      "type": "boolean",
+      "text": "Two setTimeout(fn, 0) calls made one after another from synchronous code keep their queue order.",
+      "correct": true
+    },
+    {
+      "id": 95,
+      "type": "boolean",
+      "text": "A Promise.then callback runs before the next line after .then(...).",
+      "correct": false
+    },
+    {
+      "id": 96,
+      "type": "boolean",
+      "text": "While the call stack is not empty, the event loop does not take a task from a queue.",
+      "correct": true
+    },
+    {
+      "id": 97,
+      "type": "boolean",
+      "text": "queueMicrotask and Promise.then share one microtask queue.",
+      "correct": true
+    },
+    {
+      "id": 98,
+      "type": "boolean",
+      "text": "setTimeout(fn, 0) calls fn synchronously: zero means “no queue”.",
+      "correct": false
+    },
+    {
+      "id": 99,
+      "type": "boolean",
+      "text": "While the line after setTimeout(fn, 0) is running, fn is still waiting in a queue.",
+      "correct": true
+    },
+    {
+      "id": 100,
+      "type": "boolean",
+      "text": "With no timers and no promises, the event loop still pauses between two console.log calls.",
+      "correct": false
+    },
+    {
+      "id": 101,
+      "type": "boolean",
+      "text": "If the executor calls resolve immediately, the then callback still waits until the current synchronous code finishes.",
+      "correct": true
+    },
+    {
+      "id": 102,
+      "type": "boolean",
+      "text": "A microtask can start in the middle of a synchronous function, before its return.",
+      "correct": false
+    },
+    {
+      "id": 103,
+      "type": "recall",
+      "text": "Why doesn’t setTimeout(fn, 0) run immediately?",
+      "answer": "Zero is a timer delay, not “run now”. The callback joins the macrotask queue and starts only after the stack is empty and that queue is reached. Synchronous code and microtasks finish first."
+    },
+    {
+      "id": 104,
+      "type": "recall",
+      "text": "What is the call stack for in this model?",
+      "answer": "It runs the current synchronous code. While it is not empty, the event loop does not pull a task from a queue."
+    },
+    {
+      "id": 105,
+      "type": "recall",
+      "text": "Which queue does a Promise.then callback join?",
+      "answer": "The microtask queue. It runs after the current synchronous code and before macrotasks."
+    },
+    {
+      "id": 106,
+      "type": "recall",
+      "text": "How is a new Promise executor different from a then callback?",
+      "answer": "The executor is called immediately, synchronously. then is always deferred to the microtask queue, even when the promise is already fulfilled."
+    },
+    {
+      "id": 107,
+      "type": "recall",
+      "text": "Name two sources of macrotasks.",
+      "answer": "Timers (setTimeout and setInterval) and I/O: network, files, input events. They are turns of the outer loop, and microtasks are drained between them."
+    },
+    {
+      "id": 108,
+      "type": "recall",
+      "text": "Why doesn’t a 0 ms delay put a timer ahead of a synchronous console.log?",
+      "answer": "A timer does not cut into the current stack. Zero means “queue it as soon as possible”, not “run it before the next line”."
+    },
+    {
+      "id": 109,
+      "type": "recall",
+      "text": "The stack is empty and a microtask is already queued. What happens next?",
+      "answer": "The event loop runs microtasks until that queue is empty, and only then takes one macrotask."
+    },
+    {
+      "id": 110,
+      "type": "recall",
+      "text": "Can a microtask start before the current function returns?",
+      "answer": "No. The function reaches return and the stack unwinds first. Microtasks run after that."
+    },
+    {
+      "id": 111,
+      "type": "recall",
+      "text": "In what order do two setTimeout(0) callbacks run if they were queued one after another?",
+      "answer": "In queue order. The first callback runs to completion, then the second starts. Their lines are not interleaved."
+    },
+    {
+      "id": 112,
+      "type": "recall",
+      "text": "Why are microtasks a separate queue instead of being mixed with timers?",
+      "answer": "So promise reactions can run as a batch right after the current code, without waiting for the next timer. Otherwise then would lose to any setTimeout(0)."
     }
   ]
 }

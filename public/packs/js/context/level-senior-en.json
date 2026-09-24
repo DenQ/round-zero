@@ -1,0 +1,208 @@
+{
+  "stack": "js",
+  "topic": "context",
+  "level": "senior",
+  "locale": "en",
+  "questions": [
+    {
+      "id": 281,
+      "type": "code",
+      "language": "js",
+      "text": "function sum(a, b) {\n  console.log(this.n + a + b);\n}\nconst step = sum.bind({ n: 1 }, 2).bind({ n: 9 }, 3);\nstep(4);",
+      "options": [
+        "6",
+        "16",
+        "13",
+        "7"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 282,
+      "type": "code",
+      "language": "js",
+      "text": "const box = {\n  n: 1,\n  run() {\n    const read = () => console.log(this.n);\n    read.call({ n: 2 });\n    read.apply({ n: 3 });\n  },\n};\nbox.run();",
+      "options": [
+        "2, 3",
+        "1, 2",
+        "1, 1",
+        "2, 1"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 283,
+      "type": "code",
+      "language": "js",
+      "text": "function ObjectBox() {\n  this.n = 1;\n  return { n: 2 };\n}\nfunction PrimitiveBox() {\n  this.n = 1;\n  return 3;\n}\nconsole.log(new ObjectBox().n);\nconsole.log(new PrimitiveBox().n);",
+      "options": [
+        "1, 3",
+        "2, 3",
+        "1, 1",
+        "2, 1"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 284,
+      "type": "code",
+      "language": "js",
+      "text": "function show() {\n  'use strict';\n  if (this == null) {\n    console.log(1);\n    return;\n  }\n  console.log(this + 2);\n}\nshow.call(null);\nshow.call(3);",
+      "options": [
+        "1, 5",
+        "0, 5",
+        "1, 3",
+        "2, 5"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 285,
+      "type": "code",
+      "language": "js",
+      "text": "const box = {\n  n: 1,\n  get next() {\n    return this.n + 1;\n  },\n};\nconsole.log(box.next);\nconst getNext = Object.getOwnPropertyDescriptor(box, 'next').get;\nconsole.log(getNext.call({ n: 4 }));",
+      "options": [
+        "1, 4",
+        "2, 4",
+        "2, 5",
+        "1, 5"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 286,
+      "type": "code",
+      "language": "js",
+      "text": "const list = { 0: 1, 1: 2, length: 2 };\nconsole.log(Array.prototype.reduce.call(list, (acc, n) => acc + n, 0));",
+      "options": [
+        "3",
+        "12",
+        "2",
+        "1"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 287,
+      "type": "code",
+      "language": "js",
+      "text": "function add(extra = this.n) {\n  console.log(this.n + extra);\n}\nadd.call({ n: 1 });\nadd.call({ n: 2 }, 3);",
+      "options": [
+        "1, 5",
+        "2, 5",
+        "1, 3",
+        "2, 3"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 288,
+      "type": "code",
+      "language": "js",
+      "text": "function show(extra) {\n  console.log(this.n + extra);\n}\nFunction.prototype.call.call(show, { n: 1 }, 2);\nReflect.apply(show, { n: 4 }, [5]);",
+      "options": [
+        "1, 4",
+        "3, 9",
+        "2, 5",
+        "1, 5"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 289,
+      "type": "text",
+      "text": "What happens with two binds and two different objects?",
+      "options": [
+        "The second bind’s this wins",
+        "this comes from the first bind. The second bind can only prepend arguments",
+        "Both objects are merged into one this",
+        "The function loses this and throws when called"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 290,
+      "type": "text",
+      "text": "A constructor returns a value. What does new produce?",
+      "options": [
+        "An object from return replaces the new this. A number or other primitive is ignored",
+        "Any return replaces this, including a number",
+        "A return from a constructor is always ignored",
+        "return is allowed only for undefined"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 291,
+      "type": "text",
+      "text": "How do fn.call(null) and fn.call(1) differ in strict mode from sloppy mode?",
+      "options": [
+        "They do not: null always becomes globalThis",
+        "In strict mode null and 1 stay as this. In sloppy mode null and undefined become the global object, and a number is boxed",
+        "In strict mode both calls throw TypeError immediately",
+        "call ignores its first argument in strict mode"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 292,
+      "type": "text",
+      "text": "Where does this come from in a default-parameter expression?",
+      "options": [
+        "From the global object: parameters are evaluated before the call",
+        "From the this of that same call. The expression runs only when the argument was omitted",
+        "Parameters have no this, so the expression always sees undefined",
+        "From the this of the previous call to this function"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 293,
+      "type": "boolean",
+      "text": "A second bind can change the this fixed by the first one.",
+      "correct": false
+    },
+    {
+      "id": 294,
+      "type": "boolean",
+      "text": "An arrow can be called with new.",
+      "correct": false
+    },
+    {
+      "id": 295,
+      "type": "boolean",
+      "text": "If a constructor returns an object, new yields that object rather than the created this.",
+      "correct": true
+    },
+    {
+      "id": 296,
+      "type": "boolean",
+      "text": "In strict mode fn.call(1) gets this equal to the number 1, with no Number wrapper.",
+      "correct": true
+    },
+    {
+      "id": 297,
+      "type": "recall",
+      "text": "Why does a getter taken from a descriptor no longer read the original object?",
+      "answer": "A getter is an ordinary function. obj.next calls it with this set to obj. A bare call takes this from the new call site."
+    },
+    {
+      "id": 298,
+      "type": "recall",
+      "text": "How does Function.prototype.call.call(fn, obj, arg) work?",
+      "answer": "call expects a callable as its own this. The outer call puts fn in that slot, the next argument becomes this for fn, and the rest are fn’s arguments."
+    },
+    {
+      "id": 299,
+      "type": "recall",
+      "text": "Why can a default value this.n throw before the function body runs?",
+      "answer": "The parameter expression runs at the call and uses that call’s this. A bare strict call has this === undefined, so reading this.n throws TypeError."
+    },
+    {
+      "id": 300,
+      "type": "recall",
+      "text": "Why can’t a derived constructor read this before super()?",
+      "answer": "Until super() returns, the base constructor has not created the instance. In a derived class, this exists only after super()."
+    }
+  ]
+}

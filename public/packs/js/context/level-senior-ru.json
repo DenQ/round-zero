@@ -1,0 +1,208 @@
+{
+  "stack": "js",
+  "topic": "context",
+  "level": "senior",
+  "locale": "ru",
+  "questions": [
+    {
+      "id": 281,
+      "type": "code",
+      "language": "js",
+      "text": "function sum(a, b) {\n  console.log(this.n + a + b);\n}\nconst step = sum.bind({ n: 1 }, 2).bind({ n: 9 }, 3);\nstep(4);",
+      "options": [
+        "6",
+        "16",
+        "13",
+        "7"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 282,
+      "type": "code",
+      "language": "js",
+      "text": "const box = {\n  n: 1,\n  run() {\n    const read = () => console.log(this.n);\n    read.call({ n: 2 });\n    read.apply({ n: 3 });\n  },\n};\nbox.run();",
+      "options": [
+        "2, 3",
+        "1, 2",
+        "1, 1",
+        "2, 1"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 283,
+      "type": "code",
+      "language": "js",
+      "text": "function ObjectBox() {\n  this.n = 1;\n  return { n: 2 };\n}\nfunction PrimitiveBox() {\n  this.n = 1;\n  return 3;\n}\nconsole.log(new ObjectBox().n);\nconsole.log(new PrimitiveBox().n);",
+      "options": [
+        "1, 3",
+        "2, 3",
+        "1, 1",
+        "2, 1"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 284,
+      "type": "code",
+      "language": "js",
+      "text": "function show() {\n  'use strict';\n  if (this == null) {\n    console.log(1);\n    return;\n  }\n  console.log(this + 2);\n}\nshow.call(null);\nshow.call(3);",
+      "options": [
+        "1, 5",
+        "0, 5",
+        "1, 3",
+        "2, 5"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 285,
+      "type": "code",
+      "language": "js",
+      "text": "const box = {\n  n: 1,\n  get next() {\n    return this.n + 1;\n  },\n};\nconsole.log(box.next);\nconst getNext = Object.getOwnPropertyDescriptor(box, 'next').get;\nconsole.log(getNext.call({ n: 4 }));",
+      "options": [
+        "1, 4",
+        "2, 4",
+        "2, 5",
+        "1, 5"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 286,
+      "type": "code",
+      "language": "js",
+      "text": "const list = { 0: 1, 1: 2, length: 2 };\nconsole.log(Array.prototype.reduce.call(list, (acc, n) => acc + n, 0));",
+      "options": [
+        "3",
+        "12",
+        "2",
+        "1"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 287,
+      "type": "code",
+      "language": "js",
+      "text": "function add(extra = this.n) {\n  console.log(this.n + extra);\n}\nadd.call({ n: 1 });\nadd.call({ n: 2 }, 3);",
+      "options": [
+        "1, 5",
+        "2, 5",
+        "1, 3",
+        "2, 3"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 288,
+      "type": "code",
+      "language": "js",
+      "text": "function show(extra) {\n  console.log(this.n + extra);\n}\nFunction.prototype.call.call(show, { n: 1 }, 2);\nReflect.apply(show, { n: 4 }, [5]);",
+      "options": [
+        "1, 4",
+        "3, 9",
+        "2, 5",
+        "1, 5"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 289,
+      "type": "text",
+      "text": "Что происходит при двойном bind с двумя разными объектами?",
+      "options": [
+        "Побеждает this второго bind",
+        "this берётся от первого bind. Второй bind может только дописать аргументы спереди",
+        "Оба объекта складываются в один this",
+        "Функция теряет this и падает при вызове"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 290,
+      "type": "text",
+      "text": "Конструктор сделал return. Что получит new?",
+      "options": [
+        "Объект из return заменяет новый this. Число и другая примитивная величина игнорируются",
+        "Любой return заменяет this, включая число",
+        "return из конструктора всегда игнорируется",
+        "return разрешён только для undefined"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 291,
+      "type": "text",
+      "text": "Чем fn.call(null) и fn.call(1) в строгом режиме отличаются от нестрогого?",
+      "options": [
+        "Ничем: null всегда превращается в globalThis",
+        "В строгом режиме null и 1 остаются this. В нестрогом null и undefined подменяются глобальным объектом, а число упаковывается",
+        "В строгом режиме оба вызова сразу бросают TypeError",
+        "call в строгом режиме игнорирует первый аргумент"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 292,
+      "type": "text",
+      "text": "Откуда берётся this в выражении параметра по умолчанию?",
+      "options": [
+        "Из глобального объекта: параметры считаются раньше вызова",
+        "Из this того же вызова. Выражение выполняется, только если аргумент не передали",
+        "У параметров своего this нет, выражение всегда видит undefined",
+        "Из this предыдущего вызова этой функции"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 293,
+      "type": "boolean",
+      "text": "Второй bind может сменить this, который зафиксировал первый.",
+      "correct": false
+    },
+    {
+      "id": 294,
+      "type": "boolean",
+      "text": "Стрелку можно вызвать через new.",
+      "correct": false
+    },
+    {
+      "id": 295,
+      "type": "boolean",
+      "text": "Если конструктор возвращает объект, new отдаёт этот объект, а не созданный this.",
+      "correct": true
+    },
+    {
+      "id": 296,
+      "type": "boolean",
+      "text": "В строгом режиме fn.call(1) получает this, равный числу 1, без обёртки Number.",
+      "correct": true
+    },
+    {
+      "id": 297,
+      "type": "recall",
+      "text": "Почему геттер, снятый с дескриптора, больше не читает исходный объект?",
+      "answer": "Геттер — обычная функция. obj.next вызывает её с this, равным obj. Отдельный вызов этой функции берёт this уже из нового места вызова."
+    },
+    {
+      "id": 298,
+      "type": "recall",
+      "text": "Как работает Function.prototype.call.call(fn, obj, arg)?",
+      "answer": "У call своим this должна быть вызываемая функция. Внешний call подставляет fn на это место, следующий аргумент становится this для fn, дальше идут аргументы fn."
+    },
+    {
+      "id": 299,
+      "type": "recall",
+      "text": "Почему значение по умолчанию this.n может упасть ещё до тела функции?",
+      "answer": "Выражение параметра считается при вызове и использует this этого вызова. Если функцию вызвали без объекта в строгом режиме, this равен undefined, и чтение this.n бросает TypeError."
+    },
+    {
+      "id": 300,
+      "type": "recall",
+      "text": "Почему в конструкторе наследника this нельзя прочитать до super()?",
+      "answer": "Пока super() не отработал, базовый конструктор ещё не создал экземпляр. В классе-наследнике this появляется только после super()."
+    }
+  ]
+}
