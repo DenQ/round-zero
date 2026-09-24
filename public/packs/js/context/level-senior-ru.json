@@ -203,6 +203,206 @@
       "type": "recall",
       "text": "Почему в конструкторе наследника this нельзя прочитать до super()?",
       "answer": "Пока super() не отработал, базовый конструктор ещё не создал экземпляр. В классе-наследнике this появляется только после super()."
+    },
+    {
+      "id": 341,
+      "type": "code",
+      "language": "js",
+      "text": "function Box(n) {\n  if (!new.target) {\n    console.log(1);\n    return;\n  }\n  this.n = n;\n  console.log(this.n + 1);\n}\nBox(0);\nnew Box(2);",
+      "options": [
+        "0, 2",
+        "1, 3",
+        "1, 2",
+        "2, 3"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 342,
+      "type": "code",
+      "language": "js",
+      "text": "class Box {\n  static n = 1;\n  static show() {\n    console.log(this.n);\n  }\n}\nBox.show();\nconst show = Box.show;\ntry {\n  show();\n} catch {\n  console.log(2);\n}",
+      "options": [
+        "1, 1",
+        "2, 2",
+        "1, 2",
+        "2, 1"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 343,
+      "type": "code",
+      "language": "js",
+      "text": "class Box {\n  constructor(n) {\n    this.n = n;\n  }\n}\ntry {\n  Box.call({ n: 1 });\n  console.log(1);\n} catch {\n  console.log(2);\n}\nconsole.log(new Box(3).n);",
+      "options": [
+        "1, 3",
+        "2, 3",
+        "1, 1",
+        "2, 1"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 344,
+      "type": "code",
+      "language": "js",
+      "text": "function Name(n) {\n  this.n = n;\n}\nfunction Extra(x) {\n  this.x = x;\n}\nfunction Pair(n, x) {\n  Name.call(this, n);\n  Extra.call(this, x);\n  console.log(this.n + this.x);\n}\nnew Pair(1, 2);",
+      "options": [
+        "1",
+        "2",
+        "3",
+        "12"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 345,
+      "type": "code",
+      "language": "js",
+      "text": "const proto = {\n  n: 1,\n  get next() {\n    return this.n + 1;\n  },\n};\nconst box = Object.create(proto);\nbox.n = 4;\nconsole.log(box.next);\nconsole.log(proto.next);",
+      "options": [
+        "2, 5",
+        "4, 1",
+        "5, 1",
+        "5, 2"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 346,
+      "type": "code",
+      "language": "js",
+      "text": "class Box {\n  #n = 1;\n  read() {\n    console.log(this.#n);\n  }\n}\nconst box = new Box();\nbox.read();\nconst read = box.read;\ntry {\n  read.call({ n: 2 });\n} catch {\n  console.log(4);\n}",
+      "options": [
+        "1, 2",
+        "2, 4",
+        "1, 4",
+        "1, 1"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 347,
+      "type": "code",
+      "language": "js",
+      "text": "class Base {\n  n = 1;\n  show() {\n    console.log(this.n);\n  }\n}\nclass Child extends Base {\n  n = 2;\n  run() {\n    const go = () => super.show();\n    go.call({ n: 9 });\n  }\n}\nnew Child().run();",
+      "options": [
+        "9",
+        "1",
+        "2",
+        "11"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 348,
+      "type": "code",
+      "language": "js",
+      "text": "class Base {\n  constructor() {\n    this.n = 1;\n    console.log(this.n);\n  }\n}\nclass Child extends Base {\n  n = 2;\n  constructor() {\n    super();\n    console.log(this.n);\n  }\n}\nnew Child();",
+      "options": [
+        "2, 2",
+        "1, 1",
+        "2, 1",
+        "1, 2"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 349,
+      "type": "text",
+      "text": "Зачем в конструкторе проверяют new.target?",
+      "options": [
+        "Чтобы узнать, вызвали функцию через new или как обычную",
+        "Чтобы получить this вызывающего метода",
+        "Чтобы запретить bind",
+        "new.target — это первый аргумент конструктора"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 350,
+      "type": "text",
+      "text": "Почему класс нельзя вызвать через call, а обычную функцию-конструктор можно?",
+      "options": [
+        "У класса нет this",
+        "Конструктор класса можно вызвать только через new. Обычная функция принимает и call, и new",
+        "call на классе молча создаёт экземпляр",
+        "Обычную функцию тоже нельзя вызвать через call"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 351,
+      "type": "text",
+      "text": "Какой объект видит унаследованный геттер?",
+      "options": [
+        "Прототип, на котором геттер объявили",
+        "Тот объект, через который свойство прочитали",
+        "Всегда globalThis",
+        "Геттер не имеет this"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 352,
+      "type": "text",
+      "text": "Когда поля наследника пишут в this относительно конструктора базы?",
+      "options": [
+        "До вызова super(), поэтому база уже видит поля наследника",
+        "После того как конструктор базы вернулся из super(), и могут затереть то, что база записала в this",
+        "Поля наследника пишут в отдельный объект, не в this базы",
+        "Одновременно с первой строкой конструктора базы"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 353,
+      "type": "boolean",
+      "text": "new.target задан, когда функцию вызвали через new.",
+      "correct": true
+    },
+    {
+      "id": 354,
+      "type": "boolean",
+      "text": "Статический Box.show после const show = Box.show по-прежнему видит Box как this.",
+      "correct": false
+    },
+    {
+      "id": 355,
+      "type": "boolean",
+      "text": "Унаследованный геттер использует как this сам прототип, а не объект, через который его прочитали.",
+      "correct": false
+    },
+    {
+      "id": 356,
+      "type": "boolean",
+      "text": "Приватное поле можно прочитать через call на любом объекте.",
+      "correct": false
+    },
+    {
+      "id": 357,
+      "type": "recall",
+      "text": "Что сообщает new.target?",
+      "answer": "Через new функцию вызвали или нет. При обычном вызове new.target пустой. При new это конструктор, который стоит после new."
+    },
+    {
+      "id": 358,
+      "type": "recall",
+      "text": "Почему вынутый статический метод теряет класс?",
+      "answer": "Box.show() передаёт класс как this. const show = Box.show копирует функцию, и отдельный вызов show() уже не ставит класс слева от точки."
+    },
+    {
+      "id": 359,
+      "type": "recall",
+      "text": "Почему read.call(другойОбъект) падает на приватном поле?",
+      "answer": "Приватное поле привязано к экземпляру класса, а не к любой подмене this. call может подставить чужой объект, но прочитать #n у него нельзя."
+    },
+    {
+      "id": 360,
+      "type": "recall",
+      "text": "В какой момент поля наследника затирают this.n, записанный в конструкторе базы?",
+      "answer": "Сразу после возврата из super(), до тела конструктора наследника. База пишет в this первой, затем инициализаторы полей наследника пишут поверх."
     }
   ]
 }
