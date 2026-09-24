@@ -7,6 +7,10 @@ const rootDir = fileURLToPath(new URL('.', import.meta.url))
 
 export default defineConfig({
   plugins: [react()],
+  server: {
+    port: 5180,
+    strictPort: true,
+  },
   resolve: {
     alias: {
       '@': path.resolve(rootDir, 'src'),

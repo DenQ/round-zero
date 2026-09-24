@@ -5,15 +5,87 @@
   },
   "nav": {
     "home": "Home",
-    "about": "About"
+    "about": "About",
+    "open": "Open menu",
+    "close": "Hide menu",
+    "collapse": "Collapse menu"
   },
   "home": {
     "title": "Home",
-    "description": "Central workspace. Use the sidebar to navigate."
+    "description": "Select a pack from the menu.",
+    "activity": {
+      "title": "Activity",
+      "summary": "{{count}} answers in the last year",
+      "less": "Less",
+      "more": "More",
+      "legendEmpty": "0 answers",
+      "legendRange": "{{from}}-{{to}} answers",
+      "legendMax": "{{from}}+ answers",
+      "tooltip": "{{date}}: {{total}} answers ({{wins}} correct, {{loses}} incorrect)",
+      "tooltipEmpty": "{{date}}: no answers",
+      "hint": "Click a day to see details",
+      "selectedEmpty": "No answers",
+      "selectedSummary": "{{total}} answers · {{wins}} correct · {{loses}} incorrect",
+      "packLine": "{{pack}} — {{count}} answers · {{wins}} correct · {{loses}} incorrect",
+      "weekdays": {
+        "mon": "Mon",
+        "tue": "Tue",
+        "wed": "Wed",
+        "thu": "Thu",
+        "fri": "Fri",
+        "sat": "Sat",
+        "sun": "Sun"
+      }
+    }
   },
   "about": {
     "title": "About",
     "description": "Starter layout with MUI, routing, i18n, and theme switching."
+  },
+  "catalog": {
+    "nav": "Question packs",
+    "stacks": {
+      "js": "JS",
+      "ts": "TS",
+      "go": "Go",
+      "sql": "SQL",
+      "nest": "Nest",
+      "react": "React"
+    },
+    "topics": {
+      "eventLoop": "Event Loop"
+    },
+    "levels": {
+      "junior": "Junior",
+      "middle": "Middle",
+      "senior": "Senior"
+    }
+  },
+  "quiz": {
+    "loading": "Loading pack",
+    "error": "Failed to load the pack.",
+    "notFound": "Pack not found.",
+    "question": "Question {{n}}",
+    "game": {
+      "play": "Play",
+      "title": "Score more points",
+      "subtitle": "{{count}} random questions from this pack",
+      "subtitleAll": "All questions from this pack",
+      "packSize_one": "The pack has {{count}} question.",
+      "packSize_other": "The pack has {{count}} questions.",
+      "packUntouched": "{{n}} you haven't touched yet.",
+      "packAllTouched": "You've already answered all of them.",
+      "roundSize": "Number of questions",
+      "all": "All",
+      "progress": "{{current}}/{{total}}",
+      "next": "Next",
+      "correct": "Correct",
+      "incorrect": "Incorrect",
+      "resultTitle": "Result",
+      "resultScore": "{{score}} of {{total}}",
+      "resultPoints": "Points",
+      "playAgain": "Play again"
+    }
   },
   "theme": {
     "toLight": "Switch to light theme",

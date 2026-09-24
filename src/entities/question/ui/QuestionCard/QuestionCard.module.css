@@ -1,0 +1,76 @@
+.options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 16px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.option {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  flex: 1 1 12rem;
+  box-sizing: border-box;
+  padding: 10px 12px;
+  border: 1px solid color-mix(in srgb, currentColor 16%, transparent);
+  border-radius: 8px;
+  background: color-mix(in srgb, currentColor 5%, transparent);
+  font-size: 0.875rem;
+  line-height: 1.4;
+}
+
+.optionItem {
+  display: flex;
+  flex: 1 1 12rem;
+  min-width: 0;
+}
+
+.optionButton {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  flex: 1;
+  box-sizing: border-box;
+  width: 100%;
+  margin: 0;
+  padding: 10px 12px;
+  border: 1px solid color-mix(in srgb, currentColor 16%, transparent);
+  border-radius: 8px;
+  background: color-mix(in srgb, currentColor 5%, transparent);
+  color: inherit;
+  font: inherit;
+  font-size: 0.875rem;
+  line-height: 1.4;
+  text-align: left;
+  cursor: pointer;
+}
+
+.optionButton:hover:not(:disabled) {
+  border-color: color-mix(in srgb, currentColor 40%, transparent);
+}
+
+.optionButton:disabled {
+  cursor: default;
+}
+
+.optionCorrect {
+  border-color: #2e7d32;
+  background: color-mix(in srgb, #2e7d32 18%, transparent);
+}
+
+.optionWrong {
+  border-color: #d32f2f;
+  background: color-mix(in srgb, #d32f2f 18%, transparent);
+}
+
+.optionDimmed {
+  opacity: 0.55;
+}
+
+.optionLabel {
+  flex: 0 0 auto;
+  font-weight: 700;
+  opacity: 0.7;
+}

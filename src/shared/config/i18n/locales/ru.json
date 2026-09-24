@@ -5,15 +5,89 @@
   },
   "nav": {
     "home": "Главная",
-    "about": "О проекте"
+    "about": "О проекте",
+    "open": "Открыть меню",
+    "close": "Скрыть меню",
+    "collapse": "Схлопнуть меню"
   },
   "home": {
     "title": "Главная",
-    "description": "Центральная рабочая область. Навигация — в меню слева."
+    "description": "Выбери пак в меню.",
+    "activity": {
+      "title": "Активность",
+      "summary": "{{count}} ответов за последний год",
+      "less": "Меньше",
+      "more": "Больше",
+      "legendEmpty": "0 ответов",
+      "legendRange": "{{from}}-{{to}} ответов",
+      "legendMax": "{{from}}+ ответов",
+      "tooltip": "{{date}}: {{total}} ответов ({{wins}} верных, {{loses}} неверных)",
+      "tooltipEmpty": "{{date}}: нет ответов",
+      "hint": "Нажми на день, чтобы увидеть детали",
+      "selectedEmpty": "Нет ответов",
+      "selectedSummary": "{{total}} ответов · {{wins}} верных · {{loses}} неверных",
+      "packLine": "{{pack}} — {{count}} ответов · {{wins}} верных · {{loses}} неверных",
+      "weekdays": {
+        "mon": "Пн",
+        "tue": "Вт",
+        "wed": "Ср",
+        "thu": "Чт",
+        "fri": "Пт",
+        "sat": "Сб",
+        "sun": "Вс"
+      }
+    }
   },
   "about": {
     "title": "О проекте",
     "description": "Базовая разметка с MUI, роутером, i18n и переключателем темы."
+  },
+  "catalog": {
+    "nav": "Паки вопросов",
+    "stacks": {
+      "js": "JS",
+      "ts": "TS",
+      "go": "Go",
+      "sql": "SQL",
+      "nest": "Nest",
+      "react": "React"
+    },
+    "topics": {
+      "eventLoop": "Event Loop"
+    },
+    "levels": {
+      "junior": "Junior",
+      "middle": "Middle",
+      "senior": "Senior"
+    }
+  },
+  "quiz": {
+    "loading": "Загрузка пака",
+    "error": "Не удалось загрузить пак.",
+    "notFound": "Пак не найден.",
+    "question": "Вопрос {{n}}",
+    "game": {
+      "play": "Играть",
+      "title": "Набери больше баллов",
+      "subtitle": "{{count}} случайных вопросов из этого пака",
+      "subtitleAll": "Все вопросы из этого пака",
+      "packSize_one": "В паке {{count}} вопрос.",
+      "packSize_few": "В паке {{count}} вопроса.",
+      "packSize_many": "В паке {{count}} вопросов.",
+      "packSize_other": "В паке {{count}} вопросов.",
+      "packUntouched": "{{n}} вы ещё не трогали.",
+      "packAllTouched": "Вы уже отвечали на все.",
+      "roundSize": "Количество вопросов",
+      "all": "Все",
+      "progress": "{{current}}/{{total}}",
+      "next": "Следующий",
+      "correct": "Верно",
+      "incorrect": "Неверно",
+      "resultTitle": "Результат",
+      "resultScore": "{{score}} из {{total}}",
+      "resultPoints": "Баллы",
+      "playAgain": "Сыграть снова"
+    }
   },
   "theme": {
     "toLight": "Включить светлую тему",
