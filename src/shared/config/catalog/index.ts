@@ -19,11 +19,6 @@ export const catalog = [
     labelKey: 'catalog.stacks.js',
     topics: [
       {
-        slug: 'event-loop',
-        labelKey: 'catalog.topics.eventLoop',
-        levels: PACK_LEVELS,
-      },
-      {
         slug: 'context',
         labelKey: 'catalog.topics.context',
         levels: PACK_LEVELS,
@@ -34,8 +29,18 @@ export const catalog = [
         levels: PACK_LEVELS,
       },
       {
+        slug: 'modules',
+        labelKey: 'catalog.topics.modules',
+        levels: PACK_LEVELS,
+      },
+      {
         slug: 'promises',
         labelKey: 'catalog.topics.promises',
+        levels: PACK_LEVELS,
+      },
+      {
+        slug: 'event-loop',
+        labelKey: 'catalog.topics.eventLoop',
         levels: PACK_LEVELS,
       },
     ],

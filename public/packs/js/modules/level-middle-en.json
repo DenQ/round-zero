@@ -1,0 +1,208 @@
+{
+  "stack": "js",
+  "topic": "modules",
+  "level": "middle",
+  "locale": "en",
+  "questions": [
+    {
+      "id": 681,
+      "type": "code",
+      "language": "js",
+      "text": "import { n, inc } from 'data:text/javascript,export let n = 1; export function inc(){ n = 2 }';\nconsole.log(n);\ninc();\nconsole.log(n);",
+      "options": [
+        "1, 2",
+        "1, 1",
+        "2, 1",
+        "2, 2"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 682,
+      "type": "code",
+      "language": "js",
+      "text": "const url = 'data:text/javascript,' + encodeURIComponent('export let n = 1; export function inc(){ n = 2 }');\nconst mod = await import(url);\nconst { n } = mod;\nconsole.log(n);\nmod.inc();\nconsole.log(n);\nconsole.log(mod.n);",
+      "options": [
+        "1, 2, 2",
+        "1, 1, 2",
+        "1, 2, 1",
+        "2, 2, 2"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 683,
+      "type": "code",
+      "language": "js",
+      "text": "import { n } from 'data:text/javascript,export let n = 1';\ntry {\n  n = 2;\n  console.log(0);\n} catch {\n  console.log(1);\n}",
+      "options": [
+        "0",
+        "2",
+        "1",
+        "3"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 684,
+      "type": "code",
+      "language": "js",
+      "text": "import n, { inc, read } from 'data:text/javascript,let v = 1; export default v; export function inc(){ v = 2 } export function read(){ return v }';\nconsole.log(n);\ninc();\nconsole.log(n);\nconsole.log(read());",
+      "options": [
+        "1, 2, 2",
+        "2, 2, 2",
+        "1, 2, 1",
+        "1, 1, 2"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 685,
+      "type": "code",
+      "language": "js",
+      "text": "import n, { inc } from 'data:text/javascript,export let v = 1; export { v as default }; export function inc(){ v = 2 }';\nconsole.log(n);\ninc();\nconsole.log(n);",
+      "options": [
+        "1, 2",
+        "1, 1",
+        "2, 2",
+        "2, 1"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 686,
+      "type": "code",
+      "language": "js",
+      "text": "import * as ns from 'data:text/javascript,export let n = 1';\ntry {\n  ns.n = 2;\n  console.log(0);\n} catch {\n  console.log(1);\n}\nconsole.log(ns.n);",
+      "options": [
+        "0, 1",
+        "1, 1",
+        "1, 2",
+        "0, 2"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 687,
+      "type": "code",
+      "language": "js",
+      "text": "console.log(1);\nconst p = import('data:text/javascript,console.log(2); export {}');\nconsole.log(3);\nawait p;",
+      "options": [
+        "1, 2, 3",
+        "2, 1, 3",
+        "1, 3, 2",
+        "3, 1, 2"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 688,
+      "type": "code",
+      "language": "js",
+      "text": "const leaf = 'data:text/javascript,' + encodeURIComponent('export let n = 1; export function inc(){ n = 2 }');\nconst mod = await import('data:text/javascript,' + encodeURIComponent('export { n, inc } from ' + JSON.stringify(leaf)));\nconsole.log(mod.n);\nmod.inc();\nconsole.log(mod.n);",
+      "options": [
+        "1, 1",
+        "2, 2",
+        "2, 1",
+        "1, 2"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 689,
+      "type": "text",
+      "text": "What happens if, during a cycle, another module reads an export let or export const before its initializer?",
+      "options": [
+        "ReferenceError. The binding exists, but it stays in the TDZ until initialization",
+        "It returns undefined, as with var",
+        "It returns the value that will be assigned later",
+        "A SyntaxError while the file is parsed"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 690,
+      "type": "text",
+      "text": "What does export * leave out?",
+      "options": [
+        "Named exports",
+        "The default export. It is re-exported with a separate entry, such as export { default } from",
+        "Function declarations",
+        "Only const declarations"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 691,
+      "type": "text",
+      "text": "Why can another module already see an export function during a cycle, while the bodies are still starting?",
+      "options": [
+        "The function is copied onto the global object",
+        "Cycles are forbidden, and 0 is substituted for the function",
+        "The function declaration initializes the binding before the bodies run",
+        "export function behaves like var and starts as undefined"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 692,
+      "type": "text",
+      "text": "How does an early read of export var in a cycle differ from export let?",
+      "options": [
+        "Both reads throw ReferenceError",
+        "Both return the value that was assigned",
+        "var throws ReferenceError, let returns undefined",
+        "var already holds undefined. let is still in the TDZ, and the read throws ReferenceError"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 693,
+      "type": "boolean",
+      "text": "If the same name arrives from two export * and there is no explicit export of that name, a static import { name } from that module fails.",
+      "correct": true
+    },
+    {
+      "id": 694,
+      "type": "boolean",
+      "text": "A module namespace object can be given an own property.",
+      "correct": false
+    },
+    {
+      "id": 695,
+      "type": "boolean",
+      "text": "If evaluating a module threw, the next import of the same URL runs the body again.",
+      "correct": false
+    },
+    {
+      "id": 696,
+      "type": "boolean",
+      "text": "The argument of import() must be a string literal, like a static import specifier.",
+      "correct": false
+    },
+    {
+      "id": 697,
+      "type": "recall",
+      "text": "How do you re-export default when export * does not carry it?",
+      "answer": "export { default } from '...' or export { default as name } from '...'."
+    },
+    {
+      "id": 698,
+      "type": "recall",
+      "text": "How do you read default with a named import?",
+      "answer": "import { default as name } from '...'. The importer chooses the local name."
+    },
+    {
+      "id": 699,
+      "type": "recall",
+      "text": "What is the [[Prototype]] of a module namespace object?",
+      "answer": "null. It does not inherit Object.prototype."
+    },
+    {
+      "id": 700,
+      "type": "recall",
+      "text": "How do you resolve the clash when two export * export the same name?",
+      "answer": "With an explicit re-export of that name, such as export { n } from './a.mjs'. That export wins over the star clash."
+    }
+  ]
+}
