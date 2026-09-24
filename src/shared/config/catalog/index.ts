@@ -28,6 +28,11 @@ export const catalog = [
         labelKey: 'catalog.topics.context',
         levels: PACK_LEVELS,
       },
+      {
+        slug: 'prototypes',
+        labelKey: 'catalog.topics.prototypes',
+        levels: PACK_LEVELS,
+      },
     ],
   },
   { slug: 'ts', labelKey: 'catalog.stacks.ts', topics: [] },

@@ -1,0 +1,31 @@
+---
+description: Add or extend quiz packs under public/packs. Use when the user asks for new questions, a topic, or junior/middle/senior packs.
+alwaysApply: false
+---
+
+# Adding quiz questions
+
+JSON packs are the only source of questions. `scripts/lib/push-question.mjs` is the only writer: it assigns `lastId + 1` and appends the same id to `ru` and `en`. Do not hand-edit ids or `public/packs/last-id.json`. Do not add a generator that rewrites packs. A probe script is temporary: delete it after a successful push. Do not leave a second copy of the questions in `scripts/`.
+
+## Shape
+
+`pushQuestion({ stack, topic, level, ...question })`.
+
+- `stack`: `js | ts | go | sql | nest | react`. `topic`: slug `a-z0-9` and hyphens. `level`: `junior | middle | senior`.
+- `code`: `language`, `text` and 4 `options` are plain strings (same in both locales), `correctIndex` 0–3. The snippet is the whole question. Options are the `console.log` lines joined by `, `. Prefer numbers.
+- `text`: `text` and 4 `options` are `{ ru, en }`, plus `correctIndex`.
+- `boolean`: `text` is `{ ru, en }`, `correct` is boolean.
+- `recall`: `text` and `answer` are `{ ru, en }`.
+- Options in one language must be distinct. Both locales are required and non-empty.
+
+A new topic also needs an entry in `src/shared/config/catalog/index.ts` and `catalog.topics.*` in `src/shared/config/i18n/locales/ru.json` and `en.json`. A pack opens in the app only with at least 20 questions (`QUESTIONS_PER_PACK`).
+
+## How many
+
+Ceilings, not quotas: junior 60, middle 80, senior 100. Mix `code : text : boolean : recall` = `2:1:1:1` (60 → 24/12/12/12, 80 → 32/16/16/16, 100 → 40/20/20/20). A smaller round keeps the same ratio (20 → 8/4/4/4, 40 → 16/8/8/8). If the user gives three numbers, those are counts per level, not per type.
+
+Read the existing pack first. Stop when the next question restates a mechanic already covered, even with different numbers. A narrow topic stops below the ceiling. Spread `correctIndex` across 0–3. Verbal questions should state the rule behind a mechanic, not paraphrase another question in the same pack.
+
+## Check before push
+
+Verify every `code` snippet in Node `vm` and require the logs to equal `options[correctIndex]`. Run that check before the first `pushQuestion`, then push one question at a time. Do not execute non-JS answers (no database for SQL). For JS `this`, be explicit: add `'use strict'` when strict mode is the point. Do not use host-dependent `this` (`setTimeout(fn)` without an arrow or `bind`, top-level `this` in a script vs a module). After the push, run `node scripts/check-pack-ids.mjs`.
