@@ -1,0 +1,208 @@
+{
+  "stack": "js",
+  "topic": "scope",
+  "level": "junior",
+  "locale": "en",
+  "questions": [
+    {
+      "id": 721,
+      "type": "code",
+      "language": "js",
+      "text": "function f() {\n  if (true) {\n    var n = 1;\n  }\n  console.log(n);\n}\nf();",
+      "options": [
+        "1",
+        "0",
+        "2",
+        "3"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 722,
+      "type": "code",
+      "language": "js",
+      "text": "function f() {\n  if (true) {\n    let n = 1;\n  }\n  try {\n    console.log(n);\n  } catch (e) {\n    console.log(e instanceof ReferenceError ? 0 : 2);\n  }\n}\nf();",
+      "options": [
+        "1",
+        "0",
+        "2",
+        "3"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 723,
+      "type": "code",
+      "language": "js",
+      "text": "function f() {\n  console.log(n === undefined ? 2 : 0);\n  var n = 1;\n}\nf();",
+      "options": [
+        "0",
+        "1",
+        "2",
+        "3"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 724,
+      "type": "code",
+      "language": "js",
+      "text": "function f() {\n  try {\n    console.log(n);\n  } catch (e) {\n    console.log(e instanceof ReferenceError ? 3 : 0);\n  }\n  let n = 1;\n}\nf();",
+      "options": [
+        "0",
+        "1",
+        "2",
+        "3"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 725,
+      "type": "code",
+      "language": "js",
+      "text": "const n = 1;\ntry {\n  n = 2;\n  console.log(0);\n} catch (e) {\n  console.log(e instanceof TypeError ? 1 : 3);\n}",
+      "options": [
+        "1",
+        "0",
+        "2",
+        "3"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 726,
+      "type": "code",
+      "language": "js",
+      "text": "function make() {\n  let n = 1;\n  return function () {\n    return n;\n  };\n}\nconsole.log(make()());",
+      "options": [
+        "0",
+        "1",
+        "2",
+        "3"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 727,
+      "type": "code",
+      "language": "js",
+      "text": "const fns = [];\nfor (let i = 0; i < 3; i += 1) {\n  fns.push(function () {\n    return i;\n  });\n}\nconsole.log(fns[0]());\nconsole.log(fns[1]());\nconsole.log(fns[2]());",
+      "options": [
+        "3, 3, 3",
+        "0, 0, 0",
+        "0, 1, 2",
+        "2, 1, 0"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 728,
+      "type": "code",
+      "language": "js",
+      "text": "const fns = [];\nfor (var i = 0; i < 3; i += 1) {\n  fns.push(function () {\n    return i;\n  });\n}\nconsole.log(fns[0]());\nconsole.log(fns[2]());",
+      "options": [
+        "0, 2",
+        "0, 0",
+        "2, 0",
+        "3, 3"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 729,
+      "type": "text",
+      "text": "What can you do with an object held by const?",
+      "options": [
+        "Replace the object with another one. const allows that",
+        "Change its properties. const forbids assigning the name again, not writing into the object",
+        "Nothing. The object is frozen too",
+        "Only read properties. Writing a property throws TypeError"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 730,
+      "type": "text",
+      "text": "What does a parameter do when it has the same name as an outer variable?",
+      "options": [
+        "It hides the outer variable inside the function. The outer value does not change",
+        "It writes to that same outer variable",
+        "That name is forbidden. It is a SyntaxError",
+        "It is visible both inside the function and in the code that called it"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 731,
+      "type": "text",
+      "text": "When can you already call the name of a function declaration?",
+      "options": [
+        "Only after the line that declares it",
+        "Only if there is no var with the same name above it",
+        "From any line in that scope. The declaration puts the function in the name before the body runs",
+        "Only from another function"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 732,
+      "type": "text",
+      "text": "What happens if you call a function expression stored in var above the assignment line?",
+      "options": [
+        "The function body runs",
+        "It returns undefined, with no error",
+        "ReferenceError, as when reading let before initialization",
+        "TypeError. The name already exists, but it holds undefined until the assignment"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 733,
+      "type": "boolean",
+      "text": "A function’s local var is not visible to the code that called it.",
+      "correct": true
+    },
+    {
+      "id": 734,
+      "type": "boolean",
+      "text": "If an if block never runs, a var inside it is not created.",
+      "correct": false
+    },
+    {
+      "id": 735,
+      "type": "boolean",
+      "text": "The same block can declare let twice with one name.",
+      "correct": false
+    },
+    {
+      "id": 736,
+      "type": "boolean",
+      "text": "A new call of a function does not see the local var values left by the previous call.",
+      "correct": true
+    },
+    {
+      "id": 737,
+      "type": "recall",
+      "text": "Where is the name from catch (e) visible?",
+      "answer": "Only inside that catch. Outside the block the name does not exist."
+    },
+    {
+      "id": 738,
+      "type": "recall",
+      "text": "Can you write const without an initial value?",
+      "answer": "No. The initializer is required in the same declaration, or it is a SyntaxError."
+    },
+    {
+      "id": 739,
+      "type": "recall",
+      "text": "What does typeof return for a name that is not declared anywhere?",
+      "answer": "The string \"undefined\". That typeof does not throw ReferenceError."
+    },
+    {
+      "id": 740,
+      "type": "recall",
+      "text": "What does an assignment to an undeclared name do in strict mode?",
+      "answer": "It throws ReferenceError. No global property is created."
+    }
+  ]
+}

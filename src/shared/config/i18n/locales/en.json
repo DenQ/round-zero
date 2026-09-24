@@ -54,6 +54,7 @@
     },
     "topics": {
       "eventLoop": "Event Loop",
+      "scope": "Scope",
       "context": "Context",
       "prototypes": "Prototypes",
       "modules": "Modules",

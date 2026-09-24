@@ -1,0 +1,208 @@
+{
+  "stack": "js",
+  "topic": "scope",
+  "level": "middle",
+  "locale": "ru",
+  "questions": [
+    {
+      "id": 741,
+      "type": "code",
+      "language": "js",
+      "text": "function make() {\n  let n = 1;\n  return {\n    add() {\n      n += 1;\n    },\n    read() {\n      return n;\n    },\n  };\n}\nconst box = make();\nbox.add();\nconsole.log(box.read());",
+      "options": [
+        "2",
+        "1",
+        "0",
+        "3"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 742,
+      "type": "code",
+      "language": "js",
+      "text": "function make() {\n  let n = 0;\n  return function () {\n    n += 1;\n    return n;\n  };\n}\nconst a = make();\nconst b = make();\nconsole.log(a());\nconsole.log(b());\nconsole.log(a());",
+      "options": [
+        "1, 2, 3",
+        "1, 1, 2",
+        "2, 2, 3",
+        "1, 2, 2"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 743,
+      "type": "code",
+      "language": "js",
+      "text": "const fns = [];\nfor (var i = 0; i < 2; i += 1) {\n  let n = i;\n  fns.push(function () {\n    return n;\n  });\n}\nconsole.log(fns[0]());\nconsole.log(fns[1]());",
+      "options": [
+        "2, 2",
+        "1, 1",
+        "0, 1",
+        "0, 0"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 744,
+      "type": "code",
+      "language": "js",
+      "text": "function make() {\n  let n = 1;\n  const read = function () {\n    return n;\n  };\n  n = 2;\n  return read;\n}\nconsole.log(make()());",
+      "options": [
+        "1",
+        "0",
+        "3",
+        "2"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 745,
+      "type": "code",
+      "language": "js",
+      "text": "let n = 1;\nfunction f() {\n  try {\n    console.log(n);\n  } catch (e) {\n    console.log(e instanceof ReferenceError ? 1 : 0);\n  }\n  let n = 2;\n}\nf();",
+      "options": [
+        "1",
+        "2",
+        "0",
+        "3"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 746,
+      "type": "code",
+      "language": "js",
+      "text": "const f = function g() {\n  return typeof g === 'function' ? 1 : 0;\n};\nconsole.log(f());\nconsole.log(typeof g === 'undefined' ? 2 : 3);",
+      "options": [
+        "1, 3",
+        "1, 2",
+        "0, 2",
+        "2, 1"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 747,
+      "type": "code",
+      "language": "js",
+      "text": "let n = 1;\nfunction f(a = n) {\n  let n = 2;\n  return a;\n}\nconsole.log(f());",
+      "options": [
+        "2",
+        "0",
+        "1",
+        "3"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 748,
+      "type": "code",
+      "language": "js",
+      "text": "console.log(f());\nvar f = function () {\n  return 2;\n};\nfunction f() {\n  return 1;\n}\nconsole.log(f());",
+      "options": [
+        "2, 1",
+        "1, 1",
+        "2, 2",
+        "1, 2"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 749,
+      "type": "text",
+      "text": "Зачем в for (var i) значение i передают аргументом во внешнюю функцию?",
+      "options": [
+        "Параметр получает i этой итерации. Внутренняя функция замыкает параметр, а не переменную цикла",
+        "Чтобы остановить цикл на этой итерации",
+        "Чтобы var стал блочным",
+        "Чтобы i больше не увеличивался"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 750,
+      "type": "text",
+      "text": "Почему два let с одним именем в соседних case без своих скобок — ошибка?",
+      "options": [
+        "Каждый case — отдельная область, но let в case запрещён",
+        "Оба case лежат в одном блоке switch. Одинаковые имена let в нём — SyntaxError",
+        "switch выполняется дважды и второе let затирает первое",
+        "let в case поднимается как var"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 751,
+      "type": "text",
+      "text": "Куда пишет n = 2 во вложенной функции, если своего объявления n в ней нет, а снаружи есть let n?",
+      "options": [
+        "Всегда в глобальный объект",
+        "Никуда: это SyntaxError",
+        "В то же внешнее let. Поиск имени идёт по цепочке областей наружу",
+        "Создаёт локальный var этой функции"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 752,
+      "type": "text",
+      "text": "Где видно function, объявленную внутри блока в строгом режиме?",
+      "options": [
+        "Во всей внешней функции, как var",
+        "На globalThis",
+        "Внутри блока и в следующем блоке того же уровня",
+        "Только внутри этого блока"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 753,
+      "type": "boolean",
+      "text": "Значение по умолчанию параметра может прочитать предыдущий параметр.",
+      "correct": true
+    },
+    {
+      "id": 754,
+      "type": "boolean",
+      "text": "Цикл for (const i = 0; i < 1; i += 1) увеличивает i и завершается без ошибки.",
+      "correct": false
+    },
+    {
+      "id": 755,
+      "type": "boolean",
+      "text": "Если значение по умолчанию параметра читает следующий параметр, вызов бросает ReferenceError.",
+      "correct": true
+    },
+    {
+      "id": 756,
+      "type": "boolean",
+      "text": "var с тем же именем, что у простого параметра, в начале тела сбрасывает аргумент в undefined.",
+      "correct": false
+    },
+    {
+      "id": 757,
+      "type": "recall",
+      "text": "Почему let n = n бросает ошибку?",
+      "answer": "Правая часть читает то же связывание, которое ещё не инициализировано. Это ReferenceError из временной мёртвой зоны."
+    },
+    {
+      "id": 758,
+      "type": "recall",
+      "text": "Куда попадает присваивание необъявленному имени в нестрогом коде?",
+      "answer": "В свойство глобального объекта. Локальная переменная при этом не создаётся."
+    },
+    {
+      "id": 759,
+      "type": "recall",
+      "text": "Что остаётся во внешнем let после блока, где объявлен свой let с тем же именем?",
+      "answer": "Прежнее значение. Внутренний let прячет внешний только внутри блока и не записывает в него."
+    },
+    {
+      "id": 760,
+      "type": "recall",
+      "text": "Спасает ли typeof от временной мёртвой зоны let?",
+      "answer": "Нет. typeof по имени let до его инициализации бросает ReferenceError, а не возвращает \"undefined\"."
+    }
+  ]
+}

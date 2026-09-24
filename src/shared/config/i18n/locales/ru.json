@@ -54,6 +54,7 @@
     },
     "topics": {
       "eventLoop": "Event Loop",
+      "scope": "Область видимости",
       "context": "Контекст",
       "prototypes": "Прототипы",
       "modules": "Модули",

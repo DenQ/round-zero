@@ -1,0 +1,208 @@
+{
+  "stack": "js",
+  "topic": "scope",
+  "level": "senior",
+  "locale": "en",
+  "questions": [
+    {
+      "id": 761,
+      "type": "code",
+      "language": "js",
+      "text": "function f(n) {\n  arguments[0] = 2;\n  return n;\n}\nconsole.log(f(1));",
+      "options": [
+        "2",
+        "1",
+        "0",
+        "3"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 762,
+      "type": "code",
+      "language": "js",
+      "text": "function f(n) {\n  'use strict';\n  arguments[0] = 2;\n  return n;\n}\nconsole.log(f(1));",
+      "options": [
+        "2",
+        "1",
+        "0",
+        "3"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 763,
+      "type": "code",
+      "language": "js",
+      "text": "function f(n = 1) {\n  arguments[0] = 2;\n  return n;\n}\nconsole.log(f(1));",
+      "options": [
+        "2",
+        "0",
+        "3",
+        "1"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 764,
+      "type": "code",
+      "language": "js",
+      "text": "function f() {\n  const g = () => arguments[0];\n  return g(2);\n}\nconsole.log(f(1));",
+      "options": [
+        "2",
+        "0",
+        "1",
+        "3"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 765,
+      "type": "code",
+      "language": "js",
+      "text": "function f() {\n  var n = 0;\n  eval('var n = 1');\n  return n;\n}\nconsole.log(f());",
+      "options": [
+        "1",
+        "0",
+        "2",
+        "3"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 766,
+      "type": "code",
+      "language": "js",
+      "text": "function f() {\n  var n = 0;\n  const run = eval;\n  run('var n = 1');\n  console.log(n);\n  console.log(globalThis.n);\n}\nf();",
+      "options": [
+        "1, 0",
+        "0, 1",
+        "0, 0",
+        "1, 1"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 767,
+      "type": "code",
+      "language": "js",
+      "text": "function f() {\n  'use strict';\n  var n = 0;\n  eval('var n = 1');\n  return n;\n}\nconsole.log(f());",
+      "options": [
+        "1",
+        "2",
+        "0",
+        "3"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 768,
+      "type": "code",
+      "language": "js",
+      "text": "function f() {\n  let n = 1;\n  const g = new Function('return typeof n === \"undefined\" ? 0 : 1');\n  return g();\n}\nconsole.log(f());",
+      "options": [
+        "1",
+        "2",
+        "3",
+        "0"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 769,
+      "type": "text",
+      "text": "What happens if one function declares both let n and var n?",
+      "options": [
+        "SyntaxError. One name cannot be both a lexical declaration and a var",
+        "var wins and let is ignored",
+        "They are two different names: var is visible outside the block, let only inside",
+        "let silently becomes var"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 770,
+      "type": "text",
+      "text": "What happens in a non-strict function to a function declared inside if?",
+      "options": [
+        "The name is visible only inside the if, as in strict mode",
+        "The name is hoisted like var for the whole function. The function is stored there when execution enters the block. If the block never runs, the name exists and is undefined",
+        "That declaration is a SyntaxError",
+        "The function immediately becomes a property of globalThis"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 771,
+      "type": "text",
+      "text": "What does \"use strict\" at the start of a direct eval string change when the function itself is non-strict?",
+      "options": [
+        "Nothing. The strictness of the outer function cancels the directive in the string",
+        "The whole caller becomes strict",
+        "A var from that string does not enter the function. The function’s let is still readable: a strict eval has its own var environment, and the outer lexical chain remains visible",
+        "The eval no longer sees either var or let of the calling function"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 772,
+      "type": "text",
+      "text": "Where do let and const at the top level of a script go?",
+      "options": [
+        "Onto the global object, like var",
+        "Only into the closure of the first function in the file",
+        "Nowhere, until something reads them",
+        "Into the script’s declarative environment. They do not become properties of the global object"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 773,
+      "type": "boolean",
+      "text": "A let inside a direct eval stays in the eval environment and does not become a local variable of the calling function.",
+      "correct": true
+    },
+    {
+      "id": 774,
+      "type": "boolean",
+      "text": "In strict mode, a function inside a block cannot be called above its line: the name is in the temporal dead zone.",
+      "correct": false
+    },
+    {
+      "id": 775,
+      "type": "boolean",
+      "text": "A let with the same name as a parameter is allowed and hides the parameter only after its own line.",
+      "correct": false
+    },
+    {
+      "id": 776,
+      "type": "boolean",
+      "text": "An i++ inside the closure of one for (let i) iteration does not change i of another iteration.",
+      "correct": true
+    },
+    {
+      "id": 777,
+      "type": "recall",
+      "text": "Where does an ordinary nested function get arguments?",
+      "answer": "From its own call. That is a different arguments object, not the outer function’s object."
+    },
+    {
+      "id": 778,
+      "type": "recall",
+      "text": "Which value is visible in the non-strict function function f(a, a)?",
+      "answer": "The last argument: there is one name, and the second one wins. In strict mode, and with a default, rest, or destructuring, a repeated name is a SyntaxError."
+    },
+    {
+      "id": 779,
+      "type": "recall",
+      "text": "Does a catch without a parameter create its own variable?",
+      "answer": "No. catch { } has no binding. An outer name is still visible there, and an undeclared name inside it does not exist."
+    },
+    {
+      "id": 780,
+      "type": "recall",
+      "text": "What does the bare name n see if the top level of a script has both globalThis.n and let n?",
+      "answer": "The let value. The lexical name hides the global object’s property, but that property stays on globalThis."
+    }
+  ]
+}
