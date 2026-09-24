@@ -263,6 +263,54 @@
         "3, 1, 2"
       ],
       "correctIndex": 3
+    },
+    {
+      "id": 61,
+      "type": "text",
+      "text": "Что такое microtask в event loop?",
+      "options": [
+        "Задача из очереди микротасок: Promise.then, queueMicrotask, MutationObserver",
+        "Любой вызов setTimeout",
+        "Рендер кадра в браузере",
+        "Синхронный код в текущем стеке"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 62,
+      "type": "boolean",
+      "text": "setTimeout(fn, 0) выполнится раньше, чем Promise.resolve().then(fn).",
+      "correct": false
+    },
+    {
+      "id": 63,
+      "type": "recall",
+      "text": "Что такое event loop?",
+      "answer": "Механизм, который забирает задачи из очередей и кладёт их в call stack, когда стек пуст. Сначала опустошается очередь микротасок, затем берётся одна макротаска (таймер, I/O), после чего снова микротаски."
+    },
+    {
+      "id": 64,
+      "type": "text",
+      "text": "В каком порядке event loop обрабатывает работу после синхронного кода?",
+      "options": [
+        "Сначала все microtask, потом одна macrotask",
+        "Сначала одна macrotask, потом все microtask",
+        "Microtask и macrotask вперемешку по времени постановки",
+        "Только macrotask, microtask ждут следующего тика"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 65,
+      "type": "boolean",
+      "text": "queueMicrotask ставит колбэк в очередь микротасок.",
+      "correct": true
+    },
+    {
+      "id": 66,
+      "type": "recall",
+      "text": "Чем macrotask отличается от microtask?",
+      "answer": "Macrotask (setTimeout, setInterval, I/O) — задача «крупного» цикла: после каждой макротаски event loop снова осушает все микротаски. Microtask (Promise.then, queueMicrotask) имеют более высокий приоритет и выполняются все подряд, пока очередь не пуста."
     }
   ]
 }

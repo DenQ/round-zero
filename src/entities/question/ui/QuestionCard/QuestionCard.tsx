@@ -5,6 +5,7 @@ import Stack from '@mui/material/Stack'
 import Typography from '@mui/material/Typography'
 import { useTranslation } from 'react-i18next'
 import { CodeBlock } from '@shared/ui/CodeBlock'
+import { getQuestionCorrectIndex } from '../../model/is-correct'
 import type { Question } from '../../model/types'
 import styles from './QuestionCard.module.css'
 
@@ -48,43 +49,97 @@ export function QuestionCard({
         {question.type === 'code' ? (
           <CodeBlock code={question.text} language={question.language} />
         ) : (
-          <Typography variant="body1">{question.text}</Typography>
+          <Typography variant="body1" className={styles.prompt}>
+            {question.text}
+          </Typography>
         )}
 
-        <ul className={styles.options}>
-          {question.options.map((option, optionIndex) => {
-            const label = OPTION_LABELS[optionIndex]
+        <QuestionActions
+          question={question}
+          selectedIndex={selectedIndex}
+          revealed={revealed}
+          onSelect={onSelect}
+        />
 
-            if (!onSelect) {
-              return (
-                <li key={`${question.id}-${optionIndex}`} className={styles.option}>
-                  <span className={styles.optionLabel}>{label}</span>
-                  <span>{option}</span>
-                </li>
-              )
-            }
-
-            const status = optionStatus(optionIndex, question.correctIndex, selectedIndex, revealed)
-
-            return (
-              <li key={`${question.id}-${optionIndex}`} className={styles.optionItem}>
-                <button
-                  type="button"
-                  className={optionClassName(status)}
-                  disabled={revealed}
-                  aria-pressed={selectedIndex === optionIndex}
-                  onClick={() => onSelect(optionIndex)}
-                >
-                  <span className={styles.optionLabel}>{label}</span>
-                  <span>{option}</span>
-                </button>
-              </li>
-            )
-          })}
-        </ul>
+        {question.type === 'recall' && revealed ? (
+          <div className={styles.answer}>
+            <Typography variant="subtitle2" color="text.secondary">
+              {t('quiz.game.answer')}
+            </Typography>
+            <Typography variant="body1" className={styles.answerText}>
+              {question.answer}
+            </Typography>
+          </div>
+        ) : null}
       </CardContent>
     </Card>
   )
+}
+
+function QuestionActions({
+  question,
+  selectedIndex,
+  revealed,
+  onSelect,
+}: {
+  question: Question
+  selectedIndex: number | null
+  revealed: boolean
+  onSelect?: (optionIndex: number) => void
+}) {
+  const { t } = useTranslation()
+  const correctIndex = getQuestionCorrectIndex(question)
+  const options = questionOptions(question, t)
+
+  return (
+    <ul className={styles.options}>
+      {options.map((option, optionIndex) => {
+        if (!onSelect) {
+          return (
+            <li key={`${question.id}-${optionIndex}`} className={styles.option}>
+              {option.label ? <span className={styles.optionLabel}>{option.label}</span> : null}
+              <span>{option.text}</span>
+            </li>
+          )
+        }
+
+        const status = optionStatus(optionIndex, correctIndex, selectedIndex, revealed)
+
+        return (
+          <li key={`${question.id}-${optionIndex}`} className={styles.optionItem}>
+            <button
+              type="button"
+              className={optionClassName(status)}
+              disabled={revealed}
+              aria-pressed={selectedIndex === optionIndex}
+              onClick={() => onSelect(optionIndex)}
+            >
+              {option.label ? <span className={styles.optionLabel}>{option.label}</span> : null}
+              <span>{option.text}</span>
+            </button>
+          </li>
+        )
+      })}
+    </ul>
+  )
+}
+
+function questionOptions(
+  question: Question,
+  t: (key: string) => string,
+): { label?: string; text: string }[] {
+  if (question.type === 'boolean') {
+    return [{ text: t('quiz.game.true') }, { text: t('quiz.game.false') }]
+  }
+
+  if (question.type === 'recall') {
+    return [{ text: t('quiz.game.know') }, { text: t('quiz.game.dontKnow') }]
+  }
+
+  return question.options.map((text, optionIndex) => ({
+    label: OPTION_LABELS[optionIndex],
+    text,
+  }))
 }
 
 function optionStatus(

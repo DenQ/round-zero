@@ -6,19 +6,50 @@ import ToggleButtonGroup from '@mui/material/ToggleButtonGroup'
 import Typography from '@mui/material/Typography'
 import { useTranslation } from 'react-i18next'
 import { countUntouchedQuestions } from '@entities/activity'
-import type { Question } from '@entities/question'
+import { QUESTION_TYPES, type Question, type QuestionType } from '@entities/question'
 import type { RoundSize } from '../model/constants'
+import { areAllQuestionTypesSelected } from '../model/toggleQuestionTypes'
+
+const toggleGroupSx = {
+  display: 'flex',
+  flexWrap: 'wrap',
+  justifyContent: 'center',
+  gap: 1,
+  '& .MuiToggleButtonGroup-grouped': {
+    m: 0,
+    border: '1px solid',
+    borderColor: 'divider',
+    borderRadius: 1,
+  },
+  '& .MuiToggleButtonGroup-grouped:not(:first-of-type)': {
+    borderLeft: '1px solid',
+    borderLeftColor: 'divider',
+    marginLeft: 0,
+  },
+} as const
 
 type PlayOfferProps = {
   questions: Question[]
   roundSize: RoundSize
   sizeOptions: readonly number[]
   onRoundSizeChange: (size: RoundSize) => void
+  typeFilter: readonly QuestionType[]
+  onToggleTypeFilter: (clicked: QuestionType | 'all') => void
   onPlay: () => void
 }
 
-export function PlayOffer({ questions, roundSize, sizeOptions, onRoundSizeChange, onPlay }: PlayOfferProps) {
+export function PlayOffer({
+  questions,
+  roundSize,
+  sizeOptions,
+  onRoundSizeChange,
+  typeFilter,
+  onToggleTypeFilter,
+  onPlay,
+}: PlayOfferProps) {
   const { t } = useTranslation()
+  const allTypesSelected = areAllQuestionTypesSelected(typeFilter)
+  const canPlay = questions.length > 0
   const untouched = countUntouchedQuestions(questions.map((question) => question.id))
   const packStats =
     untouched > 0
@@ -31,8 +62,28 @@ export function PlayOffer({ questions, roundSize, sizeOptions, onRoundSizeChange
 
   return (
     <Stack spacing={1.5} sx={{ alignItems: 'center', py: 2 }}>
+      <ToggleButtonGroup size="small" aria-label={t('quiz.game.typeFilter')} sx={toggleGroupSx}>
+        <ToggleButton
+          value="all"
+          selected={allTypesSelected}
+          onClick={() => onToggleTypeFilter('all')}
+        >
+          {t('quiz.game.types.all')}
+        </ToggleButton>
+        {QUESTION_TYPES.map((type) => (
+          <ToggleButton
+            key={type}
+            value={type}
+            selected={typeFilter.includes(type)}
+            onClick={() => onToggleTypeFilter(type)}
+          >
+            {t(`quiz.game.types.${type}`)}
+          </ToggleButton>
+        ))}
+      </ToggleButtonGroup>
       <IconButton
         onClick={onPlay}
+        disabled={!canPlay}
         aria-label={t('quiz.game.play')}
         sx={{
           width: 112,
@@ -63,23 +114,7 @@ export function PlayOffer({ questions, roundSize, sizeOptions, onRoundSizeChange
             onRoundSizeChange(value)
           }
         }}
-        sx={{
-          display: 'flex',
-          flexWrap: 'wrap',
-          justifyContent: 'center',
-          gap: 1,
-          '& .MuiToggleButtonGroup-grouped': {
-            m: 0,
-            border: '1px solid',
-            borderColor: 'divider',
-            borderRadius: 1,
-          },
-          '& .MuiToggleButtonGroup-grouped:not(:first-of-type)': {
-            borderLeft: '1px solid',
-            borderLeftColor: 'divider',
-            marginLeft: 0,
-          },
-        }}
+        sx={toggleGroupSx}
       >
         {sizeOptions.map((size) => (
           <ToggleButton key={size} value={size} sx={{ minWidth: 40 }}>
