@@ -38,9 +38,10 @@ export function QuizGame({ questions, pack }: QuizGameProps) {
 
   return (
     <PlayOffer
-      questions={game.pool}
+      questions={questions}
+      pool={game.pool}
       roundSize={game.roundSize}
-      sizeOptions={game.sizeOptions}
+      resolvedRoundSize={game.resolvedRoundSize}
       onRoundSizeChange={game.setRoundSize}
       typeFilter={game.typeFilter}
       onToggleTypeFilter={game.toggleTypeFilter}
