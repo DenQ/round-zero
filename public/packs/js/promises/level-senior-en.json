@@ -1,0 +1,408 @@
+{
+  "stack": "js",
+  "topic": "promises",
+  "level": "senior",
+  "locale": "en",
+  "questions": [
+    {
+      "id": 621,
+      "type": "code",
+      "language": "js",
+      "text": "let resolve;\nconst p = new Promise((r) => {\n  resolve = r;\n});\nresolve(p);\np.then(\n  () => console.log(1),\n  (e) => console.log(e.name === 'TypeError' ? 2 : 0),\n);",
+      "options": [
+        "2",
+        "1",
+        "0",
+        "undefined"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 622,
+      "type": "code",
+      "language": "js",
+      "text": "Promise.resolve({\n  then(resolve, reject) {\n    resolve(1);\n    reject(2);\n  },\n}).then(\n  (n) => console.log(n),\n  (n) => console.log(n),\n);",
+      "options": [
+        "2",
+        "1",
+        "1, 2",
+        "2, 1"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 623,
+      "type": "code",
+      "language": "js",
+      "text": "Promise.resolve({\n  then() {\n    throw 6;\n  },\n}).catch((n) => console.log(n));",
+      "options": [
+        "undefined",
+        "0",
+        "6",
+        "TypeError"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 624,
+      "type": "code",
+      "language": "js",
+      "text": "Promise.resolve(1)\n  .finally(() => Promise.resolve(9))\n  .then((n) => console.log(n));",
+      "options": [
+        "9",
+        "1, 9",
+        "undefined",
+        "1"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 625,
+      "type": "code",
+      "language": "js",
+      "text": "const { promise, resolve } = Promise.withResolvers();\nconsole.log(typeof resolve === 'function' ? 1 : 0);\nresolve(4);\npromise.then((n) => console.log(n));",
+      "options": [
+        "1, 4",
+        "4",
+        "1",
+        "0, 4"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 626,
+      "type": "code",
+      "language": "js",
+      "text": "async function f() {\n  const n = await {\n    then(resolve) {\n      resolve(3);\n    },\n  };\n  console.log(n);\n}\nf();\nconsole.log(8);",
+      "options": [
+        "3, 8",
+        "8, 3",
+        "3",
+        "8"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 627,
+      "type": "code",
+      "language": "js",
+      "text": "Promise.all([\n  {\n    then(resolve) {\n      resolve(1);\n    },\n  },\n  2,\n]).then(([a, b]) => {\n  console.log(a);\n  console.log(b);\n});",
+      "options": [
+        "2, 1",
+        "1",
+        "1, 2",
+        "2"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 628,
+      "type": "code",
+      "language": "js",
+      "text": "Promise.any([]).catch((e) => console.log(e.errors.length));",
+      "options": [
+        "1",
+        "undefined",
+        "TypeError",
+        "0"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 629,
+      "type": "text",
+      "text": "What happens when resolve is called with the same promise it is settling?",
+      "options": [
+        "The promise rejects with a TypeError. A promise cannot adopt itself",
+        "The promise fulfills with undefined",
+        "The promise stays pending",
+        "The call is ignored and a later resolve can still settle it"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 630,
+      "type": "text",
+      "text": "If a thenable calls both resolve and reject, which call counts?",
+      "options": [
+        "reject, because failure wins",
+        "The first call. Later calls find the promise already settled",
+        "Both calls become separate results",
+        "Neither. The promise rejects with a TypeError"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 631,
+      "type": "text",
+      "text": "What does a fulfilled promise returned from finally do to the previous value?",
+      "options": [
+        "It replaces the value",
+        "It rejects the chain",
+        "The chain keeps the previous value. A fulfilled thenable from finally does not override it",
+        "It wraps the previous value in an array"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 632,
+      "type": "text",
+      "text": "What does Promise.withResolvers return?",
+      "options": [
+        "A promise subclass",
+        "A promise that fulfills on its own on the next tick",
+        "The same result as Promise.race of an empty list",
+        "A promise plus the resolve and reject functions that settle it, without an executor"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 633,
+      "type": "text",
+      "text": "Why can a plain value win Promise.race?",
+      "options": [
+        "Each input goes through Promise.resolve. A plain value is already fulfilled, so it can settle the race",
+        "race skips anything that is not a promise",
+        "race throws when an input is not a promise",
+        "A plain value is queued behind every promise"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 634,
+      "type": "text",
+      "text": "When does the second job() run in await job(); await job(), compared with starting both before either await?",
+      "options": [
+        "In both forms the second call waits for the first fulfillment",
+        "Starting both calls them before either continuation. Two awaits in a row call the next job only after the first await resumes",
+        "The first await starts every job in the function immediately",
+        "Neither form calls job until a later timer"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 635,
+      "type": "boolean",
+      "text": "Resolving a promise with itself rejects that promise with a TypeError.",
+      "correct": true
+    },
+    {
+      "id": 636,
+      "type": "boolean",
+      "text": "When a thenable calls resolve and then reject, the rejection wins.",
+      "correct": false
+    },
+    {
+      "id": 637,
+      "type": "boolean",
+      "text": "A fulfilled promise returned from finally keeps the previous fulfillment value.",
+      "correct": true
+    },
+    {
+      "id": 638,
+      "type": "boolean",
+      "text": "Promise.any of an empty list fulfills with an empty array.",
+      "correct": false
+    },
+    {
+      "id": 639,
+      "type": "boolean",
+      "text": "Promise.race sends each input through Promise.resolve, so a plain value can win.",
+      "correct": true
+    },
+    {
+      "id": 640,
+      "type": "boolean",
+      "text": "In await job(); await job(), the second call starts before the first await resumes.",
+      "correct": false
+    },
+    {
+      "id": 641,
+      "type": "recall",
+      "text": "What error settles a promise that is resolved with itself?",
+      "answer": "TypeError. The promise rejects because it would have to wait for itself."
+    },
+    {
+      "id": 642,
+      "type": "recall",
+      "text": "Which call wins when a thenable invokes both resolve and reject?",
+      "answer": "The first one. After the promise settles, further calls are ignored."
+    },
+    {
+      "id": 643,
+      "type": "recall",
+      "text": "What three fields does Promise.withResolvers return?",
+      "answer": "promise, resolve, and reject. resolve and reject settle that promise."
+    },
+    {
+      "id": 644,
+      "type": "recall",
+      "text": "What does Promise.any of an empty list do?",
+      "answer": "It rejects with an AggregateError whose errors list is empty."
+    },
+    {
+      "id": 645,
+      "type": "recall",
+      "text": "Why is then on Promise.all([]) still asynchronous?",
+      "answer": "Fulfillment is queued as a reaction. A result that is already known does not make then synchronous."
+    },
+    {
+      "id": 646,
+      "type": "recall",
+      "text": "In what order does Promise.any store reasons when every input rejects?",
+      "answer": "Input order, on AggregateError.errors."
+    },
+    {
+      "id": 647,
+      "type": "code",
+      "language": "js",
+      "text": "Promise.race([3, Promise.resolve(1)]).then((n) => console.log(n));",
+      "options": [
+        "3",
+        "1",
+        "3, 1",
+        "undefined"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 648,
+      "type": "code",
+      "language": "js",
+      "text": "const order = [];\nfunction job(id) {\n  order.push(id);\n  return Promise.resolve(id);\n}\nasync function seq() {\n  await job(1);\n  await job(2);\n}\nasync function par() {\n  const a = job(3);\n  const b = job(4);\n  await a;\n  await b;\n}\npar();\nseq();\nconsole.log(order.join(''));",
+      "options": [
+        "3412",
+        "341",
+        "1234",
+        "34"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 649,
+      "type": "code",
+      "language": "js",
+      "text": "const p = Promise.reject(1);\np.catch((n) => console.log(n));\np.catch((n) => console.log(n + 1));",
+      "options": [
+        "1",
+        "2",
+        "1, 2",
+        "2, 1"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 650,
+      "type": "code",
+      "language": "js",
+      "text": "async function f() {\n  return Promise.resolve(5);\n}\nf().then((v) => console.log(typeof v === 'number' ? 1 : 0));",
+      "options": [
+        "0",
+        "5",
+        "object",
+        "1"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 651,
+      "type": "code",
+      "language": "js",
+      "text": "const a = new Promise((_, reject) => {\n  queueMicrotask(() => reject(1));\n});\nconst b = Promise.reject(2);\nPromise.all([a, b]).catch((n) => console.log(n));",
+      "options": [
+        "2",
+        "1",
+        "1, 2",
+        "0"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 652,
+      "type": "code",
+      "language": "js",
+      "text": "let n = 0;\nPromise.all([]).then(() => {\n  n = 1;\n});\nconsole.log(n);",
+      "options": [
+        "1",
+        "0",
+        "undefined",
+        "[]"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 653,
+      "type": "code",
+      "language": "js",
+      "text": "Promise.any([\n  Promise.reject(4),\n  Promise.reject(5),\n]).catch((e) => {\n  console.log(e.errors[0]);\n  console.log(e.errors[1]);\n});",
+      "options": [
+        "5, 4",
+        "4",
+        "4, 5",
+        "5"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 654,
+      "type": "code",
+      "language": "js",
+      "text": "async function f() {\n  return {\n    then(resolve) {\n      resolve(Promise.resolve(7));\n    },\n  };\n}\nf().then((v) => console.log(typeof v === 'number' ? v : 0));",
+      "options": [
+        "0",
+        "object",
+        "undefined",
+        "7"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 655,
+      "type": "text",
+      "text": "Does one catch consume a rejection so a second catch on the same promise stays silent?",
+      "options": [
+        "Yes. A rejection has one consumer",
+        "Yes. The second catch is always attached too late",
+        "No. Each catch registers its own reaction, and the rejection is delivered to every handler already attached",
+        "Only when both handlers were passed as the second argument of then"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 656,
+      "type": "text",
+      "text": "What does an async function do with return somePromise?",
+      "options": [
+        "The caller is fulfilled with somePromise boxed as a value",
+        "The caller receives somePromise itself, and the async wrapper stays pending",
+        "Returning a promise from an async function is a syntax error",
+        "It adopts somePromise. The caller’s promise settles with that result, not with the promise object"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 657,
+      "type": "boolean",
+      "text": "Two catch handlers attached to the same rejected promise both run.",
+      "correct": true
+    },
+    {
+      "id": 658,
+      "type": "boolean",
+      "text": "An async function that returns a promise adopts it instead of fulfilling with the promise object.",
+      "correct": true
+    },
+    {
+      "id": 659,
+      "type": "recall",
+      "text": "What is the difference between starting two jobs and then awaiting them, and awaiting the first before starting the second?",
+      "answer": "The first form calls both before either continuation. The second calls the next job only after the previous await resumes."
+    },
+    {
+      "id": 660,
+      "type": "recall",
+      "text": "What does a second catch on the same promise observe?",
+      "answer": "The same rejection. Attached handlers do not consume it."
+    }
+  ]
+}

@@ -55,7 +55,8 @@
     "topics": {
       "eventLoop": "Event Loop",
       "context": "Context",
-      "prototypes": "Prototypes"
+      "prototypes": "Prototypes",
+      "promises": "Promises"
     },
     "levels": {
       "junior": "Junior",
