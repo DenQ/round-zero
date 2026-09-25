@@ -263,6 +263,54 @@
         "1, 4, 6, 7, 2, 3, 5"
       ],
       "correctIndex": 0
+    },
+    {
+      "id": 73,
+      "type": "text",
+      "text": "Where does the browser usually place rendering relative to microtasks?",
+      "options": [
+        "After the microtask queue is empty and before the next macrotask, when a frame is due",
+        "Between every two microtasks",
+        "Strictly before any microtask",
+        "Only after every macrotask in the queue"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 74,
+      "type": "boolean",
+      "text": "A queueMicrotask scheduled inside setTimeout runs after that timeout callback and before the next timer.",
+      "correct": true
+    },
+    {
+      "id": 75,
+      "type": "recall",
+      "text": "How do ECMAScript job queues relate to the browser event loop queues?",
+      "answer": "The JS spec defines Jobs and Job Queues (Promise Jobs). The host (browser, Node) decides when to run those jobs against its own work: timers, I/O, rendering. “Microtask vs macrotask” is the host model on top of JS jobs."
+    },
+    {
+      "id": 76,
+      "type": "text",
+      "text": "What does an endless queueMicrotask(() => queueMicrotask(...)) chain do?",
+      "options": [
+        "It starves macrotasks and rendering: the microtask queue never empties",
+        "After N steps it yields to setTimeout",
+        "It throws RangeError like stack recursion",
+        "It is automatically turned into a macrotask"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 77,
+      "type": "boolean",
+      "text": "MutationObserver callbacks are queued as microtasks.",
+      "correct": true
+    },
+    {
+      "id": 78,
+      "type": "recall",
+      "text": "Why can a Promise created inside setTimeout beat the next setTimeout, but not the current timer callback?",
+      "answer": "The current timeout is the macrotask already running. A promise from it enqueues a microtask, which runs right after that callback and before the next macrotask. The next setTimeout waits for a new macro turn, so the then runs first."
     }
   ]
 }

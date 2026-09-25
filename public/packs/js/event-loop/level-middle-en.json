@@ -263,6 +263,54 @@
         "4, 2, 3, 1"
       ],
       "correctIndex": 2
+    },
+    {
+      "id": 67,
+      "type": "text",
+      "text": "When does the work after await Promise.resolve() run inside an async function?",
+      "options": [
+        "As a microtask, after the current synchronous code",
+        "Immediately, on the same line",
+        "As a macrotask with setTimeout(0)",
+        "Only on the next requestAnimationFrame"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 68,
+      "type": "boolean",
+      "text": "Two Promise.then callbacks queued together run before the next setTimeout(0).",
+      "correct": true
+    },
+    {
+      "id": 69,
+      "type": "recall",
+      "text": "What happens if a microtask enqueues another microtask?",
+      "answer": "The new microtask joins the same queue and still runs in this drain, before any macrotask. The queue is emptied completely, so a then/queueMicrotask chain can delay timers."
+    },
+    {
+      "id": 70,
+      "type": "text",
+      "text": "Relative to the promise microtask queue, process.nextTick in Node.js is…",
+      "options": [
+        "An even higher-priority queue than promise microtasks",
+        "The same as setTimeout(0)",
+        "Identical to browser queueMicrotask with no differences",
+        "A macrotask after all timers"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 71,
+      "type": "boolean",
+      "text": "An async function runs synchronously until its first await.",
+      "correct": true
+    },
+    {
+      "id": 72,
+      "type": "recall",
+      "text": "Why does a nested setTimeout(0) inside then not run right after that then?",
+      "answer": "then is a microtask. setTimeout enqueues a macrotask. The event loop finishes every current microtask first, then takes the timer. So the nested timeout always waits for the next macro turn."
     }
   ]
 }

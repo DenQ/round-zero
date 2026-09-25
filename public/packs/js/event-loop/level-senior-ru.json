@@ -263,6 +263,54 @@
         "1, 4, 6, 7, 2, 3, 5"
       ],
       "correctIndex": 0
+    },
+    {
+      "id": 73,
+      "type": "text",
+      "text": "В каком порядке браузер обычно вставляет rendering относительно microtask?",
+      "options": [
+        "После осушения microtask и перед следующей macrotask (когда пора рисовать)",
+        "Между каждыми двумя microtask",
+        "Строго до любой microtask",
+        "Только после всех macrotask в очереди"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 74,
+      "type": "boolean",
+      "text": "queueMicrotask внутри setTimeout выполнится до следующего таймера, но после текущего timeout-колбэка.",
+      "correct": true
+    },
+    {
+      "id": 75,
+      "type": "recall",
+      "text": "Как связаны job queue в спецификации ECMAScript и очереди браузерного event loop?",
+      "answer": "Спека JS описывает Jobs/Job Queues (Promise Jobs). Хост (браузер, Node) решает, когда вызывать эти джобы относительно своих задач: таймеры, I/O, rendering. Поэтому «microtask vs macrotask» — модель хоста поверх JS-джоб."
+    },
+    {
+      "id": 76,
+      "type": "text",
+      "text": "Что сделает бесконечная цепочка queueMicrotask(() => queueMicrotask(...))?",
+      "options": [
+        "Заблокирует macrotask и rendering: очередь микротасок никогда не опустеет",
+        "Через N шагов уступит setTimeout",
+        "Упадёт с RangeError как рекурсия на стеке",
+        "Автоматически станет macrotask"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 77,
+      "type": "boolean",
+      "text": "MutationObserver колбэки ставятся как microtask.",
+      "correct": true
+    },
+    {
+      "id": 78,
+      "type": "recall",
+      "text": "Почему Promise, созданный внутри setTimeout, может обогнать следующий setTimeout, но не текущий колбэк таймера?",
+      "answer": "Текущий timeout — уже выполняющаяся macrotask. Промис из него ставит microtask: она бежит сразу после этого колбэка, до следующей макротаски. Следующий setTimeout ждёт нового макропрохода, поэтому then успевает раньше него."
     }
   ]
 }

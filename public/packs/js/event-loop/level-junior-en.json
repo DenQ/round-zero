@@ -263,6 +263,54 @@
         "3, 1, 2"
       ],
       "correctIndex": 3
+    },
+    {
+      "id": 61,
+      "type": "text",
+      "text": "What is a microtask in the event loop?",
+      "options": [
+        "A job from the microtask queue: Promise.then, queueMicrotask, MutationObserver",
+        "Any setTimeout call",
+        "A browser paint frame",
+        "Synchronous code still on the stack"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 62,
+      "type": "boolean",
+      "text": "setTimeout(fn, 0) runs before Promise.resolve().then(fn).",
+      "correct": false
+    },
+    {
+      "id": 63,
+      "type": "recall",
+      "text": "What is the event loop?",
+      "answer": "The mechanism that pulls jobs from queues onto the call stack when the stack is empty. It drains the microtask queue first, then takes one macrotask (timer, I/O), then drains microtasks again."
+    },
+    {
+      "id": 64,
+      "type": "text",
+      "text": "After synchronous code, in what order does the event loop run work?",
+      "options": [
+        "All microtasks, then one macrotask",
+        "One macrotask, then all microtasks",
+        "Microtasks and macrotasks interleaved by enqueue time",
+        "Only macrotasks; microtasks wait for the next tick"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 65,
+      "type": "boolean",
+      "text": "queueMicrotask puts the callback on the microtask queue.",
+      "correct": true
+    },
+    {
+      "id": 66,
+      "type": "recall",
+      "text": "How is a macrotask different from a microtask?",
+      "answer": "A macrotask (setTimeout, setInterval, I/O) is one turn of the “big” loop: after it finishes, the event loop drains every microtask. Microtasks (Promise.then, queueMicrotask) have higher priority and run back-to-back until that queue is empty."
     }
   ]
 }

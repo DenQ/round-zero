@@ -4,8 +4,7 @@ import Stack from '@mui/material/Stack'
 import Typography from '@mui/material/Typography'
 import { useTranslation } from 'react-i18next'
 import type { ActivityPackRef } from '@entities/activity'
-import { QuestionCard } from '@entities/question'
-import type { Question } from '@entities/question'
+import { isQuestionCorrect, QuestionCard, type Question } from '@entities/question'
 import { packLevelLabel, packTopicLabel } from '@shared/lib/packs'
 
 type QuizRoundProps = {
@@ -30,7 +29,7 @@ export function QuizRound({
   onNext,
 }: QuizRoundProps) {
   const { t } = useTranslation()
-  const isCorrect = selectedIndex === question.correctIndex
+  const isCorrect = selectedIndex !== null && isQuestionCorrect(question, selectedIndex)
 
   return (
     <Stack spacing={2}>

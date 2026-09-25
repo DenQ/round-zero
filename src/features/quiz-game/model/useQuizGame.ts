@@ -1,9 +1,11 @@
 import { useCallback, useState } from 'react'
 import type { ActivityPackRef } from '@entities/activity'
 import { recordAnswer } from '@entities/activity'
-import type { Question } from '@entities/question'
+import { isQuestionCorrect, QUESTION_TYPES, type Question, type QuestionType } from '@entities/question'
 import { DEFAULT_ROUND_SIZE, ROUND_SIZES, type RoundSize } from './constants'
+import { filterQuestions } from './filterQuestions'
 import { pickQuestions } from './pickQuestions'
+import { toggleQuestionTypes } from './toggleQuestionTypes'
 
 type GivenAnswer = {
   questionId: number
@@ -26,31 +28,37 @@ export function useQuizGame(questions: Question[], pack: ActivityPackRef) {
   const [state, setState] = useState<GameState>(idleState)
   const [sourceQuestions, setSourceQuestions] = useState(questions)
   const [roundSize, setRoundSize] = useState<RoundSize>(DEFAULT_ROUND_SIZE)
+  const [typeFilter, setTypeFilter] = useState<QuestionType[]>(() => [...QUESTION_TYPES])
+  const pool = filterQuestions(questions, typeFilter)
+
+  const toggleTypeFilter = useCallback((clicked: QuestionType | 'all') => {
+    setTypeFilter((current) => toggleQuestionTypes(current, clicked))
+  }, [])
 
   if (sourceQuestions !== questions) {
     setSourceQuestions(questions)
     setState(idleState)
   }
 
-  if (typeof roundSize === 'number' && roundSize > questions.length) {
-    setRoundSize(questions.length >= DEFAULT_ROUND_SIZE ? DEFAULT_ROUND_SIZE : 'all')
+  if (typeof roundSize === 'number' && roundSize > pool.length) {
+    setRoundSize(pool.length >= DEFAULT_ROUND_SIZE ? DEFAULT_ROUND_SIZE : 'all')
   }
 
   const start = useCallback(() => {
-    if (questions.length === 0) {
+    if (pool.length === 0) {
       return
     }
 
-    const count = roundSize === 'all' ? questions.length : Math.min(roundSize, questions.length)
+    const count = roundSize === 'all' ? pool.length : Math.min(roundSize, pool.length)
 
     setState({
       phase: 'playing',
-      round: pickQuestions(questions, count),
+      round: pickQuestions(pool, count),
       step: 0,
       selectedIndex: null,
       answers: [],
     })
-  }, [questions, roundSize])
+  }, [pool, roundSize])
 
   const select = useCallback((optionIndex: number) => {
     setState((current) => {
@@ -74,7 +82,7 @@ export function useQuizGame(questions: Question[], pack: ActivityPackRef) {
 
     recordAnswer({
       questionId: question.id,
-      correct: question.correctIndex === state.selectedIndex,
+      correct: isQuestionCorrect(question, state.selectedIndex),
       pack,
     })
 
@@ -100,15 +108,18 @@ export function useQuizGame(questions: Question[], pack: ActivityPackRef) {
     })
   }, [pack, state])
 
-  const sizeOptions = ROUND_SIZES.filter((size) => size <= questions.length)
+  const sizeOptions = ROUND_SIZES.filter((size) => size <= pool.length)
 
   if (state.phase === 'idle') {
     return {
       phase: 'idle' as const,
       questionCount: questions.length,
+      pool,
       roundSize,
       sizeOptions,
       setRoundSize,
+      typeFilter,
+      toggleTypeFilter,
       start,
     }
   }
@@ -139,7 +150,7 @@ export function useQuizGame(questions: Question[], pack: ActivityPackRef) {
 function countScore(round: Question[], answers: GivenAnswer[]): number {
   return answers.reduce((score, answer) => {
     const question = round.find((item) => item.id === answer.questionId)
-    if (!question || question.correctIndex !== answer.selectedIndex) {
+    if (!question || !isQuestionCorrect(question, answer.selectedIndex)) {
       return score
     }
 

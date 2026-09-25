@@ -263,6 +263,54 @@
         "4, 2, 3, 1"
       ],
       "correctIndex": 2
+    },
+    {
+      "id": 67,
+      "type": "text",
+      "text": "Когда выполнится колбэк await Promise.resolve() внутри async-функции?",
+      "options": [
+        "Как microtask, после текущего синхронного кода",
+        "Сразу, синхронно в той же строке",
+        "Как macrotask вместе с setTimeout(0)",
+        "Только в следующем кадре requestAnimationFrame"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 68,
+      "type": "boolean",
+      "text": "Два подряд Promise.then в одной очереди выполняются до следующего setTimeout(0).",
+      "correct": true
+    },
+    {
+      "id": 69,
+      "type": "recall",
+      "text": "Что произойдёт, если microtask снова поставит microtask?",
+      "answer": "Новая микротаска попадает в ту же очередь и будет выполнена в этом же проходе, до любой макротаски. Очередь осушается полностью, поэтому цепочка then/queueMicrotask может отложить таймеры."
+    },
+    {
+      "id": 70,
+      "type": "text",
+      "text": "process.nextTick в Node.js относительно очереди промисов — это…",
+      "options": [
+        "Ещё более приоритетная очередь, чем обычные microtask промисов",
+        "Обычный setTimeout(0)",
+        "То же самое, что queueMicrotask в браузере без отличий",
+        "Макротаска после всех таймеров"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 71,
+      "type": "boolean",
+      "text": "async-функция до первого await выполняется синхронно.",
+      "correct": true
+    },
+    {
+      "id": 72,
+      "type": "recall",
+      "text": "Почему вложенный setTimeout(0) внутри then не срабатывает сразу после этого then?",
+      "answer": "then — microtask. setTimeout ставит macrotask. Event loop сначала доделает все текущие микротаски и только потом возьмёт таймер. Поэтому вложенный timeout всегда уходит в следующий макропроход."
     }
   ]
 }

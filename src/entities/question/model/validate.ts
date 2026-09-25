@@ -1,7 +1,7 @@
 import type { PackRef } from '@shared/config/packs'
 import { isPackLevel, isPackLocale, isPackStack, isPackTopic } from '@shared/config/packs'
 import { OPTIONS_PER_QUESTION, QUESTIONS_PER_PACK } from './constants'
-import type { Question, QuestionPack } from './types'
+import { QUESTION_TYPES, type Question, type QuestionPack, type QuestionType } from './types'
 
 export class InvalidPackError extends Error {
   constructor(message: string) {
@@ -37,8 +37,8 @@ export function validateQuestionPack(data: unknown, expected?: PackRef): Questio
     throw new InvalidPackError('Pack locale is invalid')
   }
 
-  if (!Array.isArray(questions) || questions.length !== QUESTIONS_PER_PACK) {
-    throw new InvalidPackError(`Pack must contain ${QUESTIONS_PER_PACK} questions`)
+  if (!Array.isArray(questions) || questions.length < QUESTIONS_PER_PACK) {
+    throw new InvalidPackError(`Pack must contain at least ${QUESTIONS_PER_PACK} questions`)
   }
 
   const seenIds = new Set<number>()
@@ -76,19 +76,37 @@ function validateQuestion(data: unknown): Question {
     throw new InvalidPackError('Question must be an object')
   }
 
-  const { id, type, text, options, correctIndex, language } = data
+  const { id, type, text } = data
 
   if (typeof id !== 'number' || !Number.isInteger(id) || id < 1) {
     throw new InvalidPackError('Question id must be a positive integer')
   }
 
-  if (typeof type !== 'string' || type.length === 0) {
-    throw new InvalidPackError(`Question ${id} type is required`)
+  if (!isQuestionType(type)) {
+    throw new InvalidPackError(`Question ${id} type is invalid`)
   }
 
   if (typeof text !== 'string' || text.length === 0) {
     throw new InvalidPackError(`Question ${id} text is required`)
   }
+
+  if (type === 'boolean') {
+    if (typeof data.correct !== 'boolean') {
+      throw new InvalidPackError(`Question ${id} correct must be a boolean`)
+    }
+
+    return { id, type, text, correct: data.correct }
+  }
+
+  if (type === 'recall') {
+    if (typeof data.answer !== 'string' || data.answer.length === 0) {
+      throw new InvalidPackError(`Question ${id} answer is required`)
+    }
+
+    return { id, type, text, answer: data.answer }
+  }
+
+  const { options, correctIndex, language } = data
 
   if (!Array.isArray(options) || options.length !== OPTIONS_PER_QUESTION) {
     throw new InvalidPackError(`Question ${id} must have ${OPTIONS_PER_QUESTION} options`)
@@ -107,18 +125,28 @@ function validateQuestion(data: unknown): Question {
     throw new InvalidPackError(`Question ${id} correctIndex is invalid`)
   }
 
-  if (language !== undefined && typeof language !== 'string') {
-    throw new InvalidPackError(`Question ${id} language is invalid`)
+  const choiceOptions = options.filter((option): option is string => typeof option === 'string')
+
+  if (type === 'code') {
+    if (language !== undefined && typeof language !== 'string') {
+      throw new InvalidPackError(`Question ${id} language is invalid`)
+    }
+
+    return {
+      id,
+      type,
+      text,
+      options: choiceOptions,
+      correctIndex,
+      ...(typeof language === 'string' ? { language } : {}),
+    }
   }
 
-  return {
-    id,
-    type,
-    ...(typeof language === 'string' ? { language } : {}),
-    text,
-    options: options.filter((option): option is string => typeof option === 'string'),
-    correctIndex,
-  }
+  return { id, type, text, options: choiceOptions, correctIndex }
+}
+
+function isQuestionType(value: unknown): value is QuestionType {
+  return typeof value === 'string' && (QUESTION_TYPES as readonly string[]).includes(value)
 }
 
 function isRecord(value: unknown): value is Record<string, unknown> {
