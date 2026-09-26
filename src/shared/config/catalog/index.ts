@@ -54,7 +54,17 @@ export const catalog = [
   { slug: 'go', labelKey: 'catalog.stacks.go', topics: [] },
   { slug: 'sql', labelKey: 'catalog.stacks.sql', topics: [] },
   { slug: 'nest', labelKey: 'catalog.stacks.nest', topics: [] },
-  { slug: 'react', labelKey: 'catalog.stacks.react', topics: [] },
+  {
+    slug: 'react',
+    labelKey: 'catalog.stacks.react',
+    topics: [
+      {
+        slug: 'base',
+        labelKey: 'catalog.topics.base',
+        levels: PACK_LEVELS,
+      },
+    ],
+  },
 ] as const satisfies readonly CatalogStack[]
 
 export function getQuizPath(stack: PackStack, topic: string, level: PackLevel): string {

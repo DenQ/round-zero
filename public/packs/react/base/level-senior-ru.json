@@ -1,0 +1,408 @@
+{
+  "stack": "react",
+  "topic": "base",
+  "level": "senior",
+  "locale": "ru",
+  "questions": [
+    {
+      "id": 861,
+      "type": "code",
+      "language": "jsx",
+      "text": "import { useEffect, useState } from 'react'\nfunction Box() {\n  useState(() => {\n    console.log(1)\n    return 1\n  })\n  return null\n}\nfunction App() {\n  const [k, setK] = useState(0)\n  useEffect(() => {\n    setK(1)\n  }, [])\n  return <Box key={k} />\n}",
+      "options": [
+        "1, 1",
+        "1",
+        "1, 1, 1",
+        "0, 1"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 862,
+      "type": "code",
+      "language": "jsx",
+      "text": "import { useEffect, useState } from 'react'\nfunction Box() {\n  useState(() => {\n    console.log(1)\n    return 1\n  })\n  return null\n}\nfunction App() {\n  const [n, setN] = useState(0)\n  useEffect(() => {\n    setN(1)\n  }, [])\n  return <Box />\n}",
+      "options": [
+        "1, 1",
+        "1",
+        "0, 1",
+        "1, 0"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 863,
+      "type": "code",
+      "language": "jsx",
+      "text": "import { useEffect, useState } from 'react'\nfunction App() {\n  const [n, setN] = useState(0)\n  function Box() {\n    useState(() => {\n      console.log(1)\n      return 1\n    })\n    return null\n  }\n  useEffect(() => {\n    setN(1)\n  }, [])\n  return <Box />\n}",
+      "options": [
+        "1",
+        "0, 1",
+        "1, 1",
+        "1, 1, 1"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 864,
+      "type": "code",
+      "language": "jsx",
+      "text": "import { useEffect, useState } from 'react'\nfunction A() {\n  const [n] = useState(1)\n  console.log(n)\n  return null\n}\nfunction B() {\n  const [n] = useState(2)\n  console.log(n)\n  return null\n}\nfunction App() {\n  const [flag, setFlag] = useState(true)\n  useEffect(() => {\n    setFlag(false)\n  }, [])\n  return flag ? <A /> : <B />\n}",
+      "options": [
+        "1, 1",
+        "1",
+        "2",
+        "1, 2"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 865,
+      "type": "code",
+      "language": "jsx",
+      "text": "import { useEffect, useState } from 'react'\nfunction Row({ id }) {\n  const [n] = useState(id)\n  console.log(n)\n  return null\n}\nfunction App() {\n  const [items, setItems] = useState([1, 2])\n  useEffect(() => {\n    setItems([2])\n  }, [])\n  return items.map((id) => <Row key={id} id={id} />)\n}",
+      "options": [
+        "1, 2, 2",
+        "1, 2, 1",
+        "1, 2",
+        "2"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 866,
+      "type": "code",
+      "language": "jsx",
+      "text": "import { useEffect, useState } from 'react'\nfunction Row({ id }) {\n  const [n] = useState(id)\n  console.log(n)\n  return null\n}\nfunction App() {\n  const [items, setItems] = useState([1, 2])\n  useEffect(() => {\n    setItems([2])\n  }, [])\n  return items.map((id) => <Row id={id} />)\n}",
+      "options": [
+        "1, 2, 2",
+        "1, 2, 1",
+        "1, 2",
+        "1, 1"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 867,
+      "type": "code",
+      "language": "jsx",
+      "text": "import { useEffect, useState } from 'react'\nfunction Child({ n }) {\n  const [prev, setPrev] = useState(n)\n  const [value, setValue] = useState(0)\n  if (n !== prev) {\n    setPrev(n)\n    setValue(n)\n  }\n  console.log(value)\n  return null\n}\nfunction App() {\n  const [n, setN] = useState(1)\n  useEffect(() => {\n    setN(2)\n  }, [])\n  return <Child n={n} />\n}",
+      "options": [
+        "0, 2",
+        "0, 1, 2",
+        "0, 0, 2",
+        "2"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 868,
+      "type": "code",
+      "language": "jsx",
+      "text": "import { useEffect, useState } from 'react'\nfunction Box() {\n  const [n, setN] = useState(0)\n  useEffect(() => {\n    setN(4)\n  }, [])\n  console.log(n)\n  return null\n}\nfunction App() {\n  const [extra, setExtra] = useState(false)\n  useEffect(() => {\n    setExtra(true)\n  }, [])\n  return (\n    <>\n      <Box />\n      {extra ? <span /> : null}\n    </>\n  )\n}",
+      "options": [
+        "0, 4, 0, 4",
+        "0, 0, 4",
+        "4",
+        "0, 4"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 869,
+      "type": "code",
+      "language": "jsx",
+      "text": "import { useEffect, useState } from 'react'\nfunction Child({ n }) {\n  const [m] = useState(n)\n  console.log(m)\n  return null\n}\nfunction App() {\n  const [n, setN] = useState(1)\n  useEffect(() => {\n    setN(9)\n  }, [])\n  return <Child n={n} />\n}",
+      "options": [
+        "1, 1",
+        "1, 9",
+        "1",
+        "9"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 870,
+      "type": "code",
+      "language": "jsx",
+      "text": "import { useEffect, useState } from 'react'\nfunction App() {\n  const [n, setN] = useState(0)\n  useEffect(() => {\n    console.log(n)\n  }, [])\n  useEffect(() => {\n    setN(5)\n  }, [])\n  return null\n}",
+      "options": [
+        "0, 5",
+        "0",
+        "5",
+        "0, 0"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 871,
+      "type": "code",
+      "language": "jsx",
+      "text": "import { useEffect, useState } from 'react'\nfunction App() {\n  const [n, setN] = useState(0)\n  useEffect(() => {\n    console.log(n)\n  }, [n])\n  useEffect(() => {\n    setN(5)\n  }, [])\n  return null\n}",
+      "options": [
+        "0",
+        "5",
+        "0, 5",
+        "0, 0, 5"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 872,
+      "type": "code",
+      "language": "jsx",
+      "text": "import { useEffect, useState } from 'react'\nfunction Box() {\n  useEffect(() => {\n    console.log(1)\n    return () => console.log(2)\n  }, [])\n  return null\n}\nfunction App() {\n  const [k, setK] = useState(0)\n  useEffect(() => {\n    setK(1)\n  }, [])\n  return <Box key={k} />\n}",
+      "options": [
+        "1, 1",
+        "1, 2",
+        "2, 1",
+        "1, 2, 1"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 873,
+      "type": "code",
+      "language": "jsx",
+      "text": "import { useEffect, useState } from 'react'\nfunction Box() {\n  const [n, setN] = useState(0)\n  useEffect(() => {\n    setN(3)\n  }, [])\n  console.log(n)\n  return null\n}\nfunction App() {\n  const [tick, setTick] = useState(0)\n  useEffect(() => {\n    setTick(1)\n  }, [])\n  return (\n    <>\n      <Box />\n      <Box />\n    </>\n  )\n}",
+      "options": [
+        "0, 0, 3, 3",
+        "0, 0",
+        "0, 3",
+        "0, 0, 3"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 874,
+      "type": "code",
+      "language": "jsx",
+      "text": "function Shell({ children }) {\n  console.log(1)\n  return children(2)\n}\nfunction App() {\n  return (\n    <Shell>\n      {(n) => {\n        console.log(n)\n        return null\n      }}\n    </Shell>\n  )\n}",
+      "options": [
+        "2, 1",
+        "1, 2",
+        "1",
+        "2"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 875,
+      "type": "code",
+      "language": "jsx",
+      "text": "import { useEffect, useState } from 'react'\nfunction Child({ n }) {\n  console.log(n)\n  return null\n}\nfunction App() {\n  const [n, setN] = useState(1)\n  useEffect(() => {\n    setN(9)\n  }, [])\n  return <Child n={n} />\n}",
+      "options": [
+        "1, 1",
+        "1",
+        "1, 9",
+        "9"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 876,
+      "type": "code",
+      "language": "jsx",
+      "text": "import { useEffect, useState } from 'react'\nfunction Row({ id }) {\n  const [n] = useState(id)\n  console.log(n)\n  return null\n}\nfunction App() {\n  const [items, setItems] = useState([1, 2])\n  useEffect(() => {\n    setItems([2, 1])\n  }, [])\n  return items.map((id, index) => <Row key={index} id={id} />)\n}",
+      "options": [
+        "1, 2, 2, 1",
+        "1, 2",
+        "2, 1",
+        "1, 2, 1, 2"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 877,
+      "type": "text",
+      "text": "Почему компонент, объявленный внутри другого компонента, теряет state, когда родитель рендерится снова?",
+      "options": [
+        "Функция каждый раз новая. Для React это другой тип, и экземпляр монтируется заново",
+        "Внутренний компонент не имеет права на useState",
+        "State родителя затирает state ребёнка",
+        "Так бывает только если у внутреннего компонента есть key"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 878,
+      "type": "text",
+      "text": "Что должно совпасть, чтобы экземпляр сохранил state при следующем рендере?",
+      "options": [
+        "Только имя переменной, в которую положили элемент",
+        "Тип компонента и позиция в дереве, вместе с key",
+        "Только текст, который компонент вернул",
+        "Только то, что родитель вызвал тот же сеттер"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 879,
+      "type": "text",
+      "text": "Что делает смена key у уже смонтированного компонента?",
+      "options": [
+        "Кладёт новый key в props и оставляет тот же state",
+        "Меняет только порядок детей, state не трогает",
+        "Размонтирует прежний экземпляр и монтирует новый с начальным state",
+        "Запрещена после первого рендера"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 880,
+      "type": "text",
+      "text": "Куда девается state строки списка без key, если удалить первый элемент?",
+      "options": [
+        "Переходит к элементу с тем же id",
+        "Сбрасывается у всех оставшихся строк",
+        "React отказывается рендерить список",
+        "Остаётся у того же индекса. Вместе с данными он не переезжает"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 881,
+      "type": "text",
+      "text": "Когда setState во время рендера не зацикливает компонент?",
+      "options": [
+        "Когда он подстраивает state под изменившиеся props и стоит под условием. Безусловный вызов запускает рендер снова и снова",
+        "Всегда. Во время рендера сеттер просто записывает поле",
+        "Никогда. Любой сеттер во время рендера это ошибка синтаксиса",
+        "Только если компонент вернул null"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 882,
+      "type": "text",
+      "text": "Можно ли вызвать useState внутри if?",
+      "options": [
+        "Да. React запоминает хук по тексту условия",
+        "Нет. Хуки должны идти в одном порядке на каждом рендере. Ветка это ломает",
+        "Да, если if стоит после остальных хуков",
+        "Да, пока условие не меняется с true на false"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 883,
+      "type": "text",
+      "text": "Эффект с [] закрыл n, а другой эффект потом сделал setN. Что увидит первый эффект?",
+      "options": [
+        "Уже новое n, потому что эффект живой",
+        "Оба значения: старое и новое",
+        "Старое n из рендера, который его создал. Пустой массив не запускает его снова",
+        "undefined. Замыкание после setN стирается"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 884,
+      "type": "text",
+      "text": "Сбрасывается ли state ребёнка, если его элемент создан выше и передан в children, а промежуточный компонент обновил свой state?",
+      "options": [
+        "Да. Любой setState выше по дереву монтирует детей заново",
+        "Да, потому что children это всегда новый элемент",
+        "Да, если у ребёнка нет key",
+        "Нет. Тип и позиция те же, поэтому экземпляр живёт"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 885,
+      "type": "boolean",
+      "text": "Смена типа компонента в той же позиции сохраняет state предыдущего типа.",
+      "correct": false
+    },
+    {
+      "id": 886,
+      "type": "boolean",
+      "text": "Тот же тип в той же позиции сохраняет state, когда родитель рендерится снова.",
+      "correct": true
+    },
+    {
+      "id": 887,
+      "type": "boolean",
+      "text": "Чтобы сбросить state, key читают внутри компонента как props.key.",
+      "correct": false
+    },
+    {
+      "id": 888,
+      "type": "boolean",
+      "text": "key={id} оставляет state строке с тем же id, а не с тем же индексом.",
+      "correct": true
+    },
+    {
+      "id": 889,
+      "type": "boolean",
+      "text": "Безусловный setState во время каждого рендера — обычный способ обновить экран.",
+      "correct": false
+    },
+    {
+      "id": 890,
+      "type": "boolean",
+      "text": "Пропущенный хук в одной ветке if ломает соответствие state между рендерами.",
+      "correct": true
+    },
+    {
+      "id": 891,
+      "type": "boolean",
+      "text": "Ленивый инициализатор useState не выполняется снова, когда key сменился.",
+      "correct": false
+    },
+    {
+      "id": 892,
+      "type": "boolean",
+      "text": "Cleanup эффекта с [] выполняется, когда key компонента меняется.",
+      "correct": true
+    },
+    {
+      "id": 893,
+      "type": "recall",
+      "text": "По чему React решает, что это тот же экземпляр компонента?",
+      "answer": "По типу компонента и key на этой позиции в дереве."
+    },
+    {
+      "id": 894,
+      "type": "recall",
+      "text": "Что происходит со state при смене key?",
+      "answer": "Прежний экземпляр размонтируется. Новый монтируется с начальным state."
+    },
+    {
+      "id": 895,
+      "type": "recall",
+      "text": "Куда прилипает state в списке без key?",
+      "answer": "К индексу. Удаление или перестановка данных не уносят state за элементом."
+    },
+    {
+      "id": 896,
+      "type": "recall",
+      "text": "Почему функция-компонент, созданная внутри рендера, сбрасывает state?",
+      "answer": "Каждый рендер даёт новую функцию. React видит другой тип и монтирует заново."
+    },
+    {
+      "id": 897,
+      "type": "recall",
+      "text": "Когда cleanup эффекта с пустым массивом зависимостей всё же выполнится?",
+      "answer": "При размонтировании экземпляра, в том числе если его размонтировала смена key."
+    },
+    {
+      "id": 898,
+      "type": "recall",
+      "text": "Что увидит эффект с [], если другой эффект позже обновил закрытую им переменную?",
+      "answer": "Значение из того рендера, который этот эффект создал. Повторно он не запускается."
+    },
+    {
+      "id": 899,
+      "type": "recall",
+      "text": "Зачем условие вокруг setState во время рендера?",
+      "answer": "Чтобы поменять state только когда изменились props. Вызов на каждом рендере зациклит компонент."
+    },
+    {
+      "id": 900,
+      "type": "recall",
+      "text": "Можно ли поставить хук после раннего return?",
+      "answer": "Нет. Тогда в одной ветке хуков меньше, и state съезжает."
+    }
+  ]
+}

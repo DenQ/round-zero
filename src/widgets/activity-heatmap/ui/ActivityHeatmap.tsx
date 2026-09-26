@@ -7,7 +7,7 @@ import { useTheme } from '@mui/material/styles'
 import type { TFunction } from 'i18next'
 import { Fragment, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { parsePackKey, readActivity, toLocalDateKey } from '@entities/activity'
+import { parsePackKey, toLocalDateKey, useActivity } from '@entities/activity'
 import type { DayActivity, ISODate } from '@entities/activity'
 import { packLabel } from '@shared/lib/packs'
 import { buildHeatmapWeeks, dateFromKey, type HeatmapDay } from '../lib/build-weeks'
@@ -31,7 +31,7 @@ export function ActivityHeatmap() {
   const { t, i18n } = useTranslation()
   const theme = useTheme()
   const measureRef = useRef<HTMLDivElement>(null)
-  const activity = useMemo(() => readActivity(), [])
+  const activity = useActivity()
   const weeks = useMemo(() => buildHeatmapWeeks(activity.byDay), [activity])
   const locale = i18n.resolvedLanguage ?? i18n.language
   const today = toLocalDateKey()

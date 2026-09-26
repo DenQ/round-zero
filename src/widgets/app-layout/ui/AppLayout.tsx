@@ -2,16 +2,22 @@ import Box from '@mui/material/Box'
 import Toolbar from '@mui/material/Toolbar'
 import { useTheme } from '@mui/material/styles'
 import useMediaQuery from '@mui/material/useMediaQuery'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Outlet } from 'react-router-dom'
+import { Outlet, useLocation } from 'react-router-dom'
+import { clearResumeIntentIfLeft } from '@entities/saved-game'
 import { AppHeader } from './AppHeader'
 import { AppSidebar } from './AppSidebar'
 import { MobileNavSheet } from './MobileNavSheet'
 
 export function AppLayout() {
   const { t } = useTranslation()
+  const location = useLocation()
   const theme = useTheme()
+
+  useEffect(() => {
+    clearResumeIntentIfLeft(location.pathname)
+  }, [location.pathname])
   const isDesktop = useMediaQuery(theme.breakpoints.up('md'), { noSsr: true })
   const [desktopOpen, setDesktopOpen] = useState(true)
   const [mobileOpen, setMobileOpen] = useState(false)

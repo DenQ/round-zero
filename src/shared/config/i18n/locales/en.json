@@ -6,6 +6,7 @@
   "nav": {
     "home": "Home",
     "about": "About",
+    "settings": "Settings",
     "open": "Open menu",
     "close": "Hide menu",
     "collapse": "Collapse menu"
@@ -13,6 +14,9 @@
   "home": {
     "title": "Home",
     "description": "Select a pack from the menu.",
+    "unfinished": {
+      "title": "Unfinished games"
+    },
     "activity": {
       "title": "Activity",
       "summary": "{{count}} answers in the last year",
@@ -38,6 +42,24 @@
       }
     }
   },
+  "header": {
+    "rating": "{{level}} · {{score}}",
+    "ratingLabel": "Level {{level}}, {{score}} points"
+  },
+  "settings": {
+    "title": "Settings",
+    "ratingTitle": "Rating",
+    "points": "A correct answer scores by pack level: junior +1, middle +2, senior +3.",
+    "streak": "The multiplier is how many days in a row you played before today. Seven days in a row before today multiply the answer by 7. Yesterday only is ×1. A gap yesterday is also ×1.",
+    "levels": "Level 0 is under 1000 points. Each next threshold doubles: 2000, 4000, 8000, 16000, 32000.",
+    "resetTitle": "Statistics",
+    "resetDescription": "Reset deletes activity, points, and rating history on this device.",
+    "reset": "Reset all statistics",
+    "resetConfirmTitle": "Reset statistics?",
+    "resetConfirmBody": "Activity, points, and growth history will be deleted.",
+    "resetConfirm": "Reset",
+    "cancel": "Cancel"
+  },
   "about": {
     "title": "About",
     "description": "Starter layout with MUI, routing, i18n, and theme switching."
@@ -58,7 +80,8 @@
       "context": "Context",
       "prototypes": "Prototypes",
       "modules": "Modules",
-      "promises": "Promises"
+      "promises": "Promises",
+      "base": "Base"
     },
     "levels": {
       "junior": "Junior",
@@ -102,7 +125,10 @@
       "resultTitle": "Result",
       "resultScore": "{{score}} of {{total}}",
       "resultPoints": "Points",
-      "playAgain": "Play again"
+      "playAgain": "Play again",
+      "unfinished": "Game in progress",
+      "continue": "Continue",
+      "discard": "Delete"
     }
   },
   "theme": {

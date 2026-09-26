@@ -1,5 +1,7 @@
-import type { ActivityPackRef } from '@entities/activity'
+import { getPackKey, type ActivityPackRef } from '@entities/activity'
 import type { Question } from '@entities/question'
+import { removeSavedGame, useSavedGames } from '@entities/saved-game'
+import { rehydrateSavedGame } from '../model/rehydrate'
 import { useQuizGame } from '../model/useQuizGame'
 import { PlayOffer } from './PlayOffer'
 import { QuizRound } from './QuizRound'
@@ -12,6 +14,9 @@ type QuizGameProps = {
 
 export function QuizGame({ questions, pack }: QuizGameProps) {
   const game = useQuizGame(questions, pack)
+  const saved = useSavedGames()
+  const slot = saved.byPack[getPackKey(pack)]
+  const unfinished = slot && rehydrateSavedGame(slot, questions) ? slot : null
 
   if (game.phase === 'playing' && game.question) {
     return (
@@ -46,6 +51,9 @@ export function QuizGame({ questions, pack }: QuizGameProps) {
       typeFilter={game.typeFilter}
       onToggleTypeFilter={game.toggleTypeFilter}
       onPlay={game.start}
+      unfinished={unfinished ? { step: unfinished.step, total: unfinished.questionIds.length } : null}
+      onResume={game.resume}
+      onDiscard={() => removeSavedGame(pack)}
     />
   )
 }

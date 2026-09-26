@@ -1,5 +1,5 @@
 import { isPackLevel, isPackStack, isPackTopic } from '@shared/config/packs'
-import { ACTIVITY_STORAGE_KEY, ACTIVITY_VERSION } from './constants'
+import { ACTIVITY_CHANGED_EVENT, ACTIVITY_STORAGE_KEY, ACTIVITY_VERSION } from './constants'
 import { isISODate } from './date'
 import type { ActivityState, DayActivity, ISODate, PackAttempts, PackKey, QuestionActivity } from './types'
 
@@ -22,6 +22,12 @@ export function readActivity(): ActivityState {
 
 export function writeActivity(state: ActivityState): void {
   localStorage.setItem(ACTIVITY_STORAGE_KEY, JSON.stringify(state))
+  window.dispatchEvent(new Event(ACTIVITY_CHANGED_EVENT))
+}
+
+export function clearActivity(): void {
+  localStorage.removeItem(ACTIVITY_STORAGE_KEY)
+  window.dispatchEvent(new Event(ACTIVITY_CHANGED_EVENT))
 }
 
 function parseActivity(value: unknown): ActivityState {

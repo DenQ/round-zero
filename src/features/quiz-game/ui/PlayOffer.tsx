@@ -12,6 +12,7 @@ import { QUESTION_TYPES, type Question, type QuestionType } from '@entities/ques
 import { MIN_ROUND_SIZE, type RoundSize } from '../model/constants'
 import { countQuestionsByType } from '../model/filterQuestions'
 import { areAllQuestionTypesSelected } from '../model/toggleQuestionTypes'
+import { SavedGameActions } from './SavedGameActions'
 
 const typeToggleSx = {
   overflow: 'visible',
@@ -33,6 +34,9 @@ type PlayOfferProps = {
   typeFilter: readonly QuestionType[]
   onToggleTypeFilter: (clicked: QuestionType | 'all') => void
   onPlay: () => void
+  unfinished: { step: number; total: number } | null
+  onResume: () => void
+  onDiscard: () => void
 }
 
 export function PlayOffer({
@@ -44,6 +48,9 @@ export function PlayOffer({
   typeFilter,
   onToggleTypeFilter,
   onPlay,
+  unfinished,
+  onResume,
+  onDiscard,
 }: PlayOfferProps) {
   const { t } = useTranslation()
   const allTypesSelected = areAllQuestionTypesSelected(typeFilter)
@@ -94,20 +101,35 @@ export function PlayOffer({
           </TypeToggle>
         ))}
       </Box>
-      <IconButton
-        onClick={onPlay}
-        disabled={!canPlay}
-        aria-label={t('quiz.game.play')}
-        sx={{
-          width: 112,
-          height: 112,
-          bgcolor: 'primary.main',
-          color: 'primary.contrastText',
-          '&:hover': { bgcolor: 'primary.dark' },
-        }}
+      <Stack
+        direction="row"
+        spacing={2}
+        useFlexGap
+        sx={{ alignItems: 'center', justifyContent: 'center', flexWrap: 'wrap' }}
       >
-        <PlayArrowIcon sx={{ fontSize: 64 }} />
-      </IconButton>
+        <IconButton
+          onClick={onPlay}
+          disabled={!canPlay}
+          aria-label={t('quiz.game.play')}
+          sx={{
+            width: 112,
+            height: 112,
+            bgcolor: 'primary.main',
+            color: 'primary.contrastText',
+            '&:hover': { bgcolor: 'primary.dark' },
+          }}
+        >
+          <PlayArrowIcon sx={{ fontSize: 64 }} />
+        </IconButton>
+        {unfinished ? (
+          <SavedGameActions
+            step={unfinished.step}
+            total={unfinished.total}
+            onContinue={onResume}
+            onDiscard={onDiscard}
+          />
+        ) : null}
+      </Stack>
       <Typography variant="h6" component="p">
         {t('quiz.game.title')}
       </Typography>

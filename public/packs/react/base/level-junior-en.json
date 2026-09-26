@@ -1,0 +1,408 @@
+{
+  "stack": "react",
+  "topic": "base",
+  "level": "junior",
+  "locale": "en",
+  "questions": [
+    {
+      "id": 781,
+      "type": "code",
+      "language": "jsx",
+      "text": "function Child() {\n  console.log(2)\n  return null\n}\nfunction App() {\n  const node = <Child />\n  console.log(1)\n  return node\n}",
+      "options": [
+        "1, 2",
+        "2, 1",
+        "1",
+        "2"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 782,
+      "type": "code",
+      "language": "jsx",
+      "text": "function A() {\n  console.log(1)\n  return null\n}\nfunction B() {\n  console.log(2)\n  return null\n}\nfunction App() {\n  return (\n    <>\n      <A />\n      <B />\n    </>\n  )\n}",
+      "options": [
+        "2, 1",
+        "1, 2",
+        "1",
+        "2"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 783,
+      "type": "code",
+      "language": "jsx",
+      "text": "function Inner() {\n  console.log(3)\n  return null\n}\nfunction Child() {\n  console.log(2)\n  return <Inner />\n}\nfunction App() {\n  console.log(1)\n  return <Child />\n}",
+      "options": [
+        "3, 2, 1",
+        "1, 3, 2",
+        "1, 2, 3",
+        "2, 1, 3"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 784,
+      "type": "code",
+      "language": "jsx",
+      "text": "function Child({ n }) {\n  console.log(n)\n  return null\n}\nfunction App() {\n  const show = false\n  return (\n    <>\n      {show && <Child n={1} />}\n      <Child n={2} />\n    </>\n  )\n}",
+      "options": [
+        "1, 2",
+        "1",
+        "2, 1",
+        "2"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 785,
+      "type": "code",
+      "language": "jsx",
+      "text": "function Child({ n }) {\n  console.log(n)\n  return null\n}\nfunction App() {\n  const items = [2, 1]\n  return items.map((n) => <Child key={n} n={n} />)\n}",
+      "options": [
+        "2, 1",
+        "1, 2",
+        "1",
+        "2"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 786,
+      "type": "code",
+      "language": "jsx",
+      "text": "function App() {\n  console.log(1)\n  function handleClick() {\n    console.log(2)\n  }\n  return <button onClick={handleClick()}>Go</button>\n}",
+      "options": [
+        "1",
+        "1, 2",
+        "2",
+        "2, 1"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 787,
+      "type": "code",
+      "language": "jsx",
+      "text": "import { useState } from 'react'\nfunction App() {\n  const [n] = useState(4)\n  console.log(n)\n  return null\n}",
+      "options": [
+        "0",
+        "undefined",
+        "4",
+        "1"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 788,
+      "type": "code",
+      "language": "jsx",
+      "text": "import { useState } from 'react'\nfunction App() {\n  const [n] = useState(() => 5)\n  console.log(n)\n  return null\n}",
+      "options": [
+        "0",
+        "undefined",
+        "1",
+        "5"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 789,
+      "type": "code",
+      "language": "jsx",
+      "text": "function Child({ children }) {\n  console.log(children)\n  return children\n}\nfunction App() {\n  return <Child>3</Child>\n}",
+      "options": [
+        "3",
+        "undefined",
+        "0",
+        "[object Object]"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 790,
+      "type": "code",
+      "language": "jsx",
+      "text": "function Child({ n }) {\n  console.log(n)\n  return null\n}\nfunction App() {\n  return <Child n={1 + 2} />\n}",
+      "options": [
+        "1",
+        "3",
+        "2",
+        "1, 2"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 791,
+      "type": "code",
+      "language": "jsx",
+      "text": "function Inner() {\n  console.log(2)\n  return null\n}\nfunction Child({ children }) {\n  console.log(1)\n  return null\n}\nfunction App() {\n  return (\n    <Child>\n      <Inner />\n    </Child>\n  )\n}",
+      "options": [
+        "1, 2",
+        "2",
+        "1",
+        "2, 1"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 792,
+      "type": "code",
+      "language": "jsx",
+      "text": "function Child(props) {\n  console.log(props.key)\n  return null\n}\nfunction App() {\n  return <Child key=\"a\" />\n}",
+      "options": [
+        "a",
+        "null",
+        "0",
+        "undefined"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 793,
+      "type": "code",
+      "language": "jsx",
+      "text": "function Child(props) {\n  console.log(props.class)\n  console.log(props.className)\n  return null\n}\nfunction App() {\n  return <Child className=\"box\" />\n}",
+      "options": [
+        "undefined, box",
+        "box",
+        "box, box",
+        "undefined, undefined"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 794,
+      "type": "code",
+      "language": "jsx",
+      "text": "function A() {\n  console.log(1)\n  return null\n}\nfunction B() {\n  console.log(2)\n  return null\n}\nfunction App() {\n  const n = 0\n  return n === 0 ? <A /> : <B />\n}",
+      "options": [
+        "2",
+        "1",
+        "1, 2",
+        "0"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 795,
+      "type": "code",
+      "language": "jsx",
+      "text": "function Child({ n }) {\n  console.log(n)\n  return null\n}\nfunction App() {\n  return <Child {...{ n: 1 }} n={2} />\n}",
+      "options": [
+        "1",
+        "1, 2",
+        "2",
+        "2, 1"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 796,
+      "type": "code",
+      "language": "jsx",
+      "text": "function Child({ children }) {\n  console.log(Array.isArray(children) ? 2 : 1)\n  return children\n}\nfunction App() {\n  return (\n    <Child>\n      <span>a</span>\n    </Child>\n  )\n}",
+      "options": [
+        "2",
+        "0",
+        "undefined",
+        "1"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 797,
+      "type": "text",
+      "text": "What stays on screen from {count && <span>{count}</span>} when count is 0?",
+      "options": [
+        "The number 0. With &&, zero itself becomes a node",
+        "Nothing. React treats 0 the same as false",
+        "The text \"false\"",
+        "A render error. 0 cannot be placed in JSX"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 798,
+      "type": "text",
+      "text": "When does React call a component function again?",
+      "options": [
+        "Once in the instance lifetime. After that only the DOM changes",
+        "On every render of that spot in the tree, including when the parent renders again",
+        "Only if the call is inside useEffect",
+        "Only when the external DOM changes, not state"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 799,
+      "type": "text",
+      "text": "What does the setter do to the const from useState in the same component call?",
+      "options": [
+        "It replaces it immediately",
+        "It replaces it and the DOM before return",
+        "Nothing. The const holds this render’s value. The next call sees the new one",
+        "That call is a syntax error"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 800,
+      "type": "text",
+      "text": "Do two neighboring <Counter /> elements share one state?",
+      "options": [
+        "Yes. One component name means one state",
+        "Yes, if they have no key",
+        "Yes, because they share a parent",
+        "No. Each instance has its own state"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 801,
+      "type": "text",
+      "text": "Why does a list item get a key?",
+      "options": [
+        "So React can recognize the same list item on the next render",
+        "So key shows up in the child props",
+        "To sort the array",
+        "Key is only for input fields"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 802,
+      "type": "text",
+      "text": "How do you set a CSS class on a DOM element in React?",
+      "options": [
+        "With the class attribute, as in HTML",
+        "With the className prop. React does not pass class through to a DOM element",
+        "Both class and className set the same class",
+        "With the css prop"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 803,
+      "type": "text",
+      "text": "Which of null, false, undefined, and 0 does React not paint?",
+      "options": [
+        "All four",
+        "Only null",
+        "null, false, and undefined. The number 0 stays on screen",
+        "Only 0"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 804,
+      "type": "text",
+      "text": "Does the parent see a new value if the child writes into props?",
+      "options": [
+        "Yes. The props object is shared with the parent, and the write bubbles up",
+        "Yes, if the prop was an object",
+        "Yes. After render React copies props changes upward",
+        "No. Props are the input of this render. Writing to them does not change the parent’s state"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 805,
+      "type": "boolean",
+      "text": "return null still runs the component body.",
+      "correct": true
+    },
+    {
+      "id": 806,
+      "type": "boolean",
+      "text": "The <Child /> expression calls the Child function immediately.",
+      "correct": false
+    },
+    {
+      "id": 807,
+      "type": "boolean",
+      "text": "false && <Child /> does not call the Child function.",
+      "correct": true
+    },
+    {
+      "id": 808,
+      "type": "boolean",
+      "text": "A single child always arrives in children as an array.",
+      "correct": false
+    },
+    {
+      "id": 809,
+      "type": "boolean",
+      "text": "Two adjacent elements in a return, with no fragment and no array, are a syntax error.",
+      "correct": true
+    },
+    {
+      "id": 810,
+      "type": "boolean",
+      "text": "onClick={handleClick()} only stores the function and does not call it during render.",
+      "correct": false
+    },
+    {
+      "id": 811,
+      "type": "boolean",
+      "text": "Each component instance has its own state.",
+      "correct": true
+    },
+    {
+      "id": 812,
+      "type": "boolean",
+      "text": "Inside the child, props.key equals the key passed from outside.",
+      "correct": false
+    },
+    {
+      "id": 813,
+      "type": "recall",
+      "text": "What does the expression {0} show on screen?",
+      "answer": "The number 0. React paints zero, unlike null, false, and undefined."
+    },
+    {
+      "id": 814,
+      "type": "recall",
+      "text": "Which prop sets the CSS class of a DOM element?",
+      "answer": "className. React does not pass a class prop through to a DOM element."
+    },
+    {
+      "id": 815,
+      "type": "recall",
+      "text": "When does React call the function passed to useState?",
+      "answer": "Once, when the instance mounts. Its result becomes the initial state."
+    },
+    {
+      "id": 816,
+      "type": "recall",
+      "text": "What happens if a component receives children but does not return them?",
+      "answer": "The nested element does not mount. Its function is not called."
+    },
+    {
+      "id": 817,
+      "type": "recall",
+      "text": "In what order does React call sibling component functions?",
+      "answer": "Left to right, in the order the children appear in the parent."
+    },
+    {
+      "id": 818,
+      "type": "recall",
+      "text": "Does the setter change the useState const in the current call?",
+      "answer": "No. The new value is visible only on the next render."
+    },
+    {
+      "id": 819,
+      "type": "recall",
+      "text": "Does key land in the child props?",
+      "answer": "No. React keeps key for itself. It is not in props."
+    },
+    {
+      "id": 820,
+      "type": "recall",
+      "text": "Why do you pass the function itself to onClick, rather than calling it?",
+      "answer": "A call with parentheses runs during render. onClick needs the function React will call on the event."
+    }
+  ]
+}

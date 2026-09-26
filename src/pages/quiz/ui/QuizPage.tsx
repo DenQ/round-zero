@@ -1,7 +1,9 @@
 import Alert from '@mui/material/Alert'
 import Box from '@mui/material/Box'
 import CircularProgress from '@mui/material/CircularProgress'
+import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
+import type { QuestionPack } from '@entities/question'
 import { QuizGame } from '@features/quiz-game'
 import { useQuestionPack } from '../model/useQuestionPack'
 
@@ -26,13 +28,27 @@ export function QuizPage() {
   }
 
   return (
-    <QuizGame
+    <ReadyQuiz
       questions={state.pack.questions}
-      pack={{
-        stack: state.pack.stack,
-        topic: state.pack.topic,
-        level: state.pack.level,
-      }}
+      stack={state.pack.stack}
+      topic={state.pack.topic}
+      level={state.pack.level}
     />
   )
+}
+
+function ReadyQuiz({
+  questions,
+  stack,
+  topic,
+  level,
+}: {
+  questions: QuestionPack['questions']
+  stack: QuestionPack['stack']
+  topic: QuestionPack['topic']
+  level: QuestionPack['level']
+}) {
+  const pack = useMemo(() => ({ stack, topic, level }), [stack, topic, level])
+
+  return <QuizGame questions={questions} pack={pack} />
 }
