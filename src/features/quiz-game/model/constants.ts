@@ -1,4 +1,16 @@
-export const ROUND_SIZES = [5, 6, 7, 8, 9, 10, 20] as const
+export const MIN_ROUND_SIZE = 1
 export const DEFAULT_ROUND_SIZE = 6
 
-export type RoundSize = (typeof ROUND_SIZES)[number] | 'all'
+export type RoundSize = number | 'all'
+
+export function resolveRoundSize(stored: RoundSize, poolLength: number): number {
+  if (poolLength < 1) {
+    return 0
+  }
+
+  if (stored === 'all') {
+    return poolLength
+  }
+
+  return Math.min(Math.max(Math.round(stored), MIN_ROUND_SIZE), poolLength)
+}

@@ -1,10 +1,12 @@
 import { useCallback, useState } from 'react'
 import type { ActivityPackRef } from '@entities/activity'
 import { recordAnswer } from '@entities/activity'
-import { isQuestionCorrect, QUESTION_TYPES, type Question, type QuestionType } from '@entities/question'
-import { DEFAULT_ROUND_SIZE, ROUND_SIZES, type RoundSize } from './constants'
+import { isQuestionCorrect, type Question, type QuestionType } from '@entities/question'
+import { resolveRoundSize, type RoundSize } from './constants'
 import { filterQuestions } from './filterQuestions'
 import { pickQuestions } from './pickQuestions'
+import { readRoundSize, writeRoundSize } from './round-size-storage'
+import { readTypeFilter, writeTypeFilter } from './type-filter-storage'
 import { toggleQuestionTypes } from './toggleQuestionTypes'
 
 type GivenAnswer = {
@@ -27,12 +29,17 @@ const idleState: GameState = { phase: 'idle' }
 export function useQuizGame(questions: Question[], pack: ActivityPackRef) {
   const [state, setState] = useState<GameState>(idleState)
   const [sourceQuestions, setSourceQuestions] = useState(questions)
-  const [roundSize, setRoundSize] = useState<RoundSize>(DEFAULT_ROUND_SIZE)
-  const [typeFilter, setTypeFilter] = useState<QuestionType[]>(() => [...QUESTION_TYPES])
+  const [roundSize, setRoundSizeState] = useState<RoundSize>(readRoundSize)
+  const [typeFilter, setTypeFilter] = useState<QuestionType[]>(readTypeFilter)
   const pool = filterQuestions(questions, typeFilter)
+  const resolvedRoundSize = resolveRoundSize(roundSize, pool.length)
 
   const toggleTypeFilter = useCallback((clicked: QuestionType | 'all') => {
-    setTypeFilter((current) => toggleQuestionTypes(current, clicked))
+    setTypeFilter((current) => {
+      const next = toggleQuestionTypes(current, clicked)
+      writeTypeFilter(next)
+      return next
+    })
   }, [])
 
   if (sourceQuestions !== questions) {
@@ -40,25 +47,24 @@ export function useQuizGame(questions: Question[], pack: ActivityPackRef) {
     setState(idleState)
   }
 
-  if (typeof roundSize === 'number' && roundSize > pool.length) {
-    setRoundSize(pool.length >= DEFAULT_ROUND_SIZE ? DEFAULT_ROUND_SIZE : 'all')
-  }
+  const setRoundSize = useCallback((size: RoundSize) => {
+    writeRoundSize(size)
+    setRoundSizeState(size)
+  }, [])
 
   const start = useCallback(() => {
-    if (pool.length === 0) {
+    if (pool.length === 0 || resolvedRoundSize < 1) {
       return
     }
 
-    const count = roundSize === 'all' ? pool.length : Math.min(roundSize, pool.length)
-
     setState({
       phase: 'playing',
-      round: pickQuestions(pool, count),
+      round: pickQuestions(pool, resolvedRoundSize),
       step: 0,
       selectedIndex: null,
       answers: [],
     })
-  }, [pool, roundSize])
+  }, [pool, resolvedRoundSize])
 
   const select = useCallback((optionIndex: number) => {
     setState((current) => {
@@ -108,15 +114,13 @@ export function useQuizGame(questions: Question[], pack: ActivityPackRef) {
     })
   }, [pack, state])
 
-  const sizeOptions = ROUND_SIZES.filter((size) => size <= pool.length)
-
   if (state.phase === 'idle') {
     return {
       phase: 'idle' as const,
       questionCount: questions.length,
       pool,
       roundSize,
-      sizeOptions,
+      resolvedRoundSize,
       setRoundSize,
       typeFilter,
       toggleTypeFilter,
