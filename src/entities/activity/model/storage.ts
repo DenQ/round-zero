@@ -1,7 +1,15 @@
 import { isPackLevel, isPackStack, isPackTopic } from '@shared/config/packs'
 import { ACTIVITY_CHANGED_EVENT, ACTIVITY_STORAGE_KEY, ACTIVITY_VERSION } from './constants'
 import { isISODate } from './date'
-import type { ActivityState, DayActivity, ISODate, PackAttempts, PackKey, QuestionActivity } from './types'
+import type {
+  ActivityState,
+  DayActivity,
+  ISODate,
+  PackAttempts,
+  PackKey,
+  QuestionActivity,
+  QuestionAttempt,
+} from './types'
 
 export function emptyActivity(): ActivityState {
   return { v: ACTIVITY_VERSION, byDay: {}, byQuestion: {} }
@@ -132,7 +140,53 @@ function parseQuestion(value: unknown): QuestionActivity | null {
     return null
   }
 
-  return { wins, loses, meta: { stack, topic, level } }
+  const log = parseAttemptLog(value.log) ?? synthesizeAttemptLog(wins, loses)
+
+  return { wins, loses, log, meta: { stack, topic, level } }
+}
+
+function parseAttemptLog(value: unknown): QuestionAttempt[] | null {
+  if (!Array.isArray(value)) {
+    return null
+  }
+
+  const log: QuestionAttempt[] = []
+  for (const item of value) {
+    if (!isRecord(item) || typeof item.correct !== 'boolean' || typeof item.at !== 'string' || !isAttemptStamp(item.at)) {
+      return null
+    }
+
+    log.push({ correct: item.correct, at: item.at })
+  }
+
+  return log
+}
+
+function synthesizeAttemptLog(wins: ISODate[], loses: ISODate[]): QuestionAttempt[] {
+  const tagged = [
+    ...wins.map((at, index) => ({ correct: true, at, index })),
+    ...loses.map((at, index) => ({ correct: false, at, index })),
+  ]
+
+  tagged.sort((left, right) => {
+    if (left.at < right.at) {
+      return -1
+    }
+    if (left.at > right.at) {
+      return 1
+    }
+    return left.index - right.index
+  })
+
+  return tagged.map(({ correct, at }) => ({ correct, at }))
+}
+
+function isAttemptStamp(value: string): boolean {
+  if (isISODate(value)) {
+    return true
+  }
+
+  return /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d+)?Z$/.test(value) && !Number.isNaN(Date.parse(value))
 }
 
 function parseAttempts(value: unknown): PackAttempts | null {

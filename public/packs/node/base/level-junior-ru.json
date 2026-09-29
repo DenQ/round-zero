@@ -1,0 +1,608 @@
+{
+  "stack": "node",
+  "topic": "base",
+  "level": "junior",
+  "locale": "ru",
+  "questions": [
+    {
+      "id": 901,
+      "type": "code",
+      "language": "js",
+      "text": "console.log(1)\nprocess.nextTick(() => console.log(2))\nconsole.log(3)",
+      "options": [
+        "1, 3, 2",
+        "1, 2, 3",
+        "2, 1, 3",
+        "3, 2, 1"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 902,
+      "type": "code",
+      "language": "js",
+      "text": "process.nextTick(() => console.log(1))\nPromise.resolve().then(() => console.log(2))\nconsole.log(3)",
+      "options": [
+        "3, 2, 1",
+        "3, 1, 2",
+        "1, 2, 3",
+        "1, 3, 2"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 903,
+      "type": "code",
+      "language": "js",
+      "text": "setImmediate(() => console.log(1))\nprocess.nextTick(() => console.log(2))\nconsole.log(3)",
+      "options": [
+        "3, 1, 2",
+        "1, 2, 3",
+        "3, 2, 1",
+        "2, 3, 1"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 904,
+      "type": "code",
+      "language": "js",
+      "text": "setTimeout(() => console.log(1), 0)\nprocess.nextTick(() => console.log(2))\nconsole.log(3)",
+      "options": [
+        "3, 1, 2",
+        "2, 3, 1",
+        "1, 3, 2",
+        "3, 2, 1"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 905,
+      "type": "code",
+      "language": "js",
+      "text": "const b = Buffer.from('я')\nconsole.log(b.length)",
+      "options": [
+        "2",
+        "1",
+        "0",
+        "4"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 906,
+      "type": "code",
+      "language": "js",
+      "text": "console.log('я'.length)\nconsole.log(Buffer.byteLength('я'))",
+      "options": [
+        "2, 1",
+        "1, 2",
+        "2, 2",
+        "1, 1"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 907,
+      "type": "code",
+      "language": "js",
+      "text": "console.log(Buffer.alloc(2)[0])\nconsole.log(Buffer.alloc(2)[1])",
+      "options": [
+        "undefined, undefined",
+        "1, 1",
+        "0, 0",
+        "null, null"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 908,
+      "type": "code",
+      "language": "js",
+      "text": "console.log(Buffer.concat([Buffer.from('a'), Buffer.from('b')]).toString())",
+      "options": [
+        "a",
+        "b",
+        "a,b",
+        "ab"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 909,
+      "type": "code",
+      "language": "js",
+      "text": "const path = require('path')\nconsole.log(path.posix.join('/a', 'b', 'c'))",
+      "options": [
+        "/a/b/c",
+        "a/b/c",
+        "/a/b/c/",
+        "\\a\\b\\c"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 910,
+      "type": "code",
+      "language": "js",
+      "text": "const path = require('path')\nconsole.log(path.posix.basename('/a/b.txt'))",
+      "options": [
+        "/a/b.txt",
+        "b.txt",
+        "b",
+        "txt"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 911,
+      "type": "code",
+      "language": "js",
+      "text": "const path = require('path')\nconsole.log(path.posix.dirname('/a/b/c'))",
+      "options": [
+        "/a/b/c",
+        "c",
+        "/a/b",
+        "/a"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 912,
+      "type": "code",
+      "language": "js",
+      "text": "const path = require('path')\nconsole.log(path.posix.extname('a.b.c'))",
+      "options": [
+        ".b.c",
+        "c",
+        ".b",
+        ".c"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 913,
+      "type": "code",
+      "language": "js",
+      "text": "const { EventEmitter } = require('events')\nconst e = new EventEmitter()\ne.on('x', () => console.log(1))\ne.on('x', () => console.log(2))\ne.emit('x')",
+      "options": [
+        "1, 2",
+        "2, 1",
+        "1",
+        "2"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 914,
+      "type": "code",
+      "language": "js",
+      "text": "const { EventEmitter } = require('events')\nconst e = new EventEmitter()\ne.once('x', () => console.log(1))\ne.emit('x')\ne.emit('x')",
+      "options": [
+        "1, 1",
+        "1",
+        "2",
+        "0"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 915,
+      "type": "code",
+      "language": "js",
+      "text": "const { EventEmitter } = require('events')\nconst e = new EventEmitter()\ne.emit('x')\ne.on('x', () => console.log(1))\nconsole.log(2)",
+      "options": [
+        "1, 2",
+        "1",
+        "2",
+        "2, 1"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 916,
+      "type": "code",
+      "language": "js",
+      "text": "const { EventEmitter } = require('events')\nconst e = new EventEmitter()\ne.on('x', () => {})\ne.on('x', () => {})\nconsole.log(e.listenerCount('x'))",
+      "options": [
+        "0",
+        "1",
+        "x",
+        "2"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 917,
+      "type": "code",
+      "language": "js",
+      "text": "const module = { exports: {} }\nconst exports = module.exports\nexports.a = 1\nmodule.exports = { b: 2 }\nconsole.log(exports.a)\nconsole.log(module.exports.a ?? 0)",
+      "options": [
+        "1, 0",
+        "1, 1",
+        "0, 0",
+        "2, 1"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 918,
+      "type": "code",
+      "language": "js",
+      "text": "const module = { exports: {} }\nconst exports = module.exports\nexports.n = 3\nconsole.log(module.exports.n)",
+      "options": [
+        "undefined",
+        "3",
+        "0",
+        "{}"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 919,
+      "type": "code",
+      "language": "js",
+      "text": "console.log(new URL('https://a.test/x?y=1').pathname)",
+      "options": [
+        "x",
+        "https://a.test/x",
+        "/x",
+        "/x?y=1"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 920,
+      "type": "code",
+      "language": "js",
+      "text": "console.log(Buffer.from([15]).toString('hex'))",
+      "options": [
+        "15",
+        "F",
+        "0x0f",
+        "0f"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 921,
+      "type": "code",
+      "language": "js",
+      "text": "console.log(Buffer.from('abcd').subarray(1, 3).toString())",
+      "options": [
+        "bc",
+        "abc",
+        "bcd",
+        "ab"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 922,
+      "type": "code",
+      "language": "js",
+      "text": "queueMicrotask(() => console.log(1))\nprocess.nextTick(() => console.log(2))\nconsole.log(3)",
+      "options": [
+        "3, 1, 2",
+        "3, 2, 1",
+        "2, 3, 1",
+        "1, 2, 3"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 923,
+      "type": "code",
+      "language": "js",
+      "text": "process.nextTick(() => {\n  console.log(1)\n  process.nextTick(() => console.log(2))\n})\nconsole.log(3)",
+      "options": [
+        "1, 2, 3",
+        "3, 2, 1",
+        "3, 1, 2",
+        "1, 3, 2"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 924,
+      "type": "code",
+      "language": "js",
+      "text": "const { EventEmitter } = require('events')\nconst e = new EventEmitter()\nconsole.log(e.emit('x') ? 1 : 0)\ne.on('x', () => {})\nconsole.log(e.emit('x') ? 1 : 0)",
+      "options": [
+        "1, 1",
+        "1, 0",
+        "0, 0",
+        "0, 1"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 925,
+      "type": "text",
+      "text": "За что в Node отвечают V8 и libuv?",
+      "options": [
+        "V8 выполняет JS. libuv даёт цикл событий, таймеры и асинхронный I/O",
+        "libuv выполняет JS. V8 только рисует консоль",
+        "Оба делают одно и то же: читают файлы",
+        "V8 — это npm. libuv — это package.json"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 926,
+      "type": "text",
+      "text": "Почему говорят, что JS в Node однопоточный?",
+      "options": [
+        "Весь I/O идёт в том же потоке, что и ваш for",
+        "Код JS исполняется в одном потоке. I/O libuv может уходить в пул потоков, но колбэк снова в JS-потоке",
+        "Node создаёт поток на каждый require",
+        "Однопоточность значит, что нельзя открыть два файла"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 927,
+      "type": "text",
+      "text": "Что такое error-first колбэк в Node?",
+      "options": [
+        "Первый аргумент — результат, ошибка в this",
+        "Ошибка кидается throw, колбэк только для данных",
+        "Первый аргумент — Error или null, дальше данные",
+        "Ошибку передают последним аргументом, как в браузере"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 928,
+      "type": "text",
+      "text": "Чем fs.readFile отличается от fs.readFileSync в HTTP-сервере?",
+      "options": [
+        "Оба не блокируют цикл. Разница только в имени",
+        "readFileSync быстрее, поэтому его ставят в каждый запрос",
+        "readFile работает только с JSON",
+        "readFile отдаёт работу циклу и не держит JS-поток на время чтения. readFileSync блокирует цикл до конца чтения"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 929,
+      "type": "text",
+      "text": "Что делает require при повторном запросе того же файла?",
+      "options": [
+        "Возвращает кэш module.exports, файл заново не исполняет",
+        "Всегда исполняет файл с нуля",
+        "Удаляет файл с диска",
+        "Работает только один раз за жизнь процесса, второй вызов бросает"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 930,
+      "type": "text",
+      "text": "Откуда в CommonJS берётся __dirname?",
+      "options": [
+        "Это глобал браузера, Node его только проксирует",
+        "Node оборачивает файл в функцию и передаёт путь каталога этого файла",
+        "Это process.cwd(), всегда каталог, откуда запустили node",
+        "__dirname есть только в ESM"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 931,
+      "type": "text",
+      "text": "Как в Node включить ESM для .js файлов пакета?",
+      "options": [
+        "Поставить NODE_ESM=1",
+        "Переименовать node_modules",
+        "В package.json указать \"type\": \"module\"",
+        "ESM в Node нельзя, только .mjs без настроек и то не работает"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 932,
+      "type": "text",
+      "text": "Что такое process.argv в Node?",
+      "options": [
+        "Только флаги npm",
+        "Переменные окружения списком",
+        "Текущий рабочий каталог",
+        "Массив аргументов: путь к node, путь к скрипту, затем то, что передали в командной строке"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 933,
+      "type": "text",
+      "text": "Какого типа значения в process.env?",
+      "options": [
+        "Строки. Даже «числа» из окружения приходят строкой",
+        "Node сам парсит числа и boolean",
+        "Только Buffer",
+        "process.env нельзя читать из JS"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 934,
+      "type": "text",
+      "text": "Синхронно ли e.emit(\"x\") у EventEmitter?",
+      "options": [
+        "Нет, emit всегда через setTimeout(0)",
+        "Да. Слушатели вызываются сразу, в том же стеке, пока emit не вернулся",
+        "Только если событие называется data",
+        "emit ставит слушателей в threadpool"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 935,
+      "type": "text",
+      "text": "Есть ли в Node глобальный window?",
+      "options": [
+        "Да, это синоним process",
+        "Да, как в браузере",
+        "Нет. window — браузерный глобал. В Node для глобала есть globalThis",
+        "window появляется после http.createServer"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 936,
+      "type": "text",
+      "text": "Что делают npm-скрипты из package.json?",
+      "options": [
+        "Это комментарии, npm их не запускает",
+        "Они работают только в браузере",
+        "Каждый скрипт поднимает отдельный кластер Node",
+        "npm run исполняет команду и кладёт node_modules/.bin в PATH"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 937,
+      "type": "boolean",
+      "text": "Долгий синхронный цикл for блокирует цикл событий Node.",
+      "correct": true
+    },
+    {
+      "id": 938,
+      "type": "boolean",
+      "text": "В ESM у модуля из коробки есть __dirname, как в CommonJS.",
+      "correct": false
+    },
+    {
+      "id": 939,
+      "type": "boolean",
+      "text": "require в CommonJS синхронный.",
+      "correct": true
+    },
+    {
+      "id": 940,
+      "type": "boolean",
+      "text": "Buffer.from(\"hi\") в Node — это строка JS.",
+      "correct": false
+    },
+    {
+      "id": 941,
+      "type": "boolean",
+      "text": "process.exit() завершает процесс, не дожидаясь незавершённого I/O.",
+      "correct": true
+    },
+    {
+      "id": 942,
+      "type": "boolean",
+      "text": "Два разных new EventEmitter() не слышат события друг друга.",
+      "correct": true
+    },
+    {
+      "id": 943,
+      "type": "boolean",
+      "text": "process.nextTick — это фаза timers цикла libuv.",
+      "correct": false
+    },
+    {
+      "id": 944,
+      "type": "boolean",
+      "text": "fs.readFile без колбэка и без промиса сам превращает файл в объект.",
+      "correct": false
+    },
+    {
+      "id": 945,
+      "type": "boolean",
+      "text": "http.createServer колбэк вызывается на каждый входящий запрос.",
+      "correct": true
+    },
+    {
+      "id": 946,
+      "type": "boolean",
+      "text": "globalThis.Buffer в Node указывает на тот же конструктор, что и Buffer.",
+      "correct": true
+    },
+    {
+      "id": 947,
+      "type": "boolean",
+      "text": "npm install всегда удаляет package-lock.json.",
+      "correct": false
+    },
+    {
+      "id": 948,
+      "type": "boolean",
+      "text": "exports и module.exports в начале CJS-файла — один и тот же объект.",
+      "correct": true
+    },
+    {
+      "id": 949,
+      "type": "recall",
+      "text": "Зачем Node нужен libuv?",
+      "answer": "Цикл событий, таймеры, сокеты и асинхронный I/O, который JS сам не умеет."
+    },
+    {
+      "id": 950,
+      "type": "recall",
+      "text": "Какой первый аргумент у классического колбэка Node?",
+      "answer": "Ошибка или null, если ошибки нет."
+    },
+    {
+      "id": 951,
+      "type": "recall",
+      "text": "Как в CommonJS узнать каталог текущего файла?",
+      "answer": "__dirname. Это не process.cwd()."
+    },
+    {
+      "id": 952,
+      "type": "recall",
+      "text": "Какое поле package.json включает ESM для .js?",
+      "answer": "\"type\": \"module\"."
+    },
+    {
+      "id": 953,
+      "type": "recall",
+      "text": "Почему readFileSync опасен в обработчике запроса?",
+      "answer": "Он блокирует JS-поток и цикл событий, пока диск не ответит."
+    },
+    {
+      "id": 954,
+      "type": "recall",
+      "text": "Что лежит в process.argv[1]?",
+      "answer": "Путь к запускаемому скрипту. argv[0] — путь к бинарнику node."
+    },
+    {
+      "id": 955,
+      "type": "recall",
+      "text": "Чем EventEmitter.once отличается от on?",
+      "answer": "once снимает слушателя после первого вызова."
+    },
+    {
+      "id": 956,
+      "type": "recall",
+      "text": "Что хранит Buffer?",
+      "answer": "Сырые байты фиксированной длины, не JS-строку."
+    },
+    {
+      "id": 957,
+      "type": "recall",
+      "text": "Что вернёт повторный require одного файла?",
+      "answer": "Тот же cached exports, без повторного исполнения файла."
+    },
+    {
+      "id": 958,
+      "type": "recall",
+      "text": "Чем process.exitCode лучше голого process.exit() в конце работы?",
+      "answer": "Код выхода запомнится, процесс сможет дописать I/O и завершиться сам."
+    },
+    {
+      "id": 959,
+      "type": "recall",
+      "text": "Есть ли у ESM из коробки module.exports?",
+      "answer": "Нет. ESM экспортирует через export / export default."
+    },
+    {
+      "id": 960,
+      "type": "recall",
+      "text": "Что делает path.posix.join с сегментами пути?",
+      "answer": "Склеивает их через /, нормализуя лишние слэши, в POSIX-стиле."
+    }
+  ]
+}

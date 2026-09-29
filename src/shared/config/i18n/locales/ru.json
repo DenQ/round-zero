@@ -72,6 +72,7 @@
       "go": "Go",
       "sql": "SQL",
       "nest": "Nest",
+      "node": "Node.js",
       "react": "React"
     },
     "topics": {
@@ -116,6 +117,12 @@
       },
       "all": "Все",
       "progress": "{{current}}/{{total}}",
+      "headerScore": "{{correct}} верно / {{errors}}",
+      "errorCount_one": "{{count}} ошибка",
+      "errorCount_few": "{{count}} ошибки",
+      "errorCount_many": "{{count}} ошибок",
+      "errorCount_other": "{{count}} ошибок",
+      "log": "Лог",
       "next": "Следующий",
       "correct": "Верно",
       "incorrect": "Неверно",

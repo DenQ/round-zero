@@ -1,11 +1,11 @@
 import Alert from '@mui/material/Alert'
 import Button from '@mui/material/Button'
 import Stack from '@mui/material/Stack'
-import Typography from '@mui/material/Typography'
 import { useTranslation } from 'react-i18next'
 import type { ActivityPackRef } from '@entities/activity'
 import { isQuestionCorrect, QuestionCard, type Question } from '@entities/question'
 import { packLevelLabel, packTopicLabel } from '@shared/lib/packs'
+import { GameHeader } from './GameHeader'
 
 type QuizRoundProps = {
   pack: ActivityPackRef
@@ -33,14 +33,7 @@ export function QuizRound({
 
   return (
     <Stack spacing={2}>
-      <Typography
-        variant="h5"
-        component="p"
-        aria-live="polite"
-        sx={{ textAlign: 'center', fontVariantNumeric: 'tabular-nums' }}
-      >
-        {t('quiz.game.progress', { current: step + 1, total })}
-      </Typography>
+      <GameHeader questionId={question.id} step={step} total={total} />
 
       <QuestionCard
         question={question}
