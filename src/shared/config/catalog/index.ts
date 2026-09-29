@@ -53,7 +53,17 @@ export const catalog = [
   { slug: 'ts', labelKey: 'catalog.stacks.ts', topics: [] },
   { slug: 'go', labelKey: 'catalog.stacks.go', topics: [] },
   { slug: 'sql', labelKey: 'catalog.stacks.sql', topics: [] },
-  { slug: 'nest', labelKey: 'catalog.stacks.nest', topics: [] },
+  {
+    slug: 'nest',
+    labelKey: 'catalog.stacks.nest',
+    topics: [
+      {
+        slug: 'base',
+        labelKey: 'catalog.topics.base',
+        levels: PACK_LEVELS,
+      },
+    ],
+  },
   {
     slug: 'node',
     labelKey: 'catalog.stacks.node',

@@ -1,3 +1,4 @@
+import { useRef } from 'react'
 import Box from '@mui/material/Box'
 import Stack from '@mui/material/Stack'
 import Tooltip from '@mui/material/Tooltip'
@@ -12,15 +13,25 @@ type GameHeaderProps = {
   questionId: number
   step: number
   total: number
+  correctCount: number
+  incorrectCount: number
+  pendingCorrect: boolean | null
 }
 
-export function GameHeader({ questionId, step, total }: GameHeaderProps) {
+export function GameHeader({
+  questionId,
+  step,
+  total,
+  correctCount,
+  incorrectCount,
+  pendingCorrect,
+}: GameHeaderProps) {
   const { t, i18n } = useTranslation()
   const activity = useActivity()
+  const pendingStamp = useRef<{ key: string; at: string } | null>(null)
   const history = activity.byQuestion[questionId]?.log ?? []
-  const log = history.slice(-LOG_LIMIT)
-  const correctCount = history.filter((attempt) => attempt.correct).length
-  const incorrectCount = history.length - correctCount
+  const pending = pendingAttempt(questionId, pendingCorrect, pendingStamp)
+  const log = (pending ? [...history, pending] : history).slice(-LOG_LIMIT)
   const locale = i18n.language.startsWith('ru') ? 'ru' : 'en'
 
   return (
@@ -64,6 +75,24 @@ export function GameHeader({ questionId, step, total }: GameHeaderProps) {
       ) : null}
     </Stack>
   )
+}
+
+function pendingAttempt(
+  questionId: number,
+  correct: boolean | null,
+  stamp: { current: { key: string; at: string } | null },
+): QuestionAttempt | null {
+  if (correct === null) {
+    stamp.current = null
+    return null
+  }
+
+  const key = `${questionId}:${String(correct)}`
+  if (stamp.current?.key !== key) {
+    stamp.current = { key, at: new Date().toISOString() }
+  }
+
+  return { correct, at: stamp.current.at }
 }
 
 function Separator() {

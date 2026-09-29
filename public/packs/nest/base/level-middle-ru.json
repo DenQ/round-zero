@@ -1,0 +1,408 @@
+{
+  "stack": "nest",
+  "topic": "base",
+  "level": "middle",
+  "locale": "ru",
+  "questions": [
+    {
+      "id": 1181,
+      "type": "code",
+      "language": "ts",
+      "text": "class G1 {\n  canActivate() {\n    console.log(1)\n    return true\n  }\n}\nclass G2 {\n  canActivate() {\n    console.log(2)\n    return true\n  }\n}\n@UseGuards(G1, G2)\n@Controller()\nclass C {\n  @Get()\n  run() {}\n}",
+      "options": [
+        "1, 2",
+        "2, 1",
+        "1",
+        "2"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1182,
+      "type": "code",
+      "language": "ts",
+      "text": "class G1 {\n  canActivate() {\n    console.log(1)\n    return false\n  }\n}\nclass G2 {\n  canActivate() {\n    console.log(2)\n    return true\n  }\n}\n@UseGuards(G1, G2)\n@Controller()\nclass C {\n  @Get()\n  run() {\n    console.log(3)\n  }\n}",
+      "options": [
+        "1, 2, 3",
+        "1",
+        "1, 2",
+        "3"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1183,
+      "type": "code",
+      "language": "ts",
+      "text": "class I {\n  intercept(ctx, next) {\n    console.log(1)\n    return next.handle().pipe(tap(() => console.log(3)))\n  }\n}\n@UseInterceptors(I)\n@Controller()\nclass C {\n  @Get()\n  run() {\n    console.log(2)\n  }\n}",
+      "options": [
+        "2, 1, 3",
+        "1, 3, 2",
+        "1, 2, 3",
+        "1, 2"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1184,
+      "type": "code",
+      "language": "ts",
+      "text": "class A {\n  intercept(ctx, next) {\n    console.log(1)\n    return next.handle().pipe(tap(() => console.log(4)))\n  }\n}\nclass B {\n  intercept(ctx, next) {\n    console.log(2)\n    return next.handle().pipe(tap(() => console.log(3)))\n  }\n}\n@UseInterceptors(A, B)\n@Controller()\nclass C {\n  @Get()\n  run() {\n    console.log(0)\n  }\n}",
+      "options": [
+        "0, 1, 2, 3, 4",
+        "1, 2, 3, 4, 0",
+        "1, 2, 4, 3, 0",
+        "1, 2, 0, 3, 4"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1185,
+      "type": "code",
+      "language": "ts",
+      "text": "@Injectable({ scope: Scope.REQUEST })\nclass R {\n  n = 0\n}\nconst a = await app.resolve(R)\nconst b = await app.resolve(R)\na.n = 1\nconsole.log(b.n)",
+      "options": [
+        "0",
+        "1",
+        "undefined",
+        "Error"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1186,
+      "type": "code",
+      "language": "ts",
+      "text": "@Injectable()\nclass S {\n  n = 0\n}\nconst a = await app.resolve(S)\nconst b = await app.resolve(S)\na.n = 1\nconsole.log(b.n)",
+      "options": [
+        "0",
+        "1",
+        "undefined",
+        "2"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1187,
+      "type": "code",
+      "language": "ts",
+      "text": "class Plus {\n  transform(value: number) {\n    return value + 1\n  }\n}\nclass Twice {\n  transform(value: number) {\n    return value * 2\n  }\n}\nconsole.log(new Twice().transform(new Plus().transform(3)))",
+      "options": [
+        "7",
+        "6",
+        "8",
+        "5"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1188,
+      "type": "code",
+      "language": "ts",
+      "text": "class Boom {\n  transform(_value: number) {\n    throw new BadRequestException()\n  }\n}\ntry {\n  console.log(new Boom().transform(1))\n} catch {\n  console.log(0)\n}",
+      "options": [
+        "1",
+        "400",
+        "undefined",
+        "0"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1189,
+      "type": "code",
+      "language": "ts",
+      "text": "class Add {\n  intercept(ctx, next) {\n    return next.handle().pipe(map((v) => v + 1))\n  }\n}\n@UseInterceptors(Add)\n@Controller()\nclass C {\n  @Get()\n  run() {\n    return 2\n  }\n}",
+      "options": [
+        "3",
+        "2",
+        "1",
+        "undefined"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1190,
+      "type": "code",
+      "language": "ts",
+      "text": "@Catch()\nclass F {\n  catch(exception: NotFoundException) {\n    console.log(exception.getStatus())\n  }\n}\nnew F().catch(new NotFoundException())",
+      "options": [
+        "500",
+        "404",
+        "200",
+        "0"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1191,
+      "type": "code",
+      "language": "ts",
+      "text": "class G {\n  canActivate() {\n    console.log(1)\n    return true\n  }\n}\nclass I {\n  intercept(ctx, next) {\n    console.log(2)\n    return next.handle()\n  }\n}\n@UseGuards(G)\n@UseInterceptors(I)\n@Controller()\nclass C {\n  @Get()\n  run() {\n    console.log(3)\n  }\n}",
+      "options": [
+        "2, 1, 3",
+        "3, 2, 1",
+        "1, 2, 3",
+        "1, 3, 2"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1192,
+      "type": "code",
+      "language": "ts",
+      "text": "@Injectable()\nclass N {\n  n = 5\n}\n@Injectable()\nclass Box {\n  constructor(@Optional() private n?: N) {}\n  read() {\n    return this.n ? this.n.n : 0\n  }\n}\nconsole.log(app.get(Box).read())",
+      "options": [
+        "0",
+        "undefined",
+        "Error",
+        "5"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1193,
+      "type": "code",
+      "language": "ts",
+      "text": "const TOKEN = 'N'\n@Injectable()\nclass Box {\n  constructor(@Inject(TOKEN) private n: number) {}\n  read() {\n    return this.n\n  }\n}\nproviders: [Box, { provide: TOKEN, useValue: 12 }]\nconsole.log(app.get(Box).read())",
+      "options": [
+        "12",
+        "undefined",
+        "N",
+        "0"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1194,
+      "type": "code",
+      "language": "ts",
+      "text": "@Injectable({ scope: Scope.REQUEST })\nclass R {\n  n = 1\n}\ntry {\n  console.log(app.get(R).n)\n} catch {\n  console.log(0)\n}",
+      "options": [
+        "1",
+        "0",
+        "undefined",
+        "Error"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1195,
+      "type": "code",
+      "language": "ts",
+      "text": "class I {\n  intercept(ctx, next) {\n    console.log(1)\n    return next.handle().pipe(\n      catchError(() => {\n        console.log(3)\n        return EMPTY\n      }),\n    )\n  }\n}\n@UseInterceptors(I)\n@Controller()\nclass C {\n  @Get()\n  run() {\n    console.log(2)\n    throw new Error('x')\n  }\n}",
+      "options": [
+        "1, 3",
+        "2, 1, 3",
+        "1, 2, 3",
+        "1, 2"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1196,
+      "type": "code",
+      "language": "ts",
+      "text": "class Mw implements NestMiddleware {\n  use(req, res, next) {\n    console.log(1)\n    next()\n  }\n}\nclass G {\n  canActivate() {\n    console.log(2)\n    return true\n  }\n}\nconsumer.apply(Mw).forRoutes(C)\n@UseGuards(G)\n@Controller()\nclass C {\n  @Get()\n  run() {}\n}",
+      "options": [
+        "2, 1",
+        "1",
+        "2",
+        "1, 2"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1197,
+      "type": "text",
+      "text": "Если guard вернул false, что будет с хендлером?",
+      "options": [
+        "Его не вызывают. Nest отклоняет запрос",
+        "Он всё равно выполняется, потом Nest проверяет guard",
+        "Пропускаются только interceptor'ы",
+        "Nest ещё раз вызывает guard"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1198,
+      "type": "text",
+      "text": "Что такое next.handle() в interceptor?",
+      "options": [
+        "Сырой HTTP-сервер Node",
+        "Остаток цепочки: следующие interceptor'ы, пайпы, затем хендлер",
+        "Только следующий middleware",
+        "Блокирующее ожидание, пока клиент не отключится"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1199,
+      "type": "text",
+      "text": "Что значит Scope.REQUEST для провайдера?",
+      "options": [
+        "Один экземпляр на весь процесс",
+        "Новый экземпляр на каждый import модуля",
+        "Новый экземпляр на каждый запрос (или resolve() в тестах)",
+        "Экземпляр не создаётся, пока не вызовут app.close()"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1200,
+      "type": "text",
+      "text": "Что на HTTP-запросе выполняется раньше: middleware или guard?",
+      "options": [
+        "Сначала guard, потом middleware",
+        "Они идут параллельно",
+        "Кто зарегистрирован позже",
+        "Сначала middleware, потом guard'ы"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1201,
+      "type": "text",
+      "text": "Для чего createParamDecorator?",
+      "options": [
+        "Чтобы достать значение из ExecutionContext в аргумент хендлера",
+        "Чтобы повесить глобальный пайп",
+        "Чтобы заменить @Injectable()",
+        "Чтобы объявить динамический модуль"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1202,
+      "type": "text",
+      "text": "Если transform у пайпа бросил, хендлер выполнится?",
+      "options": [
+        "Да, с исходным непреобразованным значением",
+        "Нет. Исключение уходит в filter. Хендлер не вызывают",
+        "Да, после повторного вызова пайпа",
+        "Только если пайп глобальный"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1203,
+      "type": "text",
+      "text": "Что возвращает ExecutionContext.getHandler()?",
+      "options": [
+        "Класс контроллера",
+        "Express Request",
+        "Метод, который Nest сейчас вызовет",
+        "DI-токен guard'а"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1204,
+      "type": "text",
+      "text": "Как interceptor меняет то, что вернул хендлер?",
+      "options": [
+        "Мутацией класса контроллера",
+        "Подменой @Get() в рантайме",
+        "Записью в process.env",
+        "Через map по Observable из next.handle()"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1205,
+      "type": "boolean",
+      "text": "Guard'ы на запросе выполняются раньше interceptor'ов.",
+      "correct": true
+    },
+    {
+      "id": 1206,
+      "type": "boolean",
+      "text": "app.get() может вернуть REQUEST-scoped провайдер из корневого модуля.",
+      "correct": false
+    },
+    {
+      "id": 1207,
+      "type": "boolean",
+      "text": "@UseGuards(A, B) вызывает сначала A, потом B.",
+      "correct": true
+    },
+    {
+      "id": 1208,
+      "type": "boolean",
+      "text": "Если пайп бросил, хендлер всё равно выполняется с дефолтным значением.",
+      "correct": false
+    },
+    {
+      "id": 1209,
+      "type": "boolean",
+      "text": "Два resolve() для класса с default scope дают один экземпляр.",
+      "correct": true
+    },
+    {
+      "id": 1210,
+      "type": "boolean",
+      "text": "Interceptor может изменить ответ клиенту через map по next.handle().",
+      "correct": true
+    },
+    {
+      "id": 1211,
+      "type": "boolean",
+      "text": "Middleware обязан вернуть значение и не должен вызывать next().",
+      "correct": false
+    },
+    {
+      "id": 1212,
+      "type": "boolean",
+      "text": "@Inject('T') ищет токен T, а не класс с именем T.",
+      "correct": true
+    },
+    {
+      "id": 1213,
+      "type": "recall",
+      "text": "Какой метод должен реализовать guard?",
+      "answer": "canActivate."
+    },
+    {
+      "id": 1214,
+      "type": "recall",
+      "text": "Какой метод должен реализовать interceptor?",
+      "answer": "intercept. На вход ExecutionContext и CallHandler."
+    },
+    {
+      "id": 1215,
+      "type": "recall",
+      "text": "Какой scope провайдера создаёт новый экземпляр на HTTP-запрос?",
+      "answer": "Scope.REQUEST."
+    },
+    {
+      "id": 1216,
+      "type": "recall",
+      "text": "Какой метод реализует пайп?",
+      "answer": "transform."
+    },
+    {
+      "id": 1217,
+      "type": "recall",
+      "text": "Какой декоратор привязывает exception filter к типам ошибок?",
+      "answer": "@Catch()."
+    },
+    {
+      "id": 1218,
+      "type": "recall",
+      "text": "В каком порядке идут middleware, guard, interceptor, pipe и хендлер?",
+      "answer": "Middleware, затем guard'ы, затем interceptor'ы, затем пайпы, затем хендлер."
+    },
+    {
+      "id": 1219,
+      "type": "recall",
+      "text": "Как в кастомном param-декораторе достать текущий request?",
+      "answer": "Из ExecutionContext: switchToHttp().getRequest()."
+    },
+    {
+      "id": 1220,
+      "type": "recall",
+      "text": "Почему app.get() бросает на REQUEST-scoped провайдере?",
+      "answer": "Нет контекста запроса. Нужен resolve() или внедрение в REQUEST-scoped потребителя."
+    }
+  ]
+}
