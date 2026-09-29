@@ -311,6 +311,698 @@
       "type": "recall",
       "text": "Почему Promise, созданный внутри setTimeout, может обогнать следующий setTimeout, но не текущий колбэк таймера?",
       "answer": "Текущий timeout — уже выполняющаяся macrotask. Промис из него ставит microtask: она бежит сразу после этого колбэка, до следующей макротаски. Следующий setTimeout ждёт нового макропрохода, поэтому then успевает раньше него."
+    },
+    {
+      "id": 167,
+      "type": "code",
+      "language": "js",
+      "text": "Promise.resolve()\n  .then(() => {\n    console.log(1);\n    return Promise.resolve();\n  })\n  .then(() => console.log(2));\nPromise.resolve()\n  .then(() => console.log(3))\n  .then(() => console.log(4));\nconsole.log(5);",
+      "options": [
+        "5, 1, 3, 4, 2",
+        "5, 1, 3, 2, 4",
+        "5, 1, 2, 3, 4",
+        "5, 1, 4, 3, 2"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 168,
+      "type": "code",
+      "language": "js",
+      "text": "Promise.resolve()\n  .then(() => {\n    console.log(1);\n  })\n  .then(() => console.log(2));\nPromise.resolve()\n  .then(() => console.log(3))\n  .then(() => console.log(4));\nconsole.log(5);",
+      "options": [
+        "5, 1, 3, 4, 2",
+        "5, 1, 3, 2, 4",
+        "5, 1, 2, 3, 4",
+        "5, 1, 4, 2, 3"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 169,
+      "type": "code",
+      "language": "js",
+      "text": "function loop(n) {\n  if (n === 0) return;\n  queueMicrotask(() => {\n    console.log(n);\n    loop(n - 1);\n  });\n}\nloop(3);\nsetTimeout(() => console.log(0), 0);\nconsole.log(4);",
+      "options": [
+        "4, 3, 2, 0, 1",
+        "4, 0, 3, 2, 1",
+        "4, 3, 2, 1, 0",
+        "4, 3, 0, 2, 1"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 170,
+      "type": "code",
+      "language": "js",
+      "text": "async function f() {\n  console.log(1);\n  throw new Error(\"x\");\n}\nf().catch(() => console.log(2));\nconsole.log(3);",
+      "options": [
+        "1, 3, 2",
+        "1, 2, 3",
+        "3, 1, 2",
+        "1, 3"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 171,
+      "type": "code",
+      "language": "js",
+      "text": "async function f() {\n  try {\n    console.log(1);\n    await Promise.reject(new Error(\"x\"));\n    console.log(2);\n  } catch {\n    console.log(3);\n  }\n}\nf();\nconsole.log(4);",
+      "options": [
+        "1, 3, 4",
+        "1, 4, 3",
+        "1, 4, 2, 3",
+        "1, 2, 4, 3"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 172,
+      "type": "code",
+      "language": "js",
+      "text": "console.log(1);\nsetTimeout(() => {\n  console.log(2);\n  queueMicrotask(() => console.log(3));\n  queueMicrotask(() => console.log(4));\n}, 0);\nsetTimeout(() => console.log(5), 0);",
+      "options": [
+        "1, 2, 3, 4, 5",
+        "1, 2, 5, 3, 4",
+        "1, 2, 3, 5, 4",
+        "1, 5, 2, 3, 4"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 173,
+      "type": "code",
+      "language": "js",
+      "text": "async function f() {\n  console.log(1);\n  await Promise.resolve();\n  console.log(2);\n}\nsetTimeout(() => console.log(3), 0);\nqueueMicrotask(() => console.log(4));\nf();\nconsole.log(5);",
+      "options": [
+        "1, 5, 2, 4, 3",
+        "1, 5, 2, 3, 4",
+        "1, 5, 4, 2, 3",
+        "1, 4, 5, 2, 3"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 174,
+      "type": "code",
+      "language": "js",
+      "text": "console.log(1);\nqueueMicrotask(() => {\n  console.log(2);\n  setTimeout(() => console.log(3), 0);\n});\nqueueMicrotask(() => console.log(4));\nsetTimeout(() => console.log(5), 0);",
+      "options": [
+        "1, 2, 4, 3, 5",
+        "1, 2, 3, 4, 5",
+        "1, 2, 5, 4, 3",
+        "1, 2, 4, 5, 3"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 175,
+      "type": "code",
+      "language": "js",
+      "text": "Promise.reject(new Error(\"x\"))\n  .catch(() => {\n    console.log(1);\n    return 2;\n  })\n  .then((n) => console.log(n));\nconsole.log(3);",
+      "options": [
+        "1, 2, 3",
+        "3, 1, 2",
+        "3, 2, 1",
+        "1, 3, 2"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 176,
+      "type": "code",
+      "language": "js",
+      "text": "async function inner() {\n  console.log(1);\n  await Promise.resolve();\n  console.log(2);\n}\nasync function outer() {\n  console.log(3);\n  await inner();\n  console.log(4);\n}\nouter();\nconsole.log(5);",
+      "options": [
+        "3, 1, 5, 2, 4",
+        "3, 1, 2, 4, 5",
+        "3, 5, 1, 2, 4",
+        "5, 3, 1, 2, 4"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 177,
+      "type": "code",
+      "language": "js",
+      "text": "console.log(1);\nPromise.resolve().then(async () => {\n  console.log(2);\n  await Promise.resolve();\n  console.log(3);\n});\nconsole.log(4);",
+      "options": [
+        "1, 2, 3, 4",
+        "1, 4, 3, 2",
+        "1, 4, 2, 3",
+        "1, 2, 4, 3"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 178,
+      "type": "code",
+      "language": "js",
+      "text": "Promise.resolve().then(() => console.log(1));\nPromise.resolve().then(() => {\n  console.log(2);\n  Promise.resolve().then(() => console.log(3));\n});\nqueueMicrotask(() => console.log(4));\nconsole.log(5);",
+      "options": [
+        "5, 1, 2, 3, 4",
+        "5, 1, 2, 4, 3",
+        "5, 1, 4, 2, 3",
+        "5, 4, 1, 2, 3"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 179,
+      "type": "code",
+      "language": "js",
+      "text": "async function f() {\n  console.log(1);\n  await Promise.resolve();\n  console.log(2);\n  await Promise.resolve();\n  console.log(3);\n}\nqueueMicrotask(() => console.log(4));\nf();\nsetTimeout(() => console.log(5), 0);\nconsole.log(6);",
+      "options": [
+        "1, 6, 4, 2, 3, 5",
+        "1, 6, 2, 4, 3, 5",
+        "1, 6, 4, 2, 5, 3",
+        "1, 4, 6, 2, 3, 5"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 180,
+      "type": "code",
+      "language": "js",
+      "text": "console.log(1);\nconst p = Promise.resolve();\np.then(() => console.log(2));\np.then(() => {\n  console.log(3);\n  p.then(() => console.log(4));\n});\nconsole.log(5);",
+      "options": [
+        "1, 5, 2, 4, 3",
+        "1, 5, 2, 3",
+        "1, 2, 3, 4, 5",
+        "1, 5, 2, 3, 4"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 181,
+      "type": "code",
+      "language": "js",
+      "text": "setTimeout(() => console.log(1), 0);\nPromise.resolve().then(() => {\n  console.log(2);\n  setTimeout(() => console.log(3), 0);\n  queueMicrotask(() => console.log(4));\n});\nsetTimeout(() => console.log(5), 0);\nconsole.log(6);",
+      "options": [
+        "6, 2, 4, 1, 3, 5",
+        "6, 2, 4, 1, 5, 3",
+        "6, 2, 1, 4, 5, 3",
+        "6, 1, 2, 4, 5, 3"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 182,
+      "type": "code",
+      "language": "js",
+      "text": "console.log(1);\nsetTimeout(() => console.log(2), 0);\nqueueMicrotask(() => {\n  console.log(3);\n  queueMicrotask(() => console.log(4));\n});\nPromise.resolve().then(() => console.log(5));\nconsole.log(6);",
+      "options": [
+        "1, 6, 3, 4, 5, 2",
+        "1, 6, 3, 5, 2, 4",
+        "1, 6, 3, 5, 4, 2",
+        "1, 6, 5, 3, 4, 2"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 183,
+      "type": "code",
+      "language": "js",
+      "text": "async function f() {\n  console.log(1);\n  await Promise.resolve();\n  console.log(2);\n  setTimeout(() => console.log(3), 0);\n  await Promise.resolve();\n  console.log(4);\n}\nf();\nconsole.log(5);",
+      "options": [
+        "1, 5, 2, 4, 3",
+        "1, 5, 2, 3, 4",
+        "1, 2, 4, 5, 3",
+        "1, 5, 4, 2, 3"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 184,
+      "type": "code",
+      "language": "js",
+      "text": "console.log(1);\nsetTimeout(() => {\n  console.log(2);\n  Promise.resolve().then(() => {\n    console.log(3);\n    setTimeout(() => console.log(4), 0);\n  });\n}, 0);\nsetTimeout(() => console.log(5), 0);\nPromise.resolve().then(() => console.log(6));",
+      "options": [
+        "1, 6, 2, 5, 3, 4",
+        "1, 6, 2, 3, 4, 5",
+        "1, 6, 5, 2, 3, 4",
+        "1, 6, 2, 3, 5, 4"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 185,
+      "type": "code",
+      "language": "js",
+      "text": "console.log(1);\nqueueMicrotask(() => console.log(2));\nsetTimeout(() => {\n  console.log(3);\n  queueMicrotask(() => console.log(4));\n}, 0);\nqueueMicrotask(() => console.log(5));\nconsole.log(6);",
+      "options": [
+        "1, 6, 2, 3, 5, 4",
+        "1, 6, 2, 5, 3, 4",
+        "1, 6, 2, 5, 4, 3",
+        "1, 2, 5, 6, 3, 4"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 186,
+      "type": "code",
+      "language": "js",
+      "text": "Promise.resolve()\n  .then(() => console.log(1))\n  .finally(() => console.log(2))\n  .then(() => console.log(3));\nPromise.resolve().then(() => console.log(4));\nconsole.log(5);",
+      "options": [
+        "5, 1, 2, 4, 3",
+        "5, 1, 2, 3, 4",
+        "5, 1, 4, 2, 3",
+        "5, 4, 1, 2, 3"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 187,
+      "type": "text",
+      "text": "Чем then, который вернул Promise.resolve(), отличается от then, который вернул число, для следующего then?",
+      "options": [
+        "Возврат промиса добавляет лишнюю микротаску на разворачивание, и уже стоящие соседние микротаски успевают вклиниться",
+        "Разницы нет: оба следующих then ставятся одинаково",
+        "Возврат промиса превращает хвост цепочки в макротаску",
+        "Число игнорируется, следующий then не вызывается"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 188,
+      "type": "text",
+      "text": "Конечная цепочка queueMicrotask, где каждый шаг ставит следующий, и уже поставленный setTimeout(0):",
+      "options": [
+        "Таймер вклинится после первого queueMicrotask",
+        "Таймер выполнится только когда цепочка микротасок закончится",
+        "Таймер отменит оставшиеся микротаски",
+        "Они выполнятся параллельно"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 189,
+      "type": "text",
+      "text": "Где в браузере оказывается колбэк MessageChannel, если postMessage, микротаска и setTimeout(0) поставлены из одного синхронного куска?",
+      "options": [
+        "Раньше микротасок",
+        "После всех таймеров",
+        "После микротасок, но раньше setTimeout(0) из этого же куска",
+        "В одной очереди микротасок с then"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 190,
+      "type": "text",
+      "text": "В браузере requestAnimationFrame, поставленный из синхронного кода рядом с setTimeout(0), выполняется…",
+      "options": [
+        "Раньше любой микротаски",
+        "Строго после этого таймера",
+        "Внутри текущего стека",
+        "После микротасок и раньше этого таймера"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 191,
+      "type": "text",
+      "text": "Почему then на уже выполненном промисе не вызывается на той же строке?",
+      "options": [
+        "Реакция промиса — это job: её ставят в очередь, а не вызывают вложенно",
+        "then всегда ждёт setTimeout",
+        "На выполненный промис нельзя подписаться",
+        "Он вызывается на той же строке, если промис fulfilled"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 192,
+      "type": "text",
+      "text": "В Node.js nextTick, поставленный внутри Promise.then, и другой then, уже стоящий в очереди:",
+      "options": [
+        "nextTick всегда встаёт перед любым then",
+        "Сначала доработают уже стоящие реакции промисов, такой nextTick их не перебивает",
+        "Они в одной очереди FIFO",
+        "nextTick внутри then — это setImmediate"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 193,
+      "type": "text",
+      "text": "Что делает return anotherPromise из async-функции?",
+      "options": [
+        "Наружу уходит промис, значением которого будет объект Promise",
+        "return промиса из async-функции запрещён",
+        "Внешний промис ждёт anotherPromise и завершается вместе с ним",
+        "Внешний промис выполняется сразу, не дожидаясь внутреннего"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 194,
+      "type": "text",
+      "text": "setTimeout(0), поставленный раньше из синхронного кода, и setTimeout(0), поставленный позже из микротаски:",
+      "options": [
+        "Таймер из микротаски обгоняет уже стоящий",
+        "Оба таймера становятся микротасками",
+        "Порядок таймеров случайный",
+        "Раньше выполнится тот, что поставили первым"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 195,
+      "type": "text",
+      "text": "Что происходит при await inner() внутри async-функции outer?",
+      "options": [
+        "inner до своего await идёт синхронно, а продолжение outer будет микротаской после промиса inner",
+        "inner не вызывается, пока outer не закончится",
+        "await inner() равен setTimeout(inner, 0)",
+        "Код inner после await выполняется до синхронного начала outer"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 196,
+      "type": "text",
+      "text": "Отказ внутри async-функции, если вызывающий не повесил catch:",
+      "options": [
+        "Всегда вылетает синхронным исключением в вызывающий код",
+        "Становится отказом возвращённого промиса и может всплыть как необработанный отказ",
+        "Превращается в setTimeout",
+        "Глотается движком без следа"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 197,
+      "type": "text",
+      "text": "port.postMessage у MessageChannel в браузере — это микротаска?",
+      "options": [
+        "Да, в одной очереди с then",
+        "Да, и она обгоняет queueMicrotask",
+        "Нет: это задача хоста, она идёт после осушения микротасок",
+        "Это синхронный вызов onmessage"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 198,
+      "type": "text",
+      "text": "Можно ли в Node.js рассчитывать на один и тот же порядок setTimeout(0) и setImmediate из верхнего уровня скрипта?",
+      "options": [
+        "Да, setImmediate всегда первый",
+        "Да, setTimeout всегда первый",
+        "setImmediate — это микротаска и всегда раньше таймера",
+        "Нет: из верхнего уровня их порядок не гарантирован"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 199,
+      "type": "text",
+      "text": "Что будет с уже поставленными микротасками, если текущий код ушёл в синхронный while (true)?",
+      "options": [
+        "Они не начнутся: стек не опустеет, event loop не вернётся к очереди",
+        "Цикл прерывается на каждой итерации ради then",
+        "Очередь микротасок выполняется параллельно",
+        "Через 0 мс цикл уступает таймеру"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 200,
+      "type": "text",
+      "text": "Два then на одном и том же выполненном промисе…",
+      "options": [
+        "Второй затирает первый",
+        "Оба — микротаски в порядке подписки",
+        "Выполняются синхронно в момент then",
+        "Второй становится макротаской"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 201,
+      "type": "text",
+      "text": "В Node.js после колбэка setTimeout, который поставил и nextTick, и Promise.then:",
+      "options": [
+        "Сначала промисы, потом nextTick",
+        "Они вперемешку в одной очереди",
+        "Сначала nextTick, потом промисы, и только затем следующая макротаска",
+        "nextTick ждёт следующий таймер"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 202,
+      "type": "text",
+      "text": "В браузере rAF, поставленный внутри setTimeout, относительно Promise.then из того же колбэка:",
+      "options": [
+        "rAF вклинивается в середину then",
+        "rAF выполняется синхронно в таймере",
+        "rAF обгоняет then",
+        "then выполняется раньше rAF"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 203,
+      "type": "text",
+      "text": "Если then бросил исключение, а в цепочке есть catch и then после него:",
+      "options": [
+        "catch получит отказ микротаской, следующий then получит то, что вернул catch",
+        "Исключение оборвёт процесс",
+        "then после catch не вызывается",
+        "catch выполняется синхронно внутри then"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 204,
+      "type": "text",
+      "text": "Что значит осушить очередь микротасок?",
+      "options": [
+        "Берётся ровно одна микротаска, потом обязательно макротаска",
+        "Выполняются микротаски, включая добавленные по ходу, пока очередь не пуста; следующая макротаска ждёт",
+        "Микротаски выполняются по одной между строками синхронного кода",
+        "Это относится только к setTimeout"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 205,
+      "type": "boolean",
+      "text": "Возврат Promise.resolve() из then и возврат числа одинаково ставят следующий then относительно уже стоящей соседней микротаски.",
+      "correct": false
+    },
+    {
+      "id": 206,
+      "type": "boolean",
+      "text": "Конечная цепочка «микротаска ставит микротаску» может отложить уже стоящий setTimeout(0).",
+      "correct": true
+    },
+    {
+      "id": 207,
+      "type": "boolean",
+      "text": "В браузере обработчик onmessage у MessageChannel — это микротаска.",
+      "correct": false
+    },
+    {
+      "id": 208,
+      "type": "boolean",
+      "text": "В браузере requestAnimationFrame, поставленный из синхронного кода рядом с setTimeout(0), выполняется раньше этого таймера.",
+      "correct": true
+    },
+    {
+      "id": 209,
+      "type": "boolean",
+      "text": "then на уже выполненном промисе вызывается синхронно.",
+      "correct": false
+    },
+    {
+      "id": 210,
+      "type": "boolean",
+      "text": "В Node.js nextTick, поставленный внутри Promise.then, обгоняет другие then, которые уже стояли в очереди.",
+      "correct": false
+    },
+    {
+      "id": 211,
+      "type": "boolean",
+      "text": "return somePromise из async-функции отдаёт наружу вложенный промис как значение, не дожидаясь его.",
+      "correct": false
+    },
+    {
+      "id": 212,
+      "type": "boolean",
+      "text": "setTimeout(0) из микротаски обгоняет setTimeout(0), который уже стоял в очереди таймеров.",
+      "correct": false
+    },
+    {
+      "id": 213,
+      "type": "boolean",
+      "text": "Пока синхронный цикл не вернул управление, уже поставленные микротаски не начнутся.",
+      "correct": true
+    },
+    {
+      "id": 214,
+      "type": "boolean",
+      "text": "Два then на одном выполненном промисе выполняются в порядке подписки.",
+      "correct": true
+    },
+    {
+      "id": 215,
+      "type": "boolean",
+      "text": "В Node.js после колбэка setTimeout очередь nextTick, поставленная в этом колбэке, осушается раньше Promise.then из того же колбэка.",
+      "correct": true
+    },
+    {
+      "id": 216,
+      "type": "boolean",
+      "text": "В браузере requestAnimationFrame, поставленный внутри setTimeout, выполняется раньше Promise.then из этого же колбэка.",
+      "correct": false
+    },
+    {
+      "id": 217,
+      "type": "boolean",
+      "text": "Исключение внутри then отклоняет промис этого then и не вылетает в наружный стек.",
+      "correct": true
+    },
+    {
+      "id": 218,
+      "type": "boolean",
+      "text": "В Node.js setImmediate и setTimeout(0) из верхнего уровня скрипта всегда идут в фиксированном порядке.",
+      "correct": false
+    },
+    {
+      "id": 219,
+      "type": "boolean",
+      "text": "await продолжает функцию в том же заходе call stack, что и код до await.",
+      "correct": false
+    },
+    {
+      "id": 220,
+      "type": "boolean",
+      "text": "Promise jobs в спецификации ECMAScript — это и есть setTimeout.",
+      "correct": false
+    },
+    {
+      "id": 221,
+      "type": "boolean",
+      "text": "Вычисление await inner() не вызывает inner, пока outer не дойдёт до конца.",
+      "correct": false
+    },
+    {
+      "id": 222,
+      "type": "boolean",
+      "text": "Необработанный отказ из async-функции приходит вызывающему как синхронный throw.",
+      "correct": false
+    },
+    {
+      "id": 223,
+      "type": "recall",
+      "text": "Почему возврат промиса из then отодвигает следующий then сильнее, чем возврат числа?",
+      "answer": "Число передаётся следующей реакции одной микротаской. Возвращённый промис нужно ещё развернуть отдельной job, и за этот шаг успевают микротаски, которые уже стояли в очереди."
+    },
+    {
+      "id": 224,
+      "type": "recall",
+      "text": "Что на практике значит осушить очередь микротасок?",
+      "answer": "Берутся все текущие микротаски и те, что они добавили, пока очередь не станет пустой. Следующая макротаска и шаг отрисовки ждут этого момента."
+    },
+    {
+      "id": 225,
+      "type": "recall",
+      "text": "Почему в браузере колбэк MessageChannel может выполниться раньше таймера, поставленного до postMessage?",
+      "answer": "Сообщение порта — задача хоста, не микротаска. В этой модели после микротасок она берётся раньше очереди таймеров, поэтому обгоняет setTimeout(0) из того же синхронного куска."
+    },
+    {
+      "id": 226,
+      "type": "recall",
+      "text": "Где в браузерной модели этих вопросов стоит requestAnimationFrame относительно setTimeout(0)?",
+      "answer": "После осушения микротасок и раньше таймера, поставленного в том же синхронном куске. Внутри уже идущего таймера свой then всё равно раньше rAF, поставленного там же."
+    },
+    {
+      "id": 227,
+      "type": "recall",
+      "text": "Почему спецификация не вызывает реакцию промиса прямо на стеке?",
+      "answer": "Реакция — это job. Её ставят в очередь, чтобы then не вкладывался в текущий стек и не разрастался в синхронную рекурсию на длинной цепочке."
+    },
+    {
+      "id": 228,
+      "type": "recall",
+      "text": "Почему фраза «nextTick в Node всегда раньше промисов» слишком грубая?",
+      "answer": "Из синхронного кода и после макротаски очередь nextTick действительно осушается раньше промисов. Но nextTick, поставленный уже внутри then, не перебивает реакции промисов, которые к этому моменту уже стоят в очереди."
+    },
+    {
+      "id": 229,
+      "type": "recall",
+      "text": "Почему return otherPromise из async-функции не кладёт промис в промис?",
+      "answer": "Async-функция усыновляет возвращённый промис: внешний промис ждёт его и завершается тем же успехом или отказом. Вызывающий в then видит итоговое значение, а не объект Promise."
+    },
+    {
+      "id": 230,
+      "type": "recall",
+      "text": "Может ли микротаска переставить уже стоящие таймеры?",
+      "answer": "Нет. Новый setTimeout встаёт в конец очереди таймеров. Тот, что поставили раньше, так и останется впереди, даже если второй поставила микротаска."
+    },
+    {
+      "id": 231,
+      "type": "recall",
+      "text": "Почему длинный синхронный цикл замораживает и таймеры, и промисы?",
+      "answer": "Event loop выбирает следующую задачу только когда стек пуст. Пока крутится синхронный цикл, ни микротаска, ни таймер, ни кадр не начнутся."
+    },
+    {
+      "id": 232,
+      "type": "recall",
+      "text": "Два then на одном промисе затирают друг друга?",
+      "answer": "Нет. Оба остаются. На выполненном промисе они станут двумя микротасками в порядке подписки."
+    },
+    {
+      "id": 233,
+      "type": "recall",
+      "text": "Зачем в Node.js отдельная очередь nextTick рядом с promise jobs?",
+      "answer": "Это более ранняя очередь хоста: после текущего синхронного кода и после макротаски она осушается до микротасок промисов. Ею пользуются, когда колбэк должен успеть до then, но это всё ещё не синхронный вызов."
+    },
+    {
+      "id": 234,
+      "type": "recall",
+      "text": "Почему браузер не рисует кадр посередине then, поставленных внутри таймера?",
+      "answer": "Сначала заканчивается текущая макротаска, затем осушаются микротаски, и только потом возможен шаг отрисовки. then из таймера — часть этого осушения, кадр его не режет."
+    },
+    {
+      "id": 235,
+      "type": "recall",
+      "text": "Как catch сохраняет цепочку после throw в then?",
+      "answer": "throw отклоняет промис этого then. catch получает отказ микротаской. Если catch вернул значение, следующий then идёт уже как успешный шаг, тоже микротаской."
+    },
+    {
+      "id": 236,
+      "type": "recall",
+      "text": "Почему нельзя запоминать порядок setImmediate и setTimeout(0) из главного скрипта Node?",
+      "answer": "Из верхнего уровня их фазы таймеров и check не дают одного гарантированного порядка. Внутри I/O-колбэка порядок другой и уже устойчивый, но это другое место в цикле."
+    },
+    {
+      "id": 237,
+      "type": "recall",
+      "text": "Что происходит со стеком на await?",
+      "answer": "Функция приостанавливается, стек схлопывается до вызывающего. Продолжение после await — новая микротаска, не хвост того же вызова."
+    },
+    {
+      "id": 238,
+      "type": "recall",
+      "text": "Что спецификация JavaScript сознательно отдаёт хосту?",
+      "answer": "Таймеры, I/O, кадр и то, когда запускать promise jobs. Спека описывает jobs, а браузер и Node вплетают их в свой цикл по-своему."
+    },
+    {
+      "id": 239,
+      "type": "recall",
+      "text": "Как вкладываются две async-функции на await inner()?",
+      "answer": "Вызов inner() начинается сразу и идёт синхронно до своего await. outer ждёт промис inner, а код outer после await станет микротаской, когда inner завершится."
+    },
+    {
+      "id": 240,
+      "type": "recall",
+      "text": "Почему try/catch вокруг вызова async-функции не видит throw внутри неё?",
+      "answer": "Вызов возвращает промис и не бросает синхронно. throw отклоняет этот промис. Поймать его можно catch на промисе, а не внешним try/catch."
     }
   ]
 }

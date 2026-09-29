@@ -311,6 +311,698 @@
       "type": "recall",
       "text": "Why can a Promise created inside setTimeout beat the next setTimeout, but not the current timer callback?",
       "answer": "The current timeout is the macrotask already running. A promise from it enqueues a microtask, which runs right after that callback and before the next macrotask. The next setTimeout waits for a new macro turn, so the then runs first."
+    },
+    {
+      "id": 167,
+      "type": "code",
+      "language": "js",
+      "text": "Promise.resolve()\n  .then(() => {\n    console.log(1);\n    return Promise.resolve();\n  })\n  .then(() => console.log(2));\nPromise.resolve()\n  .then(() => console.log(3))\n  .then(() => console.log(4));\nconsole.log(5);",
+      "options": [
+        "5, 1, 3, 4, 2",
+        "5, 1, 3, 2, 4",
+        "5, 1, 2, 3, 4",
+        "5, 1, 4, 3, 2"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 168,
+      "type": "code",
+      "language": "js",
+      "text": "Promise.resolve()\n  .then(() => {\n    console.log(1);\n  })\n  .then(() => console.log(2));\nPromise.resolve()\n  .then(() => console.log(3))\n  .then(() => console.log(4));\nconsole.log(5);",
+      "options": [
+        "5, 1, 3, 4, 2",
+        "5, 1, 3, 2, 4",
+        "5, 1, 2, 3, 4",
+        "5, 1, 4, 2, 3"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 169,
+      "type": "code",
+      "language": "js",
+      "text": "function loop(n) {\n  if (n === 0) return;\n  queueMicrotask(() => {\n    console.log(n);\n    loop(n - 1);\n  });\n}\nloop(3);\nsetTimeout(() => console.log(0), 0);\nconsole.log(4);",
+      "options": [
+        "4, 3, 2, 0, 1",
+        "4, 0, 3, 2, 1",
+        "4, 3, 2, 1, 0",
+        "4, 3, 0, 2, 1"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 170,
+      "type": "code",
+      "language": "js",
+      "text": "async function f() {\n  console.log(1);\n  throw new Error(\"x\");\n}\nf().catch(() => console.log(2));\nconsole.log(3);",
+      "options": [
+        "1, 3, 2",
+        "1, 2, 3",
+        "3, 1, 2",
+        "1, 3"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 171,
+      "type": "code",
+      "language": "js",
+      "text": "async function f() {\n  try {\n    console.log(1);\n    await Promise.reject(new Error(\"x\"));\n    console.log(2);\n  } catch {\n    console.log(3);\n  }\n}\nf();\nconsole.log(4);",
+      "options": [
+        "1, 3, 4",
+        "1, 4, 3",
+        "1, 4, 2, 3",
+        "1, 2, 4, 3"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 172,
+      "type": "code",
+      "language": "js",
+      "text": "console.log(1);\nsetTimeout(() => {\n  console.log(2);\n  queueMicrotask(() => console.log(3));\n  queueMicrotask(() => console.log(4));\n}, 0);\nsetTimeout(() => console.log(5), 0);",
+      "options": [
+        "1, 2, 3, 4, 5",
+        "1, 2, 5, 3, 4",
+        "1, 2, 3, 5, 4",
+        "1, 5, 2, 3, 4"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 173,
+      "type": "code",
+      "language": "js",
+      "text": "async function f() {\n  console.log(1);\n  await Promise.resolve();\n  console.log(2);\n}\nsetTimeout(() => console.log(3), 0);\nqueueMicrotask(() => console.log(4));\nf();\nconsole.log(5);",
+      "options": [
+        "1, 5, 2, 4, 3",
+        "1, 5, 2, 3, 4",
+        "1, 5, 4, 2, 3",
+        "1, 4, 5, 2, 3"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 174,
+      "type": "code",
+      "language": "js",
+      "text": "console.log(1);\nqueueMicrotask(() => {\n  console.log(2);\n  setTimeout(() => console.log(3), 0);\n});\nqueueMicrotask(() => console.log(4));\nsetTimeout(() => console.log(5), 0);",
+      "options": [
+        "1, 2, 4, 3, 5",
+        "1, 2, 3, 4, 5",
+        "1, 2, 5, 4, 3",
+        "1, 2, 4, 5, 3"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 175,
+      "type": "code",
+      "language": "js",
+      "text": "Promise.reject(new Error(\"x\"))\n  .catch(() => {\n    console.log(1);\n    return 2;\n  })\n  .then((n) => console.log(n));\nconsole.log(3);",
+      "options": [
+        "1, 2, 3",
+        "3, 1, 2",
+        "3, 2, 1",
+        "1, 3, 2"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 176,
+      "type": "code",
+      "language": "js",
+      "text": "async function inner() {\n  console.log(1);\n  await Promise.resolve();\n  console.log(2);\n}\nasync function outer() {\n  console.log(3);\n  await inner();\n  console.log(4);\n}\nouter();\nconsole.log(5);",
+      "options": [
+        "3, 1, 5, 2, 4",
+        "3, 1, 2, 4, 5",
+        "3, 5, 1, 2, 4",
+        "5, 3, 1, 2, 4"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 177,
+      "type": "code",
+      "language": "js",
+      "text": "console.log(1);\nPromise.resolve().then(async () => {\n  console.log(2);\n  await Promise.resolve();\n  console.log(3);\n});\nconsole.log(4);",
+      "options": [
+        "1, 2, 3, 4",
+        "1, 4, 3, 2",
+        "1, 4, 2, 3",
+        "1, 2, 4, 3"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 178,
+      "type": "code",
+      "language": "js",
+      "text": "Promise.resolve().then(() => console.log(1));\nPromise.resolve().then(() => {\n  console.log(2);\n  Promise.resolve().then(() => console.log(3));\n});\nqueueMicrotask(() => console.log(4));\nconsole.log(5);",
+      "options": [
+        "5, 1, 2, 3, 4",
+        "5, 1, 2, 4, 3",
+        "5, 1, 4, 2, 3",
+        "5, 4, 1, 2, 3"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 179,
+      "type": "code",
+      "language": "js",
+      "text": "async function f() {\n  console.log(1);\n  await Promise.resolve();\n  console.log(2);\n  await Promise.resolve();\n  console.log(3);\n}\nqueueMicrotask(() => console.log(4));\nf();\nsetTimeout(() => console.log(5), 0);\nconsole.log(6);",
+      "options": [
+        "1, 6, 4, 2, 3, 5",
+        "1, 6, 2, 4, 3, 5",
+        "1, 6, 4, 2, 5, 3",
+        "1, 4, 6, 2, 3, 5"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 180,
+      "type": "code",
+      "language": "js",
+      "text": "console.log(1);\nconst p = Promise.resolve();\np.then(() => console.log(2));\np.then(() => {\n  console.log(3);\n  p.then(() => console.log(4));\n});\nconsole.log(5);",
+      "options": [
+        "1, 5, 2, 4, 3",
+        "1, 5, 2, 3",
+        "1, 2, 3, 4, 5",
+        "1, 5, 2, 3, 4"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 181,
+      "type": "code",
+      "language": "js",
+      "text": "setTimeout(() => console.log(1), 0);\nPromise.resolve().then(() => {\n  console.log(2);\n  setTimeout(() => console.log(3), 0);\n  queueMicrotask(() => console.log(4));\n});\nsetTimeout(() => console.log(5), 0);\nconsole.log(6);",
+      "options": [
+        "6, 2, 4, 1, 3, 5",
+        "6, 2, 4, 1, 5, 3",
+        "6, 2, 1, 4, 5, 3",
+        "6, 1, 2, 4, 5, 3"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 182,
+      "type": "code",
+      "language": "js",
+      "text": "console.log(1);\nsetTimeout(() => console.log(2), 0);\nqueueMicrotask(() => {\n  console.log(3);\n  queueMicrotask(() => console.log(4));\n});\nPromise.resolve().then(() => console.log(5));\nconsole.log(6);",
+      "options": [
+        "1, 6, 3, 4, 5, 2",
+        "1, 6, 3, 5, 2, 4",
+        "1, 6, 3, 5, 4, 2",
+        "1, 6, 5, 3, 4, 2"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 183,
+      "type": "code",
+      "language": "js",
+      "text": "async function f() {\n  console.log(1);\n  await Promise.resolve();\n  console.log(2);\n  setTimeout(() => console.log(3), 0);\n  await Promise.resolve();\n  console.log(4);\n}\nf();\nconsole.log(5);",
+      "options": [
+        "1, 5, 2, 4, 3",
+        "1, 5, 2, 3, 4",
+        "1, 2, 4, 5, 3",
+        "1, 5, 4, 2, 3"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 184,
+      "type": "code",
+      "language": "js",
+      "text": "console.log(1);\nsetTimeout(() => {\n  console.log(2);\n  Promise.resolve().then(() => {\n    console.log(3);\n    setTimeout(() => console.log(4), 0);\n  });\n}, 0);\nsetTimeout(() => console.log(5), 0);\nPromise.resolve().then(() => console.log(6));",
+      "options": [
+        "1, 6, 2, 5, 3, 4",
+        "1, 6, 2, 3, 4, 5",
+        "1, 6, 5, 2, 3, 4",
+        "1, 6, 2, 3, 5, 4"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 185,
+      "type": "code",
+      "language": "js",
+      "text": "console.log(1);\nqueueMicrotask(() => console.log(2));\nsetTimeout(() => {\n  console.log(3);\n  queueMicrotask(() => console.log(4));\n}, 0);\nqueueMicrotask(() => console.log(5));\nconsole.log(6);",
+      "options": [
+        "1, 6, 2, 3, 5, 4",
+        "1, 6, 2, 5, 3, 4",
+        "1, 6, 2, 5, 4, 3",
+        "1, 2, 5, 6, 3, 4"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 186,
+      "type": "code",
+      "language": "js",
+      "text": "Promise.resolve()\n  .then(() => console.log(1))\n  .finally(() => console.log(2))\n  .then(() => console.log(3));\nPromise.resolve().then(() => console.log(4));\nconsole.log(5);",
+      "options": [
+        "5, 1, 2, 4, 3",
+        "5, 1, 2, 3, 4",
+        "5, 1, 4, 2, 3",
+        "5, 4, 1, 2, 3"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 187,
+      "type": "text",
+      "text": "How does a then that returns Promise.resolve() differ from a then that returns a number, for the next then?",
+      "options": [
+        "Returning a promise adds an extra unwrap microtask, so sibling microtasks already queued can slip in",
+        "There is no difference: both following thens are queued the same way",
+        "Returning a promise turns the rest of the chain into a macrotask",
+        "The number is ignored and the next then is not called"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 188,
+      "type": "text",
+      "text": "A finite queueMicrotask chain, each step queueing the next, and a setTimeout(0) already queued:",
+      "options": [
+        "The timer slips in after the first queueMicrotask",
+        "The timer runs only after the microtask chain finishes",
+        "The timer cancels the remaining microtasks",
+        "They run in parallel"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 189,
+      "type": "text",
+      "text": "In the browser, where does a MessageChannel callback sit if postMessage, a microtask, and setTimeout(0) are all queued from the same synchronous turn?",
+      "options": [
+        "Before microtasks",
+        "After every timer",
+        "After microtasks, but before the setTimeout(0) from that same turn",
+        "On the same microtask queue as then"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 190,
+      "type": "text",
+      "text": "In the browser, a requestAnimationFrame scheduled from synchronous code next to setTimeout(0) runs…",
+      "options": [
+        "Before any microtask",
+        "Strictly after that timer",
+        "Inside the current stack",
+        "After microtasks and before that timer"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 191,
+      "type": "text",
+      "text": "Why isn’t then on an already fulfilled promise called on the same line?",
+      "options": [
+        "A promise reaction is a job: it is queued, not called nested",
+        "then always waits for a setTimeout",
+        "You cannot subscribe to a fulfilled promise",
+        "It is called on the same line when the promise is fulfilled"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 192,
+      "type": "text",
+      "text": "In Node.js, a nextTick scheduled inside a Promise.then and another then already queued:",
+      "options": [
+        "nextTick always jumps ahead of any then",
+        "Promise reactions already queued finish first; that nextTick does not preempt them",
+        "They share one FIFO queue",
+        "nextTick inside then is a setImmediate"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 193,
+      "type": "text",
+      "text": "What does return anotherPromise do inside an async function?",
+      "options": [
+        "The caller receives a promise whose value is a Promise object",
+        "Returning a promise from an async function is forbidden",
+        "The outer promise waits for anotherPromise and settles with it",
+        "The outer promise fulfills immediately, without waiting"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 194,
+      "type": "text",
+      "text": "A setTimeout(0) queued earlier from synchronous code, and a setTimeout(0) queued later from a microtask:",
+      "options": [
+        "The timer from the microtask overtakes the one already queued",
+        "Both timers become microtasks",
+        "Timer order is random",
+        "The one queued first runs first"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 195,
+      "type": "text",
+      "text": "What happens at await inner() inside an async function outer?",
+      "options": [
+        "inner runs synchronously until its own await, and outer’s continuation is a microtask after inner’s promise",
+        "inner is not called until outer finishes",
+        "await inner() is the same as setTimeout(inner, 0)",
+        "inner’s code after await runs before outer’s synchronous start"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 196,
+      "type": "text",
+      "text": "A rejection inside an async function when the caller attached no catch:",
+      "options": [
+        "Always escapes as a synchronous exception into the caller",
+        "Becomes a rejection of the returned promise and can surface as an unhandled rejection",
+        "Becomes a setTimeout",
+        "Is swallowed by the engine with no trace"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 197,
+      "type": "text",
+      "text": "Is a MessageChannel port.postMessage a microtask in the browser?",
+      "options": [
+        "Yes, on the same queue as then",
+        "Yes, and it runs before queueMicrotask",
+        "No: it is a host task and runs after microtasks are drained",
+        "It calls onmessage synchronously"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 198,
+      "type": "text",
+      "text": "In Node.js, can you rely on one fixed order of setTimeout(0) and setImmediate from the top level of a script?",
+      "options": [
+        "Yes, setImmediate is always first",
+        "Yes, setTimeout is always first",
+        "setImmediate is a microtask and always beats the timer",
+        "No: from the top level their order is not guaranteed"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 199,
+      "type": "text",
+      "text": "What happens to microtasks already queued if the current code enters a synchronous while (true)?",
+      "options": [
+        "They do not start: the stack never clears, so the event loop never returns to the queue",
+        "The loop yields every iteration for then",
+        "The microtask queue runs in parallel",
+        "After 0 ms the loop yields to a timer"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 200,
+      "type": "text",
+      "text": "Two then callbacks on the same fulfilled promise…",
+      "options": [
+        "The second replaces the first",
+        "Both are microtasks, in subscription order",
+        "Run synchronously when then is called",
+        "The second becomes a macrotask"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 201,
+      "type": "text",
+      "text": "In Node.js, after a setTimeout callback that queued both a nextTick and a Promise.then:",
+      "options": [
+        "Promises first, then nextTick",
+        "They share one mixed queue",
+        "nextTick first, then promises, and only after that the next macrotask",
+        "nextTick waits for the next timer"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 202,
+      "type": "text",
+      "text": "In the browser, an rAF scheduled inside setTimeout, relative to a Promise.then from that same callback:",
+      "options": [
+        "rAF cuts into the middle of then",
+        "rAF runs synchronously inside the timer",
+        "rAF runs before then",
+        "then runs before rAF"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 203,
+      "type": "text",
+      "text": "If then throws, and the chain has a catch plus a then after that catch:",
+      "options": [
+        "catch receives the rejection as a microtask, and the next then receives whatever catch returned",
+        "The exception stops the process",
+        "The then after catch is never called",
+        "catch runs synchronously inside then"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 204,
+      "type": "text",
+      "text": "What does it mean to drain the microtask queue?",
+      "options": [
+        "Exactly one microtask is taken, then a macrotask is required",
+        "Microtasks run, including ones added along the way, until the queue is empty; the next macrotask waits",
+        "Microtasks run one at a time between lines of synchronous code",
+        "It applies only to setTimeout"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 205,
+      "type": "boolean",
+      "text": "Returning Promise.resolve() from then and returning a number schedule the next then the same way relative to a sibling microtask already queued.",
+      "correct": false
+    },
+    {
+      "id": 206,
+      "type": "boolean",
+      "text": "A finite chain of “a microtask queues a microtask” can delay a setTimeout(0) that is already queued.",
+      "correct": true
+    },
+    {
+      "id": 207,
+      "type": "boolean",
+      "text": "In the browser, a MessageChannel onmessage handler is a microtask.",
+      "correct": false
+    },
+    {
+      "id": 208,
+      "type": "boolean",
+      "text": "In the browser, a requestAnimationFrame scheduled from synchronous code next to setTimeout(0) runs before that timer.",
+      "correct": true
+    },
+    {
+      "id": 209,
+      "type": "boolean",
+      "text": "then on an already fulfilled promise runs synchronously.",
+      "correct": false
+    },
+    {
+      "id": 210,
+      "type": "boolean",
+      "text": "In Node.js, a nextTick scheduled inside a Promise.then runs before other then callbacks already queued.",
+      "correct": false
+    },
+    {
+      "id": 211,
+      "type": "boolean",
+      "text": "return somePromise from an async function gives the caller a nested promise as the value, without waiting for it.",
+      "correct": false
+    },
+    {
+      "id": 212,
+      "type": "boolean",
+      "text": "A setTimeout(0) from a microtask jumps ahead of a setTimeout(0) already in the timer queue.",
+      "correct": false
+    },
+    {
+      "id": 213,
+      "type": "boolean",
+      "text": "Already queued microtasks cannot start while a synchronous loop still holds the stack.",
+      "correct": true
+    },
+    {
+      "id": 214,
+      "type": "boolean",
+      "text": "Two then callbacks on one fulfilled promise run in subscription order.",
+      "correct": true
+    },
+    {
+      "id": 215,
+      "type": "boolean",
+      "text": "In Node.js, after a setTimeout callback, nextTick callbacks queued there run before Promise.then callbacks queued there.",
+      "correct": true
+    },
+    {
+      "id": 216,
+      "type": "boolean",
+      "text": "In the browser, a requestAnimationFrame scheduled inside setTimeout runs before a Promise.then from that same callback.",
+      "correct": false
+    },
+    {
+      "id": 217,
+      "type": "boolean",
+      "text": "An exception inside then rejects that then’s promise and does not throw into the outer stack.",
+      "correct": true
+    },
+    {
+      "id": 218,
+      "type": "boolean",
+      "text": "In Node.js, setImmediate and setTimeout(0) from the top level of a script always run in a fixed order.",
+      "correct": false
+    },
+    {
+      "id": 219,
+      "type": "boolean",
+      "text": "await continues the function in the same call-stack turn as the code before await.",
+      "correct": false
+    },
+    {
+      "id": 220,
+      "type": "boolean",
+      "text": "Promise jobs in the ECMAScript spec are setTimeout.",
+      "correct": false
+    },
+    {
+      "id": 221,
+      "type": "boolean",
+      "text": "Evaluating await inner() does not call inner until outer finishes.",
+      "correct": false
+    },
+    {
+      "id": 222,
+      "type": "boolean",
+      "text": "An unhandled rejection from an async function reaches the caller as a synchronous throw.",
+      "correct": false
+    },
+    {
+      "id": 223,
+      "type": "recall",
+      "text": "Why does returning a promise from then delay the next then more than returning a number?",
+      "answer": "A number is passed to the next reaction in one microtask. A returned promise still has to be unwrapped by another job, and microtasks already queued can run during that extra step."
+    },
+    {
+      "id": 224,
+      "type": "recall",
+      "text": "What does draining the microtask queue mean in practice?",
+      "answer": "Every current microtask is taken, including ones they add, until the queue is empty. The next macrotask and the render step wait for that."
+    },
+    {
+      "id": 225,
+      "type": "recall",
+      "text": "Why can a MessageChannel callback in the browser run before a timer that was queued before postMessage?",
+      "answer": "A port message is a host task, not a microtask. In this model it is taken after microtasks and before the timer queue, so it beats a setTimeout(0) from the same synchronous turn."
+    },
+    {
+      "id": 226,
+      "type": "recall",
+      "text": "Where does requestAnimationFrame sit relative to setTimeout(0) in this quiz’s browser model?",
+      "answer": "After microtasks are drained and before a timer queued in the same synchronous turn. Inside a timer that is already running, a then queued there still runs before an rAF queued there."
+    },
+    {
+      "id": 227,
+      "type": "recall",
+      "text": "Why doesn’t the spec call a promise reaction directly on the stack?",
+      "answer": "A reaction is a job. It is queued so then does not nest into the current stack and turn a long chain into synchronous recursion."
+    },
+    {
+      "id": 228,
+      "type": "recall",
+      "text": "Why is “nextTick in Node always runs before promises” too rough?",
+      "answer": "From synchronous code, and after a macrotask, the nextTick queue is drained before promises. A nextTick queued from inside a then does not preempt promise reactions that are already queued."
+    },
+    {
+      "id": 229,
+      "type": "recall",
+      "text": "Why doesn’t return otherPromise from an async function nest a promise inside a promise?",
+      "answer": "An async function adopts the returned promise: the outer promise waits for it and settles the same way. The caller’s then sees the final value, not a Promise object."
+    },
+    {
+      "id": 230,
+      "type": "recall",
+      "text": "Can a microtask reorder timers that are already queued?",
+      "answer": "No. A new setTimeout joins the back of the timer queue. The one queued earlier stays ahead, even if a microtask queued the later one."
+    },
+    {
+      "id": 231,
+      "type": "recall",
+      "text": "Why does a long synchronous loop freeze both timers and promises?",
+      "answer": "The event loop picks the next task only when the stack is empty. While a synchronous loop is running, no microtask, timer, or frame can start."
+    },
+    {
+      "id": 232,
+      "type": "recall",
+      "text": "Do two then callbacks on one promise replace each other?",
+      "answer": "No. Both stay. On a fulfilled promise they become two microtasks in subscription order."
+    },
+    {
+      "id": 233,
+      "type": "recall",
+      "text": "What is Node’s nextTick queue for, next to promise jobs?",
+      "answer": "It is an earlier host queue: after synchronous code and after a macrotask it is drained before promise microtasks. It is for a callback that must run before then, and it is still not a synchronous call."
+    },
+    {
+      "id": 234,
+      "type": "recall",
+      "text": "Why doesn’t the browser paint in the middle of then callbacks queued inside a timer?",
+      "answer": "The current macrotask finishes, then microtasks are drained, and only then can a render step happen. A then from the timer is part of that drain; the frame does not cut through it."
+    },
+    {
+      "id": 235,
+      "type": "recall",
+      "text": "How does catch keep a chain alive after a throw in then?",
+      "answer": "The throw rejects that then’s promise. catch receives the rejection as a microtask. If catch returns a value, the next then continues as a fulfillment, also as a microtask."
+    },
+    {
+      "id": 236,
+      "type": "recall",
+      "text": "Why shouldn’t you memorize an order of setImmediate and setTimeout(0) from Node’s main script?",
+      "answer": "From the top level, the timers phase and the check phase do not give one guaranteed order. Inside an I/O callback the order is different and stable, but that is another point in the loop."
+    },
+    {
+      "id": 237,
+      "type": "recall",
+      "text": "What happens to the stack at an await?",
+      "answer": "The function pauses and the stack unwinds to the caller. The continuation after await is a new microtask, not the tail of the same call."
+    },
+    {
+      "id": 238,
+      "type": "recall",
+      "text": "What does the JavaScript spec deliberately leave to the host?",
+      "answer": "Timers, I/O, painting, and when to run promise jobs. The spec describes jobs; the browser and Node weave them into their own loops."
+    },
+    {
+      "id": 239,
+      "type": "recall",
+      "text": "How do two async functions nest at await inner()?",
+      "answer": "The inner() call starts immediately and runs synchronously until its own await. outer waits for inner’s promise, and the code in outer after await becomes a microtask when inner settles."
+    },
+    {
+      "id": 240,
+      "type": "recall",
+      "text": "Why doesn’t a try/catch around an async call see a throw inside that function?",
+      "answer": "The call returns a promise and does not throw synchronously. The throw rejects that promise. You catch it with a catch on the promise, not with the outer try/catch."
     }
   ]
 }

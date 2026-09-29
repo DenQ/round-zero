@@ -23,6 +23,11 @@ export const catalog = [
         labelKey: 'catalog.topics.eventLoop',
         levels: PACK_LEVELS,
       },
+      {
+        slug: 'context',
+        labelKey: 'catalog.topics.context',
+        levels: PACK_LEVELS,
+      },
     ],
   },
   { slug: 'ts', labelKey: 'catalog.stacks.ts', topics: [] },

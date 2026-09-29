@@ -1,0 +1,208 @@
+{
+  "stack": "js",
+  "topic": "context",
+  "level": "junior",
+  "locale": "en",
+  "questions": [
+    {
+      "id": 241,
+      "type": "code",
+      "language": "js",
+      "text": "const box = {\n  n: 1,\n  show() {\n    console.log(this.n);\n  },\n};\nbox.show();",
+      "options": [
+        "2",
+        "1",
+        "0",
+        "3"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 242,
+      "type": "code",
+      "language": "js",
+      "text": "function show() {\n  console.log(this.n);\n}\nconst a = { n: 1, show };\nconst b = { n: 2, show };\na.show();\nb.show();",
+      "options": [
+        "1, 2",
+        "2, 1",
+        "1, 1",
+        "2, 2"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 243,
+      "type": "code",
+      "language": "js",
+      "text": "'use strict';\nconst box = {\n  n: 1,\n  show() {\n    console.log(this.n);\n  },\n};\nfunction run(fn) {\n  try {\n    fn();\n  } catch {\n    console.log(2);\n  }\n}\nrun(box.show);\nrun(() => box.show());",
+      "options": [
+        "1, 1",
+        "2, 2",
+        "1, 2",
+        "2, 1"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 244,
+      "type": "code",
+      "language": "js",
+      "text": "function show() {\n  console.log(this.n);\n}\nshow.call({ n: 1 });\nshow.call({ n: 2 });",
+      "options": [
+        "2, 1",
+        "1, 1",
+        "1, 2",
+        "2, 2"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 245,
+      "type": "code",
+      "language": "js",
+      "text": "const box = {\n  n: 1,\n  show() {\n    console.log(this.n);\n  },\n};\nconst show = box.show.bind({ n: 2 });\nshow();\nbox.show();",
+      "options": [
+        "1, 2",
+        "2, 1",
+        "1, 1",
+        "2, 2"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 246,
+      "type": "code",
+      "language": "js",
+      "text": "const box = {\n  n: 1,\n  show() {\n    const inner = {\n      n: 2,\n      read: () => console.log(this.n),\n    };\n    inner.read();\n  },\n};\nbox.show();",
+      "options": [
+        "2",
+        "3",
+        "1",
+        "0"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 247,
+      "type": "code",
+      "language": "js",
+      "text": "const box = {\n  n: 1,\n  show() {\n    const self = this;\n    function inner() {\n      console.log(self.n);\n      console.log(this.n);\n    }\n    inner.call({ n: 2 });\n  },\n};\nbox.show();",
+      "options": [
+        "2, 1",
+        "1, 1",
+        "2, 2",
+        "1, 2"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 248,
+      "type": "code",
+      "language": "js",
+      "text": "function Box(n) {\n  this.n = n;\n}\nconsole.log(new Box(1).n);\nconsole.log(new Box(2).n);",
+      "options": [
+        "1, 2",
+        "2, 1",
+        "1, 1",
+        "2, 2"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 249,
+      "type": "text",
+      "text": "What sets this in an ordinary function?",
+      "options": [
+        "The place where the function was declared",
+        "The call: the object before the dot, or call, apply, bind, or new",
+        "The function's name",
+        "The value of the first local variable"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 250,
+      "type": "text",
+      "text": "Why does const show = box.show; show() lose box?",
+      "options": [
+        "A call without the dot does not pass box as this",
+        "Copying a method strips its body",
+        "box is deleted as soon as the method is copied",
+        "A method always has this === undefined"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 251,
+      "type": "text",
+      "text": "Where does an arrow created inside a method get this?",
+      "options": [
+        "From the object that owns the arrow",
+        "From globalThis",
+        "An arrow has no this of its own and takes it from the outer function",
+        "The arrow creates an empty object and uses that"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 252,
+      "type": "text",
+      "text": "What does fn.bind(obj) return?",
+      "options": [
+        "The result of calling fn immediately",
+        "The same fn with its body rewritten",
+        "The object obj itself",
+        "A new function whose this is already fixed"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 253,
+      "type": "boolean",
+      "text": "A method’s this is the object where the function was written, not the object it was called on.",
+      "correct": false
+    },
+    {
+      "id": 254,
+      "type": "boolean",
+      "text": "An arrow written directly in an object literal gets that object as this.",
+      "correct": false
+    },
+    {
+      "id": 255,
+      "type": "boolean",
+      "text": "box.show.bind(box) can be called on its own, and this stays box.",
+      "correct": true
+    },
+    {
+      "id": 256,
+      "type": "boolean",
+      "text": "fn.call(obj) sets obj as this for that call.",
+      "correct": true
+    },
+    {
+      "id": 257,
+      "type": "recall",
+      "text": "Why does setTimeout(box.show, 0) lose the object box?",
+      "answer": "The timer calls the function itself, with no dot before the name. That call no longer passes box as this."
+    },
+    {
+      "id": 258,
+      "type": "recall",
+      "text": "Name two ways to keep this when a method has to be passed on.",
+      "answer": "Wrap the call: () => box.show(). Or bind it first: box.show.bind(box)."
+    },
+    {
+      "id": 259,
+      "type": "recall",
+      "text": "What is this inside a function called with new?",
+      "answer": "The new object that new creates. Properties written to this end up on that object."
+    },
+    {
+      "id": 260,
+      "type": "recall",
+      "text": "Why do people write const self = this before a nested function?",
+      "answer": "An ordinary nested function gets its own this from its own call. self is a closed-over variable that keeps the outer method’s this."
+    }
+  ]
+}

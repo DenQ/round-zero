@@ -1,0 +1,208 @@
+{
+  "stack": "js",
+  "topic": "context",
+  "level": "middle",
+  "locale": "ru",
+  "questions": [
+    {
+      "id": 261,
+      "type": "code",
+      "language": "js",
+      "text": "function sum(a, b) {\n  console.log(this.n + a + b);\n}\nsum.call({ n: 1 }, 2, 3);\nsum.apply({ n: 1 }, [4, 5]);",
+      "options": [
+        "6, 6",
+        "10, 6",
+        "6, 10",
+        "7, 9"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 262,
+      "type": "code",
+      "language": "js",
+      "text": "function sum(a, b) {\n  console.log(this.n + a + b);\n}\nconst sumFrom = sum.bind({ n: 1 }, 2);\nsumFrom(3);\nsumFrom(4);",
+      "options": [
+        "5, 6",
+        "6, 7",
+        "7, 8",
+        "3, 4"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 263,
+      "type": "code",
+      "language": "js",
+      "text": "function show() {\n  console.log(this.n);\n}\nconst show1 = show.bind({ n: 1 });\nshow1.call({ n: 2 });\nshow1.apply({ n: 3 });",
+      "options": [
+        "2, 3",
+        "1, 2",
+        "1, 3",
+        "1, 1"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 264,
+      "type": "code",
+      "language": "js",
+      "text": "const box = {\n  n: 1,\n  show(x) {\n    console.log(x + this.n);\n  },\n};\n[2, 3].forEach(box.show, box);",
+      "options": [
+        "2, 3",
+        "1, 1",
+        "3, 4",
+        "3, 5"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 265,
+      "type": "code",
+      "language": "js",
+      "text": "const box = {\n  n: 2,\n  run() {\n    [1, 4].forEach((x) => console.log(x + this.n));\n  },\n};\nbox.run();",
+      "options": [
+        "1, 4",
+        "3, 6",
+        "2, 2",
+        "5, 8"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 266,
+      "type": "code",
+      "language": "js",
+      "text": "class Box {\n  n = 1;\n  method() {\n    console.log(this.n);\n  }\n  field = () => {\n    console.log(this.n);\n  };\n}\nconst box = new Box();\nconst method = box.method;\nconst field = box.field;\ntry {\n  method();\n} catch {\n  console.log(2);\n}\nfield();",
+      "options": [
+        "1, 1",
+        "2, 2",
+        "1, 2",
+        "2, 1"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 267,
+      "type": "code",
+      "language": "js",
+      "text": "const outer = {\n  n: 1,\n  make() {\n    const inner = {\n      n: 2,\n      show: () => console.log(this.n),\n    };\n    inner.show();\n    console.log(inner.n);\n  },\n};\nouter.make();",
+      "options": [
+        "2, 1",
+        "1, 2",
+        "2, 2",
+        "1, 1"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 268,
+      "type": "code",
+      "language": "js",
+      "text": "function Box(n) {\n  this.n = n;\n  return this.n;\n}\nconst Bound = Box.bind({ n: 9 });\nconsole.log(new Bound(1).n);\nconsole.log(Bound(2));",
+      "options": [
+        "9, 9",
+        "1, 9",
+        "9, 2",
+        "1, 2"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 269,
+      "type": "text",
+      "text": "Чем call отличается от apply?",
+      "options": [
+        "call принимает аргументы по одному, apply — массивом. this задают оба",
+        "apply задаёт this, call — нет",
+        "call вызывает функцию сразу, apply только связывает this",
+        "Разницы нет: оба игнорируют первый аргумент"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 270,
+      "type": "text",
+      "text": "Можно ли у функции после bind подменить this через call?",
+      "options": [
+        "Да, последний call всегда побеждает",
+        "Да, если передать тот же объект",
+        "Нет: this от bind уже зафиксирован, call его не меняет",
+        "Нет, потому что bind ничего не возвращает"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 271,
+      "type": "text",
+      "text": "Зачем forEach и map принимают второй аргумент thisArg?",
+      "options": [
+        "Он становится this обычного колбэка на время обхода",
+        "Он подменяет this и у стрелки тоже",
+        "Это начальный аккумулятор, как у reduce",
+        "Это число итераций"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 272,
+      "type": "text",
+      "text": "Что делает new с функцией, которую уже связали через bind?",
+      "options": [
+        "new использует связанный объект и не создаёт новый",
+        "new игнорирует связанный this и создаёт новый объект. Привязанные аргументы остаются",
+        "Такую функцию нельзя вызвать через new",
+        "new сбрасывает и this, и привязанные аргументы"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 273,
+      "type": "boolean",
+      "text": "Второй bind заменяет this, зафиксированный первым bind.",
+      "correct": false
+    },
+    {
+      "id": 274,
+      "type": "boolean",
+      "text": "call и apply могут подменить this у стрелки.",
+      "correct": false
+    },
+    {
+      "id": 275,
+      "type": "boolean",
+      "text": "Обычный метод класса, вынутый из экземпляра, теряет this.",
+      "correct": true
+    },
+    {
+      "id": 276,
+      "type": "boolean",
+      "text": "Поле-стрелка класса помнит экземпляр, даже если вызвать поле отдельно.",
+      "correct": true
+    },
+    {
+      "id": 277,
+      "type": "recall",
+      "text": "Как устроен приём const self = this во вложенной функции?",
+      "answer": "self запоминает this метода в переменной. Внутренняя функция читает self из замыкания: её собственный this к объекту уже не относится."
+    },
+    {
+      "id": 278,
+      "type": "recall",
+      "text": "Почему стрелка в колбэке forEach видит this метода, а обычная function — нет?",
+      "answer": "Стрелка не имеет своего this и берёт его у метода. Обычная function получает this от forEach: без thisArg в строгом режиме это undefined."
+    },
+    {
+      "id": 279,
+      "type": "recall",
+      "text": "Где лежит метод класса и где лежит поле-стрелка, и как это влияет на this?",
+      "answer": "Метод один на прототипе, this приходит из вызова. Поле-стрелка создаётся на каждом экземпляре и замыкает его this."
+    },
+    {
+      "id": 280,
+      "type": "recall",
+      "text": "Что остаётся от bind, если функцию потом вызвали через new?",
+      "answer": "Связанный this отбрасывается: new создаёт свой объект. Аргументы, привязанные через bind, по-прежнему подставляются впереди."
+    }
+  ]
+}

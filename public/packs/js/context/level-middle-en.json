@@ -1,0 +1,208 @@
+{
+  "stack": "js",
+  "topic": "context",
+  "level": "middle",
+  "locale": "en",
+  "questions": [
+    {
+      "id": 261,
+      "type": "code",
+      "language": "js",
+      "text": "function sum(a, b) {\n  console.log(this.n + a + b);\n}\nsum.call({ n: 1 }, 2, 3);\nsum.apply({ n: 1 }, [4, 5]);",
+      "options": [
+        "6, 6",
+        "10, 6",
+        "6, 10",
+        "7, 9"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 262,
+      "type": "code",
+      "language": "js",
+      "text": "function sum(a, b) {\n  console.log(this.n + a + b);\n}\nconst sumFrom = sum.bind({ n: 1 }, 2);\nsumFrom(3);\nsumFrom(4);",
+      "options": [
+        "5, 6",
+        "6, 7",
+        "7, 8",
+        "3, 4"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 263,
+      "type": "code",
+      "language": "js",
+      "text": "function show() {\n  console.log(this.n);\n}\nconst show1 = show.bind({ n: 1 });\nshow1.call({ n: 2 });\nshow1.apply({ n: 3 });",
+      "options": [
+        "2, 3",
+        "1, 2",
+        "1, 3",
+        "1, 1"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 264,
+      "type": "code",
+      "language": "js",
+      "text": "const box = {\n  n: 1,\n  show(x) {\n    console.log(x + this.n);\n  },\n};\n[2, 3].forEach(box.show, box);",
+      "options": [
+        "2, 3",
+        "1, 1",
+        "3, 4",
+        "3, 5"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 265,
+      "type": "code",
+      "language": "js",
+      "text": "const box = {\n  n: 2,\n  run() {\n    [1, 4].forEach((x) => console.log(x + this.n));\n  },\n};\nbox.run();",
+      "options": [
+        "1, 4",
+        "3, 6",
+        "2, 2",
+        "5, 8"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 266,
+      "type": "code",
+      "language": "js",
+      "text": "class Box {\n  n = 1;\n  method() {\n    console.log(this.n);\n  }\n  field = () => {\n    console.log(this.n);\n  };\n}\nconst box = new Box();\nconst method = box.method;\nconst field = box.field;\ntry {\n  method();\n} catch {\n  console.log(2);\n}\nfield();",
+      "options": [
+        "1, 1",
+        "2, 2",
+        "1, 2",
+        "2, 1"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 267,
+      "type": "code",
+      "language": "js",
+      "text": "const outer = {\n  n: 1,\n  make() {\n    const inner = {\n      n: 2,\n      show: () => console.log(this.n),\n    };\n    inner.show();\n    console.log(inner.n);\n  },\n};\nouter.make();",
+      "options": [
+        "2, 1",
+        "1, 2",
+        "2, 2",
+        "1, 1"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 268,
+      "type": "code",
+      "language": "js",
+      "text": "function Box(n) {\n  this.n = n;\n  return this.n;\n}\nconst Bound = Box.bind({ n: 9 });\nconsole.log(new Bound(1).n);\nconsole.log(Bound(2));",
+      "options": [
+        "9, 9",
+        "1, 9",
+        "9, 2",
+        "1, 2"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 269,
+      "type": "text",
+      "text": "How does call differ from apply?",
+      "options": [
+        "call takes arguments one by one, apply takes an array. Both set this",
+        "apply sets this, call does not",
+        "call invokes the function, apply only binds this",
+        "No difference: both ignore the first argument"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 270,
+      "type": "text",
+      "text": "Can call replace this on a function that was already bound?",
+      "options": [
+        "Yes, the latest call always wins",
+        "Yes, if you pass the same object",
+        "No: bind already fixed this, and call does not change it",
+        "No, because bind returns nothing"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 271,
+      "type": "text",
+      "text": "Why do forEach and map take a second argument, thisArg?",
+      "options": [
+        "It becomes this for an ordinary callback during the loop",
+        "It also replaces this for an arrow",
+        "It is the initial accumulator, as in reduce",
+        "It is the number of iterations"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 272,
+      "type": "text",
+      "text": "What does new do with a function that was already bound?",
+      "options": [
+        "new uses the bound object and does not create a new one",
+        "new ignores the bound this and creates a new object. Bound arguments stay",
+        "Such a function cannot be called with new",
+        "new drops both this and the bound arguments"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 273,
+      "type": "boolean",
+      "text": "A second bind replaces the this fixed by the first bind.",
+      "correct": false
+    },
+    {
+      "id": 274,
+      "type": "boolean",
+      "text": "call and apply can replace this on an arrow.",
+      "correct": false
+    },
+    {
+      "id": 275,
+      "type": "boolean",
+      "text": "An ordinary class method pulled off an instance loses this.",
+      "correct": true
+    },
+    {
+      "id": 276,
+      "type": "boolean",
+      "text": "A class arrow field remembers the instance even if the field is called on its own.",
+      "correct": true
+    },
+    {
+      "id": 277,
+      "type": "recall",
+      "text": "How does the const self = this trick work for a nested function?",
+      "answer": "self stores the method’s this in a variable. The inner function reads self from the closure, because its own this is no longer the object."
+    },
+    {
+      "id": 278,
+      "type": "recall",
+      "text": "Why does an arrow callback in forEach see the method’s this, while a plain function does not?",
+      "answer": "An arrow has no this of its own and takes the method’s. A plain function gets this from forEach: without thisArg that is undefined in strict mode."
+    },
+    {
+      "id": 279,
+      "type": "recall",
+      "text": "Where does a class method live, where does an arrow field live, and how does that affect this?",
+      "answer": "One method lives on the prototype, and this comes from the call. An arrow field is created on each instance and closes over that instance’s this."
+    },
+    {
+      "id": 280,
+      "type": "recall",
+      "text": "What remains of bind if the function is later called with new?",
+      "answer": "The bound this is dropped: new creates its own object. Arguments bound with bind are still prepended."
+    }
+  ]
+}
