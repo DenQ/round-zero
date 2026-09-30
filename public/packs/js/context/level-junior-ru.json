@@ -203,6 +203,206 @@
       "type": "recall",
       "text": "Зачем перед вложенной функцией пишут const self = this?",
       "answer": "Обычная вложенная функция получает свой this от своего вызова. self — переменная из замыкания, она хранит this внешнего метода."
+    },
+    {
+      "id": 301,
+      "type": "code",
+      "language": "js",
+      "text": "const box = {\n  n: 1,\n  step() {\n    this.n += 1;\n  },\n  run() {\n    this.step();\n    console.log(this.n);\n  },\n};\nbox.run();",
+      "options": [
+        "1",
+        "2",
+        "3",
+        "0"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 302,
+      "type": "code",
+      "language": "js",
+      "text": "const box = {\n  n: 1,\n  show() {\n    console.log(this.n);\n  },\n};\nbox['show']();\nconst name = 'show';\nbox[name]();",
+      "options": [
+        "1, 2",
+        "2, 1",
+        "1, 1",
+        "2, 2"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 303,
+      "type": "code",
+      "language": "js",
+      "text": "const box = {\n  n: 1,\n  show() {\n    setTimeout(() => console.log(this.n), 0);\n  },\n};\nbox.show();",
+      "options": [
+        "0",
+        "2",
+        "3",
+        "1"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 304,
+      "type": "code",
+      "language": "js",
+      "text": "function Box(n) {\n  this.n = n;\n  this.read = function () {\n    console.log(this.n);\n  };\n}\nconst box = new Box(1);\nbox.read();\nbox.read.call({ n: 2 });",
+      "options": [
+        "2, 1",
+        "1, 1",
+        "2, 2",
+        "1, 2"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 305,
+      "type": "code",
+      "language": "js",
+      "text": "const box = {\n  n: 1,\n  add() {\n    this.n += 1;\n    return this;\n  },\n};\nbox.add().add();\nconsole.log(box.n);",
+      "options": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 306,
+      "type": "code",
+      "language": "js",
+      "text": "'use strict';\nconst box = {\n  n: 1,\n  add() {\n    this.n += 1;\n    return this;\n  },\n};\nconst add = box.add;\ntry {\n  add();\n} catch {\n  console.log(box.n);\n}\nbox.add();\nconsole.log(box.n);",
+      "options": [
+        "1, 1",
+        "1, 2",
+        "2, 2",
+        "2, 1"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 307,
+      "type": "code",
+      "language": "js",
+      "text": "const outer = {\n  n: 1,\n  make() {\n    return {\n      n: 2,\n      show() {\n        console.log(this.n);\n      },\n    };\n  },\n};\nouter.make().show();",
+      "options": [
+        "1",
+        "2",
+        "3",
+        "0"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 308,
+      "type": "code",
+      "language": "js",
+      "text": "function log(obj) {\n  console.log(obj.n);\n}\nconst box = {\n  n: 1,\n  show() {\n    log(this);\n  },\n};\nbox.show();\nconst show = box.show;\nshow.call({ n: 2 });",
+      "options": [
+        "1, 1",
+        "2, 1",
+        "1, 2",
+        "2, 2"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 309,
+      "type": "text",
+      "text": "Что с this делает вызов box['show']()?",
+      "options": [
+        "То же, что box.show(): объект перед скобками становится this",
+        "Теряет объект, потому что между именем и скобками нет точки",
+        "Берёт this из строки 'show'",
+        "Всегда подставляет globalThis"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 310,
+      "type": "text",
+      "text": "Почему box.add().add() увеличивает один и тот же n?",
+      "options": [
+        "Второй add вызывается без объекта, но this копируется само",
+        "add возвращает this, поэтому следующий вызов снова идёт на тот же объект",
+        "Цепочка создаёт новый объект на каждый вызов и складывает их n",
+        "add игнорирует this и пишет в глобальную переменную"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 311,
+      "type": "text",
+      "text": "Куда попадает this, если метод вызывает this.step()?",
+      "options": [
+        "step теряет объект: вызов из другого метода всегда сбрасывает this",
+        "step получает this внешней функции, даже если это стрелка",
+        "step вызывается на том же объекте, и его this — этот объект",
+        "this.step() подставляет аргументом число, а не объект"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 312,
+      "type": "text",
+      "text": "Чем обычный метод вложенного объекта отличается от стрелки в том же месте?",
+      "options": [
+        "Ничем: оба читают n внешнего объекта",
+        "Обычный метод берёт this у своего вызова, стрелка — у внешней функции",
+        "Стрелка берёт this у вложенного объекта, метод — у внешнего",
+        "Вложенный метод вообще не имеет this"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 313,
+      "type": "boolean",
+      "text": "box['show']() теряет this, потому что между объектом и скобками нет точки.",
+      "correct": false
+    },
+    {
+      "id": 314,
+      "type": "boolean",
+      "text": "Метод, который возвращает this, можно вызывать цепочкой на том же объекте.",
+      "correct": true
+    },
+    {
+      "id": 315,
+      "type": "boolean",
+      "text": "this.step() внутри метода вызывает step с this того же объекта.",
+      "correct": true
+    },
+    {
+      "id": 316,
+      "type": "boolean",
+      "text": "setTimeout(() => ..., 0) внутри метода теряет this этого метода.",
+      "correct": false
+    },
+    {
+      "id": 317,
+      "type": "recall",
+      "text": "Почему цепочка box.add().add() не теряет объект?",
+      "answer": "add возвращает this. Следующая точка вызывает метод уже на этом возвращённом объекте, поэтому this снова он."
+    },
+    {
+      "id": 318,
+      "type": "recall",
+      "text": "Меняет ли запись box['show']() правила this по сравнению с box.show()?",
+      "answer": "Нет. И точка, и скобки — вызов метода на объекте. this в обоих случаях этот объект."
+    },
+    {
+      "id": 319,
+      "type": "recall",
+      "text": "Что напечатает обычный метод внутреннего объекта: n внешнего или свой?",
+      "answer": "Свой. this берётся из вызова inner.show(), то есть из внутреннего объекта. Стрелка на том же месте увидела бы внешний."
+    },
+    {
+      "id": 320,
+      "type": "recall",
+      "text": "Как передать текущий объект во внутреннюю функцию, не сохраняя this в self?",
+      "answer": "Передать его аргументом: log(this). Внутри log это параметр, а не её собственный this."
     }
   ]
 }

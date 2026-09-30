@@ -203,6 +203,206 @@
       "type": "recall",
       "text": "Why do people write const self = this before a nested function?",
       "answer": "An ordinary nested function gets its own this from its own call. self is a closed-over variable that keeps the outer method’s this."
+    },
+    {
+      "id": 301,
+      "type": "code",
+      "language": "js",
+      "text": "const box = {\n  n: 1,\n  step() {\n    this.n += 1;\n  },\n  run() {\n    this.step();\n    console.log(this.n);\n  },\n};\nbox.run();",
+      "options": [
+        "1",
+        "2",
+        "3",
+        "0"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 302,
+      "type": "code",
+      "language": "js",
+      "text": "const box = {\n  n: 1,\n  show() {\n    console.log(this.n);\n  },\n};\nbox['show']();\nconst name = 'show';\nbox[name]();",
+      "options": [
+        "1, 2",
+        "2, 1",
+        "1, 1",
+        "2, 2"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 303,
+      "type": "code",
+      "language": "js",
+      "text": "const box = {\n  n: 1,\n  show() {\n    setTimeout(() => console.log(this.n), 0);\n  },\n};\nbox.show();",
+      "options": [
+        "0",
+        "2",
+        "3",
+        "1"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 304,
+      "type": "code",
+      "language": "js",
+      "text": "function Box(n) {\n  this.n = n;\n  this.read = function () {\n    console.log(this.n);\n  };\n}\nconst box = new Box(1);\nbox.read();\nbox.read.call({ n: 2 });",
+      "options": [
+        "2, 1",
+        "1, 1",
+        "2, 2",
+        "1, 2"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 305,
+      "type": "code",
+      "language": "js",
+      "text": "const box = {\n  n: 1,\n  add() {\n    this.n += 1;\n    return this;\n  },\n};\nbox.add().add();\nconsole.log(box.n);",
+      "options": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 306,
+      "type": "code",
+      "language": "js",
+      "text": "'use strict';\nconst box = {\n  n: 1,\n  add() {\n    this.n += 1;\n    return this;\n  },\n};\nconst add = box.add;\ntry {\n  add();\n} catch {\n  console.log(box.n);\n}\nbox.add();\nconsole.log(box.n);",
+      "options": [
+        "1, 1",
+        "1, 2",
+        "2, 2",
+        "2, 1"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 307,
+      "type": "code",
+      "language": "js",
+      "text": "const outer = {\n  n: 1,\n  make() {\n    return {\n      n: 2,\n      show() {\n        console.log(this.n);\n      },\n    };\n  },\n};\nouter.make().show();",
+      "options": [
+        "1",
+        "2",
+        "3",
+        "0"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 308,
+      "type": "code",
+      "language": "js",
+      "text": "function log(obj) {\n  console.log(obj.n);\n}\nconst box = {\n  n: 1,\n  show() {\n    log(this);\n  },\n};\nbox.show();\nconst show = box.show;\nshow.call({ n: 2 });",
+      "options": [
+        "1, 1",
+        "2, 1",
+        "1, 2",
+        "2, 2"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 309,
+      "type": "text",
+      "text": "What does box['show']() do with this?",
+      "options": [
+        "The same as box.show(): the object before the brackets becomes this",
+        "It loses the object, because there is no dot before the brackets",
+        "It takes this from the string 'show'",
+        "It always uses globalThis"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 310,
+      "type": "text",
+      "text": "Why does box.add().add() increase the same n?",
+      "options": [
+        "The second add is called without an object, but this copies itself",
+        "add returns this, so the next call goes to the same object again",
+        "The chain creates a new object on every call and adds their n together",
+        "add ignores this and writes to a global variable"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 311,
+      "type": "text",
+      "text": "Where does this go when a method calls this.step()?",
+      "options": [
+        "step loses the object: a call from another method always resets this",
+        "step receives the outer function this, even when step is an arrow",
+        "step is called on the same object, so its this is that object",
+        "this.step() passes a number as the argument, not an object"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 312,
+      "type": "text",
+      "text": "How does an ordinary method of a nested object differ from an arrow in the same place?",
+      "options": [
+        "They do not differ: both read the outer object n",
+        "An ordinary method takes this from its own call, an arrow takes it from the outer function",
+        "The arrow takes this from the nested object, the method from the outer one",
+        "A nested method has no this at all"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 313,
+      "type": "boolean",
+      "text": "box['show']() loses this because there is no dot between the object and the brackets.",
+      "correct": false
+    },
+    {
+      "id": 314,
+      "type": "boolean",
+      "text": "A method that returns this can be chained on the same object.",
+      "correct": true
+    },
+    {
+      "id": 315,
+      "type": "boolean",
+      "text": "this.step() inside a method calls step with this set to the same object.",
+      "correct": true
+    },
+    {
+      "id": 316,
+      "type": "boolean",
+      "text": "setTimeout(() => ..., 0) inside a method loses that method's this.",
+      "correct": false
+    },
+    {
+      "id": 317,
+      "type": "recall",
+      "text": "Why does the chain box.add().add() not lose the object?",
+      "answer": "add returns this. The next dot calls the method on that returned object, so this is the same object again."
+    },
+    {
+      "id": 318,
+      "type": "recall",
+      "text": "Does box['show']() change the this rules compared with box.show()?",
+      "answer": "No. Both the dot and the brackets call a method on the object. In both cases this is that object."
+    },
+    {
+      "id": 319,
+      "type": "recall",
+      "text": "What does an ordinary method of an inner object print: the outer n or its own?",
+      "answer": "Its own. this comes from the call inner.show(), so from the inner object. An arrow in the same place would see the outer one."
+    },
+    {
+      "id": 320,
+      "type": "recall",
+      "text": "How do you pass the current object into an inner function without storing this in self?",
+      "answer": "Pass it as an argument: log(this). Inside log that value is a parameter, not log's own this."
     }
   ]
 }

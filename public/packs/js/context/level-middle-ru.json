@@ -203,6 +203,206 @@
       "type": "recall",
       "text": "Что остаётся от bind, если функцию потом вызвали через new?",
       "answer": "Связанный this отбрасывается: new создаёт свой объект. Аргументы, привязанные через bind, по-прежнему подставляются впереди."
+    },
+    {
+      "id": 321,
+      "type": "code",
+      "language": "js",
+      "text": "function Box(n) {\n  this.n = n;\n}\nBox.prototype.read = function () {\n  console.log(this.n);\n};\nconst a = new Box(1);\nconst b = new Box(2);\na.read();\nb.read();",
+      "options": [
+        "1, 1",
+        "2, 1",
+        "1, 2",
+        "2, 2"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 322,
+      "type": "code",
+      "language": "js",
+      "text": "'use strict';\nconst box = {\n  n: 1,\n  show() {\n    console.log(this.n);\n  },\n};\nconst { show } = box;\ntry {\n  show();\n} catch {\n  console.log(2);\n}\nbox.show();",
+      "options": [
+        "1, 1",
+        "1, 2",
+        "2, 2",
+        "2, 1"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 323,
+      "type": "code",
+      "language": "js",
+      "text": "function Box(n) {\n  this.n = n;\n  this.fromThis = function () {\n    console.log(this.n);\n  };\n  this.fromArg = function () {\n    console.log(n);\n  };\n}\nconst box = new Box(1);\nbox.fromThis.call({ n: 2 });\nbox.fromArg.call({ n: 2 });",
+      "options": [
+        "1, 1",
+        "2, 2",
+        "2, 1",
+        "1, 2"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 324,
+      "type": "code",
+      "language": "js",
+      "text": "class Base {\n  n = 1;\n  show() {\n    console.log(this.n);\n  }\n}\nclass Child extends Base {\n  n = 2;\n  run() {\n    super.show();\n  }\n}\nnew Child().run();",
+      "options": [
+        "1",
+        "2",
+        "3",
+        "0"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 325,
+      "type": "code",
+      "language": "js",
+      "text": "class Box {\n  constructor(n) {\n    this.n = n;\n  }\n  add(x) {\n    console.log(this.n + x);\n  }\n}\nconst box = new Box(1);\nbox.add(2);\nbox.add.call({ n: 3 }, 4);",
+      "options": [
+        "3, 7",
+        "3, 5",
+        "1, 4",
+        "3, 3"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 326,
+      "type": "code",
+      "language": "js",
+      "text": "const box = {\n  n: 1,\n  show() {\n    console.log(this.n);\n  },\n};\nsetTimeout(box.show.bind({ n: 2 }), 0);",
+      "options": [
+        "1",
+        "0",
+        "2",
+        "3"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 327,
+      "type": "code",
+      "language": "js",
+      "text": "const box = {\n  n: 1,\n  run(fn) {\n    fn.call(this);\n  },\n};\nbox.run(function () {\n  console.log(this.n);\n});\nbox.run(function () {\n  console.log(this.n + 2);\n});",
+      "options": [
+        "1, 2",
+        "1, 1",
+        "2, 3",
+        "1, 3"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 328,
+      "type": "code",
+      "language": "js",
+      "text": "'use strict';\nconst box = {\n  n: 1,\n  show() {\n    console.log(this.n);\n  },\n};\ntry {\n  [0].forEach(box.show);\n} catch {\n  console.log(2);\n}\n[0].forEach(box.show, box);",
+      "options": [
+        "1, 1",
+        "2, 1",
+        "1, 2",
+        "2, 2"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 329,
+      "type": "text",
+      "text": "Что происходит с this при const { show } = box?",
+      "options": [
+        "show остаётся связанным с box",
+        "Связь с box теряется: дальше это обычная функция без объекта перед вызовом",
+        "this навсегда становится undefined, даже при box.show()",
+        "Деструктуризация вызывает show сразу"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 330,
+      "type": "text",
+      "text": "Почему один метод на прототипе печатает разный n у двух экземпляров?",
+      "options": [
+        "Движок копирует метод в каждый экземпляр со своим n",
+        "Метод один, а this при вызове a.read() — это a, при b.read() — это b",
+        "Прототип хранит отдельный this на каждый new",
+        "Второй экземпляр затирает n первого"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 331,
+      "type": "text",
+      "text": "Чему равен this внутри метода, вызванного через super.show()?",
+      "options": [
+        "Отдельному объекту базового класса",
+        "Прототипу, на котором лежит show",
+        "Тому же экземпляру наследника, на котором вызвали метод",
+        "undefined: super сбрасывает this"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 332,
+      "type": "text",
+      "text": "Чем функция, которая читает аргумент конструктора, отличается от функции, которая читает this.n?",
+      "options": [
+        "Аргумент запомнен замыканием, call с другим объектом его не подменит. this.n зависит от вызова",
+        "Обе читают одно и то же: this конструктора навсегда",
+        "Аргумент конструктора и есть this",
+        "Замыкание видит this того call, которым функцию вызвали"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 333,
+      "type": "boolean",
+      "text": "const { show } = box сохраняет this равным box.",
+      "correct": false
+    },
+    {
+      "id": 334,
+      "type": "boolean",
+      "text": "Метод на прототипе при вызове a.read() получает this, равный a.",
+      "correct": true
+    },
+    {
+      "id": 335,
+      "type": "boolean",
+      "text": "super.show() подставляет this базового экземпляра, отдельного от наследника.",
+      "correct": false
+    },
+    {
+      "id": 336,
+      "type": "boolean",
+      "text": "Функция, замкнувшая аргумент конструктора, меняет ответ, если вызвать её через call с другим объектом.",
+      "correct": false
+    },
+    {
+      "id": 337,
+      "type": "recall",
+      "text": "Почему деструктуризация метода теряет объект?",
+      "answer": "const { show } = box копирует ссылку на функцию. Вызов show() идёт уже без объекта слева, поэтому this больше не box."
+    },
+    {
+      "id": 338,
+      "type": "recall",
+      "text": "Как один метод прототипа обслуживает разные экземпляры?",
+      "answer": "Функция лежит на прототипе одна. При вызове экземпляр.метод() this равен этому экземпляру, поэтому читается его собственный n."
+    },
+    {
+      "id": 339,
+      "type": "recall",
+      "text": "Какой объект становится this при super.method()?",
+      "answer": "Тот же экземпляр, на котором вызвали метод наследника. super только выбирает функцию базы, this не подменяется на отдельный объект базы."
+    },
+    {
+      "id": 340,
+      "type": "recall",
+      "text": "Когда функция в конструкторе читает параметр, а не this, что меняет call?",
+      "answer": "Ничего в этом значении. Параметр лежит в замыкании. call подменит только this, если функция читает this.n."
     }
   ]
 }

@@ -203,6 +203,206 @@
       "type": "recall",
       "text": "What remains of bind if the function is later called with new?",
       "answer": "The bound this is dropped: new creates its own object. Arguments bound with bind are still prepended."
+    },
+    {
+      "id": 321,
+      "type": "code",
+      "language": "js",
+      "text": "function Box(n) {\n  this.n = n;\n}\nBox.prototype.read = function () {\n  console.log(this.n);\n};\nconst a = new Box(1);\nconst b = new Box(2);\na.read();\nb.read();",
+      "options": [
+        "1, 1",
+        "2, 1",
+        "1, 2",
+        "2, 2"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 322,
+      "type": "code",
+      "language": "js",
+      "text": "'use strict';\nconst box = {\n  n: 1,\n  show() {\n    console.log(this.n);\n  },\n};\nconst { show } = box;\ntry {\n  show();\n} catch {\n  console.log(2);\n}\nbox.show();",
+      "options": [
+        "1, 1",
+        "1, 2",
+        "2, 2",
+        "2, 1"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 323,
+      "type": "code",
+      "language": "js",
+      "text": "function Box(n) {\n  this.n = n;\n  this.fromThis = function () {\n    console.log(this.n);\n  };\n  this.fromArg = function () {\n    console.log(n);\n  };\n}\nconst box = new Box(1);\nbox.fromThis.call({ n: 2 });\nbox.fromArg.call({ n: 2 });",
+      "options": [
+        "1, 1",
+        "2, 2",
+        "2, 1",
+        "1, 2"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 324,
+      "type": "code",
+      "language": "js",
+      "text": "class Base {\n  n = 1;\n  show() {\n    console.log(this.n);\n  }\n}\nclass Child extends Base {\n  n = 2;\n  run() {\n    super.show();\n  }\n}\nnew Child().run();",
+      "options": [
+        "1",
+        "2",
+        "3",
+        "0"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 325,
+      "type": "code",
+      "language": "js",
+      "text": "class Box {\n  constructor(n) {\n    this.n = n;\n  }\n  add(x) {\n    console.log(this.n + x);\n  }\n}\nconst box = new Box(1);\nbox.add(2);\nbox.add.call({ n: 3 }, 4);",
+      "options": [
+        "3, 7",
+        "3, 5",
+        "1, 4",
+        "3, 3"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 326,
+      "type": "code",
+      "language": "js",
+      "text": "const box = {\n  n: 1,\n  show() {\n    console.log(this.n);\n  },\n};\nsetTimeout(box.show.bind({ n: 2 }), 0);",
+      "options": [
+        "1",
+        "0",
+        "2",
+        "3"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 327,
+      "type": "code",
+      "language": "js",
+      "text": "const box = {\n  n: 1,\n  run(fn) {\n    fn.call(this);\n  },\n};\nbox.run(function () {\n  console.log(this.n);\n});\nbox.run(function () {\n  console.log(this.n + 2);\n});",
+      "options": [
+        "1, 2",
+        "1, 1",
+        "2, 3",
+        "1, 3"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 328,
+      "type": "code",
+      "language": "js",
+      "text": "'use strict';\nconst box = {\n  n: 1,\n  show() {\n    console.log(this.n);\n  },\n};\ntry {\n  [0].forEach(box.show);\n} catch {\n  console.log(2);\n}\n[0].forEach(box.show, box);",
+      "options": [
+        "1, 1",
+        "2, 1",
+        "1, 2",
+        "2, 2"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 329,
+      "type": "text",
+      "text": "What happens to this with const { show } = box?",
+      "options": [
+        "show stays tied to box",
+        "The link to box is lost: it is now an ordinary function with no object before the call",
+        "this becomes undefined forever, even for box.show()",
+        "Destructuring calls show immediately"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 330,
+      "type": "text",
+      "text": "Why does one method on the prototype print a different n for two instances?",
+      "options": [
+        "The engine copies the method into each instance with its own n",
+        "There is one method, but this in a.read() is a and this in b.read() is b",
+        "The prototype stores a separate this for every new",
+        "The second instance overwrites the first instance n"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 331,
+      "type": "text",
+      "text": "What is this inside a method called through super.show()?",
+      "options": [
+        "A separate base-class object",
+        "The prototype that owns show",
+        "The same derived instance on which the method was called",
+        "undefined: super resets this"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 332,
+      "type": "text",
+      "text": "How does a function that reads a constructor argument differ from one that reads this.n?",
+      "options": [
+        "The argument is closed over, so call with another object does not replace it. this.n depends on the call",
+        "Both read the same thing: the constructor this forever",
+        "A constructor argument is this",
+        "The closure sees the this of the call that invokes the function"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 333,
+      "type": "boolean",
+      "text": "const { show } = box keeps this equal to box.",
+      "correct": false
+    },
+    {
+      "id": 334,
+      "type": "boolean",
+      "text": "A prototype method called as a.read() gets this equal to a.",
+      "correct": true
+    },
+    {
+      "id": 335,
+      "type": "boolean",
+      "text": "super.show() sets this to a base instance separate from the derived one.",
+      "correct": false
+    },
+    {
+      "id": 336,
+      "type": "boolean",
+      "text": "A function that closed over a constructor argument changes its answer when called via call with another object.",
+      "correct": false
+    },
+    {
+      "id": 337,
+      "type": "recall",
+      "text": "Why does destructuring a method lose the object?",
+      "answer": "const { show } = box copies the function reference. show() is then called with no object on the left, so this is no longer box."
+    },
+    {
+      "id": 338,
+      "type": "recall",
+      "text": "How does one prototype method serve different instances?",
+      "answer": "A single function lives on the prototype. instance.method() sets this to that instance, so it reads that instance's own n."
+    },
+    {
+      "id": 339,
+      "type": "recall",
+      "text": "Which object becomes this in super.method()?",
+      "answer": "The same instance on which the derived method was called. super only picks the base function; this is not replaced with a separate base object."
+    },
+    {
+      "id": 340,
+      "type": "recall",
+      "text": "When a function created in a constructor reads a parameter rather than this, what does call change?",
+      "answer": "Nothing about that value. The parameter lives in the closure. call replaces only this, and only if the function reads this.n."
     }
   ]
 }
