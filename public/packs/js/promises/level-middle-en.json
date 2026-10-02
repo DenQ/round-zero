@@ -1,0 +1,408 @@
+{
+  "stack": "js",
+  "topic": "promises",
+  "level": "middle",
+  "locale": "en",
+  "questions": [
+    {
+      "id": 581,
+      "type": "code",
+      "language": "js",
+      "text": "Promise.resolve(1)\n  .then(\n    () => {\n      throw 2;\n    },\n    () => console.log(3),\n  )\n  .catch((n) => console.log(n));",
+      "options": [
+        "2",
+        "3",
+        "3, 2",
+        "2, 3"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 582,
+      "type": "code",
+      "language": "js",
+      "text": "Promise.reject(1)\n  .then(\n    () => console.log(0),\n    (n) => console.log(n),\n  )\n  .catch(() => console.log(2));",
+      "options": [
+        "1, 2",
+        "1",
+        "2",
+        "0, 1"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 583,
+      "type": "code",
+      "language": "js",
+      "text": "Promise.resolve(1)\n  .finally(() => 9)\n  .then((n) => console.log(n));",
+      "options": [
+        "9",
+        "1, 9",
+        "1",
+        "undefined"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 584,
+      "type": "code",
+      "language": "js",
+      "text": "Promise.resolve(1)\n  .finally(() => {\n    throw 4;\n  })\n  .then(\n    (n) => console.log(n),\n    (n) => console.log(n),\n  );",
+      "options": [
+        "1",
+        "1, 4",
+        "undefined",
+        "4"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 585,
+      "type": "code",
+      "language": "js",
+      "text": "Promise.resolve(1)\n  .finally(() => Promise.reject(4))\n  .then(\n    () => console.log(1),\n    (n) => console.log(n),\n  );",
+      "options": [
+        "4",
+        "1",
+        "1, 4",
+        "undefined"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 586,
+      "type": "code",
+      "language": "js",
+      "text": "Promise.resolve()\n  .then(() => Promise.resolve(1))\n  .then((n) => console.log(n));\nPromise.resolve()\n  .then(() => 2)\n  .then((n) => console.log(n));",
+      "options": [
+        "1, 2",
+        "2, 1",
+        "1",
+        "2"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 587,
+      "type": "code",
+      "language": "js",
+      "text": "const thenable = {\n  then(resolve) {\n    resolve(7);\n  },\n};\nPromise.resolve(thenable).then((n) => console.log(n));\nconsole.log(8);",
+      "options": [
+        "7, 8",
+        "7",
+        "8, 7",
+        "8"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 588,
+      "type": "code",
+      "language": "js",
+      "text": "const inner = Promise.resolve(1);\nPromise.reject(inner).catch((v) => console.log(v === inner ? 1 : 0));",
+      "options": [
+        "0",
+        "undefined",
+        "1, 0",
+        "1"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 589,
+      "type": "text",
+      "text": "Why does the rejection handler of the same then miss a throw from the fulfillment handler?",
+      "options": [
+        "That rejection handler sees only a rejection of the promise then was called on. A throw rejects the promise then returns",
+        "Both handlers share one try around the whole then",
+        "A throw inside then is a synchronous exception for the caller of then",
+        "The rejection handler always runs before the fulfillment handler"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 590,
+      "type": "text",
+      "text": "What can finally change about the previous settlement?",
+      "options": [
+        "Nothing. The callback is only an observer",
+        "A throw, or a returned rejected thenable, replaces it. A plain return value does not",
+        "The return value always becomes the next fulfillment",
+        "It can turn a rejection into fulfillment only"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 591,
+      "type": "text",
+      "text": "What does Promise.resolve do with a thenable?",
+      "options": [
+        "It reads a value property",
+        "It wraps the object as a fulfillment and skips then",
+        "It calls then and adopts the settlement that thenable reports",
+        "It throws, because the value is not a native promise"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 592,
+      "type": "text",
+      "text": "What does Promise.reject do with a promise passed as the reason?",
+      "options": [
+        "It waits for that promise and rejects with its value",
+        "It fulfills when that promise fulfills",
+        "It unwraps one level, the way Promise.resolve does",
+        "It rejects with that promise object as the reason and does not adopt it"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 593,
+      "type": "text",
+      "text": "How does Promise.any differ from Promise.race?",
+      "options": [
+        "any fulfills with the first fulfillment and ignores rejections, unless every input rejects",
+        "any is another name for race",
+        "any waits until every input settles",
+        "any rejects on the first rejection"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 594,
+      "type": "text",
+      "text": "Why does try/catch around return promise miss that promise’s rejection?",
+      "options": [
+        "return is forbidden inside try",
+        "The rejection happens later, when the returned promise settles. Without await the async function does not throw into that catch",
+        "catch inside an async function handles only a synchronous throw before the first line",
+        "A returned promise is always fulfilled"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 595,
+      "type": "boolean",
+      "text": "The second callback of then(onFulfilled, onRejected) catches a throw from onFulfilled.",
+      "correct": false
+    },
+    {
+      "id": 596,
+      "type": "boolean",
+      "text": "A plain value returned from finally leaves the previous fulfillment in place.",
+      "correct": true
+    },
+    {
+      "id": 597,
+      "type": "boolean",
+      "text": "Promise.resolve adopts a thenable by calling its then.",
+      "correct": true
+    },
+    {
+      "id": 598,
+      "type": "boolean",
+      "text": "Promise.reject adopts a promise that was passed as the reason.",
+      "correct": false
+    },
+    {
+      "id": 599,
+      "type": "boolean",
+      "text": "Promise.any can fulfill with a later success when an earlier input has already rejected.",
+      "correct": true
+    },
+    {
+      "id": 600,
+      "type": "boolean",
+      "text": "Array forEach waits for async callbacks before the line after the loop runs.",
+      "correct": false
+    },
+    {
+      "id": 601,
+      "type": "recall",
+      "text": "What does the second argument of then handle?",
+      "answer": "A rejection of the promise then was called on. A throw from the first argument misses it."
+    },
+    {
+      "id": 602,
+      "type": "recall",
+      "text": "When does finally replace the previous settlement?",
+      "answer": "When its callback throws or returns a rejected thenable. A plain return value is dropped."
+    },
+    {
+      "id": 603,
+      "type": "recall",
+      "text": "What does Promise.allSettled fulfill with?",
+      "answer": "An array of result objects, one per input. A rejected input does not reject that promise."
+    },
+    {
+      "id": 604,
+      "type": "recall",
+      "text": "What is the rejection of Promise.any when every input rejects?",
+      "answer": "An AggregateError. Its errors list holds each rejection reason."
+    },
+    {
+      "id": 605,
+      "type": "recall",
+      "text": "How do you wait for each array item one after another inside an async function?",
+      "answer": "for...of with await in the body. forEach does not wait for async callbacks."
+    },
+    {
+      "id": 606,
+      "type": "recall",
+      "text": "What happens to a new promise when its executor throws?",
+      "answer": "The promise rejects with the thrown value."
+    },
+    {
+      "id": 607,
+      "type": "code",
+      "language": "js",
+      "text": "Promise.allSettled([\n  Promise.resolve(1),\n  Promise.reject(2),\n]).then((xs) => {\n  console.log(xs[0].status === 'fulfilled' ? 1 : 0);\n  console.log(xs[1].status === 'rejected' ? 2 : 0);\n});",
+      "options": [
+        "1, 2",
+        "2, 1",
+        "1",
+        "0, 2"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 608,
+      "type": "code",
+      "language": "js",
+      "text": "Promise.any([\n  Promise.reject(1),\n  Promise.resolve(2),\n  Promise.reject(3),\n]).then((n) => console.log(n));",
+      "options": [
+        "1",
+        "2",
+        "3",
+        "1, 2"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 609,
+      "type": "code",
+      "language": "js",
+      "text": "Promise.any([\n  Promise.reject(1),\n  Promise.reject(2),\n]).catch((e) => console.log(e.errors.length));",
+      "options": [
+        "1",
+        "0",
+        "2",
+        "undefined"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 610,
+      "type": "code",
+      "language": "js",
+      "text": "Promise.resolve(6)\n  .then(null)\n  .then((n) => console.log(n));",
+      "options": [
+        "null",
+        "0",
+        "undefined",
+        "6"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 611,
+      "type": "code",
+      "language": "js",
+      "text": "async function f() {\n  try {\n    return Promise.reject(1);\n  } catch {\n    return 2;\n  }\n}\nf().then(\n  (n) => console.log(n),\n  (n) => console.log(n),\n);",
+      "options": [
+        "1",
+        "2",
+        "1, 2",
+        "undefined"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 612,
+      "type": "code",
+      "language": "js",
+      "text": "async function f() {\n  try {\n    return await Promise.reject(1);\n  } catch {\n    return 2;\n  }\n}\nf().then((n) => console.log(n));",
+      "options": [
+        "1",
+        "2",
+        "undefined",
+        "1, 2"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 613,
+      "type": "code",
+      "language": "js",
+      "text": "const out = [];\n[1, 2].forEach(async (id) => {\n  await Promise.resolve();\n  out.push(id);\n});\nconsole.log(out.length);",
+      "options": [
+        "2",
+        "1",
+        "0",
+        "undefined"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 614,
+      "type": "code",
+      "language": "js",
+      "text": "new Promise(() => {\n  throw 5;\n}).catch((n) => console.log(n));",
+      "options": [
+        "undefined",
+        "0",
+        "pending",
+        "5"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 615,
+      "type": "text",
+      "text": "What does a non-function argument to then mean?",
+      "options": [
+        "The chain rejects",
+        "The rest of the chain is skipped",
+        "There is no handler. The fulfillment value is passed on",
+        "That argument becomes the next fulfillment value"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 616,
+      "type": "text",
+      "text": "What does Promise.allSettled produce when some inputs reject?",
+      "options": [
+        "A rejection, the same as Promise.all",
+        "An array of only the fulfilled values",
+        "The first rejection reason",
+        "A fulfilled array of result objects, one per input, each marked fulfilled or rejected"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 617,
+      "type": "boolean",
+      "text": "A throw inside the executor rejects the new promise.",
+      "correct": true
+    },
+    {
+      "id": 618,
+      "type": "boolean",
+      "text": "Inside try/catch, return of a rejected promise and return await of that promise settle the async function the same way.",
+      "correct": false
+    },
+    {
+      "id": 619,
+      "type": "recall",
+      "text": "What extra wait appears when a then callback returns a promise, compared with returning a number?",
+      "answer": "The chain adopts that promise. The next then waits for it instead of receiving a plain value on the same step."
+    },
+    {
+      "id": 620,
+      "type": "recall",
+      "text": "What does then do with a fulfillment when the handler argument is not a function?",
+      "answer": "It passes the value through. null and other non-functions are not handlers."
+    }
+  ]
+}

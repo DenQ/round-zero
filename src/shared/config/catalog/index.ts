@@ -33,6 +33,11 @@ export const catalog = [
         labelKey: 'catalog.topics.prototypes',
         levels: PACK_LEVELS,
       },
+      {
+        slug: 'promises',
+        labelKey: 'catalog.topics.promises',
+        levels: PACK_LEVELS,
+      },
     ],
   },
   { slug: 'ts', labelKey: 'catalog.stacks.ts', topics: [] },
