@@ -1,0 +1,208 @@
+{
+  "stack": "js",
+  "topic": "modules",
+  "level": "senior",
+  "locale": "ru",
+  "questions": [
+    {
+      "id": 701,
+      "type": "code",
+      "language": "js",
+      "text": "import * as ns from 'data:text/javascript,export const a = 1; export default 2';\nconsole.log(Object.keys(ns).length);",
+      "options": [
+        "1",
+        "0",
+        "3",
+        "2"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 702,
+      "type": "code",
+      "language": "js",
+      "text": "let sync = 0;\nlet pending;\ntry {\n  pending = import('data:text/javascript,throw 1');\n  sync = 1;\n} catch {\n  sync = 2;\n}\nlet later = 0;\ntry {\n  await pending;\n} catch {\n  later = 1;\n}\nconsole.log(sync);\nconsole.log(later);",
+      "options": [
+        "2, 1",
+        "1, 1",
+        "1, 0",
+        "2, 0"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 703,
+      "type": "code",
+      "language": "js",
+      "text": "console.log(1);\nimport { n } from 'data:text/javascript,console.log(2); await Promise.resolve(); console.log(3); export const n = 4';\nconsole.log(n);",
+      "options": [
+        "1, 2, 3, 4",
+        "1, 2, 4, 3",
+        "2, 3, 1, 4",
+        "2, 1, 3, 4"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 704,
+      "type": "code",
+      "language": "js",
+      "text": "const a = 'data:text/javascript,' + encodeURIComponent('export const n = 1; export const a = 2');\nconst b = 'data:text/javascript,' + encodeURIComponent('export const n = 3; export const b = 4');\nconst ns = await import('data:text/javascript,' + encodeURIComponent('export * from ' + JSON.stringify(a) + '\\nexport * from ' + JSON.stringify(b)));\nconsole.log(ns.a);\nconsole.log(ns.b);\nconsole.log('n' in ns ? 1 : 0);",
+      "options": [
+        "2, 4, 1",
+        "1, 3, 1",
+        "1, 3, 0",
+        "2, 4, 0"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 705,
+      "type": "code",
+      "language": "js",
+      "text": "const mod = await import('data:text/javascript,export function url(){ return import.meta.url }');\nconsole.log(mod.url() === import.meta.url ? 0 : 1);",
+      "options": [
+        "1",
+        "0",
+        "2",
+        "3"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 706,
+      "type": "code",
+      "language": "js",
+      "text": "console.log(1);\nconst mod = await import('data:text/javascript,console.log(2); await Promise.resolve(); console.log(3); export const n = 4');\nconsole.log(mod.n);",
+      "options": [
+        "1, 2, 4, 3",
+        "1, 2, 3, 4",
+        "2, 3, 1, 4",
+        "1, 3, 2, 4"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 707,
+      "type": "code",
+      "language": "js",
+      "text": "const leaf = 'data:text/javascript,' + encodeURIComponent('export const n = 4; export default 5');\nconst ns = await import('data:text/javascript,' + encodeURIComponent('export * as box from ' + JSON.stringify(leaf)));\nconsole.log(ns.box.n);\nconsole.log(ns.box.default);",
+      "options": [
+        "5, 4",
+        "4, 0",
+        "4, 5",
+        "0, 5"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 708,
+      "type": "code",
+      "language": "js",
+      "text": "const leaf = 'data:text/javascript,' + encodeURIComponent('export const n = 4; export const m = 6');\nconst mid = 'data:text/javascript,' + encodeURIComponent('export * from ' + JSON.stringify(leaf));\nconst ns = await import('data:text/javascript,' + encodeURIComponent('export * from ' + JSON.stringify(mid)));\nconsole.log(ns.n);\nconsole.log(ns.m);",
+      "options": [
+        "6, 4",
+        "0, 0",
+        "5, 5",
+        "4, 6"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 709,
+      "type": "text",
+      "text": "Пока модуль стоит на top-level await, может ли выполниться сосед, которого родитель импортирует отдельно?",
+      "options": [
+        "Да. Сосед, который не ждёт этот await, может выполниться. Тело родителя начнётся, когда завершатся все его статические зависимости",
+        "Нет. Top-level await останавливает весь граф до продолжения этого модуля",
+        "Да, и тело родителя выполняется вперемешку с этим ожиданием",
+        "Нет. Сосед даже не инстанциируется"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 710,
+      "type": "text",
+      "text": "Что сообщает дескриптор экспорта на объекте пространства имён и можно ли записать в него извне?",
+      "options": [
+        "writable: false, configurable: true. Присваивание проходит молча",
+        "writable: true, configurable: false. Присваивание и delete всё равно бросают TypeError. Меняет связь только модуль, который её объявил",
+        "writable: true, configurable: true. Импортёр может записать новое значение",
+        "Дескриптора нет: экспорт не является собственным свойством"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 711,
+      "type": "text",
+      "text": "Когда функция с другой стороны цикла может прочитать let или const?",
+      "options": [
+        "Только до инициализации. Дальше связь закрывается",
+        "Никогда. Цикл делает связь недоступной до конца программы",
+        "После того как инициализатор этой связи уже выполнился. Чтение живое и видит следующие присваивания. Прямое чтение во время инициализации бросает ReferenceError",
+        "Сразу при инстанциации, ещё до тел, и там уже лежит конечное значение"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 712,
+      "type": "text",
+      "text": "Относительно чего import() резолвит строку, которая начинается с ./?",
+      "options": [
+        "Относительно process.cwd(), потому что строка вычислена в рантайме",
+        "Относительно URL страницы, даже если вызов стоит во вложенном модуле",
+        "Относительно каталога, где лежит package.json",
+        "Относительно URL текущего модуля, как и статический import. В рантайме вычисляется только сама строка"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 713,
+      "type": "boolean",
+      "text": "На верхнем уровне модуля this указывает на globalThis.",
+      "correct": false
+    },
+    {
+      "id": 714,
+      "type": "boolean",
+      "text": "await внутри export function приостанавливает граф модулей так же, как top-level await.",
+      "correct": false
+    },
+    {
+      "id": 715,
+      "type": "boolean",
+      "text": "Синтаксическая ошибка в целевом модуле заставляет import() бросить исключение на строке вызова.",
+      "correct": false
+    },
+    {
+      "id": 716,
+      "type": "boolean",
+      "text": "export * as name from добавляет текущему модулю его собственный default.",
+      "correct": false
+    },
+    {
+      "id": 717,
+      "type": "recall",
+      "text": "Чем инстанциация модуля отличается от выполнения его тела?",
+      "answer": "Инстанциация создаёт связи: function уже инициализирована, var равен undefined, let и const ещё нет. Потом выполнение запускает тела. Циклическое чтение let до инициализатора падает на выполнении."
+    },
+    {
+      "id": 718,
+      "type": "recall",
+      "text": "Чему равен Symbol.toStringTag объекта пространства имён?",
+      "answer": "Строке Module."
+    },
+    {
+      "id": 719,
+      "type": "recall",
+      "text": "Как загрузить модуль только когда выполнилась одна ветка условия?",
+      "answer": "Вызвать import() внутри этой ветки. Статический import безусловен и стоит только на верхнем уровне."
+    },
+    {
+      "id": 720,
+      "type": "recall",
+      "text": "По какому ключу модуль лежит в карте модулей?",
+      "answer": "Абсолютный URL после резолва спецификатора. Тот же текст по другому URL — другой экземпляр."
+    }
+  ]
+}

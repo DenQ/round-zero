@@ -1,0 +1,208 @@
+{
+  "stack": "js",
+  "topic": "modules",
+  "level": "junior",
+  "locale": "ru",
+  "questions": [
+    {
+      "id": 661,
+      "type": "code",
+      "language": "js",
+      "text": "import { n } from 'data:text/javascript,export const n = 1';\nconsole.log(n);",
+      "options": [
+        "1",
+        "0",
+        "2",
+        "3"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 662,
+      "type": "code",
+      "language": "js",
+      "text": "import n from 'data:text/javascript,export default 2';\nconsole.log(n);",
+      "options": [
+        "1",
+        "2",
+        "0",
+        "3"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 663,
+      "type": "code",
+      "language": "js",
+      "text": "import { n as m } from 'data:text/javascript,export const n = 3';\nconsole.log(m);",
+      "options": [
+        "1",
+        "0",
+        "3",
+        "2"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 664,
+      "type": "code",
+      "language": "js",
+      "text": "import * as ns from 'data:text/javascript,export const n = 4';\nconsole.log(ns.n);",
+      "options": [
+        "1",
+        "2",
+        "0",
+        "4"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 665,
+      "type": "code",
+      "language": "js",
+      "text": "const url = 'data:text/javascript,' + encodeURIComponent('let n = 0; export function next(){ n += 1; return n }');\nconst a = await import(url);\nconst b = await import(url);\nconsole.log(a.next());\nconsole.log(b.next());",
+      "options": [
+        "1, 1",
+        "1, 2",
+        "2, 1",
+        "2, 2"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 666,
+      "type": "code",
+      "language": "js",
+      "text": "var n = 1;\nconsole.log(typeof globalThis.n === 'undefined' ? 1 : 0);",
+      "options": [
+        "0",
+        "2",
+        "1",
+        "3"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 667,
+      "type": "code",
+      "language": "js",
+      "text": "console.log(n);\nimport { n } from 'data:text/javascript,export const n = 7';",
+      "options": [
+        "0",
+        "1",
+        "2",
+        "7"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 668,
+      "type": "code",
+      "language": "js",
+      "text": "import { m } from 'data:text/javascript,const n = 8; export { n as m }';\nconsole.log(m);",
+      "options": [
+        "8",
+        "0",
+        "1",
+        "2"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 669,
+      "type": "text",
+      "text": "Где можно объявлять статические import и export?",
+      "options": [
+        "Только на верхнем уровне модуля. Внутри функции, if или блока это синтаксическая ошибка",
+        "Внутри любой функции, если она не вложена",
+        "Только в первой строке файла",
+        "В любом месте, где можно вызвать функцию"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 670,
+      "type": "text",
+      "text": "Сколько экспортов по умолчанию может быть в одном модуле?",
+      "options": [
+        "Столько же, сколько именованных",
+        "Не больше одного. Именованных экспортов может быть много",
+        "Ровно один: модуль без default недопустим",
+        "Ни одного. default выносят в отдельный файл"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 671,
+      "type": "text",
+      "text": "Что стоит в спецификаторе статического import?",
+      "options": [
+        "Любое выражение. Оно считается, когда выполнение доходит до строки",
+        "Имя локальной переменной из этого файла",
+        "Строковый литерал. По нему граф модулей собирается до выполнения тела",
+        "Промис, который вернул import()"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 672,
+      "type": "text",
+      "text": "Зачем пишут import './side.mjs' без списка имён?",
+      "options": [
+        "Чтобы удалить экспорты этого модуля",
+        "Чтобы скопировать его переменные в глобальную область",
+        "Чтобы дождаться изменения файла на диске",
+        "Чтобы выполнить модуль ради побочных эффектов. Повтор того же URL тело не запускает"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 673,
+      "type": "boolean",
+      "text": "В одном модуле можно одновременно экспортировать default и именованные связи.",
+      "correct": true
+    },
+    {
+      "id": 674,
+      "type": "boolean",
+      "text": "Статический import внутри if подгружает модуль только если эта ветка выполнилась.",
+      "correct": false
+    },
+    {
+      "id": 675,
+      "type": "boolean",
+      "text": "Имя в import value from должно совпадать с именем переменной в экспортирующем файле.",
+      "correct": false
+    },
+    {
+      "id": 676,
+      "type": "boolean",
+      "text": "Код модуля выполняется в строгом режиме.",
+      "correct": true
+    },
+    {
+      "id": 677,
+      "type": "recall",
+      "text": "Как называется свойство объекта пространства имён, через которое читается export default?",
+      "answer": "default. Именованные экспорты лежат под своими именами."
+    },
+    {
+      "id": 678,
+      "type": "recall",
+      "text": "Что возвращает import(specifier)?",
+      "answer": "Промис. При успехе значение — объект пространства имён, а не отдельный экспорт."
+    },
+    {
+      "id": 679,
+      "type": "recall",
+      "text": "Относительно чего резолвится спецификатор, который начинается с ./ или ../?",
+      "answer": "Относительно URL текущего модуля, а не рабочей директории процесса."
+    },
+    {
+      "id": 680,
+      "type": "recall",
+      "text": "Какие префиксы делают спецификатор относительным?",
+      "answer": "./ и ../. Имя без такого префикса — голый спецификатор, его резолвит среда."
+    }
+  ]
+}

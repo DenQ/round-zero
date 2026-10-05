@@ -1,0 +1,208 @@
+{
+  "stack": "js",
+  "topic": "modules",
+  "level": "middle",
+  "locale": "ru",
+  "questions": [
+    {
+      "id": 681,
+      "type": "code",
+      "language": "js",
+      "text": "import { n, inc } from 'data:text/javascript,export let n = 1; export function inc(){ n = 2 }';\nconsole.log(n);\ninc();\nconsole.log(n);",
+      "options": [
+        "1, 2",
+        "1, 1",
+        "2, 1",
+        "2, 2"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 682,
+      "type": "code",
+      "language": "js",
+      "text": "const url = 'data:text/javascript,' + encodeURIComponent('export let n = 1; export function inc(){ n = 2 }');\nconst mod = await import(url);\nconst { n } = mod;\nconsole.log(n);\nmod.inc();\nconsole.log(n);\nconsole.log(mod.n);",
+      "options": [
+        "1, 2, 2",
+        "1, 1, 2",
+        "1, 2, 1",
+        "2, 2, 2"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 683,
+      "type": "code",
+      "language": "js",
+      "text": "import { n } from 'data:text/javascript,export let n = 1';\ntry {\n  n = 2;\n  console.log(0);\n} catch {\n  console.log(1);\n}",
+      "options": [
+        "0",
+        "2",
+        "1",
+        "3"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 684,
+      "type": "code",
+      "language": "js",
+      "text": "import n, { inc, read } from 'data:text/javascript,let v = 1; export default v; export function inc(){ v = 2 } export function read(){ return v }';\nconsole.log(n);\ninc();\nconsole.log(n);\nconsole.log(read());",
+      "options": [
+        "1, 2, 2",
+        "2, 2, 2",
+        "1, 2, 1",
+        "1, 1, 2"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 685,
+      "type": "code",
+      "language": "js",
+      "text": "import n, { inc } from 'data:text/javascript,export let v = 1; export { v as default }; export function inc(){ v = 2 }';\nconsole.log(n);\ninc();\nconsole.log(n);",
+      "options": [
+        "1, 2",
+        "1, 1",
+        "2, 2",
+        "2, 1"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 686,
+      "type": "code",
+      "language": "js",
+      "text": "import * as ns from 'data:text/javascript,export let n = 1';\ntry {\n  ns.n = 2;\n  console.log(0);\n} catch {\n  console.log(1);\n}\nconsole.log(ns.n);",
+      "options": [
+        "0, 1",
+        "1, 1",
+        "1, 2",
+        "0, 2"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 687,
+      "type": "code",
+      "language": "js",
+      "text": "console.log(1);\nconst p = import('data:text/javascript,console.log(2); export {}');\nconsole.log(3);\nawait p;",
+      "options": [
+        "1, 2, 3",
+        "2, 1, 3",
+        "1, 3, 2",
+        "3, 1, 2"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 688,
+      "type": "code",
+      "language": "js",
+      "text": "const leaf = 'data:text/javascript,' + encodeURIComponent('export let n = 1; export function inc(){ n = 2 }');\nconst mod = await import('data:text/javascript,' + encodeURIComponent('export { n, inc } from ' + JSON.stringify(leaf)));\nconsole.log(mod.n);\nmod.inc();\nconsole.log(mod.n);",
+      "options": [
+        "1, 1",
+        "2, 2",
+        "2, 1",
+        "1, 2"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 689,
+      "type": "text",
+      "text": "Что происходит, если во время цикла другой модуль читает export let или export const до строки инициализации?",
+      "options": [
+        "ReferenceError. Связь уже создана, но остаётся в TDZ до инициализации",
+        "Возвращается undefined, как у var",
+        "Возвращается значение, которое будет присвоено ниже",
+        "SyntaxError ещё при разборе файла"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 690,
+      "type": "text",
+      "text": "Что export * не реэкспортирует?",
+      "options": [
+        "Именованные экспорты",
+        "Экспорт по умолчанию. Его переносят отдельной записью, например export { default } from",
+        "Объявления функций",
+        "Только объявления const"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 691,
+      "type": "text",
+      "text": "Почему при цикле export function уже видна другому модулю, пока тела ещё стартуют?",
+      "options": [
+        "Функция копируется в глобальный объект",
+        "Циклы запрещены, и вместо функции подставляется 0",
+        "Объявление функции инициализирует связь до выполнения тел",
+        "export function ведёт себя как var и сначала равен undefined"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 692,
+      "type": "text",
+      "text": "Чем раннее чтение export var в цикле отличается от export let?",
+      "options": [
+        "Оба чтения бросают ReferenceError",
+        "Оба возвращают уже присвоенное значение",
+        "var бросает ReferenceError, let возвращает undefined",
+        "var уже содержит undefined. let ещё в TDZ, и чтение бросает ReferenceError"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 693,
+      "type": "boolean",
+      "text": "Если одно и то же имя приходит из двух export * и явного экспорта этого имени нет, статический import { name } из такого модуля завершается ошибкой.",
+      "correct": true
+    },
+    {
+      "id": 694,
+      "type": "boolean",
+      "text": "На объект пространства имён можно добавить собственное свойство.",
+      "correct": false
+    },
+    {
+      "id": 695,
+      "type": "boolean",
+      "text": "Если выполнение модуля бросило исключение, следующий import того же URL запускает тело ещё раз.",
+      "correct": false
+    },
+    {
+      "id": 696,
+      "type": "boolean",
+      "text": "Аргумент import() обязан быть строковым литералом, как спецификатор статического import.",
+      "correct": false
+    },
+    {
+      "id": 697,
+      "type": "recall",
+      "text": "Как реэкспортировать default, если export * его не переносит?",
+      "answer": "export { default } from '...' или export { default as name } from '...'."
+    },
+    {
+      "id": 698,
+      "type": "recall",
+      "text": "Как прочитать default формой именованного импорта?",
+      "answer": "import { default as name } from '...'. Локальное имя выбирает импортёр."
+    },
+    {
+      "id": 699,
+      "type": "recall",
+      "text": "Чему равен [[Prototype]] объекта пространства имён?",
+      "answer": "null. Object.prototype по цепочке он не наследует."
+    },
+    {
+      "id": 700,
+      "type": "recall",
+      "text": "Как снять неоднозначность, если два export * отдают одно имя?",
+      "answer": "Явным реэкспортом этого имени, например export { n } from './a.mjs'. Побеждает он, а не конфликт звёзд."
+    }
+  ]
+}
