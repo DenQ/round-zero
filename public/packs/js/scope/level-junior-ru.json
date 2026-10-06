@@ -1,0 +1,208 @@
+{
+  "stack": "js",
+  "topic": "scope",
+  "level": "junior",
+  "locale": "ru",
+  "questions": [
+    {
+      "id": 721,
+      "type": "code",
+      "language": "js",
+      "text": "function f() {\n  if (true) {\n    var n = 1;\n  }\n  console.log(n);\n}\nf();",
+      "options": [
+        "1",
+        "0",
+        "2",
+        "3"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 722,
+      "type": "code",
+      "language": "js",
+      "text": "function f() {\n  if (true) {\n    let n = 1;\n  }\n  try {\n    console.log(n);\n  } catch (e) {\n    console.log(e instanceof ReferenceError ? 0 : 2);\n  }\n}\nf();",
+      "options": [
+        "1",
+        "0",
+        "2",
+        "3"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 723,
+      "type": "code",
+      "language": "js",
+      "text": "function f() {\n  console.log(n === undefined ? 2 : 0);\n  var n = 1;\n}\nf();",
+      "options": [
+        "0",
+        "1",
+        "2",
+        "3"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 724,
+      "type": "code",
+      "language": "js",
+      "text": "function f() {\n  try {\n    console.log(n);\n  } catch (e) {\n    console.log(e instanceof ReferenceError ? 3 : 0);\n  }\n  let n = 1;\n}\nf();",
+      "options": [
+        "0",
+        "1",
+        "2",
+        "3"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 725,
+      "type": "code",
+      "language": "js",
+      "text": "const n = 1;\ntry {\n  n = 2;\n  console.log(0);\n} catch (e) {\n  console.log(e instanceof TypeError ? 1 : 3);\n}",
+      "options": [
+        "1",
+        "0",
+        "2",
+        "3"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 726,
+      "type": "code",
+      "language": "js",
+      "text": "function make() {\n  let n = 1;\n  return function () {\n    return n;\n  };\n}\nconsole.log(make()());",
+      "options": [
+        "0",
+        "1",
+        "2",
+        "3"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 727,
+      "type": "code",
+      "language": "js",
+      "text": "const fns = [];\nfor (let i = 0; i < 3; i += 1) {\n  fns.push(function () {\n    return i;\n  });\n}\nconsole.log(fns[0]());\nconsole.log(fns[1]());\nconsole.log(fns[2]());",
+      "options": [
+        "3, 3, 3",
+        "0, 0, 0",
+        "0, 1, 2",
+        "2, 1, 0"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 728,
+      "type": "code",
+      "language": "js",
+      "text": "const fns = [];\nfor (var i = 0; i < 3; i += 1) {\n  fns.push(function () {\n    return i;\n  });\n}\nconsole.log(fns[0]());\nconsole.log(fns[2]());",
+      "options": [
+        "0, 2",
+        "0, 0",
+        "2, 0",
+        "3, 3"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 729,
+      "type": "text",
+      "text": "Что можно сделать с объектом, который лежит в const?",
+      "options": [
+        "Заменить сам объект другим. const это разрешает",
+        "Менять его свойства. const запрещает новое присваивание имени, а не запись в объект",
+        "Ничего. Объект тоже заморожен",
+        "Только читать свойства. Запись свойства бросает TypeError"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 730,
+      "type": "text",
+      "text": "Что делает параметр с тем же именем, что у внешней переменной?",
+      "options": [
+        "Прячет внешнюю переменную внутри функции. Снаружи её значение не меняется",
+        "Пишет в ту же внешнюю переменную",
+        "Такое имя запрещено. Это SyntaxError",
+        "Виден и внутри функции, и в коде, который её вызвал"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 731,
+      "type": "text",
+      "text": "Когда имя объявления function уже можно вызвать?",
+      "options": [
+        "Только после строки с объявлением",
+        "Только если выше нет var с тем же именем",
+        "В любой строке этой области видимости. Объявление кладёт функцию в имя до выполнения тела",
+        "Только из другой функции"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 732,
+      "type": "text",
+      "text": "Что будет, если вызвать function expression в var выше строки присваивания?",
+      "options": [
+        "Выполнится тело функции",
+        "Вернётся undefined, без ошибки",
+        "ReferenceError, как при чтении let до инициализации",
+        "TypeError. Имя уже есть, но до присваивания в нём undefined"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 733,
+      "type": "boolean",
+      "text": "Локальный var функции не виден в коде, который её вызвал.",
+      "correct": true
+    },
+    {
+      "id": 734,
+      "type": "boolean",
+      "text": "Если блок if ни разу не выполнился, var внутри него не создаётся.",
+      "correct": false
+    },
+    {
+      "id": 735,
+      "type": "boolean",
+      "text": "В одном блоке можно дважды объявить let с одним именем.",
+      "correct": false
+    },
+    {
+      "id": 736,
+      "type": "boolean",
+      "text": "Новый вызов функции не видит значения локального var, оставшиеся от прошлого вызова.",
+      "correct": true
+    },
+    {
+      "id": 737,
+      "type": "recall",
+      "text": "Где видно имя из catch (e)?",
+      "answer": "Только внутри этого catch. Снаружи блока имени нет."
+    },
+    {
+      "id": 738,
+      "type": "recall",
+      "text": "Можно ли написать const без начального значения?",
+      "answer": "Нет. Инициализатор обязателен в том же объявлении, иначе это SyntaxError."
+    },
+    {
+      "id": 739,
+      "type": "recall",
+      "text": "Что вернёт typeof для имени, которое нигде не объявлено?",
+      "answer": "Строку \"undefined\". Такой typeof не бросает ReferenceError."
+    },
+    {
+      "id": 740,
+      "type": "recall",
+      "text": "Что делает присваивание необъявленному имени в строгом режиме?",
+      "answer": "Бросает ReferenceError. Глобальное свойство при этом не создаётся."
+    }
+  ]
+}

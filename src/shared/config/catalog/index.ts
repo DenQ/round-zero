@@ -19,6 +19,11 @@ export const catalog = [
     labelKey: 'catalog.stacks.js',
     topics: [
       {
+        slug: 'scope',
+        labelKey: 'catalog.topics.scope',
+        levels: PACK_LEVELS,
+      },
+      {
         slug: 'context',
         labelKey: 'catalog.topics.context',
         levels: PACK_LEVELS,

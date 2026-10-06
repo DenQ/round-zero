@@ -1,0 +1,208 @@
+{
+  "stack": "js",
+  "topic": "scope",
+  "level": "middle",
+  "locale": "en",
+  "questions": [
+    {
+      "id": 741,
+      "type": "code",
+      "language": "js",
+      "text": "function make() {\n  let n = 1;\n  return {\n    add() {\n      n += 1;\n    },\n    read() {\n      return n;\n    },\n  };\n}\nconst box = make();\nbox.add();\nconsole.log(box.read());",
+      "options": [
+        "2",
+        "1",
+        "0",
+        "3"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 742,
+      "type": "code",
+      "language": "js",
+      "text": "function make() {\n  let n = 0;\n  return function () {\n    n += 1;\n    return n;\n  };\n}\nconst a = make();\nconst b = make();\nconsole.log(a());\nconsole.log(b());\nconsole.log(a());",
+      "options": [
+        "1, 2, 3",
+        "1, 1, 2",
+        "2, 2, 3",
+        "1, 2, 2"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 743,
+      "type": "code",
+      "language": "js",
+      "text": "const fns = [];\nfor (var i = 0; i < 2; i += 1) {\n  let n = i;\n  fns.push(function () {\n    return n;\n  });\n}\nconsole.log(fns[0]());\nconsole.log(fns[1]());",
+      "options": [
+        "2, 2",
+        "1, 1",
+        "0, 1",
+        "0, 0"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 744,
+      "type": "code",
+      "language": "js",
+      "text": "function make() {\n  let n = 1;\n  const read = function () {\n    return n;\n  };\n  n = 2;\n  return read;\n}\nconsole.log(make()());",
+      "options": [
+        "1",
+        "0",
+        "3",
+        "2"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 745,
+      "type": "code",
+      "language": "js",
+      "text": "let n = 1;\nfunction f() {\n  try {\n    console.log(n);\n  } catch (e) {\n    console.log(e instanceof ReferenceError ? 1 : 0);\n  }\n  let n = 2;\n}\nf();",
+      "options": [
+        "1",
+        "2",
+        "0",
+        "3"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 746,
+      "type": "code",
+      "language": "js",
+      "text": "const f = function g() {\n  return typeof g === 'function' ? 1 : 0;\n};\nconsole.log(f());\nconsole.log(typeof g === 'undefined' ? 2 : 3);",
+      "options": [
+        "1, 3",
+        "1, 2",
+        "0, 2",
+        "2, 1"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 747,
+      "type": "code",
+      "language": "js",
+      "text": "let n = 1;\nfunction f(a = n) {\n  let n = 2;\n  return a;\n}\nconsole.log(f());",
+      "options": [
+        "2",
+        "0",
+        "1",
+        "3"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 748,
+      "type": "code",
+      "language": "js",
+      "text": "console.log(f());\nvar f = function () {\n  return 2;\n};\nfunction f() {\n  return 1;\n}\nconsole.log(f());",
+      "options": [
+        "2, 1",
+        "1, 1",
+        "2, 2",
+        "1, 2"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 749,
+      "type": "text",
+      "text": "Why pass i as an argument to an outer function inside for (var i)?",
+      "options": [
+        "The parameter receives this iteration’s i. The inner function closes over the parameter, not the loop variable",
+        "To stop the loop on this iteration",
+        "To make var block-scoped",
+        "So that i no longer increments"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 750,
+      "type": "text",
+      "text": "Why are two let declarations with the same name in adjacent case clauses without their own braces an error?",
+      "options": [
+        "Each case is its own scope, but let is forbidden in a case",
+        "Both cases sit in the one switch block. Duplicate let names there are a SyntaxError",
+        "switch runs twice and the second let overwrites the first",
+        "let in a case is hoisted like var"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 751,
+      "type": "text",
+      "text": "Where does n = 2 write inside a nested function if that function does not declare n, but an outer let n exists?",
+      "options": [
+        "Always to the global object",
+        "Nowhere: it is a SyntaxError",
+        "To that same outer let. The name is resolved by walking the scope chain outward",
+        "It creates a local var of that function"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 752,
+      "type": "text",
+      "text": "Where is a function declared inside a block visible in strict mode?",
+      "options": [
+        "Throughout the outer function, like var",
+        "On globalThis",
+        "Inside the block and in the next block at the same level",
+        "Only inside that block"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 753,
+      "type": "boolean",
+      "text": "A parameter default can read the previous parameter.",
+      "correct": true
+    },
+    {
+      "id": 754,
+      "type": "boolean",
+      "text": "The loop for (const i = 0; i < 1; i += 1) increments i and finishes without an error.",
+      "correct": false
+    },
+    {
+      "id": 755,
+      "type": "boolean",
+      "text": "If a parameter default reads the next parameter, the call throws ReferenceError.",
+      "correct": true
+    },
+    {
+      "id": 756,
+      "type": "boolean",
+      "text": "A var with the same name as a simple parameter resets the argument to undefined at the start of the body.",
+      "correct": false
+    },
+    {
+      "id": 757,
+      "type": "recall",
+      "text": "Why does let n = n throw?",
+      "answer": "The right-hand side reads the same binding, which is not initialized yet. That is a ReferenceError from the temporal dead zone."
+    },
+    {
+      "id": 758,
+      "type": "recall",
+      "text": "Where does an assignment to an undeclared name go in non-strict code?",
+      "answer": "To a property of the global object. No local variable is created."
+    },
+    {
+      "id": 759,
+      "type": "recall",
+      "text": "What remains in an outer let after a block that declares its own let with the same name?",
+      "answer": "The previous value. The inner let hides the outer one only inside the block and does not write to it."
+    },
+    {
+      "id": 760,
+      "type": "recall",
+      "text": "Does typeof bypass the temporal dead zone of let?",
+      "answer": "No. typeof on a let name before its initialization throws ReferenceError. It does not return \"undefined\"."
+    }
+  ]
+}
