@@ -6,13 +6,25 @@ import ListItemButton from '@mui/material/ListItemButton'
 import ListItemText from '@mui/material/ListItemText'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useLocation } from 'react-router-dom'
 import { catalog, getQuizPath } from '@shared/config/catalog'
 import type { CatalogStack, CatalogTopic } from '@shared/config/catalog'
 import type { PackLevel } from '@shared/config/packs'
 
 function topicKey(stack: string, topic: string) {
   return `${stack}/${topic}`
+}
+
+function openFromPath(pathname: string): Record<string, boolean> {
+  const [, quiz, stack, topic] = pathname.split('/')
+  if (quiz !== 'quiz' || !stack || !topic) {
+    return {}
+  }
+
+  return {
+    [stack]: true,
+    [topicKey(stack, topic)]: true,
+  }
 }
 
 type PackNavTreeProps = {
@@ -22,25 +34,16 @@ type PackNavTreeProps = {
 
 export function PackNavTree({ dense = true, onNavigate }: PackNavTreeProps) {
   const { t } = useTranslation()
+  const { pathname } = useLocation()
   const stacks = catalog.filter((stack) => stack.topics.length > 0)
 
-  const [open, setOpen] = useState<Record<string, boolean>>(() => {
-    const next: Record<string, boolean> = {}
+  const [open, setOpen] = useState<Record<string, boolean>>(() => openFromPath(pathname))
+  const [trackedPath, setTrackedPath] = useState(pathname)
 
-    for (const stack of catalog) {
-      if (stack.topics.length === 0) {
-        continue
-      }
-
-      next[stack.slug] = true
-
-      for (const topic of stack.topics) {
-        next[topicKey(stack.slug, topic.slug)] = true
-      }
-    }
-
-    return next
-  })
+  if (trackedPath !== pathname) {
+    setTrackedPath(pathname)
+    setOpen((current) => ({ ...current, ...openFromPath(pathname) }))
+  }
 
   const toggle = (key: string) => {
     setOpen((prev) => ({ ...prev, [key]: !prev[key] }))

@@ -1,11 +1,32 @@
 export {
+  clearActivity,
   emptyActivity,
   getDayTotals,
   readActivity,
   recordAnswer,
   toLocalDateKey,
+  useActivity,
 } from './activity'
+export {
+  clearRating,
+  ensureRatingBackfill,
+  levelFromScore,
+  recordRating,
+  useRating,
+} from './rating'
+export type { RatingState } from './rating'
 export type { ActivityPackRef, ActivityState, DayTotals } from './activity'
+export {
+  clearResumeIntentIfLeft,
+  listSavedGames,
+  readSavedGame,
+  removeSavedGame,
+  requestResume,
+  saveGame,
+  shouldResumeOnMount,
+  useSavedGames,
+} from './saved-game'
+export type { SavedGame, SavedGamesState } from './saved-game'
 export {
   BOOLEAN_FALSE_INDEX,
   BOOLEAN_TRUE_INDEX,
