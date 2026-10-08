@@ -1,4 +1,4 @@
-export const PACK_STACKS = ['js', 'ts', 'go', 'sql', 'nest', 'react'] as const
+export const PACK_STACKS = ['js', 'ts', 'go', 'sql', 'nest', 'node', 'react'] as const
 export type PackStack = (typeof PACK_STACKS)[number]
 
 export const PACK_LEVELS = ['junior', 'middle', 'senior'] as const

@@ -1,0 +1,808 @@
+{
+  "stack": "node",
+  "topic": "base",
+  "level": "middle",
+  "locale": "ru",
+  "questions": [
+    {
+      "id": 961,
+      "type": "code",
+      "language": "js",
+      "text": "const { EventEmitter } = require('events')\nconst e = new EventEmitter()\ne.on('x', () => console.log(1))\ne.prependListener('x', () => console.log(2))\ne.emit('x')",
+      "options": [
+        "2, 1",
+        "1, 2",
+        "2",
+        "1"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 962,
+      "type": "code",
+      "language": "js",
+      "text": "const { EventEmitter } = require('events')\nconst e = new EventEmitter()\nconst f = () => console.log(1)\ne.on('x', f)\ne.off('x', f)\ne.emit('x')\nconsole.log(2)",
+      "options": [
+        "1, 2",
+        "2",
+        "1",
+        "2, 1"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 963,
+      "type": "code",
+      "language": "js",
+      "text": "const { EventEmitter } = require('events')\nconst e = new EventEmitter()\ntry {\n  e.emit('error', new Error('x'))\n  console.log(1)\n} catch {\n  console.log(2)\n}",
+      "options": [
+        "1",
+        "0",
+        "2",
+        "x"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 964,
+      "type": "code",
+      "language": "js",
+      "text": "const path = require('path')\nconsole.log(path.posix.relative('/a/b', '/a/b/c'))",
+      "options": [
+        "/a/b/c",
+        "/c",
+        "../c",
+        "c"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 965,
+      "type": "code",
+      "language": "js",
+      "text": "const path = require('path')\nconsole.log(path.posix.normalize('/a/../b'))",
+      "options": [
+        "/b",
+        "/a/../b",
+        "b",
+        "/a/b"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 966,
+      "type": "code",
+      "language": "js",
+      "text": "const path = require('path')\nconsole.log(path.posix.isAbsolute('/a') ? 1 : 0)\nconsole.log(path.posix.isAbsolute('a') ? 1 : 0)",
+      "options": [
+        "0, 1",
+        "1, 0",
+        "1, 1",
+        "0, 0"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 967,
+      "type": "code",
+      "language": "js",
+      "text": "console.log(Buffer.compare(Buffer.from('a'), Buffer.from('a')))",
+      "options": [
+        "1",
+        "-1",
+        "0",
+        "true"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 968,
+      "type": "code",
+      "language": "js",
+      "text": "console.log(Buffer.from('ab').equals(Buffer.from('ab')) ? 1 : 0)",
+      "options": [
+        "0",
+        "ab",
+        "true",
+        "1"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 969,
+      "type": "code",
+      "language": "js",
+      "text": "let n = 0\nfunction f() {\n  console.log(n)\n  n += 1\n  if (n < 3) process.nextTick(f)\n}\nprocess.nextTick(f)\nsetImmediate(() => console.log(9))",
+      "options": [
+        "0, 1, 2, 9",
+        "9, 0, 1, 2",
+        "0, 9, 1, 2",
+        "0, 1, 9, 2"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 970,
+      "type": "code",
+      "language": "js",
+      "text": "setImmediate(() => console.log(1))\nsetImmediate(() => console.log(2))",
+      "options": [
+        "2, 1",
+        "1, 2",
+        "1",
+        "2"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 971,
+      "type": "code",
+      "language": "js",
+      "text": "setImmediate(() => {\n  console.log(1)\n  setImmediate(() => console.log(2))\n})",
+      "options": [
+        "2, 1",
+        "1",
+        "1, 2",
+        "2"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 972,
+      "type": "code",
+      "language": "js",
+      "text": "setImmediate(() => console.log(1))\nPromise.resolve().then(() => console.log(2))",
+      "options": [
+        "1, 2",
+        "1",
+        "2",
+        "2, 1"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 973,
+      "type": "code",
+      "language": "js",
+      "text": "const { Readable } = require('stream')\nconst r = Readable.from(['1', '2'])\nr.on('data', (chunk) => console.log(String(chunk)))",
+      "options": [
+        "1, 2",
+        "2, 1",
+        "12",
+        "1"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 974,
+      "type": "code",
+      "language": "js",
+      "text": "const { Transform } = require('stream')\nconst t = new Transform({\n  transform(chunk, _enc, cb) {\n    cb(null, String(Number(chunk) + 1))\n  },\n})\nt.on('data', (chunk) => console.log(String(chunk)))\nt.write('3')\nt.end()",
+      "options": [
+        "3",
+        "4",
+        "31",
+        "undefined"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 975,
+      "type": "code",
+      "language": "js",
+      "text": "const buf = Buffer.alloc(2)\nbuf.writeUInt8(7, 1)\nconsole.log(buf[0])\nconsole.log(buf[1])",
+      "options": [
+        "7, 0",
+        "7, 7",
+        "0, 7",
+        "1, 7"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 976,
+      "type": "code",
+      "language": "js",
+      "text": "console.log(Buffer.from('abcd').indexOf(Buffer.from('cd')))",
+      "options": [
+        "-1",
+        "1",
+        "0",
+        "2"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 977,
+      "type": "code",
+      "language": "js",
+      "text": "const { EventEmitter } = require('events')\nconst e = new EventEmitter()\ne.on('a', () => {})\ne.on('b', () => {})\nconsole.log(e.eventNames().join(','))",
+      "options": [
+        "a,b",
+        "b,a",
+        "a",
+        "ab"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 978,
+      "type": "code",
+      "language": "js",
+      "text": "const { EventEmitter } = require('events')\nconst e = new EventEmitter()\ne.prependOnceListener('x', () => console.log(1))\ne.emit('x')\ne.emit('x')\nconsole.log(2)",
+      "options": [
+        "1, 1, 2",
+        "1, 2",
+        "2, 1",
+        "2"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 979,
+      "type": "code",
+      "language": "js",
+      "text": "const { EventEmitter } = require('events')\nconst e = new EventEmitter()\ne.on('x', () => {})\ne.on('x', () => {})\ne.removeAllListeners('x')\nconsole.log(e.listenerCount('x'))",
+      "options": [
+        "2",
+        "1",
+        "0",
+        "x"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 980,
+      "type": "code",
+      "language": "js",
+      "text": "const src = Buffer.from('ab')\nconst dst = Buffer.alloc(2)\nsrc.copy(dst)\nconsole.log(dst.toString())",
+      "options": [
+        "a",
+        "b",
+        "undefined",
+        "ab"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 981,
+      "type": "code",
+      "language": "js",
+      "text": "const buf = Buffer.alloc(2)\nbuf.fill(3)\nconsole.log(buf[0])\nconsole.log(buf[1])",
+      "options": [
+        "3, 3",
+        "0, 3",
+        "3, 0",
+        "0, 0"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 982,
+      "type": "code",
+      "language": "js",
+      "text": "const { types } = require('util')\nconsole.log(types.isDate(new Date()) ? 1 : 0)\nconsole.log(types.isDate({}) ? 1 : 0)",
+      "options": [
+        "0, 1",
+        "1, 0",
+        "1, 1",
+        "0, 0"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 983,
+      "type": "code",
+      "language": "js",
+      "text": "const { PassThrough } = require('stream')\nconst p = new PassThrough()\np.on('data', (chunk) => console.log(String(chunk)))\np.write('5')\np.end()",
+      "options": [
+        "undefined",
+        "5, 5",
+        "5",
+        "null"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 984,
+      "type": "code",
+      "language": "js",
+      "text": "const crypto = require('crypto')\nconsole.log(crypto.createHash('sha256').update('a').digest('hex').slice(0, 2))",
+      "options": [
+        "a",
+        "sha",
+        "61",
+        "ca"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 985,
+      "type": "code",
+      "language": "js",
+      "text": "console.log(Buffer.byteLength('0a', 'hex'))",
+      "options": [
+        "1",
+        "2",
+        "0",
+        "4"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 986,
+      "type": "code",
+      "language": "js",
+      "text": "const path = require('path')\nconsole.log(path.posix.format({ dir: '/a', base: 'b.txt' }))",
+      "options": [
+        "b.txt",
+        "/a/b.txt",
+        "/a",
+        "a/b.txt"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 987,
+      "type": "code",
+      "language": "js",
+      "text": "const u = new URL('https://a.test/x?n=4')\nconsole.log(u.searchParams.get('n'))",
+      "options": [
+        "?n=4",
+        "n=4",
+        "4",
+        "x"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 988,
+      "type": "code",
+      "language": "js",
+      "text": "const buf = Buffer.from('hi')\nconsole.log(buf.toString('utf8', 1))",
+      "options": [
+        "hi",
+        "h",
+        "ihi",
+        "i"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 989,
+      "type": "code",
+      "language": "js",
+      "text": "Promise.resolve().then(() => console.log(1))\nsetImmediate(() => console.log(2))",
+      "options": [
+        "1, 2",
+        "2, 1",
+        "1",
+        "2"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 990,
+      "type": "code",
+      "language": "js",
+      "text": "const { EventEmitter } = require('events')\nconst e = new EventEmitter()\ne.on('x', () => console.log(e.listenerCount('x')))\ne.emit('x')",
+      "options": [
+        "0",
+        "1",
+        "2",
+        "x"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 991,
+      "type": "code",
+      "language": "js",
+      "text": "const { Readable } = require('stream')\nconst r = Readable.from(['7'])\nr.pause()\nconsole.log(r.readableFlowing === false ? 1 : 0)\nr.on('data', (chunk) => console.log(String(chunk)))\nr.resume()",
+      "options": [
+        "7, 1",
+        "7",
+        "1, 7",
+        "1"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 992,
+      "type": "code",
+      "language": "js",
+      "text": "const { Buffer: B } = require('buffer')\nconsole.log(B.from([1, 2]).readUInt8(1))",
+      "options": [
+        "1",
+        "0",
+        "3",
+        "2"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 993,
+      "type": "text",
+      "text": "В какой фазе цикла libuv выполняется setImmediate?",
+      "options": [
+        "В фазе check, после poll",
+        "В фазе timers, до poll",
+        "В очереди process.nextTick",
+        "В микротасках вместе с Promise"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 994,
+      "type": "text",
+      "text": "Что задаёт UV_THREADPOOL_SIZE?",
+      "options": [
+        "Число процессов cluster",
+        "Размер пула потоков libuv для части I/O и crypto, не для всего JS",
+        "Лимит слушателей EventEmitter",
+        "Максимальный размер Buffer"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 995,
+      "type": "text",
+      "text": "Чем stream.pipeline отличается от pipe()?",
+      "options": [
+        "pipeline нельзя вызывать с Transform",
+        "pipe уничтожает все сокеты процесса",
+        "pipeline прокидывает ошибки, вызывает destroy и даёт колбэк/промис по завершении. pipe ошибки сам не собирает",
+        "Разницы нет, это алиасы"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 996,
+      "type": "text",
+      "text": "Что такое backpressure у Readable?",
+      "options": [
+        "Это всегда ошибка ERR_STREAM_DESTROYED",
+        "Это синоним pause() из HTTP",
+        "Это только про TCP_NODELAY",
+        "Потребитель не успевает. push() возвращает false, когда буфер выше highWaterMark, и чтение надо притормозить"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 997,
+      "type": "text",
+      "text": "Чем Buffer.alloc отличается от Buffer.allocUnsafe?",
+      "options": [
+        "alloc заполняет нулями. allocUnsafe быстрее, но может оставить старые байты кучи",
+        "allocUnsafe всегда нули, alloc — случайные байты",
+        "alloc нельзя вызвать с длиной больше 8",
+        "Это одно и то же с Node 18"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 998,
+      "type": "text",
+      "text": "Что делает EventEmitter при слишком большом числе слушателей?",
+      "options": [
+        "Молча удаляет старые слушатели",
+        "После defaultMaxListeners печатает предупреждение о возможной утечке. emit не отключается",
+        "Процесс всегда завершается с кодом 1",
+        "Включается cluster"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 999,
+      "type": "text",
+      "text": "Как из ESM-файла сделать синхронный require?",
+      "options": [
+        "Глобальный require есть и в ESM",
+        "Только через eval(\"require\")",
+        "module.createRequire(import.meta.url) возвращает require, привязанный к этому файлу",
+        "Это невозможно в Node"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1000,
+      "type": "text",
+      "text": "Чем child_process.fork отличается от spawn?",
+      "options": [
+        "fork нельзя использовать с JS",
+        "spawn всегда поднимает V8 isolate в том же процессе",
+        "Разницы нет",
+        "fork — это spawn node-процесса с каналом IPC. spawn запускает любую программу без этого канала по умолчанию"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1001,
+      "type": "text",
+      "text": "Чем worker_threads отличается от cluster?",
+      "options": [
+        "Воркеры — потоки одного процесса с отдельным V8. cluster — отдельные процессы, память не общая",
+        "cluster — это потоки, worker_threads — процессы",
+        "Оба делят один heap без ограничений",
+        "worker_threads нельзя использовать для CPU-задач"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1002,
+      "type": "text",
+      "text": "Что случится, если отвергнутый промис никто не поймал?",
+      "options": [
+        "Node молча глотает это всегда",
+        "Node эмитит unhandledRejection на process. Это не то же самое, что throw в синхронном коде",
+        "Автоматически вызывается process.exit(0)",
+        "Ошибка уходит в fs"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1003,
+      "type": "text",
+      "text": "Для чего поле exports в package.json?",
+      "options": [
+        "Это список npm-скриптов",
+        "Оно заменяет node_modules",
+        "Оно задаёт публичные точки входа пакета и может закрыть глубокие пути, которые раньше брали через main",
+        "Это только для браузерного bundler, Node его игнорирует"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1004,
+      "type": "text",
+      "text": "Что делает флаг --inspect?",
+      "options": [
+        "Включает строгий режим JS",
+        "Отключает libuv",
+        "Компилирует проект в один бинарник",
+        "Поднимает DevTools-протокол, чтобы отладчик подключился к процессу"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1005,
+      "type": "text",
+      "text": "Влияет ли NODE_ENV на ядро Node?",
+      "options": [
+        "Нет. Это соглашение библиотек и бандлеров. Само ядро Node от него не переключается",
+        "Да, production выключает цикл событий",
+        "Да, development запрещает require",
+        "Да, test включает worker_threads"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1006,
+      "type": "text",
+      "text": "Что делает objectMode у стрима?",
+      "options": [
+        "Сериализует объекты в JSON на диск",
+        "Разрешает чанкам быть любыми JS-значениями, не только Buffer/string",
+        "Включает HTTPS",
+        "Это режим только для fs.createWriteStream"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1007,
+      "type": "text",
+      "text": "Чем exec отличается от spawn?",
+      "options": [
+        "exec работает только в браузере",
+        "spawn буферизует весь вывод в строку, exec стримит",
+        "exec запускает команду через шелл и буферизует stdout/stderr. spawn отдаёт стримы и шелл не обязателен",
+        "Оба всегда используют шелл и одинаковый буфер"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1008,
+      "type": "text",
+      "text": "Как из CommonJS загрузить ESM-модуль?",
+      "options": [
+        "require(\"./file.mjs\") всегда работает",
+        "Через fs.readFile",
+        "Это запрещено навсегда",
+        "Через динамический import(), который возвращает промис. Синхронный require ESM не загрузит"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1009,
+      "type": "boolean",
+      "text": "Бесконечные process.nextTick могут не дать дойти до фаз libuv, в том числе до setImmediate.",
+      "correct": true
+    },
+    {
+      "id": 1010,
+      "type": "boolean",
+      "text": "CPU-тяжёлый код в JS-потоке сам уходит в UV threadpool.",
+      "correct": false
+    },
+    {
+      "id": 1011,
+      "type": "boolean",
+      "text": "fs.promises.readFile не блокирует цикл на время чтения файла, в отличие от readFileSync.",
+      "correct": true
+    },
+    {
+      "id": 1012,
+      "type": "boolean",
+      "text": "AbortController в Node нельзя передать в fetch и в некоторые fs-операции.",
+      "correct": false
+    },
+    {
+      "id": 1013,
+      "type": "boolean",
+      "text": "pipe() сам не уничтожает все стримы цепочки, если один из них упал с ошибкой.",
+      "correct": true
+    },
+    {
+      "id": 1014,
+      "type": "boolean",
+      "text": "module.domain — актуальный способ ловить ошибки в Node 20+.",
+      "correct": false
+    },
+    {
+      "id": 1015,
+      "type": "boolean",
+      "text": "dns.lookup часто идёт через threadpool и может его забить при большом числе запросов.",
+      "correct": true
+    },
+    {
+      "id": 1016,
+      "type": "boolean",
+      "text": "uncaughtException — штатный способ продолжить HTTP-сервер после любого throw.",
+      "correct": false
+    },
+    {
+      "id": 1017,
+      "type": "boolean",
+      "text": "highWaterMark ограничивает внутренний буфер стрима, не размер файла на диске.",
+      "correct": true
+    },
+    {
+      "id": 1018,
+      "type": "boolean",
+      "text": "workerData копируется в воркер при старте; это не общая память с родителем по умолчанию.",
+      "correct": true
+    },
+    {
+      "id": 1019,
+      "type": "boolean",
+      "text": "Главное поле main всегда побеждает exports, если оба заданы.",
+      "correct": false
+    },
+    {
+      "id": 1020,
+      "type": "boolean",
+      "text": "setImmediate из колбэка I/O срабатывает в check той же итерации, до следующего timers.",
+      "correct": true
+    },
+    {
+      "id": 1021,
+      "type": "boolean",
+      "text": "child_process.exec не буферизует вывод и поэтому безопасен для гигабайтных логов.",
+      "correct": false
+    },
+    {
+      "id": 1022,
+      "type": "boolean",
+      "text": "Сообщение parentPort.postMessage структурированно клонируется, если не передать transfer list.",
+      "correct": true
+    },
+    {
+      "id": 1023,
+      "type": "boolean",
+      "text": "require кэширует ESM-граф так же, как import, без исключений.",
+      "correct": false
+    },
+    {
+      "id": 1024,
+      "type": "boolean",
+      "text": "fs.createReadStream читает файл кусками и может учитывать backpressure потребителя.",
+      "correct": true
+    },
+    {
+      "id": 1025,
+      "type": "recall",
+      "text": "Как называются основные фазы цикла libuv по порядку вокруг I/O?",
+      "answer": "timers, затем pending callbacks, poll, check (setImmediate), close."
+    },
+    {
+      "id": 1026,
+      "type": "recall",
+      "text": "Что будет, если nextTick ставить бесконечно?",
+      "answer": "Фазы libuv и I/O не получат очередь. Цикл «голодает»."
+    },
+    {
+      "id": 1027,
+      "type": "recall",
+      "text": "Зачем stream.pipeline вместо .pipe() в продакшене?",
+      "answer": "Ошибки прокидываются, стримы destroy, есть колбэк или промис о конце."
+    },
+    {
+      "id": 1028,
+      "type": "recall",
+      "text": "Чем spawn безопаснее exec для аргументов?",
+      "answer": "spawn без shell не склеивает команду в строку, меньше риск инъекции."
+    },
+    {
+      "id": 1029,
+      "type": "recall",
+      "text": "Делят ли процессы cluster одну кучу V8?",
+      "answer": "Нет. У каждого процесса свой heap. IPC — сообщения, не общая память."
+    },
+    {
+      "id": 1030,
+      "type": "recall",
+      "text": "Что эмитится на process при throw вне try/catch?",
+      "answer": "uncaughtException. Состояние процесса после этого нельзя считать целым."
+    },
+    {
+      "id": 1031,
+      "type": "recall",
+      "text": "Как из CJS вызвать ESM?",
+      "answer": "Динамический import(). require ESM-файл не загрузит."
+    },
+    {
+      "id": 1032,
+      "type": "recall",
+      "text": "Что делает createRequire(import.meta.url)?",
+      "answer": "Даёт функцию require с путями относительно этого ESM-файла."
+    },
+    {
+      "id": 1033,
+      "type": "recall",
+      "text": "Для чего AbortSignal в асинхронных API Node?",
+      "answer": "Чтобы отменить операцию: fetch, некоторые fs и таймеры."
+    },
+    {
+      "id": 1034,
+      "type": "recall",
+      "text": "Что такое dual package hazard?",
+      "answer": "Один пакет грузится и как CJS, и как ESM — два экземпляра состояния."
+    },
+    {
+      "id": 1035,
+      "type": "recall",
+      "text": "Зачем objectMode у Transform?",
+      "answer": "Чтобы чанки были объекты, а не только байты и строки."
+    },
+    {
+      "id": 1036,
+      "type": "recall",
+      "text": "Что предупреждает EventEmitter про maxListeners?",
+      "answer": "Подозрение на утечку: слушатели копятся и не снимаются."
+    },
+    {
+      "id": 1037,
+      "type": "recall",
+      "text": "Где Node берёт crypto.pbkdf2 по умолчанию — JS-поток или pool?",
+      "answer": "В threadpool libuv, поэтому тяжёлый crypto конкурирует с fs за пул."
+    },
+    {
+      "id": 1038,
+      "type": "recall",
+      "text": "Нужен ли shell для child_process.spawn по умолчанию?",
+      "answer": "Нет. shell: true нужно включать явно."
+    },
+    {
+      "id": 1039,
+      "type": "recall",
+      "text": "Что делает NODE_DEBUG?",
+      "answer": "Включает отладочные логи встроенных модулей по имени, например fs, net."
+    },
+    {
+      "id": 1040,
+      "type": "recall",
+      "text": "Чем pause()/resume() на Readable связаны с flowing mode?",
+      "answer": "resume и подписка на data включают flowing. pause останавливает автоматическую выдачу чанков."
+    }
+  ]
+}

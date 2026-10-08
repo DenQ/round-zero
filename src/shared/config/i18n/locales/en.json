@@ -72,6 +72,7 @@
       "go": "Go",
       "sql": "SQL",
       "nest": "Nest",
+      "node": "Node.js",
       "react": "React"
     },
     "topics": {
@@ -114,6 +115,10 @@
       },
       "all": "All",
       "progress": "{{current}}/{{total}}",
+      "headerScore": "{{correct}} correct / {{errors}}",
+      "errorCount_one": "{{count}} error",
+      "errorCount_other": "{{count}} errors",
+      "log": "Log",
       "next": "Next",
       "correct": "Correct",
       "incorrect": "Incorrect",

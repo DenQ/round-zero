@@ -5,7 +5,7 @@ import { fileURLToPath } from 'node:url'
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..')
 const defaultPacksDir = path.join(rootDir, 'public/packs')
 
-const STACKS = ['js', 'ts', 'go', 'sql', 'nest', 'react']
+const STACKS = ['js', 'ts', 'go', 'sql', 'nest', 'node', 'react']
 const LEVELS = ['junior', 'middle', 'senior']
 const LOCALES = ['ru', 'en']
 const QUESTION_TYPES = ['code', 'text', 'boolean', 'recall']

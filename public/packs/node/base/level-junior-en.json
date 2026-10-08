@@ -1,0 +1,608 @@
+{
+  "stack": "node",
+  "topic": "base",
+  "level": "junior",
+  "locale": "en",
+  "questions": [
+    {
+      "id": 901,
+      "type": "code",
+      "language": "js",
+      "text": "console.log(1)\nprocess.nextTick(() => console.log(2))\nconsole.log(3)",
+      "options": [
+        "1, 3, 2",
+        "1, 2, 3",
+        "2, 1, 3",
+        "3, 2, 1"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 902,
+      "type": "code",
+      "language": "js",
+      "text": "process.nextTick(() => console.log(1))\nPromise.resolve().then(() => console.log(2))\nconsole.log(3)",
+      "options": [
+        "3, 2, 1",
+        "3, 1, 2",
+        "1, 2, 3",
+        "1, 3, 2"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 903,
+      "type": "code",
+      "language": "js",
+      "text": "setImmediate(() => console.log(1))\nprocess.nextTick(() => console.log(2))\nconsole.log(3)",
+      "options": [
+        "3, 1, 2",
+        "1, 2, 3",
+        "3, 2, 1",
+        "2, 3, 1"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 904,
+      "type": "code",
+      "language": "js",
+      "text": "setTimeout(() => console.log(1), 0)\nprocess.nextTick(() => console.log(2))\nconsole.log(3)",
+      "options": [
+        "3, 1, 2",
+        "2, 3, 1",
+        "1, 3, 2",
+        "3, 2, 1"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 905,
+      "type": "code",
+      "language": "js",
+      "text": "const b = Buffer.from('я')\nconsole.log(b.length)",
+      "options": [
+        "2",
+        "1",
+        "0",
+        "4"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 906,
+      "type": "code",
+      "language": "js",
+      "text": "console.log('я'.length)\nconsole.log(Buffer.byteLength('я'))",
+      "options": [
+        "2, 1",
+        "1, 2",
+        "2, 2",
+        "1, 1"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 907,
+      "type": "code",
+      "language": "js",
+      "text": "console.log(Buffer.alloc(2)[0])\nconsole.log(Buffer.alloc(2)[1])",
+      "options": [
+        "undefined, undefined",
+        "1, 1",
+        "0, 0",
+        "null, null"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 908,
+      "type": "code",
+      "language": "js",
+      "text": "console.log(Buffer.concat([Buffer.from('a'), Buffer.from('b')]).toString())",
+      "options": [
+        "a",
+        "b",
+        "a,b",
+        "ab"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 909,
+      "type": "code",
+      "language": "js",
+      "text": "const path = require('path')\nconsole.log(path.posix.join('/a', 'b', 'c'))",
+      "options": [
+        "/a/b/c",
+        "a/b/c",
+        "/a/b/c/",
+        "\\a\\b\\c"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 910,
+      "type": "code",
+      "language": "js",
+      "text": "const path = require('path')\nconsole.log(path.posix.basename('/a/b.txt'))",
+      "options": [
+        "/a/b.txt",
+        "b.txt",
+        "b",
+        "txt"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 911,
+      "type": "code",
+      "language": "js",
+      "text": "const path = require('path')\nconsole.log(path.posix.dirname('/a/b/c'))",
+      "options": [
+        "/a/b/c",
+        "c",
+        "/a/b",
+        "/a"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 912,
+      "type": "code",
+      "language": "js",
+      "text": "const path = require('path')\nconsole.log(path.posix.extname('a.b.c'))",
+      "options": [
+        ".b.c",
+        "c",
+        ".b",
+        ".c"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 913,
+      "type": "code",
+      "language": "js",
+      "text": "const { EventEmitter } = require('events')\nconst e = new EventEmitter()\ne.on('x', () => console.log(1))\ne.on('x', () => console.log(2))\ne.emit('x')",
+      "options": [
+        "1, 2",
+        "2, 1",
+        "1",
+        "2"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 914,
+      "type": "code",
+      "language": "js",
+      "text": "const { EventEmitter } = require('events')\nconst e = new EventEmitter()\ne.once('x', () => console.log(1))\ne.emit('x')\ne.emit('x')",
+      "options": [
+        "1, 1",
+        "1",
+        "2",
+        "0"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 915,
+      "type": "code",
+      "language": "js",
+      "text": "const { EventEmitter } = require('events')\nconst e = new EventEmitter()\ne.emit('x')\ne.on('x', () => console.log(1))\nconsole.log(2)",
+      "options": [
+        "1, 2",
+        "1",
+        "2",
+        "2, 1"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 916,
+      "type": "code",
+      "language": "js",
+      "text": "const { EventEmitter } = require('events')\nconst e = new EventEmitter()\ne.on('x', () => {})\ne.on('x', () => {})\nconsole.log(e.listenerCount('x'))",
+      "options": [
+        "0",
+        "1",
+        "x",
+        "2"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 917,
+      "type": "code",
+      "language": "js",
+      "text": "const module = { exports: {} }\nconst exports = module.exports\nexports.a = 1\nmodule.exports = { b: 2 }\nconsole.log(exports.a)\nconsole.log(module.exports.a ?? 0)",
+      "options": [
+        "1, 0",
+        "1, 1",
+        "0, 0",
+        "2, 1"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 918,
+      "type": "code",
+      "language": "js",
+      "text": "const module = { exports: {} }\nconst exports = module.exports\nexports.n = 3\nconsole.log(module.exports.n)",
+      "options": [
+        "undefined",
+        "3",
+        "0",
+        "{}"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 919,
+      "type": "code",
+      "language": "js",
+      "text": "console.log(new URL('https://a.test/x?y=1').pathname)",
+      "options": [
+        "x",
+        "https://a.test/x",
+        "/x",
+        "/x?y=1"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 920,
+      "type": "code",
+      "language": "js",
+      "text": "console.log(Buffer.from([15]).toString('hex'))",
+      "options": [
+        "15",
+        "F",
+        "0x0f",
+        "0f"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 921,
+      "type": "code",
+      "language": "js",
+      "text": "console.log(Buffer.from('abcd').subarray(1, 3).toString())",
+      "options": [
+        "bc",
+        "abc",
+        "bcd",
+        "ab"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 922,
+      "type": "code",
+      "language": "js",
+      "text": "queueMicrotask(() => console.log(1))\nprocess.nextTick(() => console.log(2))\nconsole.log(3)",
+      "options": [
+        "3, 1, 2",
+        "3, 2, 1",
+        "2, 3, 1",
+        "1, 2, 3"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 923,
+      "type": "code",
+      "language": "js",
+      "text": "process.nextTick(() => {\n  console.log(1)\n  process.nextTick(() => console.log(2))\n})\nconsole.log(3)",
+      "options": [
+        "1, 2, 3",
+        "3, 2, 1",
+        "3, 1, 2",
+        "1, 3, 2"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 924,
+      "type": "code",
+      "language": "js",
+      "text": "const { EventEmitter } = require('events')\nconst e = new EventEmitter()\nconsole.log(e.emit('x') ? 1 : 0)\ne.on('x', () => {})\nconsole.log(e.emit('x') ? 1 : 0)",
+      "options": [
+        "1, 1",
+        "1, 0",
+        "0, 0",
+        "0, 1"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 925,
+      "type": "text",
+      "text": "What do V8 and libuv do in Node?",
+      "options": [
+        "V8 runs JS. libuv provides the event loop, timers, and async I/O",
+        "libuv runs JS. V8 only draws the console",
+        "Both do the same thing: they read files",
+        "V8 is npm. libuv is package.json"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 926,
+      "type": "text",
+      "text": "Why is JS in Node called single-threaded?",
+      "options": [
+        "All I/O runs on the same thread as your for-loop",
+        "JS runs on one thread. libuv I/O may use a thread pool, but the callback returns to the JS thread",
+        "Node starts a thread per require",
+        "Single-threaded means you cannot open two files"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 927,
+      "type": "text",
+      "text": "What is an error-first callback in Node?",
+      "options": [
+        "The first argument is the result; the error is on this",
+        "Errors are thrown; the callback only carries data",
+        "The first argument is Error or null, then the data",
+        "The error is the last argument, as in the browser"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 928,
+      "type": "text",
+      "text": "How does fs.readFile differ from fs.readFileSync in an HTTP server?",
+      "options": [
+        "Neither blocks the loop. Only the name differs",
+        "readFileSync is faster, so it belongs in every request",
+        "readFile only works with JSON",
+        "readFile yields to the loop and does not hold the JS thread during the read. readFileSync blocks the loop until the read finishes"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 929,
+      "type": "text",
+      "text": "What does require do on a second load of the same file?",
+      "options": [
+        "It returns the cached module.exports and does not run the file again",
+        "It always runs the file from scratch",
+        "It deletes the file from disk",
+        "It works once per process; the second call throws"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 930,
+      "type": "text",
+      "text": "Where does __dirname come from in CommonJS?",
+      "options": [
+        "It is a browser global; Node only proxies it",
+        "Node wraps the file in a function and passes that file’s directory path",
+        "It is process.cwd(), always the directory where you launched node",
+        "__dirname exists only in ESM"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 931,
+      "type": "text",
+      "text": "How do you enable ESM for a package’s .js files in Node?",
+      "options": [
+        "Set NODE_ESM=1",
+        "Rename node_modules",
+        "Set \"type\": \"module\" in package.json",
+        "Node cannot do ESM; even .mjs does not work"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 932,
+      "type": "text",
+      "text": "What is process.argv in Node?",
+      "options": [
+        "Only npm flags",
+        "Environment variables as a list",
+        "The current working directory",
+        "The argument array: the node path, the script path, then the command-line arguments"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 933,
+      "type": "text",
+      "text": "What type are process.env values?",
+      "options": [
+        "Strings. Even numeric-looking values arrive as strings",
+        "Node parses numbers and booleans for you",
+        "Only Buffer",
+        "JS cannot read process.env"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 934,
+      "type": "text",
+      "text": "Is EventEmitter e.emit(\"x\") synchronous?",
+      "options": [
+        "No. emit always goes through setTimeout(0)",
+        "Yes. Listeners run at once, on the same stack, before emit returns",
+        "Only if the event name is data",
+        "emit puts listeners on the thread pool"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 935,
+      "type": "text",
+      "text": "Does Node have a global window?",
+      "options": [
+        "Yes. It is an alias of process",
+        "Yes, the same as in the browser",
+        "No. window is a browser global. Node uses globalThis for the global object",
+        "window appears after http.createServer"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 936,
+      "type": "text",
+      "text": "What do npm scripts from package.json do?",
+      "options": [
+        "They are comments; npm does not run them",
+        "They only run in the browser",
+        "Each script starts a separate Node cluster",
+        "npm run executes the command and puts node_modules/.bin on PATH"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 937,
+      "type": "boolean",
+      "text": "A long synchronous for-loop blocks the Node event loop.",
+      "correct": true
+    },
+    {
+      "id": 938,
+      "type": "boolean",
+      "text": "An ESM module has __dirname out of the box, the same as CommonJS.",
+      "correct": false
+    },
+    {
+      "id": 939,
+      "type": "boolean",
+      "text": "require in CommonJS is synchronous.",
+      "correct": true
+    },
+    {
+      "id": 940,
+      "type": "boolean",
+      "text": "Buffer.from(\"hi\") in Node is a JS string.",
+      "correct": false
+    },
+    {
+      "id": 941,
+      "type": "boolean",
+      "text": "process.exit() ends the process without waiting for unfinished I/O.",
+      "correct": true
+    },
+    {
+      "id": 942,
+      "type": "boolean",
+      "text": "Two different new EventEmitter() instances do not hear each other’s events.",
+      "correct": true
+    },
+    {
+      "id": 943,
+      "type": "boolean",
+      "text": "process.nextTick is the timers phase of the libuv loop.",
+      "correct": false
+    },
+    {
+      "id": 944,
+      "type": "boolean",
+      "text": "fs.readFile without a callback or a promise turns the file into an object by itself.",
+      "correct": false
+    },
+    {
+      "id": 945,
+      "type": "boolean",
+      "text": "The http.createServer callback runs for every incoming request.",
+      "correct": true
+    },
+    {
+      "id": 946,
+      "type": "boolean",
+      "text": "globalThis.Buffer in Node is the same constructor as Buffer.",
+      "correct": true
+    },
+    {
+      "id": 947,
+      "type": "boolean",
+      "text": "npm install always deletes package-lock.json.",
+      "correct": false
+    },
+    {
+      "id": 948,
+      "type": "boolean",
+      "text": "At the start of a CJS file, exports and module.exports are the same object.",
+      "correct": true
+    },
+    {
+      "id": 949,
+      "type": "recall",
+      "text": "Why does Node need libuv?",
+      "answer": "The event loop, timers, sockets, and async I/O that JS cannot do alone."
+    },
+    {
+      "id": 950,
+      "type": "recall",
+      "text": "What is the first argument of a classic Node callback?",
+      "answer": "An error, or null when there is no error."
+    },
+    {
+      "id": 951,
+      "type": "recall",
+      "text": "How do you get the current file’s directory in CommonJS?",
+      "answer": "__dirname. It is not process.cwd()."
+    },
+    {
+      "id": 952,
+      "type": "recall",
+      "text": "Which package.json field turns on ESM for .js files?",
+      "answer": "\"type\": \"module\"."
+    },
+    {
+      "id": 953,
+      "type": "recall",
+      "text": "Why is readFileSync dangerous inside a request handler?",
+      "answer": "It blocks the JS thread and the event loop until the disk answers."
+    },
+    {
+      "id": 954,
+      "type": "recall",
+      "text": "What is in process.argv[1]?",
+      "answer": "The path to the script being run. argv[0] is the node binary."
+    },
+    {
+      "id": 955,
+      "type": "recall",
+      "text": "How does EventEmitter.once differ from on?",
+      "answer": "once removes the listener after the first call."
+    },
+    {
+      "id": 956,
+      "type": "recall",
+      "text": "What does a Buffer store?",
+      "answer": "Raw bytes of a fixed length, not a JS string."
+    },
+    {
+      "id": 957,
+      "type": "recall",
+      "text": "What does a second require of the same file return?",
+      "answer": "The same cached exports, without running the file again."
+    },
+    {
+      "id": 958,
+      "type": "recall",
+      "text": "Why is process.exitCode better than a bare process.exit() at the end of work?",
+      "answer": "The exit code is stored, and the process can finish I/O and then exit on its own."
+    },
+    {
+      "id": 959,
+      "type": "recall",
+      "text": "Does ESM have module.exports out of the box?",
+      "answer": "No. ESM exports with export / export default."
+    },
+    {
+      "id": 960,
+      "type": "recall",
+      "text": "What does path.posix.join do with path segments?",
+      "answer": "It joins them with /, normalizing extra slashes, in POSIX style."
+    }
+  ]
+}

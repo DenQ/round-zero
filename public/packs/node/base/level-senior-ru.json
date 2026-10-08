@@ -1,0 +1,1008 @@
+{
+  "stack": "node",
+  "topic": "base",
+  "level": "senior",
+  "locale": "ru",
+  "questions": [
+    {
+      "id": 1041,
+      "type": "code",
+      "language": "js",
+      "text": "const { AsyncLocalStorage } = require('async_hooks')\nconst als = new AsyncLocalStorage()\nals.run({ n: 1 }, () => {\n  console.log(als.getStore().n)\n})\nconsole.log(als.getStore() ? 1 : 0)",
+      "options": [
+        "1, 0",
+        "1, 1",
+        "0, 0",
+        "0, 1"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1042,
+      "type": "code",
+      "language": "js",
+      "text": "const { AsyncLocalStorage } = require('async_hooks')\nconst als = new AsyncLocalStorage()\nPromise.resolve().then(() => {\n  console.log(als.getStore() ? 1 : 0)\n})\nals.run(1, () => {\n  Promise.resolve().then(() => console.log(als.getStore()))\n})",
+      "options": [
+        "1, 0",
+        "1, 1",
+        "0, 1",
+        "0, 0"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1043,
+      "type": "code",
+      "language": "js",
+      "text": "const crypto = require('crypto')\ntry {\n  crypto.timingSafeEqual(Buffer.from('a'), Buffer.from('ab'))\n  console.log(1)\n} catch {\n  console.log(2)\n}",
+      "options": [
+        "1",
+        "0",
+        "2",
+        "ab"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1044,
+      "type": "code",
+      "language": "js",
+      "text": "const crypto = require('crypto')\nconsole.log(crypto.timingSafeEqual(Buffer.from('ab'), Buffer.from('ac')) ? 1 : 0)",
+      "options": [
+        "1",
+        "true",
+        "ab",
+        "0"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1045,
+      "type": "code",
+      "language": "js",
+      "text": "const o = { n: 1 }\nconst c = structuredClone(o)\nc.n = 2\nconsole.log(o.n)",
+      "options": [
+        "1",
+        "2",
+        "undefined",
+        "0"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1046,
+      "type": "code",
+      "language": "js",
+      "text": "const b = Buffer.from([18, 52])\nb.swap16()\nconsole.log(b[0])\nconsole.log(b[1])",
+      "options": [
+        "18, 52",
+        "52, 18",
+        "0, 0",
+        "34, 12"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1047,
+      "type": "code",
+      "language": "js",
+      "text": "const b = Buffer.alloc(4)\nb.writeInt32BE(1)\nconsole.log(b[3])",
+      "options": [
+        "0",
+        "4",
+        "1",
+        "255"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1048,
+      "type": "code",
+      "language": "js",
+      "text": "console.log(Buffer.from([1, 0, 0, 0]).readInt32LE(0))",
+      "options": [
+        "0",
+        "16777216",
+        "256",
+        "1"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1049,
+      "type": "code",
+      "language": "js",
+      "text": "const vm = require('vm')\nconst ctx = { n: 1 }\nvm.runInNewContext('n = 2', ctx)\nconsole.log(ctx.n)",
+      "options": [
+        "2",
+        "1",
+        "undefined",
+        "0"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1050,
+      "type": "code",
+      "language": "js",
+      "text": "const vm = require('vm')\nlet n = 1\nvm.runInNewContext('n = 2')\nconsole.log(n)",
+      "options": [
+        "2",
+        "1",
+        "undefined",
+        "0"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1051,
+      "type": "code",
+      "language": "js",
+      "text": "const path = require('path')\nconsole.log(path.posix.resolve('/a', '/b'))",
+      "options": [
+        "/a/b",
+        "/a//b",
+        "/b",
+        "a/b"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1052,
+      "type": "code",
+      "language": "js",
+      "text": "const path = require('path')\nconsole.log(path.posix.parse('/a/b.txt').name)",
+      "options": [
+        "/a/b.txt",
+        "b.txt",
+        ".txt",
+        "b"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1053,
+      "type": "code",
+      "language": "js",
+      "text": "const { EventEmitter } = require('events')\nconst e = new EventEmitter()\ne.on('error', () => console.log(1))\ne.emit('error', new Error('x'))\nconsole.log(2)",
+      "options": [
+        "1, 2",
+        "2",
+        "1",
+        "2, 1"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1054,
+      "type": "code",
+      "language": "js",
+      "text": "const { EventEmitter } = require('events')\nconst e = new EventEmitter()\nEventEmitter.once(e, 'x').then(([n]) => console.log(n))\ne.emit('x', 5)",
+      "options": [
+        "0",
+        "5",
+        "x",
+        "1"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1055,
+      "type": "code",
+      "language": "js",
+      "text": "setImmediate(() => {\n  process.nextTick(() => console.log(1))\n  console.log(2)\n})",
+      "options": [
+        "1, 2",
+        "1",
+        "2, 1",
+        "2"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1056,
+      "type": "code",
+      "language": "js",
+      "text": "console.log(Buffer.byteLength('a', 'utf16le'))",
+      "options": [
+        "1",
+        "0",
+        "4",
+        "2"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1057,
+      "type": "code",
+      "language": "js",
+      "text": "console.log(new TextDecoder().decode(Buffer.from([65])))",
+      "options": [
+        "A",
+        "65",
+        "0x41",
+        "undefined"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1058,
+      "type": "code",
+      "language": "js",
+      "text": "const { types } = require('util')\nconsole.log(types.isNativeError(new Error('x')) ? 1 : 0)\nconsole.log(types.isNativeError({ message: 'x' }) ? 1 : 0)",
+      "options": [
+        "0, 1",
+        "1, 0",
+        "1, 1",
+        "0, 0"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1059,
+      "type": "code",
+      "language": "js",
+      "text": "const a = Buffer.alloc(4)\nconsole.log(a.write('hi'))",
+      "options": [
+        "hi",
+        "4",
+        "2",
+        "0"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1060,
+      "type": "code",
+      "language": "js",
+      "text": "const { EventEmitter } = require('events')\nconst e = new EventEmitter()\nconst f = () => {}\ne.on('x', f)\nconsole.log(e.rawListeners('x').includes(f) ? 1 : 0)",
+      "options": [
+        "0",
+        "f",
+        "x",
+        "1"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1061,
+      "type": "code",
+      "language": "js",
+      "text": "const { AsyncLocalStorage } = require('async_hooks')\nconst als = new AsyncLocalStorage()\nals.enterWith({ n: 3 })\nconsole.log(als.getStore().n)\nals.disable()\nconsole.log(als.getStore() ? 1 : 0)",
+      "options": [
+        "3, 0",
+        "3, 1",
+        "0, 0",
+        "1, 0"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1062,
+      "type": "code",
+      "language": "js",
+      "text": "const crypto = require('crypto')\nconsole.log(crypto.timingSafeEqual(Buffer.from('zz'), Buffer.from('zz')) ? 1 : 0)",
+      "options": [
+        "0",
+        "1",
+        "zz",
+        "2"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1063,
+      "type": "code",
+      "language": "js",
+      "text": "const { MessageChannel } = require('worker_threads')\nconst { port1, port2 } = new MessageChannel()\nport1.on('message', (n) => console.log(n))\nport2.postMessage(4)",
+      "options": [
+        "0",
+        "undefined",
+        "4",
+        "1"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1064,
+      "type": "code",
+      "language": "js",
+      "text": "const buf = Buffer.from('α')\nconsole.log(buf.length)",
+      "options": [
+        "1",
+        "α",
+        "0",
+        "2"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1065,
+      "type": "code",
+      "language": "js",
+      "text": "const { Transform } = require('stream')\nlet n = 0\nconst t = new Transform({\n  transform(chunk, _enc, cb) {\n    n += 1\n    cb(null, chunk)\n  },\n  flush(cb) {\n    console.log(n)\n    cb()\n  },\n})\nt.on('data', () => {})\nt.write('a')\nt.write('b')\nt.end()",
+      "options": [
+        "2",
+        "1",
+        "0",
+        "ab"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1066,
+      "type": "code",
+      "language": "js",
+      "text": "const { Readable } = require('stream')\nconst r = Readable.from([Buffer.from('x')])\nr.on('end', () => console.log(1))\nr.on('data', () => console.log(2))",
+      "options": [
+        "1, 2",
+        "2, 1",
+        "1",
+        "2"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1067,
+      "type": "code",
+      "language": "js",
+      "text": "const { Buffer: B } = require('buffer')\nconsole.log(B.isBuffer(B.from('a')) ? 1 : 0)\nconsole.log(B.isBuffer(Uint8Array.from([1])) ? 1 : 0)",
+      "options": [
+        "1, 1",
+        "0, 1",
+        "1, 0",
+        "0, 0"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1068,
+      "type": "code",
+      "language": "js",
+      "text": "const u = new URL('https://a.test/path')\nu.pathname = '/z'\nconsole.log(u.pathname)",
+      "options": [
+        "path",
+        "/path",
+        "z",
+        "/z"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1069,
+      "type": "code",
+      "language": "js",
+      "text": "const { EventEmitter } = require('events')\nconst e = new EventEmitter()\ne.setMaxListeners(1)\ne.on('x', () => {})\nconsole.log(e.getMaxListeners())",
+      "options": [
+        "1",
+        "10",
+        "0",
+        "2"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1070,
+      "type": "code",
+      "language": "js",
+      "text": "const src = Buffer.from([1, 2, 3])\nconsole.log(src.subarray(0, 2).length)\nsrc[0] = 9\nconsole.log(src.subarray(0, 1)[0])",
+      "options": [
+        "2, 1",
+        "2, 9",
+        "1, 9",
+        "2, 2"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1071,
+      "type": "code",
+      "language": "js",
+      "text": "process.nextTick(() => console.log(1))\nsetImmediate(() => {\n  process.nextTick(() => console.log(2))\n  console.log(3)\n})",
+      "options": [
+        "1, 2, 3",
+        "3, 1, 2",
+        "1, 3, 2",
+        "2, 1, 3"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1072,
+      "type": "code",
+      "language": "js",
+      "text": "const { once, EventEmitter } = require('events')\nconst e = new EventEmitter()\nonce(e, 'y').then(() => console.log(1))\ne.emit('y')\nconsole.log(2)",
+      "options": [
+        "1, 2",
+        "1",
+        "2",
+        "2, 1"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1073,
+      "type": "code",
+      "language": "js",
+      "text": "const { PassThrough } = require('stream')\nconst a = new PassThrough()\nconst b = new PassThrough()\nb.on('data', (c) => console.log(String(c)))\na.pipe(b)\na.end('8')",
+      "options": [
+        "8",
+        "undefined",
+        "0",
+        "88"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1074,
+      "type": "code",
+      "language": "js",
+      "text": "const { debuglog } = require('util')\nconst d = debuglog('probe')\nconsole.log(typeof d === 'function' ? 1 : 0)",
+      "options": [
+        "0",
+        "1",
+        "probe",
+        "function"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1075,
+      "type": "code",
+      "language": "js",
+      "text": "const { types } = require('util')\nconsole.log(types.isSet(new Set()) ? 1 : 0)\nconsole.log(types.isSet([]) ? 1 : 0)",
+      "options": [
+        "0, 0",
+        "0, 1",
+        "1, 0",
+        "1, 1"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1076,
+      "type": "code",
+      "language": "js",
+      "text": "const b = Buffer.alloc(3)\nb.writeUInt16BE(258, 0)\nconsole.log(b[0])\nconsole.log(b[1])",
+      "options": [
+        "1, 1",
+        "2, 2",
+        "258, 0",
+        "1, 2"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1077,
+      "type": "code",
+      "language": "js",
+      "text": "const { EventEmitter } = require('events')\nconst e = new EventEmitter()\ne.on('x', () => console.log(1))\ne.on('x', () => {\n  throw new Error('boom')\n})\ne.on('x', () => console.log(2))\ntry {\n  e.emit('x')\n} catch {\n  console.log(3)\n}",
+      "options": [
+        "1, 3",
+        "1, 2, 3",
+        "3",
+        "1, 2"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1078,
+      "type": "code",
+      "language": "js",
+      "text": "const { pipeline, Readable, Writable } = require('stream')\nlet n = 0\nconst dest = new Writable({\n  write(chunk, _enc, cb) {\n    n += Number(chunk)\n    cb()\n  },\n})\npipeline(Readable.from(['1', '2']), dest, (err) => {\n  console.log(err ? 0 : n)\n})",
+      "options": [
+        "0",
+        "3",
+        "12",
+        "1"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1079,
+      "type": "code",
+      "language": "js",
+      "text": "const { pathToFileURL } = require('url')\nconsole.log(pathToFileURL('/a/b').pathname.endsWith('/a/b') ? 1 : 0)",
+      "options": [
+        "0",
+        "file",
+        "1",
+        "/a/b"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1080,
+      "type": "code",
+      "language": "js",
+      "text": "const { inspect } = require('util')\nconsole.log(inspect({ n: 1 }).includes('1') ? 1 : 0)",
+      "options": [
+        "0",
+        "n",
+        "{ n: 1 }",
+        "1"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1081,
+      "type": "text",
+      "text": "Почему нельзя «починить» процесс в uncaughtException и продолжить принимать трафик?",
+      "options": [
+        "После необработанного throw куча, хендлы и инварианты могут быть сломаны. Логируют, закрывают сервер и выходят",
+        "uncaughtException в Node не существует",
+        "Так рекомендует документация для нулевого даунтайма",
+        "После него автоматически чистится вся память"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1082,
+      "type": "text",
+      "text": "Зачем sticky sessions у cluster за балансировщиком?",
+      "options": [
+        "Потому что heap общий и сессия обязана жить в одном воркере V8",
+        "Процессы не делят память. WebSocket и in-memory сессии привязаны к одному воркеру, иначе следующий пакет уйдёт в другой процесс",
+        "sticky нужен только для fs",
+        "cluster сам реплицирует объекты между процессами"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1083,
+      "type": "text",
+      "text": "Что даёт SharedArrayBuffer между worker_threads?",
+      "options": [
+        "Это то же самое, что JSON в postMessage",
+        "Это общий heap всех процессов cluster",
+        "Общую память байтов между потоками одного процесса. Гонки без Atomics. Cluster так память не делит",
+        "Это сокет для HTTP/2"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1084,
+      "type": "text",
+      "text": "Как HTTP-ответ проявляет backpressure в Node?",
+      "options": [
+        "res.write всегда копирует всё в ядро без паузы",
+        "Это касается только входящего req",
+        "highWaterMark на IncomingMessage всегда 0",
+        "res.write возвращает false, когда сокет не принимает. Нужно ждать drain, а не забивать память"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1085,
+      "type": "text",
+      "text": "Что такое dual package hazard?",
+      "options": [
+        "Пакет с CJS и ESM entry может загрузиться дважды: два синглтона, два instanceof",
+        "Это ошибка npm ci",
+        "Это когда exports забыли указать",
+        "Это только про native addons"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1086,
+      "type": "text",
+      "text": "Зачем N-API вместо прямых V8 API в аддонах?",
+      "options": [
+        "N-API работает только в браузере",
+        "Стабильный ABI между версиями Node. Пересборка под каждый minor V8 не нужна",
+        "N-API быстрее любого JS на порядок всегда",
+        "N-API запрещает потоки"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1087,
+      "type": "text",
+      "text": "Как EventEmitter даёт утечку памяти в долгоживущем процессе?",
+      "options": [
+        "emit копирует всё в disk cache",
+        "maxListeners всегда режет слушателей, утечки нет",
+        "on без off держит колбэки и замыкания. Особенно если подписка на каждый запрос",
+        "Утекает только если имя события — error"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1088,
+      "type": "text",
+      "text": "Как закрыть path traversal в раздаче файлов?",
+      "options": [
+        "Склеить user path через + и отдать",
+        "decodeURIComponent достаточно всегда",
+        "path.join сам запрещает ..",
+        "Нормализовать путь и проверить, что результат остаётся внутри корневого каталога"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1089,
+      "type": "text",
+      "text": "Зачем crypto.timingSafeEqual при сравнении секретов?",
+      "options": [
+        "Обычный === зависит от данных по времени. timingSafeEqual сравнивает буферы за постоянное время при равной длине",
+        "Он шифрует строки AES",
+        "Он нужен только для HTTP/2",
+        "Он принимает строки разной длины без ошибки"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1090,
+      "type": "text",
+      "text": "Кто реализует fetch в современном Node?",
+      "options": [
+        "XMLHttpRequest из jsdom",
+        "Клиент undici, не браузерный XHR",
+        "http.request нельзя использовать рядом",
+        "fetch есть только с флагом --experimental-vm-modules"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1091,
+      "type": "text",
+      "text": "Как ловят event loop lag в проде?",
+      "options": [
+        "Смотрят только RSS в top",
+        "process.hrtime в конструкторе Buffer",
+        "perf_hooks.monitorEventLoopDelay или свой histogram по setInterval: насколько таймер опаздывает относительно nominal delay",
+        "Lag нельзя измерить из JS"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1092,
+      "type": "text",
+      "text": "Зачем AsyncLocalStorage в HTTP-сервере?",
+      "options": [
+        "Чтобы заменить cluster",
+        "Чтобы ускорить JSON.parse",
+        "Это алиас process.env",
+        "Протащить request-id и контекст через await без аргументов в каждой функции. Это не глобальная переменная на весь процесс"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1093,
+      "type": "text",
+      "text": "Что делает permission model в Node?",
+      "options": [
+        "Ограничивает доступ процесса к fs, сети и child_process, если включить флаги permissions",
+        "Это npm audit",
+        "Это замена TLS",
+        "Включено всегда и ломает require"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1094,
+      "type": "text",
+      "text": "Что такое single executable application (SEA) в Node?",
+      "options": [
+        "Это Docker-образ",
+        "Снимок приложения внутри бинарника node, чтобы раздавать один файл без отдельного node_modules на машине пользователя",
+        "Это только pkg от третьей стороны, в ядре нет",
+        "Это режим cluster"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1095,
+      "type": "text",
+      "text": "Зачем keep-alive и пул сокетов на исходящем HTTP?",
+      "options": [
+        "Чтобы отключить TCP",
+        "Чтобы каждый запрос делал новый TLS с нуля — так надёжнее",
+        "Повторно использовать TCP/TLS вместо handshake на каждый запрос. Иначе latency и файловые дескрипторы растут",
+        "keep-alive работает только во входящем createServer"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1096,
+      "type": "text",
+      "text": "Что делают custom loader hooks (register) в Node?",
+      "options": [
+        "Патчат libuv на C++",
+        "Это только для CommonJS require.cache",
+        "Они ускоряют V8 JIT",
+        "Перехватывают resolve/load модулей: транспиляция, виртуальные спецификаторы, политика импорта"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1097,
+      "type": "text",
+      "text": "Чем isolate V8 отличается от OS-процесса?",
+      "options": [
+        "Isolate — куча и набор контекстов внутри процесса. Падение native кода и лимиты OS всё ещё на процесс",
+        "Isolate — это синоним PID",
+        "У isolate своя таблица процессов ядра",
+        "Worker thread не имеет isolate"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1098,
+      "type": "text",
+      "text": "JSON.parse и ключ __proto__: в чём риск?",
+      "options": [
+        "JSON.parse всегда исполняет код из строки",
+        "В зависимости от парсера и слияния объектов можно получить prototype pollution. Не мержить незнакомый JSON в Object.prototype цепочкой",
+        "Риска нет: JSON не может содержать __proto__",
+        "Это ломает только Buffer"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1099,
+      "type": "text",
+      "text": "Как корректно завершить HTTP-сервер по SIGTERM?",
+      "options": [
+        "process.exit(0) сразу в обработчике, сокеты оборвутся сами как надо",
+        "Игнорировать сигнал, Node сам дренирует keep-alive вечно",
+        "server.close перестаёт принимать новые соединения, дождаться активных запросов (или таймаут), потом выйти",
+        "Удалить cluster.settings и всё"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1100,
+      "type": "text",
+      "text": "Почему heap snapshot полезен при росте RSS?",
+      "options": [
+        "Он показывает CPU по функциям, как flamegraph",
+        "Он ускоряет GC",
+        "Он заменяет access log",
+        "Видно удерживаемые объекты и ребра: замыкания, кэши, слушатели — кто держит память"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1101,
+      "type": "boolean",
+      "text": "После uncaughtException процесс нельзя считать безопасным для продолжения работы.",
+      "correct": true
+    },
+    {
+      "id": 1102,
+      "type": "boolean",
+      "text": "cluster.fork делит одну V8-кучу между воркерами.",
+      "correct": false
+    },
+    {
+      "id": 1103,
+      "type": "boolean",
+      "text": "res.write(false) значит: подожди drain, прежде чем писать ещё.",
+      "correct": true
+    },
+    {
+      "id": 1104,
+      "type": "boolean",
+      "text": "timingSafeEqual принимает буферы разной длины и просто возвращает false.",
+      "correct": false
+    },
+    {
+      "id": 1105,
+      "type": "boolean",
+      "text": "AsyncLocalStorage сохраняет store через await и then в том же чейне, если контекст не потеряли.",
+      "correct": true
+    },
+    {
+      "id": 1106,
+      "type": "boolean",
+      "text": "Custom ESM loader hooks выполняются в том же isolate, что и пользовательский код, без отдельной политики.",
+      "correct": false
+    },
+    {
+      "id": 1107,
+      "type": "boolean",
+      "text": "N-API аддон переживает обновление Node без перекомпиляции чаще, чем NAN/сырой V8.",
+      "correct": true
+    },
+    {
+      "id": 1108,
+      "type": "boolean",
+      "text": "path.join(root, userInput) сам гарантирует, что файл не выйдет за root.",
+      "correct": false
+    },
+    {
+      "id": 1109,
+      "type": "boolean",
+      "text": "Мониторинг event loop delay ловит синхронную блокировку JS-потока, которую CPU в воркере не покажет как loop lag этого процесса.",
+      "correct": true
+    },
+    {
+      "id": 1110,
+      "type": "boolean",
+      "text": "fetch в Node — это обёртка над XMLHttpRequest.",
+      "correct": false
+    },
+    {
+      "id": 1111,
+      "type": "boolean",
+      "text": "MessagePort.postMessage по умолчанию structured clone, transfer list отдаёт ownership буфера.",
+      "correct": true
+    },
+    {
+      "id": 1112,
+      "type": "boolean",
+      "text": "vm.runInNewContext даёт полную изоляцию native-аддонов и процесса от побега.",
+      "correct": false
+    },
+    {
+      "id": 1113,
+      "type": "boolean",
+      "text": "server.close() перестаёт принимать новые соединения, уже открытые при этом не убивает мгновенно.",
+      "correct": true
+    },
+    {
+      "id": 1114,
+      "type": "boolean",
+      "text": "Permission model в Node включён по умолчанию для всех скриптов.",
+      "correct": false
+    },
+    {
+      "id": 1115,
+      "type": "boolean",
+      "text": "Утечка: кэш Map без вытеснения на каждый уникальный ключ запроса растёт неограниченно.",
+      "correct": true
+    },
+    {
+      "id": 1116,
+      "type": "boolean",
+      "text": "HTTP/2 в Node убирает backpressure: write всегда true.",
+      "correct": false
+    },
+    {
+      "id": 1117,
+      "type": "boolean",
+      "text": "worker_threads.Worker — отдельный isolate, не отдельный PID.",
+      "correct": true
+    },
+    {
+      "id": 1118,
+      "type": "boolean",
+      "text": "exports в package.json не может спрятать файлы от глубокого import, если задан main.",
+      "correct": false
+    },
+    {
+      "id": 1119,
+      "type": "boolean",
+      "text": "keep-alive timeout на сервере нужно согласовывать с балансировщиком, иначе тот режет соединение первым.",
+      "correct": true
+    },
+    {
+      "id": 1120,
+      "type": "boolean",
+      "text": "SEA убирает необходимость думать про секреты: ключи внутри бинарника нельзя извлечь.",
+      "correct": false
+    },
+    {
+      "id": 1121,
+      "type": "recall",
+      "text": "Что сделать в обработчике uncaughtException в проде?",
+      "answer": "Залогировать, начать graceful shutdown, выйти. Не обслуживать новые запросы как ни в чём не бывало."
+    },
+    {
+      "id": 1122,
+      "type": "recall",
+      "text": "Почему in-memory сессия ломается за cluster без sticky?",
+      "answer": "Следующий TCP может попасть в другой процесс без этой памяти."
+    },
+    {
+      "id": 1123,
+      "type": "recall",
+      "text": "Что вернёт res.write, если ядро не принимает данные?",
+      "answer": "false. Дальше ждут drain."
+    },
+    {
+      "id": 1124,
+      "type": "recall",
+      "text": "Зачем Atomics на SharedArrayBuffer?",
+      "answer": "Чтобы не гонять гонки на общих индексах между потоками."
+    },
+    {
+      "id": 1125,
+      "type": "recall",
+      "text": "Что такое dual package hazard одним предложением?",
+      "answer": "Один пакет загружен и как CJS, и как ESM — два модуля состояния."
+    },
+    {
+      "id": 1126,
+      "type": "recall",
+      "text": "Чем N-API лучше сырого V8 API?",
+      "answer": "Стабильный ABI, меньше пересборок на новый Node."
+    },
+    {
+      "id": 1127,
+      "type": "recall",
+      "text": "Как поймать утечку слушателей?",
+      "answer": "Warning maxListeners, heap snapshot, снять on в конце запроса."
+    },
+    {
+      "id": 1128,
+      "type": "recall",
+      "text": "Как защититься от path traversal?",
+      "answer": "resolve/normalize и проверка, что путь внутри root."
+    },
+    {
+      "id": 1129,
+      "type": "recall",
+      "text": "Когда timingSafeEqual бросает?",
+      "answer": "Если длины буферов разные."
+    },
+    {
+      "id": 1130,
+      "type": "recall",
+      "text": "Чем fetch в Node реализован?",
+      "answer": "Клиентом undici."
+    },
+    {
+      "id": 1131,
+      "type": "recall",
+      "text": "Как измерить задержку цикла событий?",
+      "answer": "monitorEventLoopDelay или насколько setInterval опаздывает."
+    },
+    {
+      "id": 1132,
+      "type": "recall",
+      "text": "Зачем ALS на запросе?",
+      "answer": "Контекст запроса (id, логгер) через async без прокидывания аргумента везде."
+    },
+    {
+      "id": 1133,
+      "type": "recall",
+      "text": "Что ограничивает permission model?",
+      "answer": "fs, сеть, worker, child_process — если включить --permission."
+    },
+    {
+      "id": 1134,
+      "type": "recall",
+      "text": "Что положить в обработчик SIGTERM?",
+      "answer": "close сервера, отказ от новых conn, таймаут на in-flight, exit."
+    },
+    {
+      "id": 1135,
+      "type": "recall",
+      "text": "Изолирует ли vm от native и процесса?",
+      "answer": "Нет. Это не песочница безопасности процесса."
+    },
+    {
+      "id": 1136,
+      "type": "recall",
+      "text": "Зачем пул исходящих HTTP-соединений?",
+      "answer": "Не делать TCP/TLS handshake на каждый запрос."
+    },
+    {
+      "id": 1137,
+      "type": "recall",
+      "text": "Worker thread — это новый процесс?",
+      "answer": "Нет. Новый isolate в том же PID."
+    },
+    {
+      "id": 1138,
+      "type": "recall",
+      "text": "Что смотреть в heap snapshot при росте памяти?",
+      "answer": "Кто удерживает объекты: кэши, замыкания, слушатели, отсоединённые буферы."
+    },
+    {
+      "id": 1139,
+      "type": "recall",
+      "text": "Зачем согласовать keep-alive с балансировщиком?",
+      "answer": "Иначе LB закроет сокет, а Node ещё считает его живым — обрыв запросов."
+    },
+    {
+      "id": 1140,
+      "type": "recall",
+      "text": "Можно ли считать SEA защитой секретов?",
+      "answer": "Нет. Бинарник можно разобрать, ключи из него извлекают."
+    }
+  ]
+}

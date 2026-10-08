@@ -19,9 +19,15 @@ export type DayActivity = {
   packs: Record<PackKey, PackAttempts>
 }
 
+export type QuestionAttempt = {
+  correct: boolean
+  at: string
+}
+
 export type QuestionActivity = {
   wins: ISODate[]
   loses: ISODate[]
+  log: QuestionAttempt[]
   meta: ActivityPackRef
 }
 
