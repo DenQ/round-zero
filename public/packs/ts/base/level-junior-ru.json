@@ -1,0 +1,608 @@
+{
+  "stack": "ts",
+  "topic": "base",
+  "level": "junior",
+  "locale": "ru",
+  "questions": [
+    {
+      "id": 1261,
+      "type": "code",
+      "language": "ts",
+      "text": "enum E { A, B }\nconsole.log(E.A)",
+      "options": [
+        "0",
+        "1",
+        "A",
+        "undefined"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1262,
+      "type": "code",
+      "language": "ts",
+      "text": "enum E { A, B }\nconsole.log(E[0])",
+      "options": [
+        "0",
+        "A",
+        "B",
+        "undefined"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1263,
+      "type": "code",
+      "language": "ts",
+      "text": "enum E { A = \"a\" }\nconsole.log(E.A)",
+      "options": [
+        "0",
+        "A",
+        "a",
+        "undefined"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1264,
+      "type": "code",
+      "language": "ts",
+      "text": "enum E { A = \"a\" }\nconsole.log(E[\"a\"])",
+      "options": [
+        "a",
+        "A",
+        "0",
+        "undefined"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1265,
+      "type": "code",
+      "language": "ts",
+      "text": "const x = \"4\" as unknown as number\nconsole.log(typeof x)",
+      "options": [
+        "string",
+        "number",
+        "object",
+        "undefined"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1266,
+      "type": "code",
+      "language": "ts",
+      "text": "const x = null!\nconsole.log(x)",
+      "options": [
+        "undefined",
+        "null",
+        "0",
+        "true"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1267,
+      "type": "code",
+      "language": "ts",
+      "text": "const o: { readonly n: number } = { n: 1 }\no.n = 2\nconsole.log(o.n)",
+      "options": [
+        "1",
+        "undefined",
+        "2",
+        "0"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1268,
+      "type": "code",
+      "language": "ts",
+      "text": "const o: { n?: number } = {}\nconsole.log(o.n)",
+      "options": [
+        "0",
+        "null",
+        "1",
+        "undefined"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1269,
+      "type": "code",
+      "language": "ts",
+      "text": "const t: [number, number] = [1, 2]\nt.push(3)\nconsole.log(t.length)",
+      "options": [
+        "3",
+        "2",
+        "1",
+        "4"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1270,
+      "type": "code",
+      "language": "ts",
+      "text": "class A {\n  constructor(public n: number) {}\n}\nconsole.log(new A(4).n)",
+      "options": [
+        "0",
+        "4",
+        "undefined",
+        "1"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1271,
+      "type": "code",
+      "language": "ts",
+      "text": "class A {}\nclass B extends A {}\nconsole.log(new B() instanceof A)",
+      "options": [
+        "false",
+        "undefined",
+        "true",
+        "A"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1272,
+      "type": "code",
+      "language": "ts",
+      "text": "interface I { n: number }\nclass A implements I { n = 1 }\ntry {\n  console.log(new A() instanceof I)\n} catch {\n  console.log(0)\n}",
+      "options": [
+        "1",
+        "true",
+        "false",
+        "0"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1273,
+      "type": "code",
+      "language": "ts",
+      "text": "function f(x: string): number\nfunction f(x: number): number\nfunction f(x: string | number) {\n  return typeof x === \"string\" ? 1 : 2\n}\nconsole.log(f(0))",
+      "options": [
+        "2",
+        "1",
+        "0",
+        "undefined"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1274,
+      "type": "code",
+      "language": "ts",
+      "text": "function f(): void {}\nconsole.log(f())",
+      "options": [
+        "null",
+        "undefined",
+        "void",
+        "0"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1275,
+      "type": "code",
+      "language": "ts",
+      "text": "class A { static n = 1 }\nconsole.log(A.n)\nconsole.log(new A().n)",
+      "options": [
+        "undefined, 1",
+        "1, 1",
+        "1, undefined",
+        "undefined, undefined"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1276,
+      "type": "code",
+      "language": "ts",
+      "text": "class A { get n() { return 3 } }\nconsole.log(new A().n)",
+      "options": [
+        "undefined",
+        "0",
+        "get",
+        "3"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1277,
+      "type": "code",
+      "language": "ts",
+      "text": "class A { n = 6 }\nconsole.log(new A().n)",
+      "options": [
+        "6",
+        "0",
+        "undefined",
+        "A"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1278,
+      "type": "code",
+      "language": "ts",
+      "text": "type Id = number\nconst id: Id = 8\nconsole.log(typeof id)",
+      "options": [
+        "object",
+        "number",
+        "Id",
+        "undefined"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1279,
+      "type": "code",
+      "language": "ts",
+      "text": "interface I { n: number }\nclass A implements I { n = 7 }\nconsole.log(new A().n)",
+      "options": [
+        "undefined",
+        "I",
+        "7",
+        "0"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1280,
+      "type": "code",
+      "language": "ts",
+      "text": "enum E { A = 1, B }\nconsole.log(E.B)",
+      "options": [
+        "1",
+        "0",
+        "3",
+        "2"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1281,
+      "type": "code",
+      "language": "ts",
+      "text": "class A {\n  n = 2\n  m = () => this.n\n}\nconst m = new A().m\nconsole.log(m())",
+      "options": [
+        "2",
+        "undefined",
+        "0",
+        "NaN"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1282,
+      "type": "code",
+      "language": "ts",
+      "text": "const n: number | null = null\nconsole.log(n ?? 5)",
+      "options": [
+        "null",
+        "5",
+        "0",
+        "undefined"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1283,
+      "type": "code",
+      "language": "ts",
+      "text": "const o: { n?: { m: number } } = {}\nconsole.log(o.n?.m)",
+      "options": [
+        "0",
+        "null",
+        "undefined",
+        "m"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1284,
+      "type": "code",
+      "language": "ts",
+      "text": "const x: number | string = 1\nconsole.log(typeof x)",
+      "options": [
+        "string",
+        "object",
+        "union",
+        "number"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1285,
+      "type": "text",
+      "text": "Что сравнивает структурная типизация при присваивании?",
+      "options": [
+        "Поля и их типы, а не имя типа",
+        "Конструктор, которым создано значение",
+        "Файл, в котором объявлен тип",
+        "Являются ли оба типа классами"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1286,
+      "type": "text",
+      "text": "Что нужно сделать, прежде чем использовать unknown как string?",
+      "options": [
+        "Ничего: у unknown доступны любые операции",
+        "Сузить тип проверкой, которую понимает компилятор",
+        "Вызвать рантайм-функцию unknown",
+        "Объявить значение через interface"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1287,
+      "type": "text",
+      "text": "Что означает тип never?",
+      "options": [
+        "Любое значение, как any",
+        "Значение, которое может быть null",
+        "Никакого значения. Проверка типов ставит его туда, куда управление не доходит",
+        "То же самое, что undefined"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1288,
+      "type": "text",
+      "text": "Что делает аннотация возвращаемого типа?",
+      "options": [
+        "Преобразует возвращённое значение к этому типу",
+        "Регистрирует функцию в пространстве типов",
+        "Бросает ошибку, если рантайм-тип другой",
+        "Проверяет возвращаемое выражение и не меняет само значение"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1289,
+      "type": "text",
+      "text": "Какие операции доступны у объединения A | B без сужения?",
+      "options": [
+        "Только те, что допустимы для обоих членов",
+        "Все операции A и все операции B",
+        "Только операции первого члена",
+        "Никакие"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1290,
+      "type": "text",
+      "text": "Что пересечение A & B требует от значения?",
+      "options": [
+        "Что оно подходит под A или под B",
+        "Что оно подходит и под A, и под B",
+        "Что оно не подходит ни под один из них",
+        "Что это кортеж из A и B"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1291,
+      "type": "text",
+      "text": "Для чего нужен keyof?",
+      "options": [
+        "Он читает свойство в рантайме",
+        "Он замораживает объект",
+        "Он строит тип ключей для проверки типов",
+        "Он создаёт enum"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1292,
+      "type": "text",
+      "text": "Что означает typeof на месте типа, например type T = typeof value?",
+      "options": [
+        "Вызывает JS-оператор typeof и сохраняет строку",
+        "Удаляет значение",
+        "Копирует объект в рантайме",
+        "Берёт тип этого значения для проверки типов"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1293,
+      "type": "text",
+      "text": "Чем является параметр типа у функции?",
+      "options": [
+        "Тип вызова, который выбирает компилятор. Отдельной JS-функции он не создаёт",
+        "Вторая функция на каждый тип",
+        "Рантайм-обёртка вокруг аргумента",
+        "Enum допустимых типов"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1294,
+      "type": "text",
+      "text": "Что implements меняет у класса?",
+      "options": [
+        "Цепочку прототипов",
+        "Ничего в рантайме. Он только проверяет, что класс совпадает с интерфейсом",
+        "Число параметров конструктора",
+        "Он выпускает интерфейс как объект"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1295,
+      "type": "text",
+      "text": "Когда проверяются типы параметров?",
+      "options": [
+        "Во время выполнения, на каждом аргументе",
+        "Они лежат в скрытом массиве",
+        "При компиляции, на месте вызова. В JS их нет",
+        "Только если файл импортирует reflect-metadata"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1296,
+      "type": "text",
+      "text": "Что any делает в месте использования?",
+      "options": [
+        "Запрещает любую операцию",
+        "Означает то же, что never",
+        "Печатает предупреждение в рантайме",
+        "Отключает проверку типов для этого значения"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1297,
+      "type": "boolean",
+      "text": "Два объектных типа с одинаковыми полями присваиваются друг другу.",
+      "correct": true
+    },
+    {
+      "id": 1298,
+      "type": "boolean",
+      "text": "Псевдоним типа можно вызвать через new.",
+      "correct": false
+    },
+    {
+      "id": 1299,
+      "type": "boolean",
+      "text": "never можно присвоить переменной любого другого типа.",
+      "correct": true
+    },
+    {
+      "id": 1300,
+      "type": "boolean",
+      "text": "unknown можно присвоить в string без сужения.",
+      "correct": false
+    },
+    {
+      "id": 1301,
+      "type": "boolean",
+      "text": "Класс может реализовать интерфейс.",
+      "correct": true
+    },
+    {
+      "id": 1302,
+      "type": "boolean",
+      "text": "readonly запрещает запись, когда код уже выполняется.",
+      "correct": false
+    },
+    {
+      "id": 1303,
+      "type": "boolean",
+      "text": "Интерфейс может расширять другой интерфейс.",
+      "correct": true
+    },
+    {
+      "id": 1304,
+      "type": "boolean",
+      "text": "keyof — это функция, которая есть в рантайме.",
+      "correct": false
+    },
+    {
+      "id": 1305,
+      "type": "boolean",
+      "text": "После компиляции обобщённая функция остаётся одной функцией.",
+      "correct": true
+    },
+    {
+      "id": 1306,
+      "type": "boolean",
+      "text": "Аннотация возвращаемого типа void означает, что функция возвращает null.",
+      "correct": false
+    },
+    {
+      "id": 1307,
+      "type": "boolean",
+      "text": "Знак ? у свойства говорит проверке типов, что свойства может не быть.",
+      "correct": true
+    },
+    {
+      "id": 1308,
+      "type": "boolean",
+      "text": "enum стирается так же, как interface.",
+      "correct": false
+    },
+    {
+      "id": 1309,
+      "type": "recall",
+      "text": "Какой тип принимает любое значение, но не даёт им пользоваться, пока тип не сузят?",
+      "answer": "unknown."
+    },
+    {
+      "id": 1310,
+      "type": "recall",
+      "text": "У какого типа нет ни одного значения?",
+      "answer": "never."
+    },
+    {
+      "id": 1311,
+      "type": "recall",
+      "text": "Какое ключевое слово объявляет набор именованных констант, который остаётся в JS?",
+      "answer": "enum."
+    },
+    {
+      "id": 1312,
+      "type": "recall",
+      "text": "Какое ключевое слово даёт типу новое имя и не создаёт значение?",
+      "answer": "type."
+    },
+    {
+      "id": 1313,
+      "type": "recall",
+      "text": "Какое ключевое слово проверяет класс на соответствие интерфейсу?",
+      "answer": "implements."
+    },
+    {
+      "id": 1314,
+      "type": "recall",
+      "text": "Какой оператор типа строит ключи другого типа?",
+      "answer": "keyof."
+    },
+    {
+      "id": 1315,
+      "type": "recall",
+      "text": "Какой оператор типа берёт тип уже объявленного значения?",
+      "answer": "typeof."
+    },
+    {
+      "id": 1316,
+      "type": "recall",
+      "text": "Какой знак после имени свойства говорит, что его можно не указывать?",
+      "answer": "?"
+    },
+    {
+      "id": 1317,
+      "type": "recall",
+      "text": "Какой знак говорит проверке типов, что значение не null и не undefined?",
+      "answer": "!"
+    },
+    {
+      "id": 1318,
+      "type": "recall",
+      "text": "Какое ключевое слово делает утверждение типа, которое стирается?",
+      "answer": "as."
+    },
+    {
+      "id": 1319,
+      "type": "recall",
+      "text": "Какой тип отключает проверку в месте использования?",
+      "answer": "any."
+    },
+    {
+      "id": 1320,
+      "type": "recall",
+      "text": "Чему равен первый член числового enum, если у него нет инициализатора?",
+      "answer": "0."
+    }
+  ]
+}

@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react'
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 import Chip from '@mui/material/Chip'
@@ -19,6 +20,7 @@ type QuestionCardProps = {
   selectedIndex?: number | null
   revealed?: boolean
   onSelect?: (optionIndex: number) => void
+  headerEnd?: ReactNode
 }
 
 export function QuestionCard({
@@ -29,21 +31,31 @@ export function QuestionCard({
   selectedIndex = null,
   revealed = false,
   onSelect,
+  headerEnd,
 }: QuestionCardProps) {
   const { t } = useTranslation()
 
   return (
     <Card variant="outlined" component="article">
       <CardContent>
-        <Stack direction="row" spacing={1} sx={{ mb: 1.5, alignItems: 'center', flexWrap: 'wrap' }}>
-          <Typography variant="subtitle2" color="text.secondary">
-            {t('quiz.question', { n: index + 1 })}
-          </Typography>
-          {question.type === 'code' && question.language ? (
-            <Chip size="small" label={question.language.toUpperCase()} />
+        <Stack
+          direction="row"
+          spacing={1}
+          sx={{ mb: 1.5, alignItems: 'center', justifyContent: 'space-between' }}
+        >
+          <Stack direction="row" spacing={1} sx={{ alignItems: 'center', flexWrap: 'wrap', minWidth: 0 }}>
+            <Typography variant="subtitle2" color="text.secondary">
+              {t('quiz.question', { n: index + 1 })}
+            </Typography>
+            {question.type === 'code' && question.language ? (
+              <Chip size="small" label={question.language.toUpperCase()} />
+            ) : null}
+            {topicLabel ? <Chip size="small" variant="outlined" label={topicLabel} /> : null}
+            {levelLabel ? <Chip size="small" variant="outlined" label={levelLabel} /> : null}
+          </Stack>
+          {headerEnd ? (
+            <Stack sx={{ flexShrink: 0, ml: 1 }}>{headerEnd}</Stack>
           ) : null}
-          {topicLabel ? <Chip size="small" variant="outlined" label={topicLabel} /> : null}
-          {levelLabel ? <Chip size="small" variant="outlined" label={levelLabel} /> : null}
         </Stack>
 
         {question.type === 'code' ? (

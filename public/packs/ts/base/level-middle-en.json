@@ -1,0 +1,808 @@
+{
+  "stack": "ts",
+  "topic": "base",
+  "level": "middle",
+  "locale": "en",
+  "questions": [
+    {
+      "id": 1321,
+      "type": "code",
+      "language": "ts",
+      "text": "class A { private n = 1 }\nconsole.log(new A().n)",
+      "options": [
+        "1",
+        "undefined",
+        "0",
+        "A"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1322,
+      "type": "code",
+      "language": "ts",
+      "text": "class A { protected n = 4 }\nconsole.log(new A().n)",
+      "options": [
+        "undefined",
+        "4",
+        "0",
+        "1"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1323,
+      "type": "code",
+      "language": "ts",
+      "text": "class A { #n = 1 }\nconsole.log(\"n\" in new A())",
+      "options": [
+        "true",
+        "1",
+        "false",
+        "undefined"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1324,
+      "type": "code",
+      "language": "ts",
+      "text": "abstract class A { n() { return 1 } }\nconsole.log(new A().n())",
+      "options": [
+        "undefined",
+        "0",
+        "A",
+        "1"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1325,
+      "type": "code",
+      "language": "ts",
+      "text": "namespace N { export const n = 1 }\nconsole.log(N.n)",
+      "options": [
+        "1",
+        "undefined",
+        "0",
+        "N"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1326,
+      "type": "code",
+      "language": "ts",
+      "text": "function f() { return 1 }\nnamespace f { export const n = 2 }\nconsole.log(f())\nconsole.log(f.n)",
+      "options": [
+        "2, 1",
+        "1, 2",
+        "1, undefined",
+        "undefined, 2"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1327,
+      "type": "code",
+      "language": "ts",
+      "text": "const o = { n: 1 } as const\n;(o as { n: number }).n = 2\nconsole.log(o.n)",
+      "options": [
+        "1",
+        "undefined",
+        "2",
+        "0"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1328,
+      "type": "code",
+      "language": "ts",
+      "text": "function isNum(x: unknown): x is number { return true }\nconst x = \"ab\"\nconsole.log(isNum(x))\nconsole.log(x.length)",
+      "options": [
+        "true, undefined",
+        "false, 2",
+        "true, 0",
+        "true, 2"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1329,
+      "type": "code",
+      "language": "ts",
+      "text": "function id<T>(x: T): T { return x }\nconsole.log(id(3))",
+      "options": [
+        "3",
+        "undefined",
+        "0",
+        "T"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1330,
+      "type": "code",
+      "language": "ts",
+      "text": "class A {\n  n = 1\n  constructor() { console.log(this.n) }\n}\nnew A()",
+      "options": [
+        "undefined",
+        "1",
+        "0",
+        "A"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1331,
+      "type": "code",
+      "language": "ts",
+      "text": "class A {\n  #n = 1\n  set n(v: number) { this.#n = v + 1 }\n  get n() { return this.#n }\n}\nconst a = new A()\na.n = 4\nconsole.log(a.n)",
+      "options": [
+        "4",
+        "1",
+        "5",
+        "undefined"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1332,
+      "type": "code",
+      "language": "ts",
+      "text": "function f(this: { n: number }, x: number) { return this.n + x }\nconsole.log(f.length)",
+      "options": [
+        "2",
+        "0",
+        "undefined",
+        "1"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1333,
+      "type": "code",
+      "language": "ts",
+      "text": "class A { n!: number }\nconsole.log(new A().n)",
+      "options": [
+        "undefined",
+        "0",
+        "null",
+        "1"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1334,
+      "type": "code",
+      "language": "ts",
+      "text": "enum E { A = 1, B = \"b\" }\nconsole.log(E.B)",
+      "options": [
+        "1",
+        "b",
+        "B",
+        "undefined"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1335,
+      "type": "code",
+      "language": "ts",
+      "text": "enum E { A, B }\nconsole.log(Object.keys(E).length)",
+      "options": [
+        "2",
+        "0",
+        "4",
+        "1"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1336,
+      "type": "code",
+      "language": "ts",
+      "text": "enum E { A = \"a\", B = \"b\" }\nconsole.log(Object.keys(E).length)",
+      "options": [
+        "4",
+        "0",
+        "1",
+        "2"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1337,
+      "type": "code",
+      "language": "ts",
+      "text": "enum E { A = 1, B = 2, C = 4 }\nconsole.log(E.A | E.B)",
+      "options": [
+        "3",
+        "1",
+        "2",
+        "4"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1338,
+      "type": "code",
+      "language": "ts",
+      "text": "class A { n = 1 }\nnamespace A { export const m = 2 }\nconsole.log(A.m)",
+      "options": [
+        "1",
+        "2",
+        "undefined",
+        "0"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1339,
+      "type": "code",
+      "language": "ts",
+      "text": "class A {\n  static n = 1\n  static { this.n = 4 }\n}\nconsole.log(A.n)",
+      "options": [
+        "1",
+        "undefined",
+        "4",
+        "0"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1340,
+      "type": "code",
+      "language": "ts",
+      "text": "function assertNum(x: unknown): asserts x is number {\n  if (typeof x !== \"number\") throw new Error(\"no\")\n}\ntry {\n  assertNum(\"a\")\n  console.log(0)\n} catch {\n  console.log(1)\n}",
+      "options": [
+        "0",
+        "a",
+        "undefined",
+        "1"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1341,
+      "type": "code",
+      "language": "ts",
+      "text": "class A { private constructor() {} }\nconsole.log(typeof new A())",
+      "options": [
+        "object",
+        "undefined",
+        "function",
+        "error"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1342,
+      "type": "code",
+      "language": "ts",
+      "text": "class A { n() { return 1 } }\nclass B extends A { override n() { return 2 } }\nconsole.log(new A().n())\nconsole.log(new B().n())",
+      "options": [
+        "2, 2",
+        "1, 2",
+        "1, 1",
+        "2, 1"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1343,
+      "type": "code",
+      "language": "ts",
+      "text": "class A { n = 1 }\nclass B extends A { n = 2 }\nconsole.log(new B().n)",
+      "options": [
+        "1",
+        "undefined",
+        "2",
+        "0"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1344,
+      "type": "code",
+      "language": "ts",
+      "text": "const s = Symbol(\"k\")\nconst o = { [s]: 6 }\nconsole.log(o[s])\nconsole.log(Object.keys(o).length)",
+      "options": [
+        "6, 1",
+        "undefined, 0",
+        "0, 6",
+        "6, 0"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1345,
+      "type": "code",
+      "language": "ts",
+      "text": "class A {\n  constructor(x: string)\n  constructor(x: number)\n  constructor(public x: string | number) {}\n}\nconsole.log(new A(3).x)",
+      "options": [
+        "3",
+        "undefined",
+        "0",
+        "string"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1346,
+      "type": "code",
+      "language": "ts",
+      "text": "function f(...xs: [number, number]) { return xs[0] + xs[1] }\nconsole.log(f(2, 3))",
+      "options": [
+        "2",
+        "5",
+        "3",
+        "23"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1347,
+      "type": "code",
+      "language": "ts",
+      "text": "const o: { [key: string]: number } = { a: 1 }\nconsole.log(o.b)",
+      "options": [
+        "0",
+        "1",
+        "undefined",
+        "null"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1348,
+      "type": "code",
+      "language": "ts",
+      "text": "const n = 2\nenum E { A = n }\nconsole.log(E[2])",
+      "options": [
+        "2",
+        "undefined",
+        "n",
+        "A"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1349,
+      "type": "code",
+      "language": "ts",
+      "text": "class A {\n  #n = 5\n  static read(x: A) { return x.#n }\n}\nconsole.log(A.read(new A()))",
+      "options": [
+        "5",
+        "undefined",
+        "0",
+        "1"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1350,
+      "type": "code",
+      "language": "ts",
+      "text": "namespace N { export class A { n = 1 } }\nimport A = N.A\nconsole.log(new A().n)",
+      "options": [
+        "undefined",
+        "1",
+        "0",
+        "A"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1351,
+      "type": "code",
+      "language": "ts",
+      "text": "enum E { A = 1, B = A * 2 }\nconsole.log(E.B)",
+      "options": [
+        "1",
+        "3",
+        "2",
+        "undefined"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1352,
+      "type": "code",
+      "language": "ts",
+      "text": "console.log(0 || 5)\nconsole.log(0 ?? 5)",
+      "options": [
+        "5, 5",
+        "0, 0",
+        "0, 5",
+        "5, 0"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1353,
+      "type": "text",
+      "text": "Why can code outside the class read a private field after compilation?",
+      "options": [
+        "private is erased, so the field stays an ordinary property",
+        "private becomes a WeakMap that throws",
+        "private renames the field to a symbol",
+        "private deletes the field"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1354,
+      "type": "text",
+      "text": "What is a # field at runtime?",
+      "options": [
+        "An ordinary string key",
+        "An ECMAScript private name that another class body cannot read",
+        "A new WeakMap on every read",
+        "An enum member"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1355,
+      "type": "text",
+      "text": "What does abstract on a class become in the emitted JS?",
+      "options": [
+        "A flag that makes new throw",
+        "An object frozen with Object.freeze",
+        "Nothing. The constructor stays an ordinary function",
+        "A symbol on the prototype"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1356,
+      "type": "text",
+      "text": "What is a namespace after emit?",
+      "options": [
+        "A type-only alias",
+        "An erased interface",
+        "A class with a private constructor",
+        "An object that holds the exported values"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1357,
+      "type": "text",
+      "text": "What does as const change at runtime?",
+      "options": [
+        "Nothing. The value stays an ordinary mutable value",
+        "It freezes the object",
+        "It copies the object",
+        "It turns fields into getters"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1358,
+      "type": "text",
+      "text": "What does satisfies change at runtime?",
+      "options": [
+        "It freezes the object",
+        "Nothing. The expression is checked and emitted unchanged",
+        "It wraps the value in a Satisfies object",
+        "It removes extra properties"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1359,
+      "type": "text",
+      "text": "What does a type predicate x is T mean for the returned boolean?",
+      "options": [
+        "A true result converts the value to T",
+        "A false result throws",
+        "In the true branch the checker treats the value as T. The boolean itself is ordinary",
+        "It writes a hidden brand onto the object"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1360,
+      "type": "text",
+      "text": "What is the this parameter?",
+      "options": [
+        "A real first argument",
+        "A way to make function.length equal 2",
+        "A runtime type guard",
+        "A check on the call's this. It is erased from the parameter list"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1361,
+      "type": "text",
+      "text": "What does the mark n!: number on a class field do?",
+      "options": [
+        "It leaves the field uninitialized and only silences the checker",
+        "It sets n to 0",
+        "It sets n to null",
+        "It creates a getter"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1362,
+      "type": "text",
+      "text": "Which enum members get a reverse mapping?",
+      "options": [
+        "String members",
+        "Numeric members",
+        "Only const enum members",
+        "None"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1363,
+      "type": "text",
+      "text": "What merges when a class and a namespace share a name?",
+      "options": [
+        "Nothing. The namespace replaces the class",
+        "The namespace becomes a subclass",
+        "One value: the constructor plus the namespace exports",
+        "They stay two unrelated bindings"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1364,
+      "type": "text",
+      "text": "When does a static {} block run?",
+      "options": [
+        "On every new",
+        "On the first method call",
+        "Never. It is type-only",
+        "When the class is evaluated"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1365,
+      "type": "text",
+      "text": "Where does an asserts function's throw come from?",
+      "options": [
+        "From the throw written in the body. The asserts keyword is erased",
+        "From the asserts keyword itself",
+        "From the checker at runtime",
+        "From the first overload"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1366,
+      "type": "text",
+      "text": "How many constructors does a class with constructor overloads emit?",
+      "options": [
+        "One per overload",
+        "One, the implementation",
+        "None",
+        "Two: a public one and a private one"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1367,
+      "type": "text",
+      "text": "What does an index signature [key: string]: number create at runtime?",
+      "options": [
+        "A Proxy",
+        "A default property named key",
+        "Nothing. It only types reads and writes",
+        "An enum of keys"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1368,
+      "type": "text",
+      "text": "What does a constraint T extends string do?",
+      "options": [
+        "It converts the argument to string at the call",
+        "It creates a separate function for string",
+        "It stops the generic function from running",
+        "It is checked when the type argument is chosen and is not a runtime check"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1369,
+      "type": "boolean",
+      "text": "A private field name is omitted from the emitted property.",
+      "correct": false
+    },
+    {
+      "id": 1370,
+      "type": "boolean",
+      "text": "A #n field can be read back with obj[\"#n\"].",
+      "correct": false
+    },
+    {
+      "id": 1371,
+      "type": "boolean",
+      "text": "After compilation, abstract makes new throw.",
+      "correct": false
+    },
+    {
+      "id": 1372,
+      "type": "boolean",
+      "text": "Namespace exports become properties of the namespace object.",
+      "correct": true
+    },
+    {
+      "id": 1373,
+      "type": "boolean",
+      "text": "as const calls Object.freeze.",
+      "correct": false
+    },
+    {
+      "id": 1374,
+      "type": "boolean",
+      "text": "satisfies is erased.",
+      "correct": true
+    },
+    {
+      "id": 1375,
+      "type": "boolean",
+      "text": "A type predicate returns a boolean.",
+      "correct": true
+    },
+    {
+      "id": 1376,
+      "type": "boolean",
+      "text": "The this parameter counts toward function.length.",
+      "correct": false
+    },
+    {
+      "id": 1377,
+      "type": "boolean",
+      "text": "A ! mark on a field assigns null.",
+      "correct": false
+    },
+    {
+      "id": 1378,
+      "type": "boolean",
+      "text": "A numeric enum creates reverse mappings.",
+      "correct": true
+    },
+    {
+      "id": 1379,
+      "type": "boolean",
+      "text": "A string enum creates a reverse mapping from the string back to the name.",
+      "correct": false
+    },
+    {
+      "id": 1380,
+      "type": "boolean",
+      "text": "Constructor overloads emit one constructor.",
+      "correct": true
+    },
+    {
+      "id": 1381,
+      "type": "boolean",
+      "text": "override wraps the base class method.",
+      "correct": false
+    },
+    {
+      "id": 1382,
+      "type": "boolean",
+      "text": "A class field initializer runs before the constructor body.",
+      "correct": true
+    },
+    {
+      "id": 1383,
+      "type": "boolean",
+      "text": "The JS engine enforces protected.",
+      "correct": false
+    },
+    {
+      "id": 1384,
+      "type": "boolean",
+      "text": "Merging a namespace onto a function puts the exports on that function.",
+      "correct": true
+    },
+    {
+      "id": 1385,
+      "type": "recall",
+      "text": "Which keyword marks a class member for the checker only and is then erased?",
+      "answer": "private."
+    },
+    {
+      "id": 1386,
+      "type": "recall",
+      "text": "Which prefix makes a field private in JS itself?",
+      "answer": "#."
+    },
+    {
+      "id": 1387,
+      "type": "recall",
+      "text": "Which keyword blocks new for the checker but is erased?",
+      "answer": "abstract."
+    },
+    {
+      "id": 1388,
+      "type": "recall",
+      "text": "Which keyword groups values into one object?",
+      "answer": "namespace."
+    },
+    {
+      "id": 1389,
+      "type": "recall",
+      "text": "Which assertion asks the checker to keep literal types?",
+      "answer": "as const."
+    },
+    {
+      "id": 1390,
+      "type": "recall",
+      "text": "Which operator checks an expression against a type and keeps the narrower inferred type?",
+      "answer": "satisfies."
+    },
+    {
+      "id": 1391,
+      "type": "recall",
+      "text": "What does a type predicate return?",
+      "answer": "A boolean."
+    },
+    {
+      "id": 1392,
+      "type": "recall",
+      "text": "Which mark on a field claims it is assigned without assigning it?",
+      "answer": "!."
+    },
+    {
+      "id": 1393,
+      "type": "recall",
+      "text": "Which enum members are written into the reverse mapping?",
+      "answer": "Numeric members."
+    },
+    {
+      "id": 1394,
+      "type": "recall",
+      "text": "Which block runs when the class is evaluated, not on new?",
+      "answer": "static {}."
+    },
+    {
+      "id": 1395,
+      "type": "recall",
+      "text": "Which keyword requires the method to already exist on the base class?",
+      "answer": "override."
+    },
+    {
+      "id": 1396,
+      "type": "recall",
+      "text": "What are constructor overloads emitted as?",
+      "answer": "One constructor."
+    },
+    {
+      "id": 1397,
+      "type": "recall",
+      "text": "What does an index signature create on the object at runtime?",
+      "answer": "Nothing."
+    },
+    {
+      "id": 1398,
+      "type": "recall",
+      "text": "Which values does ?? replace with the fallback?",
+      "answer": "null and undefined."
+    },
+    {
+      "id": 1399,
+      "type": "recall",
+      "text": "What is a bound written as T extends ... called?",
+      "answer": "A constraint."
+    },
+    {
+      "id": 1400,
+      "type": "recall",
+      "text": "Which keyword limits a member to subclasses for the checker only?",
+      "answer": "protected."
+    }
+  ]
+}

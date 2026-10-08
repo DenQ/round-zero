@@ -1,0 +1,608 @@
+{
+  "stack": "ts",
+  "topic": "base",
+  "level": "junior",
+  "locale": "en",
+  "questions": [
+    {
+      "id": 1261,
+      "type": "code",
+      "language": "ts",
+      "text": "enum E { A, B }\nconsole.log(E.A)",
+      "options": [
+        "0",
+        "1",
+        "A",
+        "undefined"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1262,
+      "type": "code",
+      "language": "ts",
+      "text": "enum E { A, B }\nconsole.log(E[0])",
+      "options": [
+        "0",
+        "A",
+        "B",
+        "undefined"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1263,
+      "type": "code",
+      "language": "ts",
+      "text": "enum E { A = \"a\" }\nconsole.log(E.A)",
+      "options": [
+        "0",
+        "A",
+        "a",
+        "undefined"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1264,
+      "type": "code",
+      "language": "ts",
+      "text": "enum E { A = \"a\" }\nconsole.log(E[\"a\"])",
+      "options": [
+        "a",
+        "A",
+        "0",
+        "undefined"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1265,
+      "type": "code",
+      "language": "ts",
+      "text": "const x = \"4\" as unknown as number\nconsole.log(typeof x)",
+      "options": [
+        "string",
+        "number",
+        "object",
+        "undefined"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1266,
+      "type": "code",
+      "language": "ts",
+      "text": "const x = null!\nconsole.log(x)",
+      "options": [
+        "undefined",
+        "null",
+        "0",
+        "true"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1267,
+      "type": "code",
+      "language": "ts",
+      "text": "const o: { readonly n: number } = { n: 1 }\no.n = 2\nconsole.log(o.n)",
+      "options": [
+        "1",
+        "undefined",
+        "2",
+        "0"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1268,
+      "type": "code",
+      "language": "ts",
+      "text": "const o: { n?: number } = {}\nconsole.log(o.n)",
+      "options": [
+        "0",
+        "null",
+        "1",
+        "undefined"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1269,
+      "type": "code",
+      "language": "ts",
+      "text": "const t: [number, number] = [1, 2]\nt.push(3)\nconsole.log(t.length)",
+      "options": [
+        "3",
+        "2",
+        "1",
+        "4"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1270,
+      "type": "code",
+      "language": "ts",
+      "text": "class A {\n  constructor(public n: number) {}\n}\nconsole.log(new A(4).n)",
+      "options": [
+        "0",
+        "4",
+        "undefined",
+        "1"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1271,
+      "type": "code",
+      "language": "ts",
+      "text": "class A {}\nclass B extends A {}\nconsole.log(new B() instanceof A)",
+      "options": [
+        "false",
+        "undefined",
+        "true",
+        "A"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1272,
+      "type": "code",
+      "language": "ts",
+      "text": "interface I { n: number }\nclass A implements I { n = 1 }\ntry {\n  console.log(new A() instanceof I)\n} catch {\n  console.log(0)\n}",
+      "options": [
+        "1",
+        "true",
+        "false",
+        "0"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1273,
+      "type": "code",
+      "language": "ts",
+      "text": "function f(x: string): number\nfunction f(x: number): number\nfunction f(x: string | number) {\n  return typeof x === \"string\" ? 1 : 2\n}\nconsole.log(f(0))",
+      "options": [
+        "2",
+        "1",
+        "0",
+        "undefined"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1274,
+      "type": "code",
+      "language": "ts",
+      "text": "function f(): void {}\nconsole.log(f())",
+      "options": [
+        "null",
+        "undefined",
+        "void",
+        "0"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1275,
+      "type": "code",
+      "language": "ts",
+      "text": "class A { static n = 1 }\nconsole.log(A.n)\nconsole.log(new A().n)",
+      "options": [
+        "undefined, 1",
+        "1, 1",
+        "1, undefined",
+        "undefined, undefined"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1276,
+      "type": "code",
+      "language": "ts",
+      "text": "class A { get n() { return 3 } }\nconsole.log(new A().n)",
+      "options": [
+        "undefined",
+        "0",
+        "get",
+        "3"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1277,
+      "type": "code",
+      "language": "ts",
+      "text": "class A { n = 6 }\nconsole.log(new A().n)",
+      "options": [
+        "6",
+        "0",
+        "undefined",
+        "A"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1278,
+      "type": "code",
+      "language": "ts",
+      "text": "type Id = number\nconst id: Id = 8\nconsole.log(typeof id)",
+      "options": [
+        "object",
+        "number",
+        "Id",
+        "undefined"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1279,
+      "type": "code",
+      "language": "ts",
+      "text": "interface I { n: number }\nclass A implements I { n = 7 }\nconsole.log(new A().n)",
+      "options": [
+        "undefined",
+        "I",
+        "7",
+        "0"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1280,
+      "type": "code",
+      "language": "ts",
+      "text": "enum E { A = 1, B }\nconsole.log(E.B)",
+      "options": [
+        "1",
+        "0",
+        "3",
+        "2"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1281,
+      "type": "code",
+      "language": "ts",
+      "text": "class A {\n  n = 2\n  m = () => this.n\n}\nconst m = new A().m\nconsole.log(m())",
+      "options": [
+        "2",
+        "undefined",
+        "0",
+        "NaN"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1282,
+      "type": "code",
+      "language": "ts",
+      "text": "const n: number | null = null\nconsole.log(n ?? 5)",
+      "options": [
+        "null",
+        "5",
+        "0",
+        "undefined"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1283,
+      "type": "code",
+      "language": "ts",
+      "text": "const o: { n?: { m: number } } = {}\nconsole.log(o.n?.m)",
+      "options": [
+        "0",
+        "null",
+        "undefined",
+        "m"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1284,
+      "type": "code",
+      "language": "ts",
+      "text": "const x: number | string = 1\nconsole.log(typeof x)",
+      "options": [
+        "string",
+        "object",
+        "union",
+        "number"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1285,
+      "type": "text",
+      "text": "What does structural typing compare when checking an assignment?",
+      "options": [
+        "The fields and their types, not the type name",
+        "The constructor the value was created with",
+        "The file that declared the type",
+        "Whether both types are classes"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1286,
+      "type": "text",
+      "text": "What must you do before treating unknown as string?",
+      "options": [
+        "Nothing. unknown allows every operation",
+        "Narrow it with a check the checker understands",
+        "Call a runtime function named unknown",
+        "Declare the value with interface"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1287,
+      "type": "text",
+      "text": "What does the type never mean?",
+      "options": [
+        "Any value, like any",
+        "A value that may be null",
+        "No value. The checker uses it for places control never reaches",
+        "The same thing as undefined"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1288,
+      "type": "text",
+      "text": "What does a return type annotation do?",
+      "options": [
+        "It converts the returned value to that type",
+        "It registers the function in a type namespace",
+        "It throws when the runtime type differs",
+        "It checks the returned expression and does not change the value"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1289,
+      "type": "text",
+      "text": "Which operations does a union A | B allow without narrowing?",
+      "options": [
+        "Only operations that are valid for both members",
+        "Every operation of A and every operation of B",
+        "Only operations of the first member",
+        "None"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1290,
+      "type": "text",
+      "text": "What does an intersection A & B require of a value?",
+      "options": [
+        "That it matches A or B",
+        "That it matches both A and B",
+        "That it matches neither",
+        "That it is a tuple of A and B"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1291,
+      "type": "text",
+      "text": "What is keyof for?",
+      "options": [
+        "It reads a property at runtime",
+        "It freezes the object",
+        "It builds the type of keys for the checker",
+        "It creates an enum"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1292,
+      "type": "text",
+      "text": "What does typeof mean in type position, as in type T = typeof value?",
+      "options": [
+        "It calls the JS typeof operator and stores the string",
+        "It deletes the value",
+        "It copies the object at runtime",
+        "It takes the type of that value for the checker"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1293,
+      "type": "text",
+      "text": "What is a type parameter on a function?",
+      "options": [
+        "A per-call type chosen by the checker. It does not create another JS function",
+        "A second function created for each type",
+        "A runtime box around the argument",
+        "An enum of allowed types"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1294,
+      "type": "text",
+      "text": "What does implements change on a class?",
+      "options": [
+        "The prototype chain",
+        "Nothing at runtime. It only checks that the class matches the interface",
+        "The constructor length",
+        "It emits the interface as an object"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1295,
+      "type": "text",
+      "text": "When are parameter types checked?",
+      "options": [
+        "While the function runs, on each argument",
+        "They are stored in a hidden array",
+        "At compile time, at the call. They are not reified",
+        "Only if the file imports reflect-metadata"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1296,
+      "type": "text",
+      "text": "What does any do at a use site?",
+      "options": [
+        "It rejects every operation",
+        "It means the same thing as never",
+        "It prints a warning at runtime",
+        "It turns off type checking for that value"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1297,
+      "type": "boolean",
+      "text": "Two object types with the same fields are assignable to each other.",
+      "correct": true
+    },
+    {
+      "id": 1298,
+      "type": "boolean",
+      "text": "A type alias can be called with new.",
+      "correct": false
+    },
+    {
+      "id": 1299,
+      "type": "boolean",
+      "text": "never can be assigned to a variable of any other type.",
+      "correct": true
+    },
+    {
+      "id": 1300,
+      "type": "boolean",
+      "text": "unknown can be assigned to string without narrowing.",
+      "correct": false
+    },
+    {
+      "id": 1301,
+      "type": "boolean",
+      "text": "A class can implement an interface.",
+      "correct": true
+    },
+    {
+      "id": 1302,
+      "type": "boolean",
+      "text": "readonly rejects a write when the JS runs.",
+      "correct": false
+    },
+    {
+      "id": 1303,
+      "type": "boolean",
+      "text": "An interface can extend another interface.",
+      "correct": true
+    },
+    {
+      "id": 1304,
+      "type": "boolean",
+      "text": "keyof is a function that exists at runtime.",
+      "correct": false
+    },
+    {
+      "id": 1305,
+      "type": "boolean",
+      "text": "A generic function is still one function after emit.",
+      "correct": true
+    },
+    {
+      "id": 1306,
+      "type": "boolean",
+      "text": "A void return annotation means the function returns null.",
+      "correct": false
+    },
+    {
+      "id": 1307,
+      "type": "boolean",
+      "text": "A ? on a property tells the checker the property may be missing.",
+      "correct": true
+    },
+    {
+      "id": 1308,
+      "type": "boolean",
+      "text": "An enum is erased the same way an interface is.",
+      "correct": false
+    },
+    {
+      "id": 1309,
+      "type": "recall",
+      "text": "Which type accepts any value but blocks operations until you narrow it?",
+      "answer": "unknown."
+    },
+    {
+      "id": 1310,
+      "type": "recall",
+      "text": "Which type has no values?",
+      "answer": "never."
+    },
+    {
+      "id": 1311,
+      "type": "recall",
+      "text": "Which keyword declares a set of named constants that remains in JS?",
+      "answer": "enum."
+    },
+    {
+      "id": 1312,
+      "type": "recall",
+      "text": "Which keyword gives a type a new name and creates no value?",
+      "answer": "type."
+    },
+    {
+      "id": 1313,
+      "type": "recall",
+      "text": "Which keyword checks a class against an interface?",
+      "answer": "implements."
+    },
+    {
+      "id": 1314,
+      "type": "recall",
+      "text": "Which type operator produces the keys of a type?",
+      "answer": "keyof."
+    },
+    {
+      "id": 1315,
+      "type": "recall",
+      "text": "Which type operator takes the type of an existing value?",
+      "answer": "typeof."
+    },
+    {
+      "id": 1316,
+      "type": "recall",
+      "text": "Which mark after a property name says it may be omitted?",
+      "answer": "?"
+    },
+    {
+      "id": 1317,
+      "type": "recall",
+      "text": "Which mark tells the checker a value is not null or undefined?",
+      "answer": "!"
+    },
+    {
+      "id": 1318,
+      "type": "recall",
+      "text": "Which keyword writes a type assertion that is erased?",
+      "answer": "as."
+    },
+    {
+      "id": 1319,
+      "type": "recall",
+      "text": "Which type turns off checking at a use site?",
+      "answer": "any."
+    },
+    {
+      "id": 1320,
+      "type": "recall",
+      "text": "What is the first numeric enum member when it has no initializer?",
+      "answer": "0."
+    }
+  ]
+}

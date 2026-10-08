@@ -1,0 +1,808 @@
+{
+  "stack": "ts",
+  "topic": "base",
+  "level": "middle",
+  "locale": "ru",
+  "questions": [
+    {
+      "id": 1321,
+      "type": "code",
+      "language": "ts",
+      "text": "class A { private n = 1 }\nconsole.log(new A().n)",
+      "options": [
+        "1",
+        "undefined",
+        "0",
+        "A"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1322,
+      "type": "code",
+      "language": "ts",
+      "text": "class A { protected n = 4 }\nconsole.log(new A().n)",
+      "options": [
+        "undefined",
+        "4",
+        "0",
+        "1"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1323,
+      "type": "code",
+      "language": "ts",
+      "text": "class A { #n = 1 }\nconsole.log(\"n\" in new A())",
+      "options": [
+        "true",
+        "1",
+        "false",
+        "undefined"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1324,
+      "type": "code",
+      "language": "ts",
+      "text": "abstract class A { n() { return 1 } }\nconsole.log(new A().n())",
+      "options": [
+        "undefined",
+        "0",
+        "A",
+        "1"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1325,
+      "type": "code",
+      "language": "ts",
+      "text": "namespace N { export const n = 1 }\nconsole.log(N.n)",
+      "options": [
+        "1",
+        "undefined",
+        "0",
+        "N"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1326,
+      "type": "code",
+      "language": "ts",
+      "text": "function f() { return 1 }\nnamespace f { export const n = 2 }\nconsole.log(f())\nconsole.log(f.n)",
+      "options": [
+        "2, 1",
+        "1, 2",
+        "1, undefined",
+        "undefined, 2"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1327,
+      "type": "code",
+      "language": "ts",
+      "text": "const o = { n: 1 } as const\n;(o as { n: number }).n = 2\nconsole.log(o.n)",
+      "options": [
+        "1",
+        "undefined",
+        "2",
+        "0"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1328,
+      "type": "code",
+      "language": "ts",
+      "text": "function isNum(x: unknown): x is number { return true }\nconst x = \"ab\"\nconsole.log(isNum(x))\nconsole.log(x.length)",
+      "options": [
+        "true, undefined",
+        "false, 2",
+        "true, 0",
+        "true, 2"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1329,
+      "type": "code",
+      "language": "ts",
+      "text": "function id<T>(x: T): T { return x }\nconsole.log(id(3))",
+      "options": [
+        "3",
+        "undefined",
+        "0",
+        "T"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1330,
+      "type": "code",
+      "language": "ts",
+      "text": "class A {\n  n = 1\n  constructor() { console.log(this.n) }\n}\nnew A()",
+      "options": [
+        "undefined",
+        "1",
+        "0",
+        "A"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1331,
+      "type": "code",
+      "language": "ts",
+      "text": "class A {\n  #n = 1\n  set n(v: number) { this.#n = v + 1 }\n  get n() { return this.#n }\n}\nconst a = new A()\na.n = 4\nconsole.log(a.n)",
+      "options": [
+        "4",
+        "1",
+        "5",
+        "undefined"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1332,
+      "type": "code",
+      "language": "ts",
+      "text": "function f(this: { n: number }, x: number) { return this.n + x }\nconsole.log(f.length)",
+      "options": [
+        "2",
+        "0",
+        "undefined",
+        "1"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1333,
+      "type": "code",
+      "language": "ts",
+      "text": "class A { n!: number }\nconsole.log(new A().n)",
+      "options": [
+        "undefined",
+        "0",
+        "null",
+        "1"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1334,
+      "type": "code",
+      "language": "ts",
+      "text": "enum E { A = 1, B = \"b\" }\nconsole.log(E.B)",
+      "options": [
+        "1",
+        "b",
+        "B",
+        "undefined"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1335,
+      "type": "code",
+      "language": "ts",
+      "text": "enum E { A, B }\nconsole.log(Object.keys(E).length)",
+      "options": [
+        "2",
+        "0",
+        "4",
+        "1"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1336,
+      "type": "code",
+      "language": "ts",
+      "text": "enum E { A = \"a\", B = \"b\" }\nconsole.log(Object.keys(E).length)",
+      "options": [
+        "4",
+        "0",
+        "1",
+        "2"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1337,
+      "type": "code",
+      "language": "ts",
+      "text": "enum E { A = 1, B = 2, C = 4 }\nconsole.log(E.A | E.B)",
+      "options": [
+        "3",
+        "1",
+        "2",
+        "4"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1338,
+      "type": "code",
+      "language": "ts",
+      "text": "class A { n = 1 }\nnamespace A { export const m = 2 }\nconsole.log(A.m)",
+      "options": [
+        "1",
+        "2",
+        "undefined",
+        "0"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1339,
+      "type": "code",
+      "language": "ts",
+      "text": "class A {\n  static n = 1\n  static { this.n = 4 }\n}\nconsole.log(A.n)",
+      "options": [
+        "1",
+        "undefined",
+        "4",
+        "0"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1340,
+      "type": "code",
+      "language": "ts",
+      "text": "function assertNum(x: unknown): asserts x is number {\n  if (typeof x !== \"number\") throw new Error(\"no\")\n}\ntry {\n  assertNum(\"a\")\n  console.log(0)\n} catch {\n  console.log(1)\n}",
+      "options": [
+        "0",
+        "a",
+        "undefined",
+        "1"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1341,
+      "type": "code",
+      "language": "ts",
+      "text": "class A { private constructor() {} }\nconsole.log(typeof new A())",
+      "options": [
+        "object",
+        "undefined",
+        "function",
+        "error"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1342,
+      "type": "code",
+      "language": "ts",
+      "text": "class A { n() { return 1 } }\nclass B extends A { override n() { return 2 } }\nconsole.log(new A().n())\nconsole.log(new B().n())",
+      "options": [
+        "2, 2",
+        "1, 2",
+        "1, 1",
+        "2, 1"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1343,
+      "type": "code",
+      "language": "ts",
+      "text": "class A { n = 1 }\nclass B extends A { n = 2 }\nconsole.log(new B().n)",
+      "options": [
+        "1",
+        "undefined",
+        "2",
+        "0"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1344,
+      "type": "code",
+      "language": "ts",
+      "text": "const s = Symbol(\"k\")\nconst o = { [s]: 6 }\nconsole.log(o[s])\nconsole.log(Object.keys(o).length)",
+      "options": [
+        "6, 1",
+        "undefined, 0",
+        "0, 6",
+        "6, 0"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1345,
+      "type": "code",
+      "language": "ts",
+      "text": "class A {\n  constructor(x: string)\n  constructor(x: number)\n  constructor(public x: string | number) {}\n}\nconsole.log(new A(3).x)",
+      "options": [
+        "3",
+        "undefined",
+        "0",
+        "string"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1346,
+      "type": "code",
+      "language": "ts",
+      "text": "function f(...xs: [number, number]) { return xs[0] + xs[1] }\nconsole.log(f(2, 3))",
+      "options": [
+        "2",
+        "5",
+        "3",
+        "23"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1347,
+      "type": "code",
+      "language": "ts",
+      "text": "const o: { [key: string]: number } = { a: 1 }\nconsole.log(o.b)",
+      "options": [
+        "0",
+        "1",
+        "undefined",
+        "null"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1348,
+      "type": "code",
+      "language": "ts",
+      "text": "const n = 2\nenum E { A = n }\nconsole.log(E[2])",
+      "options": [
+        "2",
+        "undefined",
+        "n",
+        "A"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1349,
+      "type": "code",
+      "language": "ts",
+      "text": "class A {\n  #n = 5\n  static read(x: A) { return x.#n }\n}\nconsole.log(A.read(new A()))",
+      "options": [
+        "5",
+        "undefined",
+        "0",
+        "1"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1350,
+      "type": "code",
+      "language": "ts",
+      "text": "namespace N { export class A { n = 1 } }\nimport A = N.A\nconsole.log(new A().n)",
+      "options": [
+        "undefined",
+        "1",
+        "0",
+        "A"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1351,
+      "type": "code",
+      "language": "ts",
+      "text": "enum E { A = 1, B = A * 2 }\nconsole.log(E.B)",
+      "options": [
+        "1",
+        "3",
+        "2",
+        "undefined"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1352,
+      "type": "code",
+      "language": "ts",
+      "text": "console.log(0 || 5)\nconsole.log(0 ?? 5)",
+      "options": [
+        "5, 5",
+        "0, 0",
+        "0, 5",
+        "5, 0"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1353,
+      "type": "text",
+      "text": "Почему снаружи класса можно прочитать поле private после компиляции?",
+      "options": [
+        "private стирается, и поле остаётся обычным свойством",
+        "private превращается в WeakMap, который бросает ошибку",
+        "private переименовывает поле в symbol",
+        "private удаляет поле"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1354,
+      "type": "text",
+      "text": "Чем поле # является в рантайме?",
+      "options": [
+        "Обычным строковым ключом",
+        "Приватным именем ECMAScript, которое другое тело класса не читает",
+        "Новым WeakMap на каждое чтение",
+        "Членом enum"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1355,
+      "type": "text",
+      "text": "Чем становится abstract у класса в скомпилированном JS?",
+      "options": [
+        "Флагом, из-за которого new бросает ошибку",
+        "Объектом, замороженным через Object.freeze",
+        "Ничем. Конструктор остаётся обычной функцией",
+        "Символом на прототипе"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1356,
+      "type": "text",
+      "text": "Чем является namespace после компиляции?",
+      "options": [
+        "Псевдонимом только для типов",
+        "Стертым интерфейсом",
+        "Классом с приватным конструктором",
+        "Объектом, в котором лежат экспортированные значения"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1357,
+      "type": "text",
+      "text": "Что as const меняет в рантайме?",
+      "options": [
+        "Ничего. Значение остаётся обычным и изменяемым",
+        "Замораживает объект",
+        "Копирует объект",
+        "Превращает поля в геттеры"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1358,
+      "type": "text",
+      "text": "Что satisfies меняет в рантайме?",
+      "options": [
+        "Замораживает объект",
+        "Ничего. Выражение проверяется и попадает в JS как было",
+        "Оборачивает значение в объект Satisfies",
+        "Удаляет лишние свойства"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1359,
+      "type": "text",
+      "text": "Что означает предикат типа x is T для возвращённого boolean?",
+      "options": [
+        "При true значение преобразуется к T",
+        "При false функция бросает ошибку",
+        "В ветке true компилятор считает значение типом T. Сам boolean обычный",
+        "Он записывает скрытую марку на объект"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1360,
+      "type": "text",
+      "text": "Чем является параметр this?",
+      "options": [
+        "Настоящим первым аргументом",
+        "Способом сделать function.length равным 2",
+        "Рантайм-проверкой типа",
+        "Проверкой this у вызова. Из списка параметров он стирается"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1361,
+      "type": "text",
+      "text": "Что делает пометка n!: number у поля класса?",
+      "options": [
+        "Оставляет поле неинициализированным и только затыкает проверку типов",
+        "Записывает в n число 0",
+        "Записывает в n значение null",
+        "Создаёт геттер"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1362,
+      "type": "text",
+      "text": "Какие члены enum получают обратное отображение?",
+      "options": [
+        "Строковые",
+        "Числовые",
+        "Только члены const enum",
+        "Никакие"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1363,
+      "type": "text",
+      "text": "Что сливается, когда класс и namespace называются одинаково?",
+      "options": [
+        "Ничего. namespace заменяет класс",
+        "namespace становится подклассом",
+        "Одно значение: конструктор плюс экспорты namespace",
+        "Это остаются два несвязанных имени"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1364,
+      "type": "text",
+      "text": "Когда выполняется блок static {}?",
+      "options": [
+        "На каждом new",
+        "При первом вызове метода",
+        "Никогда. Это конструкция только для типов",
+        "Когда вычисляется класс"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1365,
+      "type": "text",
+      "text": "Откуда берётся throw у функции с asserts?",
+      "options": [
+        "Из throw, который написан в теле. Само слово asserts стирается",
+        "Из самого ключевого слова asserts",
+        "Из проверки типов во время выполнения",
+        "Из первой перегрузки"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1366,
+      "type": "text",
+      "text": "Сколько конструкторов выпускает класс с перегрузками конструктора?",
+      "options": [
+        "По одному на каждую перегрузку",
+        "Один, тело реализации",
+        "Ни одного",
+        "Два: публичный и приватный"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1367,
+      "type": "text",
+      "text": "Что сигнатура индекса [key: string]: number создаёт в рантайме?",
+      "options": [
+        "Proxy",
+        "Свойство по умолчанию с именем key",
+        "Ничего. Она только типизирует чтение и запись",
+        "Enum ключей"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1368,
+      "type": "text",
+      "text": "Что делает ограничение T extends string?",
+      "options": [
+        "Превращает аргумент в string при вызове",
+        "Создаёт отдельную функцию для string",
+        "Запрещает обобщённой функции выполняться",
+        "Проверяет аргумент типа при выборе и не становится рантайм-проверкой"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1369,
+      "type": "boolean",
+      "text": "Имя поля private выкидывается из скомпилированного свойства.",
+      "correct": false
+    },
+    {
+      "id": 1370,
+      "type": "boolean",
+      "text": "Значение поля #n можно прочитать как obj[\"#n\"].",
+      "correct": false
+    },
+    {
+      "id": 1371,
+      "type": "boolean",
+      "text": "После компиляции abstract заставляет new бросать ошибку.",
+      "correct": false
+    },
+    {
+      "id": 1372,
+      "type": "boolean",
+      "text": "Экспорты namespace становятся свойствами объекта namespace.",
+      "correct": true
+    },
+    {
+      "id": 1373,
+      "type": "boolean",
+      "text": "as const вызывает Object.freeze.",
+      "correct": false
+    },
+    {
+      "id": 1374,
+      "type": "boolean",
+      "text": "satisfies стирается.",
+      "correct": true
+    },
+    {
+      "id": 1375,
+      "type": "boolean",
+      "text": "Предикат типа возвращает boolean.",
+      "correct": true
+    },
+    {
+      "id": 1376,
+      "type": "boolean",
+      "text": "Параметр this входит в function.length.",
+      "correct": false
+    },
+    {
+      "id": 1377,
+      "type": "boolean",
+      "text": "Пометка ! у поля записывает в него null.",
+      "correct": false
+    },
+    {
+      "id": 1378,
+      "type": "boolean",
+      "text": "Числовой enum создаёт обратные отображения.",
+      "correct": true
+    },
+    {
+      "id": 1379,
+      "type": "boolean",
+      "text": "Строковый enum создаёт обратное отображение от строки к имени.",
+      "correct": false
+    },
+    {
+      "id": 1380,
+      "type": "boolean",
+      "text": "Перегрузки конструктора компилируются в один конструктор.",
+      "correct": true
+    },
+    {
+      "id": 1381,
+      "type": "boolean",
+      "text": "override оборачивает метод базового класса.",
+      "correct": false
+    },
+    {
+      "id": 1382,
+      "type": "boolean",
+      "text": "Инициализатор поля класса выполняется раньше тела конструктора.",
+      "correct": true
+    },
+    {
+      "id": 1383,
+      "type": "boolean",
+      "text": "protected проверяет сам движок JS.",
+      "correct": false
+    },
+    {
+      "id": 1384,
+      "type": "boolean",
+      "text": "Слияние namespace с функцией вешает экспорты на эту функцию.",
+      "correct": true
+    },
+    {
+      "id": 1385,
+      "type": "recall",
+      "text": "Какое ключевое слово помечает член класса только для проверки типов и затем стирается?",
+      "answer": "private."
+    },
+    {
+      "id": 1386,
+      "type": "recall",
+      "text": "Какой префикс делает поле приватным уже в JS?",
+      "answer": "#."
+    },
+    {
+      "id": 1387,
+      "type": "recall",
+      "text": "Какое ключевое слово запрещает new для проверки типов, но стирается?",
+      "answer": "abstract."
+    },
+    {
+      "id": 1388,
+      "type": "recall",
+      "text": "Какое ключевое слово группирует значения в один объект?",
+      "answer": "namespace."
+    },
+    {
+      "id": 1389,
+      "type": "recall",
+      "text": "Какое утверждение просит компилятор сохранить литеральные типы?",
+      "answer": "as const."
+    },
+    {
+      "id": 1390,
+      "type": "recall",
+      "text": "Какой оператор проверяет выражение на тип и оставляет более узкий выведенный тип?",
+      "answer": "satisfies."
+    },
+    {
+      "id": 1391,
+      "type": "recall",
+      "text": "Что возвращает предикат типа?",
+      "answer": "boolean."
+    },
+    {
+      "id": 1392,
+      "type": "recall",
+      "text": "Какая пометка у поля говорит, что оно присвоено, хотя присваивания нет?",
+      "answer": "!."
+    },
+    {
+      "id": 1393,
+      "type": "recall",
+      "text": "Какие члены enum попадают в обратное отображение?",
+      "answer": "Числовые."
+    },
+    {
+      "id": 1394,
+      "type": "recall",
+      "text": "Какой блок выполняется при вычислении класса, а не при new?",
+      "answer": "static {}."
+    },
+    {
+      "id": 1395,
+      "type": "recall",
+      "text": "Какое ключевое слово требует, чтобы метод уже был в базовом классе?",
+      "answer": "override."
+    },
+    {
+      "id": 1396,
+      "type": "recall",
+      "text": "Во что компилируются перегрузки конструктора?",
+      "answer": "В один конструктор."
+    },
+    {
+      "id": 1397,
+      "type": "recall",
+      "text": "Что сигнатура индекса создаёт у объекта в рантайме?",
+      "answer": "Ничего."
+    },
+    {
+      "id": 1398,
+      "type": "recall",
+      "text": "Какие значения оператор ?? заменяет запасным?",
+      "answer": "null и undefined."
+    },
+    {
+      "id": 1399,
+      "type": "recall",
+      "text": "Как называется граница вида T extends ...?",
+      "answer": "Ограничение."
+    },
+    {
+      "id": 1400,
+      "type": "recall",
+      "text": "Какое ключевое слово ограничивает член наследниками только для проверки типов?",
+      "answer": "protected."
+    }
+  ]
+}
