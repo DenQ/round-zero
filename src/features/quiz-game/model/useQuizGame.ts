@@ -196,6 +196,7 @@ export function useQuizGame(questions: Question[], pack: ActivityPackRef) {
   }
 
   const question = state.round[state.step] ?? null
+  const tally = countRound(state.round, state.answers, state.step, state.selectedIndex)
 
   return {
     phase: 'playing' as const,
@@ -204,6 +205,8 @@ export function useQuizGame(questions: Question[], pack: ActivityPackRef) {
     total: state.round.length,
     selectedIndex: state.selectedIndex,
     revealed: state.selectedIndex !== null,
+    correctCount: tally.correct,
+    incorrectCount: tally.incorrect,
     select,
     next,
   }
@@ -235,6 +238,22 @@ function toSavedGame(state: PlayingState): SavedGame {
     answers: state.answers,
     updatedAt: Date.now(),
   }
+}
+
+function countRound(
+  round: Question[],
+  answers: SavedAnswer[],
+  step: number,
+  selectedIndex: number | null,
+): { correct: number; incorrect: number } {
+  const graded = [...answers]
+  const question = round[step]
+  if (question && selectedIndex !== null) {
+    graded.push({ questionId: question.id, selectedIndex })
+  }
+
+  const correct = countScore(round, graded)
+  return { correct, incorrect: graded.length - correct }
 }
 
 function countScore(round: Question[], answers: SavedAnswer[]): number {

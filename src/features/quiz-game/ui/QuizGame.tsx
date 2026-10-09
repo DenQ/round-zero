@@ -27,6 +27,8 @@ export function QuizGame({ questions, pack }: QuizGameProps) {
         total={game.total}
         selectedIndex={game.selectedIndex}
         revealed={game.revealed}
+        correctCount={game.correctCount}
+        incorrectCount={game.incorrectCount}
         onSelect={game.select}
         onNext={game.next}
       />

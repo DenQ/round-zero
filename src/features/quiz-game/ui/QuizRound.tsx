@@ -14,6 +14,8 @@ type QuizRoundProps = {
   total: number
   selectedIndex: number | null
   revealed: boolean
+  correctCount: number
+  incorrectCount: number
   onSelect: (optionIndex: number) => void
   onNext: () => void
 }
@@ -25,6 +27,8 @@ export function QuizRound({
   total,
   selectedIndex,
   revealed,
+  correctCount,
+  incorrectCount,
   onSelect,
   onNext,
 }: QuizRoundProps) {
@@ -33,7 +37,14 @@ export function QuizRound({
 
   return (
     <Stack spacing={2}>
-      <GameHeader questionId={question.id} step={step} total={total} />
+      <GameHeader
+        questionId={question.id}
+        step={step}
+        total={total}
+        correctCount={correctCount}
+        incorrectCount={incorrectCount}
+        pendingCorrect={revealed ? isCorrect : null}
+      />
 
       <QuestionCard
         question={question}
