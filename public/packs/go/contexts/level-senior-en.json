@@ -1,0 +1,1008 @@
+{
+  "stack": "go",
+  "topic": "contexts",
+  "level": "senior",
+  "locale": "en",
+  "questions": [
+    {
+      "id": 2241,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"context\"\n\t\"fmt\"\n\t\"net/http\"\n\t\"net/http/httptest\"\n)\n\nfunc main() {\n\treq := httptest.NewRequest(http.MethodGet, \"/\", nil)\n\tctx, cancel := context.WithCancel(context.Background())\n\treq = req.WithContext(ctx)\n\tcancel()\n\tif req.Context().Err() == context.Canceled {\n\t\tfmt.Println(1)\n\t} else {\n\t\tfmt.Println(0)\n\t}\n}\n",
+      "options": [
+        "1",
+        "0",
+        "2",
+        "3"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 2242,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"net/http/httptest\"\n)\n\nfunc main() {\n\treq := httptest.NewRequest(http.MethodGet, \"/\", nil)\n\tif req.Context().Err() == nil {\n\t\tfmt.Println(0)\n\t} else {\n\t\tfmt.Println(1)\n\t}\n}\n",
+      "options": [
+        "1",
+        "0",
+        "2",
+        "3"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 2243,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"context\"\n\t\"fmt\"\n)\n\nfunc main() {\n\tp, cancel := context.WithCancel(context.Background())\n\td := context.WithoutCancel(p)\n\tc, stop := context.WithCancel(d)\n\tstop()\n\tcancel()\n\tif c.Err() == context.Canceled {\n\t\tfmt.Println(1)\n\t} else {\n\t\tfmt.Println(0)\n\t}\n\tif d.Err() == nil {\n\t\tfmt.Println(2)\n\t} else {\n\t\tfmt.Println(0)\n\t}\n}\n",
+      "options": [
+        "0",
+        "1",
+        "1, 2",
+        "2"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 2244,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"context\"\n\t\"fmt\"\n)\n\nfunc main() {\n\tctx, cancel := context.WithCancel(context.Background())\n\tdefer cancel()\n\tvar n int\n\tstop := context.AfterFunc(ctx, func() {\n\t\tn = 9\n\t})\n\tstop()\n\tcancel()\n\tfmt.Println(n)\n}\n",
+      "options": [
+        "1",
+        "2",
+        "3",
+        "0"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 2245,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"context\"\n\t\"errors\"\n\t\"fmt\"\n\t\"time\"\n)\n\nfunc main() {\n\tctx, cancel := context.WithTimeoutCause(context.Background(), -time.Second, errors.New(\"boom\"))\n\tdefer cancel()\n\tif ctx.Err() == context.DeadlineExceeded {\n\t\tfmt.Println(1)\n\t} else {\n\t\tfmt.Println(0)\n\t}\n\tfmt.Println(len(context.Cause(ctx).Error()))\n}\n",
+      "options": [
+        "1, 4",
+        "0",
+        "1",
+        "2"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 2246,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"context\"\n\t\"fmt\"\n\t\"time\"\n)\n\nfunc main() {\n\tp, c1 := context.WithTimeout(context.Background(), time.Hour)\n\tdefer c1()\n\tc, c2 := context.WithTimeout(p, -time.Second)\n\tdefer c2()\n\tif p.Err() == nil {\n\t\tfmt.Println(0)\n\t} else {\n\t\tfmt.Println(1)\n\t}\n\tif c.Err() == context.DeadlineExceeded {\n\t\tfmt.Println(1)\n\t} else {\n\t\tfmt.Println(2)\n\t}\n}\n",
+      "options": [
+        "0",
+        "0, 1",
+        "1",
+        "2"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 2247,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"context\"\n\t\"fmt\"\n\t\"time\"\n)\n\nfunc main() {\n\tp, cancel := context.WithCancel(context.Background())\n\tc, stop := context.WithTimeout(p, -time.Second)\n\tdefer stop()\n\tcancel()\n\tif c.Err() == context.DeadlineExceeded {\n\t\tfmt.Println(1)\n\t} else {\n\t\tfmt.Println(0)\n\t}\n}\n",
+      "options": [
+        "0",
+        "2",
+        "1",
+        "3"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 2248,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"context\"\n\t\"fmt\"\n\t\"time\"\n)\n\nfunc main() {\n\tp, c1 := context.WithTimeout(context.Background(), -time.Second)\n\tdefer c1()\n\tc, c2 := context.WithCancel(p)\n\tdefer c2()\n\tif c.Err() == context.DeadlineExceeded {\n\t\tfmt.Println(2)\n\t} else {\n\t\tfmt.Println(0)\n\t}\n}\n",
+      "options": [
+        "0",
+        "1",
+        "3",
+        "2"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 2249,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"context\"\n\t\"fmt\"\n\t\"net/http\"\n\t\"net/http/httptest\"\n)\n\nfunc main() {\n\ttype key int\n\tconst k key = 1\n\tctx := context.WithValue(context.Background(), k, 5)\n\treq := httptest.NewRequest(http.MethodGet, \"/\", nil).WithContext(ctx)\n\tfmt.Println(req.Context().Value(k).(int))\n}\n",
+      "options": [
+        "5",
+        "0",
+        "1",
+        "2"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 2250,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"context\"\n\t\"fmt\"\n\t\"net/http\"\n\t\"net/http/httptest\"\n)\n\nfunc main() {\n\treq := httptest.NewRequest(http.MethodGet, \"/\", nil)\n\told := req.Context()\n\tctx, cancel := context.WithCancel(old)\n\tdefer cancel()\n\treq = req.WithContext(ctx)\n\tif req.Context() == old {\n\t\tfmt.Println(1)\n\t} else {\n\t\tfmt.Println(0)\n\t}\n}\n",
+      "options": [
+        "1",
+        "0",
+        "2",
+        "3"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 2251,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"context\"\n\t\"fmt\"\n)\n\nfunc main() {\n\ttype key int\n\tconst k key = 1\n\ta := context.WithValue(context.Background(), k, 1)\n\tb := context.WithValue(a, k, 2)\n\tc := context.WithValue(b, k, 3)\n\tfmt.Println(c.Value(k).(int))\n\tfmt.Println(a.Value(k).(int))\n}\n",
+      "options": [
+        "0",
+        "1",
+        "3, 1",
+        "2"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 2252,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"context\"\n\t\"fmt\"\n)\n\nfunc main() {\n\tctx, cancel := context.WithCancel(context.Background())\n\tcancel()\n\t<-ctx.Done()\n\t<-ctx.Done()\n\tfmt.Println(1)\n}\n",
+      "options": [
+        "0",
+        "2",
+        "3",
+        "1"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 2253,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"context\"\n\t\"fmt\"\n\t\"time\"\n)\n\nfunc main() {\n\tctx, cancel := context.WithDeadline(context.Background(), time.Now().Add(-time.Second))\n\tdefer cancel()\n\td, _ := ctx.Deadline()\n\tif time.Until(d) < 0 {\n\t\tfmt.Println(1)\n\t} else {\n\t\tfmt.Println(0)\n\t}\n}\n",
+      "options": [
+        "1",
+        "0",
+        "2",
+        "3"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 2254,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"context\"\n\t\"fmt\"\n)\n\nfunc main() {\n\tp, cancel := context.WithCancel(context.Background())\n\ta := context.WithoutCancel(p)\n\tb := context.WithoutCancel(a)\n\tcancel()\n\tn := 0\n\tif a.Err() == nil {\n\t\tn++\n\t}\n\tif b.Err() == nil {\n\t\tn++\n\t}\n\tfmt.Println(n)\n}\n",
+      "options": [
+        "0",
+        "2",
+        "1",
+        "3"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 2255,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"context\"\n\t\"errors\"\n\t\"fmt\"\n)\n\nfunc main() {\n\tctx, cancel := context.WithCancelCause(context.Background())\n\tcancel(errors.New(\"ab\"))\n\tif ctx.Err() == context.Canceled {\n\t\tfmt.Println(1)\n\t} else {\n\t\tfmt.Println(0)\n\t}\n\tfmt.Println(len(context.Cause(ctx).Error()))\n}\n",
+      "options": [
+        "0",
+        "1",
+        "1, 2",
+        "2"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 2256,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"context\"\n\t\"fmt\"\n)\n\nfunc main() {\n\tctx, cancel := context.WithCancel(context.Background())\n\tdefer cancel()\n\tstop := context.AfterFunc(ctx, func() {\n\t\tfmt.Println(8)\n\t})\n\tfirst := stop()\n\tsecond := stop()\n\tn := 0\n\tif first {\n\t\tn++\n\t}\n\tif second {\n\t\tn++\n\t}\n\tfmt.Println(n)\n}\n",
+      "options": [
+        "0",
+        "2",
+        "3",
+        "1"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 2257,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"context\"\n\t\"fmt\"\n\t\"sync\"\n)\n\nfunc main() {\n\tvar wg sync.WaitGroup\n\tctx, cancel := context.WithCancel(context.Background())\n\twg.Add(1)\n\tcontext.AfterFunc(ctx, func() {\n\t\tdefer wg.Done()\n\t\tfmt.Println(4)\n\t})\n\tcancel()\n\twg.Wait()\n}\n",
+      "options": [
+        "4",
+        "0",
+        "1",
+        "2"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 2258,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n)\n\nfunc main() {\n\treq, _ := http.NewRequest(http.MethodGet, \"http://127.0.0.1/\", nil)\n\tif req.Context().Err() == nil {\n\t\tfmt.Println(1)\n\t} else {\n\t\tfmt.Println(0)\n\t}\n}\n",
+      "options": [
+        "0",
+        "1",
+        "2",
+        "3"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 2259,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"context\"\n\t\"fmt\"\n)\n\nfunc main() {\n\ttype key struct{ n int }\n\tk1 := key{n: 1}\n\tk2 := key{n: 1}\n\tctx := context.WithValue(context.Background(), k1, 7)\n\tfmt.Println(ctx.Value(k2).(int))\n}\n",
+      "options": [
+        "0",
+        "1",
+        "7",
+        "2"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 2260,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"context\"\n\t\"fmt\"\n)\n\nfunc main() {\n\ta := new(int)\n\tb := new(int)\n\tctx := context.WithValue(context.Background(), a, 3)\n\tctx = context.WithValue(ctx, b, 9)\n\tfmt.Println(ctx.Value(a).(int))\n\tfmt.Println(ctx.Value(b).(int))\n}\n",
+      "options": [
+        "0",
+        "1",
+        "2",
+        "3, 9"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 2261,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"context\"\n\t\"fmt\"\n)\n\nfunc main() {\n\tp, cancel := context.WithCancel(context.Background())\n\tcancel()\n\tif p.Err() != nil {\n\t\tfmt.Println(1)\n\t} else {\n\t\tfmt.Println(0)\n\t}\n\td := context.WithoutCancel(p)\n\tif d.Err() == nil {\n\t\tfmt.Println(2)\n\t} else {\n\t\tfmt.Println(0)\n\t}\n}\n",
+      "options": [
+        "1, 2",
+        "0",
+        "1",
+        "2"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 2262,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"context\"\n\t\"errors\"\n\t\"fmt\"\n\t\"time\"\n)\n\nfunc main() {\n\tp, c1 := context.WithTimeoutCause(context.Background(), -time.Second, errors.New(\"t\"))\n\tdefer c1()\n\tc, c2 := context.WithCancelCause(p)\n\tc2(errors.New(\"c\"))\n\tif context.Cause(c).Error() == \"t\" {\n\t\tfmt.Println(1)\n\t} else {\n\t\tfmt.Println(0)\n\t}\n}\n",
+      "options": [
+        "0",
+        "1",
+        "2",
+        "3"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 2263,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"context\"\n\t\"fmt\"\n\t\"net/http\"\n\t\"net/http/httptest\"\n)\n\nfunc main() {\n\treq := httptest.NewRequest(http.MethodPost, \"/x\", nil)\n\tctx, cancel := context.WithCancel(req.Context())\n\tcancel()\n\treq = req.WithContext(ctx)\n\tselect {\n\tcase <-req.Context().Done():\n\t\tfmt.Println(1)\n\tdefault:\n\t\tfmt.Println(0)\n\t}\n}\n",
+      "options": [
+        "0",
+        "2",
+        "1",
+        "3"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 2264,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"context\"\n\t\"fmt\"\n)\n\nfunc main() {\n\ttype key int\n\tconst k key = 1\n\tp, cancel := context.WithCancel(context.Background())\n\tctx := context.WithValue(p, k, 2)\n\tcancel()\n\tfmt.Println(ctx.Value(k).(int))\n\tif ctx.Err() != nil {\n\t\tfmt.Println(1)\n\t} else {\n\t\tfmt.Println(0)\n\t}\n}\n",
+      "options": [
+        "0",
+        "1",
+        "2",
+        "2, 1"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 2265,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"context\"\n\t\"fmt\"\n)\n\nfunc main() {\n\tctx, cancel := context.WithTimeout(context.Background(), 0)\n\tdefer cancel()\n\tif ctx.Err() == context.DeadlineExceeded {\n\t\tfmt.Println(1)\n\t} else {\n\t\tfmt.Println(0)\n\t}\n}\n",
+      "options": [
+        "1",
+        "0",
+        "2",
+        "3"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 2266,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"context\"\n\t\"fmt\"\n)\n\nfunc main() {\n\tleft, c1 := context.WithCancel(context.Background())\n\tright, c2 := context.WithCancel(context.Background())\n\tdefer c2()\n\tc1()\n\tselect {\n\tcase <-left.Done():\n\t\tfmt.Println(1)\n\tcase <-right.Done():\n\t\tfmt.Println(2)\n\t}\n}\n",
+      "options": [
+        "0",
+        "1",
+        "2",
+        "3"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 2267,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"context\"\n\t\"fmt\"\n)\n\nfunc main() {\n\tctx, cancel := context.WithCancel(context.Background())\n\tdefer cancel()\n\tdone := ctx.Done()\n\tcancel()\n\tselect {\n\tcase <-done:\n\t\tfmt.Println(1)\n\tdefault:\n\t\tfmt.Println(0)\n\t}\n}\n",
+      "options": [
+        "0",
+        "2",
+        "1",
+        "3"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 2268,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"context\"\n\t\"fmt\"\n\t\"time\"\n)\n\nfunc main() {\n\tp, c1 := context.WithDeadline(context.Background(), time.Unix(0, 0))\n\tdefer c1()\n\tc, c2 := context.WithDeadline(p, time.Unix(0, 0))\n\tdefer c2()\n\td1, _ := p.Deadline()\n\td2, _ := c.Deadline()\n\tif d1.Equal(d2) {\n\t\tfmt.Println(1)\n\t} else {\n\t\tfmt.Println(0)\n\t}\n}\n",
+      "options": [
+        "0",
+        "2",
+        "3",
+        "1"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 2269,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"context\"\n\t\"fmt\"\n)\n\nfunc main() {\n\tn := 0\n\tif context.Canceled != nil {\n\t\tn++\n\t}\n\tif context.DeadlineExceeded != nil {\n\t\tn++\n\t}\n\tfmt.Println(n)\n}\n",
+      "options": [
+        "2",
+        "0",
+        "1",
+        "3"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 2270,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"context\"\n\t\"fmt\"\n\t\"net/http\"\n\t\"net/http/httptest\"\n)\n\nfunc main() {\n\treq := httptest.NewRequest(http.MethodGet, \"/\", nil)\n\tctx, cancel := context.WithCancel(context.Background())\n\tdefer cancel()\n\treq = req.WithContext(ctx)\n\treq2 := req.Clone(context.Background())\n\tcancel()\n\tif req.Context().Err() != nil {\n\t\tfmt.Println(1)\n\t} else {\n\t\tfmt.Println(0)\n\t}\n\tif req2.Context().Err() == nil {\n\t\tfmt.Println(2)\n\t} else {\n\t\tfmt.Println(0)\n\t}\n}\n",
+      "options": [
+        "0",
+        "1, 2",
+        "1",
+        "2"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 2271,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"context\"\n\t\"errors\"\n\t\"fmt\"\n)\n\nfunc main() {\n\tctx, cancel := context.WithCancelCause(context.Background())\n\tcancel(errors.New(\"z\"))\n\tif errors.Is(context.Cause(ctx), ctx.Err()) {\n\t\tfmt.Println(1)\n\t} else {\n\t\tfmt.Println(0)\n\t}\n}\n",
+      "options": [
+        "1",
+        "2",
+        "0",
+        "3"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 2272,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"context\"\n\t\"fmt\"\n)\n\nfunc main() {\n\tctx := context.Background()\n\tif ctx.Value(1) == nil {\n\t\tfmt.Println(0)\n\t} else {\n\t\tfmt.Println(1)\n\t}\n}\n",
+      "options": [
+        "1",
+        "2",
+        "3",
+        "0"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 2273,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"context\"\n\t\"fmt\"\n\t\"time\"\n)\n\nfunc main() {\n\tp, c1 := context.WithTimeout(context.Background(), time.Hour)\n\tdefer c1()\n\tc, c2 := context.WithTimeout(p, time.Hour)\n\tdefer c2()\n\tdp, _ := p.Deadline()\n\tdc, _ := c.Deadline()\n\tif dc.Equal(dp) || dc.Before(dp) {\n\t\tfmt.Println(1)\n\t} else {\n\t\tfmt.Println(0)\n\t}\n}\n",
+      "options": [
+        "1",
+        "0",
+        "2",
+        "3"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 2274,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"context\"\n\t\"fmt\"\n)\n\nfunc main() {\n\tp, cancel := context.WithCancel(context.Background())\n\t_, stop := context.WithCancel(p)\n\tstop()\n\tif p.Err() == nil {\n\t\tfmt.Println(0)\n\t} else {\n\t\tfmt.Println(1)\n\t}\n\tcancel()\n\tif p.Err() == context.Canceled {\n\t\tfmt.Println(1)\n\t} else {\n\t\tfmt.Println(2)\n\t}\n}\n",
+      "options": [
+        "0",
+        "0, 1",
+        "1",
+        "2"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 2275,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"context\"\n\t\"fmt\"\n\t\"sync\"\n\t\"time\"\n)\n\nfunc main() {\n\tctx, cancel := context.WithTimeout(context.Background(), -time.Second)\n\tdefer cancel()\n\tvar wg sync.WaitGroup\n\twg.Add(1)\n\tcontext.AfterFunc(ctx, func() {\n\t\tdefer wg.Done()\n\t\tif ctx.Err() == context.DeadlineExceeded {\n\t\t\tfmt.Println(1)\n\t\t} else {\n\t\t\tfmt.Println(0)\n\t\t}\n\t})\n\twg.Wait()\n}\n",
+      "options": [
+        "0",
+        "2",
+        "1",
+        "3"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 2276,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"context\"\n\t\"fmt\"\n\t\"net/http\"\n\t\"net/http/httptest\"\n)\n\nfunc main() {\n\treq := httptest.NewRequest(http.MethodGet, \"/\", nil)\n\tbg := context.Background()\n\treq = req.WithContext(bg)\n\tif req.Context() == bg {\n\t\tfmt.Println(1)\n\t} else {\n\t\tfmt.Println(0)\n\t}\n}\n",
+      "options": [
+        "0",
+        "2",
+        "3",
+        "1"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 2277,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"context\"\n\t\"fmt\"\n)\n\nfunc main() {\n\ttype key int\n\tctx := context.WithValue(context.Background(), key(1), 4)\n\tif ctx.Value(1) == nil {\n\t\tfmt.Println(0)\n\t} else {\n\t\tfmt.Println(1)\n\t}\n}\n",
+      "options": [
+        "0",
+        "1",
+        "2",
+        "3"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 2278,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"context\"\n\t\"fmt\"\n)\n\nfunc main() {\n\tp, cancel := context.WithCancel(context.Background())\n\tcancel()\n\tchild := context.WithoutCancel(p)\n\tgrand, stop := context.WithCancel(child)\n\tdefer stop()\n\tif grand.Err() == nil {\n\t\tfmt.Println(1)\n\t} else {\n\t\tfmt.Println(0)\n\t}\n}\n",
+      "options": [
+        "0",
+        "1",
+        "2",
+        "3"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 2279,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"context\"\n\t\"errors\"\n\t\"fmt\"\n)\n\nfunc main() {\n\tctx, cancel := context.WithCancelCause(context.Background())\n\terrA := errors.New(\"a\")\n\tcancel(errA)\n\tif context.Cause(ctx) == errA {\n\t\tfmt.Println(1)\n\t} else {\n\t\tfmt.Println(0)\n\t}\n}\n",
+      "options": [
+        "0",
+        "2",
+        "1",
+        "3"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 2280,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"context\"\n\t\"fmt\"\n\t\"net/http\"\n)\n\nfunc main() {\n\tctx, cancel := context.WithCancel(context.Background())\n\tcancel()\n\treq, err := http.NewRequestWithContext(ctx, http.MethodGet, \"http://127.0.0.1/\", nil)\n\tif err != nil {\n\t\tfmt.Println(0)\n\t\treturn\n\t}\n\tif req.Context().Err() == context.Canceled {\n\t\tfmt.Println(1)\n\t} else {\n\t\tfmt.Println(0)\n\t}\n}\n",
+      "options": [
+        "0",
+        "2",
+        "3",
+        "1"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 2281,
+      "type": "text",
+      "text": "Should you store Context as a long-lived struct field?",
+      "options": [
+        "No. Pass it as an argument on each call",
+        "Yes, it simplifies DI",
+        "Yes, if it is *http.Server",
+        "Yes, instead of Background"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 2282,
+      "type": "text",
+      "text": "When is an HTTP server Request.Context() canceled?",
+      "options": [
+        "Only on WriteTimeout",
+        "When the client disconnects or the request ends",
+        "Never",
+        "On every Write"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 2283,
+      "type": "text",
+      "text": "When do you take context.TODO() instead of Background()?",
+      "options": [
+        "In every HTTP handler",
+        "Instead of Err()",
+        "When the parent context is not clear yet",
+        "For signal cancel"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 2284,
+      "type": "text",
+      "text": "How do you detach background work from request cancel?",
+      "options": [
+        "Pass nil",
+        "Call Done() twice",
+        "Copy the Context struct",
+        "context.WithoutCancel or a new Background"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 2285,
+      "type": "text",
+      "text": "Should you write your own type that implements Context?",
+      "options": [
+        "Usually no: the context package functions are enough",
+        "Yes, in every service",
+        "Yes, otherwise Value does not work",
+        "Yes, for http.Request"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 2286,
+      "type": "text",
+      "text": "What should you do if ctx.Err() is already set before new work?",
+      "options": [
+        "Ignore it and continue",
+        "Do not start the work; return that error",
+        "Call Background()",
+        "Clear Err with WithValue"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 2287,
+      "type": "text",
+      "text": "Why prefer AfterFunc over a goroutine on <-ctx.Done() for a short callback?",
+      "options": [
+        "AfterFunc is synchronous",
+        "AfterFunc cancels the parent",
+        "You can stop it before start and avoid managing an extra goroutine yourself",
+        "It changes Err to Cause"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 2288,
+      "type": "text",
+      "text": "How does errgroup relate to Context?",
+      "options": [
+        "errgroup forbids Context",
+        "Each Go ignores ctx",
+        "Wait never cancels ctx",
+        "WithContext cancels the rest on the first error"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 2289,
+      "type": "text",
+      "text": "What does Request.Clone(ctx) do?",
+      "options": [
+        "A copy of the request with that context",
+        "Cancels the original request",
+        "Changes the URL",
+        "Nothing if ctx is already canceled"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 2290,
+      "type": "text",
+      "text": "Why are two *int pointers different WithValue keys?",
+      "options": [
+        "The ints are compared by value",
+        "Pointer identity is compared",
+        "WithValue forbids pointers",
+        "They always collide"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 2291,
+      "type": "text",
+      "text": "If the parent is already DeadlineExceeded, what Err does a WithCancel child have?",
+      "options": [
+        "nil",
+        "Canceled",
+        "DeadlineExceeded",
+        "panic"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 2292,
+      "type": "text",
+      "text": "Can you still read Value after cancel?",
+      "options": [
+        "No, Value becomes nil",
+        "Only until Done closes",
+        "Only through Cause",
+        "Yes. Values are independent of cancel"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 2293,
+      "type": "text",
+      "text": "Why is starting work after Done is already closed risky?",
+      "options": [
+        "The work keeps using time after the request was canceled",
+        "Go inserts a panic",
+        "Err becomes nil",
+        "The select spec forbids it"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 2294,
+      "type": "text",
+      "text": "Do you need a custom Context to add a Value?",
+      "options": [
+        "Yes, always",
+        "No. WithValue is enough",
+        "Yes, if the key is a struct",
+        "Yes, for HTTP"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 2295,
+      "type": "text",
+      "text": "What happens to Cause if the parent timeout fires first, then the child cancel runs?",
+      "options": [
+        "The child cause always wins",
+        "Err becomes nil",
+        "The first recorded reason wins (the parent timeout)",
+        "Both errors are Join’d"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 2296,
+      "type": "text",
+      "text": "Request.WithContext does not mutate the original request. What does it do?",
+      "options": [
+        "It panics",
+        "It writes a Header",
+        "It cancels the old ctx",
+        "It returns a shallow copy with the new context"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 2297,
+      "type": "text",
+      "text": "For an outgoing HTTP client call, which context goes to NewRequestWithContext?",
+      "options": [
+        "The caller context, so the request can be canceled",
+        "Always TODO",
+        "nil",
+        "Another Request’s context without Clone"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 2298,
+      "type": "text",
+      "text": "Are Canceled and DeadlineExceeded distinct values under ==?",
+      "options": [
+        "No, they are one sentinel",
+        "Yes. They are different sentinel errors",
+        "Only through Cause",
+        "Only in tests"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 2299,
+      "type": "text",
+      "text": "Why must fire-and-forget work after a handler not use Request.Context()?",
+      "options": [
+        "Context cannot be passed into a goroutine",
+        "Values disappear",
+        "The request context is canceled when the handler returns",
+        "http.Request forbids goroutines"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 2300,
+      "type": "text",
+      "text": "What about a second AfterFunc stop after a successful first?",
+      "options": [
+        "panic",
+        "true again",
+        "It blocks",
+        "false: the callback is no longer pending"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 2301,
+      "type": "boolean",
+      "text": "Storing Context as a long-lived struct field is an anti-pattern.",
+      "correct": true
+    },
+    {
+      "id": 2302,
+      "type": "boolean",
+      "text": "Request.Context() stays live long after the HTTP handler returns.",
+      "correct": false
+    },
+    {
+      "id": 2303,
+      "type": "boolean",
+      "text": "WithoutCancel is a way to detach work from request cancellation.",
+      "correct": true
+    },
+    {
+      "id": 2304,
+      "type": "boolean",
+      "text": "A custom Context type is usually unnecessary.",
+      "correct": true
+    },
+    {
+      "id": 2305,
+      "type": "boolean",
+      "text": "You may start new work even if ctx.Err() is already set.",
+      "correct": false
+    },
+    {
+      "id": 2306,
+      "type": "boolean",
+      "text": "Value remains readable after cancel.",
+      "correct": true
+    },
+    {
+      "id": 2307,
+      "type": "boolean",
+      "text": "Clone attaches the new context to the copy, not the original request.",
+      "correct": true
+    },
+    {
+      "id": 2308,
+      "type": "boolean",
+      "text": "errgroup.WithContext cancels the group on the first error.",
+      "correct": true
+    },
+    {
+      "id": 2309,
+      "type": "boolean",
+      "text": "Background() is a normal root in main when there is no incoming ctx.",
+      "correct": true
+    },
+    {
+      "id": 2310,
+      "type": "boolean",
+      "text": "TODO() and Background() are interchangeable with no meaning difference for readers.",
+      "correct": false
+    },
+    {
+      "id": 2311,
+      "type": "boolean",
+      "text": "Two pointer keys from different new(int) do not collide.",
+      "correct": true
+    },
+    {
+      "id": 2312,
+      "type": "boolean",
+      "text": "A WithCancel child of an already expired parent gets Canceled, not DeadlineExceeded.",
+      "correct": false
+    },
+    {
+      "id": 2313,
+      "type": "boolean",
+      "text": "An AfterFunc callback can be stopped before it starts running.",
+      "correct": true
+    },
+    {
+      "id": 2314,
+      "type": "boolean",
+      "text": "http.Request.WithContext mutates the receiver in place.",
+      "correct": false
+    },
+    {
+      "id": 2315,
+      "type": "boolean",
+      "text": "An outgoing client context should be able to cancel RoundTrip.",
+      "correct": true
+    },
+    {
+      "id": 2316,
+      "type": "boolean",
+      "text": "Canceled and DeadlineExceeded are the same sentinel.",
+      "correct": false
+    },
+    {
+      "id": 2317,
+      "type": "boolean",
+      "text": "The first recorded Cause is not overwritten by a later child cancel.",
+      "correct": true
+    },
+    {
+      "id": 2318,
+      "type": "boolean",
+      "text": "A timeout of 0 yields DeadlineExceeded immediately.",
+      "correct": true
+    },
+    {
+      "id": 2319,
+      "type": "boolean",
+      "text": "You must implement Context yourself to use WithValue.",
+      "correct": false
+    },
+    {
+      "id": 2320,
+      "type": "boolean",
+      "text": "Done can be received from again: the channel is already closed.",
+      "correct": true
+    },
+    {
+      "id": 2321,
+      "type": "recall",
+      "text": "Where does Context belong: a long-lived field or an argument?",
+      "answer": "As an argument of each call."
+    },
+    {
+      "id": 2322,
+      "type": "recall",
+      "text": "When does the server cancel Request.Context()?",
+      "answer": "When the client disconnects or the request finishes."
+    },
+    {
+      "id": 2323,
+      "type": "recall",
+      "text": "How do you detach work from an incoming ctx cancel?",
+      "answer": "WithoutCancel or a new Background."
+    },
+    {
+      "id": 2324,
+      "type": "recall",
+      "text": "Should you implement your own Context?",
+      "answer": "Usually no."
+    },
+    {
+      "id": 2325,
+      "type": "recall",
+      "text": "What if ctx.Err() != nil before starting work?",
+      "answer": "Do not start; return the error."
+    },
+    {
+      "id": 2326,
+      "type": "recall",
+      "text": "Which context for outgoing NewRequestWithContext?",
+      "answer": "The caller’s context, to cancel the request."
+    },
+    {
+      "id": 2327,
+      "type": "recall",
+      "text": "What does errgroup.WithContext cancel on error?",
+      "answer": "The group context and the remaining goroutines."
+    },
+    {
+      "id": 2328,
+      "type": "recall",
+      "text": "When TODO instead of Background?",
+      "answer": "When the parent ctx is not clear yet."
+    },
+    {
+      "id": 2329,
+      "type": "recall",
+      "text": "Does Value survive cancel?",
+      "answer": "Yes."
+    },
+    {
+      "id": 2330,
+      "type": "recall",
+      "text": "Does WithContext mutate the original *Request?",
+      "answer": "No. It returns a copy."
+    },
+    {
+      "id": 2331,
+      "type": "recall",
+      "text": "What Err does a child have if the parent is already DeadlineExceeded?",
+      "answer": "DeadlineExceeded."
+    },
+    {
+      "id": 2332,
+      "type": "recall",
+      "text": "Why not give a background goroutine Request.Context() after the handler?",
+      "answer": "The request context is canceled when the handler returns."
+    },
+    {
+      "id": 2333,
+      "type": "recall",
+      "text": "What does a second AfterFunc stop return after a successful first?",
+      "answer": "false."
+    },
+    {
+      "id": 2334,
+      "type": "recall",
+      "text": "How does Clone relate to context?",
+      "answer": "The request copy carries the given ctx."
+    },
+    {
+      "id": 2335,
+      "type": "recall",
+      "text": "Are Canceled and DeadlineExceeded one sentinel?",
+      "answer": "No. They are different."
+    },
+    {
+      "id": 2336,
+      "type": "recall",
+      "text": "How do you register a done callback without your own goroutine?",
+      "answer": "context.AfterFunc."
+    },
+    {
+      "id": 2337,
+      "type": "recall",
+      "text": "Who wins in Cause: a later child cancel or an already expired parent?",
+      "answer": "The parent’s already recorded reason."
+    },
+    {
+      "id": 2338,
+      "type": "recall",
+      "text": "Which error does a 0 timeout produce at once?",
+      "answer": "DeadlineExceeded."
+    },
+    {
+      "id": 2339,
+      "type": "recall",
+      "text": "How are pointer keys compared in Value?",
+      "answer": "By pointer identity."
+    },
+    {
+      "id": 2340,
+      "type": "recall",
+      "text": "Can you receive again from an already closed Done?",
+      "answer": "Yes."
+    }
+  ]
+}

@@ -1,0 +1,608 @@
+{
+  "stack": "go",
+  "topic": "contexts",
+  "level": "junior",
+  "locale": "ru",
+  "questions": [
+    {
+      "id": 2101,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"context\"\n\t\"fmt\"\n)\n\nfunc main() {\n\tctx := context.Background()\n\tif ctx.Err() == nil {\n\t\tfmt.Println(1)\n\t} else {\n\t\tfmt.Println(0)\n\t}\n}\n",
+      "options": [
+        "1",
+        "0",
+        "2",
+        "3"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 2102,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"context\"\n\t\"fmt\"\n)\n\nfunc main() {\n\tctx, cancel := context.WithCancel(context.Background())\n\tcancel()\n\tif ctx.Err() == context.Canceled {\n\t\tfmt.Println(1)\n\t} else {\n\t\tfmt.Println(0)\n\t}\n}\n",
+      "options": [
+        "0",
+        "1",
+        "2",
+        "3"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 2103,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"context\"\n\t\"fmt\"\n)\n\nfunc main() {\n\tparent, cancel := context.WithCancel(context.Background())\n\tchild, stop := context.WithCancel(parent)\n\tdefer stop()\n\tcancel()\n\tif child.Err() == context.Canceled {\n\t\tfmt.Println(1)\n\t} else {\n\t\tfmt.Println(0)\n\t}\n}\n",
+      "options": [
+        "0",
+        "2",
+        "1",
+        "3"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 2104,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"context\"\n\t\"fmt\"\n)\n\nfunc main() {\n\tparent, stop := context.WithCancel(context.Background())\n\tdefer stop()\n\tchild, cancel := context.WithCancel(parent)\n\tcancel()\n\tif parent.Err() == nil {\n\t\tfmt.Println(1)\n\t} else {\n\t\tfmt.Println(0)\n\t}\n\tif child.Err() == context.Canceled {\n\t\tfmt.Println(2)\n\t} else {\n\t\tfmt.Println(0)\n\t}\n}\n",
+      "options": [
+        "0",
+        "1",
+        "2",
+        "1, 2"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 2105,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"context\"\n\t\"fmt\"\n)\n\nfunc main() {\n\tctx, cancel := context.WithCancel(context.Background())\n\tcancel()\n\tcancel()\n\tif ctx.Err() == context.Canceled {\n\t\tfmt.Println(1)\n\t} else {\n\t\tfmt.Println(0)\n\t}\n}\n",
+      "options": [
+        "1",
+        "0",
+        "2",
+        "3"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 2106,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"context\"\n\t\"fmt\"\n)\n\nfunc main() {\n\tctx, cancel := context.WithCancel(context.Background())\n\tcancel()\n\tselect {\n\tcase <-ctx.Done():\n\t\tfmt.Println(1)\n\tdefault:\n\t\tfmt.Println(0)\n\t}\n}\n",
+      "options": [
+        "0",
+        "1",
+        "2",
+        "3"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 2107,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"context\"\n\t\"fmt\"\n)\n\nfunc main() {\n\tctx, cancel := context.WithCancel(context.Background())\n\tdefer cancel()\n\tselect {\n\tcase <-ctx.Done():\n\t\tfmt.Println(1)\n\tdefault:\n\t\tfmt.Println(0)\n\t}\n}\n",
+      "options": [
+        "1",
+        "2",
+        "0",
+        "3"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 2108,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"context\"\n\t\"fmt\"\n\t\"time\"\n)\n\nfunc main() {\n\tctx, cancel := context.WithDeadline(context.Background(), time.Now().Add(-time.Second))\n\tdefer cancel()\n\tif ctx.Err() == context.DeadlineExceeded {\n\t\tfmt.Println(2)\n\t} else {\n\t\tfmt.Println(0)\n\t}\n}\n",
+      "options": [
+        "0",
+        "1",
+        "3",
+        "2"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 2109,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"context\"\n\t\"fmt\"\n)\n\nfunc main() {\n\ttype key int\n\tconst userKey key = 0\n\tctx := context.WithValue(context.Background(), userKey, 7)\n\tfmt.Println(ctx.Value(userKey).(int))\n}\n",
+      "options": [
+        "7",
+        "0",
+        "1",
+        "2"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 2110,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"context\"\n\t\"fmt\"\n)\n\nfunc main() {\n\ttype key int\n\tctx := context.WithValue(context.Background(), key(1), 9)\n\tif ctx.Value(key(2)) == nil {\n\t\tfmt.Println(0)\n\t} else {\n\t\tfmt.Println(1)\n\t}\n}\n",
+      "options": [
+        "1",
+        "0",
+        "2",
+        "3"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 2111,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"context\"\n\t\"fmt\"\n)\n\nfunc main() {\n\tctx := context.TODO()\n\tif ctx.Err() == nil {\n\t\tfmt.Println(1)\n\t} else {\n\t\tfmt.Println(0)\n\t}\n}\n",
+      "options": [
+        "0",
+        "2",
+        "1",
+        "3"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 2112,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"context\"\n\t\"fmt\"\n)\n\nfunc main() {\n\t_, ok := context.Background().Deadline()\n\tif ok {\n\t\tfmt.Println(1)\n\t} else {\n\t\tfmt.Println(0)\n\t}\n}\n",
+      "options": [
+        "1",
+        "2",
+        "3",
+        "0"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 2113,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"context\"\n\t\"fmt\"\n)\n\nfunc main() {\n\tctx, cancel := context.WithCancel(context.Background())\n\tdefer cancel()\n\tif ctx.Err() == nil {\n\t\tfmt.Println(0)\n\t} else {\n\t\tfmt.Println(1)\n\t}\n}\n",
+      "options": [
+        "0",
+        "1",
+        "2",
+        "3"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 2114,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"context\"\n\t\"fmt\"\n)\n\nfunc main() {\n\tp, cancel := context.WithCancel(context.Background())\n\tc1, s1 := context.WithCancel(p)\n\tc2, s2 := context.WithCancel(p)\n\tdefer s1()\n\tdefer s2()\n\tcancel()\n\tn := 0\n\tif c1.Err() != nil {\n\t\tn++\n\t}\n\tif c2.Err() != nil {\n\t\tn++\n\t}\n\tfmt.Println(n)\n}\n",
+      "options": [
+        "0",
+        "2",
+        "1",
+        "3"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 2115,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"context\"\n\t\"fmt\"\n\t\"time\"\n)\n\nfunc main() {\n\tctx, cancel := context.WithTimeout(context.Background(), -time.Second)\n\tdefer cancel()\n\tif ctx.Err() == context.DeadlineExceeded {\n\t\tfmt.Println(1)\n\t} else {\n\t\tfmt.Println(0)\n\t}\n}\n",
+      "options": [
+        "0",
+        "2",
+        "1",
+        "3"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 2116,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"context\"\n\t\"fmt\"\n)\n\nfunc main() {\n\ttype key int\n\tconst k key = 1\n\tctx := context.WithValue(context.Background(), k, 3)\n\tctx = context.WithValue(ctx, k, 5)\n\tfmt.Println(ctx.Value(k).(int))\n}\n",
+      "options": [
+        "0",
+        "1",
+        "2",
+        "5"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 2117,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"context\"\n\t\"fmt\"\n)\n\nfunc main() {\n\ttype key int\n\tconst k key = 1\n\tp := context.WithValue(context.Background(), k, 4)\n\tc, cancel := context.WithCancel(p)\n\tdefer cancel()\n\tfmt.Println(c.Value(k).(int))\n}\n",
+      "options": [
+        "4",
+        "0",
+        "1",
+        "2"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 2118,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"context\"\n\t\"fmt\"\n)\n\nfunc main() {\n\ttype key int\n\tconst k key = 1\n\tp := context.Background()\n\tc := context.WithValue(p, k, 8)\n\tif p.Value(k) == nil {\n\t\tfmt.Println(0)\n\t} else {\n\t\tfmt.Println(1)\n\t}\n\tfmt.Println(c.Value(k).(int))\n}\n",
+      "options": [
+        "0",
+        "0, 8",
+        "1",
+        "2"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 2119,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"context\"\n\t\"fmt\"\n)\n\nfunc main() {\n\tctx, cancel := context.WithCancel(context.Background())\n\tcancel()\n\t<-ctx.Done()\n\tfmt.Println(3)\n}\n",
+      "options": [
+        "0",
+        "1",
+        "3",
+        "2"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 2120,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"context\"\n\t\"fmt\"\n)\n\nfunc main() {\n\tctx, cancel := context.WithCancel(context.Background())\n\tcancel()\n\tif ctx.Err() == context.DeadlineExceeded {\n\t\tfmt.Println(2)\n\t} else if ctx.Err() == context.Canceled {\n\t\tfmt.Println(1)\n\t} else {\n\t\tfmt.Println(0)\n\t}\n}\n",
+      "options": [
+        "0",
+        "2",
+        "3",
+        "1"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 2121,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"context\"\n\t\"fmt\"\n)\n\nfunc main() {\n\tctx, cancel := context.WithCancel(context.TODO())\n\tcancel()\n\tif ctx.Err() == context.Canceled {\n\t\tfmt.Println(1)\n\t} else {\n\t\tfmt.Println(0)\n\t}\n}\n",
+      "options": [
+        "1",
+        "0",
+        "2",
+        "3"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 2122,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"context\"\n\t\"fmt\"\n)\n\nfunc main() {\n\ta, ca := context.WithCancel(context.Background())\n\tb, cb := context.WithCancel(a)\n\tc, cc := context.WithCancel(b)\n\tdefer ca()\n\tdefer cc()\n\tcb()\n\tn := 0\n\tif a.Err() != nil {\n\t\tn++\n\t}\n\tif b.Err() != nil {\n\t\tn++\n\t}\n\tif c.Err() != nil {\n\t\tn++\n\t}\n\tfmt.Println(n)\n}\n",
+      "options": [
+        "0",
+        "2",
+        "1",
+        "3"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 2123,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"context\"\n\t\"fmt\"\n\t\"time\"\n)\n\nfunc main() {\n\tctx, cancel := context.WithDeadline(context.Background(), time.Now().Add(-time.Millisecond))\n\tdefer cancel()\n\t_, ok := ctx.Deadline()\n\tif ok {\n\t\tfmt.Println(1)\n\t} else {\n\t\tfmt.Println(0)\n\t}\n}\n",
+      "options": [
+        "0",
+        "2",
+        "1",
+        "3"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 2124,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"context\"\n\t\"fmt\"\n)\n\nfunc main() {\n\ttype key int\n\tconst k key = 2\n\tctx := context.WithValue(context.Background(), k, 6)\n\tfmt.Println(ctx.Value(k).(int))\n}\n",
+      "options": [
+        "0",
+        "1",
+        "2",
+        "6"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 2125,
+      "type": "text",
+      "text": "Что возвращает ctx.Done() после отмены?",
+      "options": [
+        "Закрытый канал, из которого можно читать",
+        "nil-канал",
+        "Канал с ошибкой Err",
+        "Новый контекст"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 2126,
+      "type": "text",
+      "text": "Когда context.Background() становится отменённым?",
+      "options": [
+        "После первого WithCancel",
+        "Никогда: это корневой контекст без отмены",
+        "Когда процесс получает SIGINT",
+        "После вызова Done"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 2127,
+      "type": "text",
+      "text": "Зачем Context ставят первым аргументом функции?",
+      "options": [
+        "Так требует компилятор",
+        "Чтобы скрыть его от линтера",
+        "Конвенция: отмена и дедлайн пробрасываются явно",
+        "Чтобы заменить error"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 2128,
+      "type": "text",
+      "text": "Отмена дочернего контекста отменяет родителя?",
+      "options": [
+        "Да, всегда",
+        "Да, если родитель из WithTimeout",
+        "Только при WithValue",
+        "Нет. Отмена идёт вниз по дереву, не вверх"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 2129,
+      "type": "text",
+      "text": "Для чего нужен context.TODO()?",
+      "options": [
+        "Заглушка, когда ещё не ясно, какой контекст передать",
+        "Отмена по таймауту 0",
+        "Фон для http.Server",
+        "Контекст с обязательным Cause"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 2130,
+      "type": "text",
+      "text": "Какая ошибка у контекста с истекшим дедлайном?",
+      "options": [
+        "context.Canceled",
+        "context.DeadlineExceeded",
+        "io.EOF",
+        "nil"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 2131,
+      "type": "text",
+      "text": "Можно ли передавать nil вместо Context?",
+      "options": [
+        "Да, это то же самое, что Background",
+        "Да, если функция не читает Done",
+        "Нет. Передают Background или TODO",
+        "Да, Go подставит TODO сам"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 2132,
+      "type": "text",
+      "text": "Что делает cancel() с каналом Done?",
+      "options": [
+        "Отправляет в него Err",
+        "Делает его nil",
+        "Блокирует все receive навсегда",
+        "Закрывает его"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 2133,
+      "type": "text",
+      "text": "Для чего WithValue, а для чего нет?",
+      "options": [
+        "Для данных запроса, не для опциональных параметров API",
+        "Для любых аргументов функции",
+        "Только для дедлайнов",
+        "Чтобы заменить первый аргумент Context"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 2134,
+      "type": "text",
+      "text": "Чем WithTimeout отличается от WithDeadline?",
+      "options": [
+        "Timeout нельзя отменить cancel",
+        "Timeout берёт длительность, Deadline — абсолютное время",
+        "Deadline не ставит Err",
+        "Разницы нет"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 2135,
+      "type": "text",
+      "text": "Зачем вызывать cancel, даже если работа уже кончилась?",
+      "options": [
+        "Иначе Done никогда не закроется у родителя",
+        "Иначе WithValue потеряет ключ",
+        "Чтобы освободить таймер и связанные ресурсы",
+        "Это обязательный синтаксис defer"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 2136,
+      "type": "text",
+      "text": "Отмена родителя что делает с детьми?",
+      "options": [
+        "Ничего, пока дети сами не вызовут cancel",
+        "Отменяет только WithValue-детей",
+        "Переносит их Err на родителя",
+        "Отменяет всех потомков"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 2137,
+      "type": "boolean",
+      "text": "context.Background() сам по себе никогда не отменяется.",
+      "correct": true
+    },
+    {
+      "id": 2138,
+      "type": "boolean",
+      "text": "Отмена родителя отменяет дочерние контексты.",
+      "correct": true
+    },
+    {
+      "id": 2139,
+      "type": "boolean",
+      "text": "Отмена ребёнка отменяет родителя.",
+      "correct": false
+    },
+    {
+      "id": 2140,
+      "type": "boolean",
+      "text": "В публичный API можно передавать nil как Context.",
+      "correct": false
+    },
+    {
+      "id": 2141,
+      "type": "boolean",
+      "text": "После cancel канал Done закрыт.",
+      "correct": true
+    },
+    {
+      "id": 2142,
+      "type": "boolean",
+      "text": "До cancel у WithCancel-контекста Err() равен nil.",
+      "correct": true
+    },
+    {
+      "id": 2143,
+      "type": "boolean",
+      "text": "Повторный вызов cancel паникует.",
+      "correct": false
+    },
+    {
+      "id": 2144,
+      "type": "boolean",
+      "text": "Истёкший таймаут даёт context.DeadlineExceeded, не Canceled.",
+      "correct": true
+    },
+    {
+      "id": 2145,
+      "type": "boolean",
+      "text": "Компилятор требует, чтобы Context был первым аргументом.",
+      "correct": false
+    },
+    {
+      "id": 2146,
+      "type": "boolean",
+      "text": "Приём из Done до отмены может блокироваться.",
+      "correct": true
+    },
+    {
+      "id": 2147,
+      "type": "boolean",
+      "text": "Дочерний WithCancel видит Value родителя.",
+      "correct": true
+    },
+    {
+      "id": 2148,
+      "type": "boolean",
+      "text": "У context.Background() Deadline всегда установлен.",
+      "correct": false
+    },
+    {
+      "id": 2149,
+      "type": "recall",
+      "text": "Какой метод говорит, почему контекст закончился?",
+      "answer": "Err()."
+    },
+    {
+      "id": 2150,
+      "type": "recall",
+      "text": "Какой канал сигналит об отмене?",
+      "answer": "Done()."
+    },
+    {
+      "id": 2151,
+      "type": "recall",
+      "text": "Какой корневой пустой контекст берут в main?",
+      "answer": "context.Background()."
+    },
+    {
+      "id": 2152,
+      "type": "recall",
+      "text": "Какая ошибка после cancel() без дедлайна?",
+      "answer": "context.Canceled."
+    },
+    {
+      "id": 2153,
+      "type": "recall",
+      "text": "Какая ошибка после истечения таймаута?",
+      "answer": "context.DeadlineExceeded."
+    },
+    {
+      "id": 2154,
+      "type": "recall",
+      "text": "Какой тип у первого аргумента по конвенции?",
+      "answer": "context.Context."
+    },
+    {
+      "id": 2155,
+      "type": "recall",
+      "text": "Какая функция даёт отменяемый дочерний контекст?",
+      "answer": "context.WithCancel."
+    },
+    {
+      "id": 2156,
+      "type": "recall",
+      "text": "Как обычно освобождают cancel?",
+      "answer": "defer cancel()."
+    },
+    {
+      "id": 2157,
+      "type": "recall",
+      "text": "Какой контекст-заглушка, если родитель ещё неизвестен?",
+      "answer": "context.TODO()."
+    },
+    {
+      "id": 2158,
+      "type": "recall",
+      "text": "Чем кладут request-scoped значение?",
+      "answer": "context.WithValue."
+    },
+    {
+      "id": 2159,
+      "type": "recall",
+      "text": "Что передать вместо nil-контекста?",
+      "answer": "Background или TODO."
+    },
+    {
+      "id": 2160,
+      "type": "recall",
+      "text": "Закрывается ли Done ребёнка при отмене родителя?",
+      "answer": "Да."
+    }
+  ]
+}

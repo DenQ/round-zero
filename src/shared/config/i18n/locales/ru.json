@@ -92,7 +92,8 @@
       "base": "База",
       "slices": "Слайсы",
       "goroutines": "Горутины",
-      "channels": "Каналы"
+      "channels": "Каналы",
+      "contexts": "Контексты"
     },
     "levels": {
       "junior": "Junior",
