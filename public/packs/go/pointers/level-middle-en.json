@@ -1,0 +1,808 @@
+{
+  "stack": "go",
+  "topic": "pointers",
+  "level": "middle",
+  "locale": "en",
+  "questions": [
+    {
+      "id": 2401,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\ntype T struct{ n int }\n\nfunc (t T) bump() {\n\tt.n++\n}\n\nfunc main() {\n\tt := T{n: 1}\n\tt.bump()\n\tfmt.Println(t.n)\n}\n",
+      "options": [
+        "1",
+        "2",
+        "0",
+        "3"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 2402,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\ntype T struct{ n int }\n\nfunc (t *T) bump() {\n\tt.n++\n}\n\nfunc main() {\n\tt := T{n: 1}\n\tt.bump()\n\tfmt.Println(t.n)\n}\n",
+      "options": [
+        "1",
+        "2",
+        "0",
+        "3"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 2403,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\ntype T struct{ n int }\n\nfunc (t *T) ok() int {\n\tif t == nil {\n\t\treturn 1\n\t}\n\treturn 0\n}\n\nfunc main() {\n\tvar p *T\n\tfmt.Println(p.ok())\n}\n",
+      "options": [
+        "0",
+        "2",
+        "1",
+        "3"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 2404,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\ntype T struct{ n int }\n\nfunc (t *T) get() int {\n\treturn t.n\n}\n\nfunc main() {\n\tdefer func() {\n\t\tif recover() != nil {\n\t\t\tfmt.Println(1)\n\t\t} else {\n\t\t\tfmt.Println(0)\n\t\t}\n\t}()\n\tvar p *T\n\tfmt.Println(p.get())\n}\n",
+      "options": [
+        "0",
+        "2",
+        "3",
+        "1"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 2405,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\ntype T struct{}\n\nfunc main() {\n\tvar p *T\n\tvar i any = p\n\tif i == nil {\n\t\tfmt.Println(1)\n\t} else {\n\t\tfmt.Println(0)\n\t}\n\tif p == nil {\n\t\tfmt.Println(1)\n\t} else {\n\t\tfmt.Println(0)\n\t}\n}\n",
+      "options": [
+        "0, 1",
+        "1, 1",
+        "0, 0",
+        "1, 0"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 2406,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\ntype T struct{ n int }\n\nfunc main() {\n\ts := []T{{1}, {2}}\n\tfor _, v := range s {\n\t\tv.n = 9\n\t}\n\tfmt.Println(s[0].n)\n}\n",
+      "options": [
+        "9",
+        "1",
+        "2",
+        "0"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 2407,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\ntype T struct{ n int }\n\nfunc main() {\n\ts := []*T{{n: 1}, {n: 2}}\n\tfor _, v := range s {\n\t\tv.n = 9\n\t}\n\tfmt.Println(s[0].n)\n}\n",
+      "options": [
+        "1",
+        "2",
+        "9",
+        "0"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 2408,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\ntype T struct{ n int }\n\nfunc main() {\n\ts := []T{{1}, {2}}\n\tfor i := range s {\n\t\ts[i].n = 9\n\t}\n\tfmt.Println(s[0].n)\n}\n",
+      "options": [
+        "1",
+        "2",
+        "0",
+        "9"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 2409,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tx, y := 3, 8\n\tp := &x\n\tq := p\n\tp = &y\n\tfmt.Println(*q)\n\tfmt.Println(*p)\n}\n",
+      "options": [
+        "3, 8",
+        "8, 8",
+        "3, 3",
+        "8, 3"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 2410,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\ts := []int{1}\n\tp := &s\n\t*p = append(*p, 2)\n\tfmt.Println(len(s))\n\tfmt.Println(s[1])\n}\n",
+      "options": [
+        "1, 1",
+        "2, 2",
+        "2, 1",
+        "1, 2"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 2411,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\ta, b := 1, 2\n\ts := []*int{&a, &b}\n\t*s[0] = 9\n\tfmt.Println(a)\n}\n",
+      "options": [
+        "1",
+        "2",
+        "9",
+        "0"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 2412,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\ntype T struct{ n int }\n\nfunc main() {\n\tm := map[string]T{\"a\": {n: 1}}\n\tv := m[\"a\"]\n\tv.n = 9\n\tm[\"a\"] = v\n\tfmt.Println(m[\"a\"].n)\n}\n",
+      "options": [
+        "1",
+        "0",
+        "8",
+        "9"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 2413,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\ntype T struct{ n int }\n\nfunc main() {\n\tm := map[string]*T{\"a\": {n: 1}}\n\tm[\"a\"].n = 9\n\tfmt.Println(m[\"a\"].n)\n}\n",
+      "options": [
+        "9",
+        "1",
+        "0",
+        "8"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 2414,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\ta := [2]int{1, 2}\n\tp := &a\n\tb := a\n\tp[0] = 9\n\tfmt.Println(b[0])\n\tfmt.Println(a[0])\n}\n",
+      "options": [
+        "9, 9",
+        "1, 9",
+        "1, 1",
+        "9, 1"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 2415,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\ts := []int{1, 2, 3}\n\tp := &s\n\t(*p)[1] = 8\n\tfmt.Println(s[1])\n}\n",
+      "options": [
+        "2",
+        "1",
+        "8",
+        "3"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 2416,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\ts := []int{1, 2}\n\tp := &s\n\t*p = []int{9}\n\tfmt.Println(len(s))\n\tfmt.Println(s[0])\n}\n",
+      "options": [
+        "2, 1",
+        "2, 9",
+        "1, 1",
+        "1, 9"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 2417,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\ntype I interface{ N() int }\n\ntype T struct{ n int }\n\nfunc (t *T) N() int {\n\treturn t.n\n}\n\nfunc main() {\n\tvar i I = &T{n: 4}\n\tfmt.Println(i.N())\n}\n",
+      "options": [
+        "4",
+        "0",
+        "1",
+        "3"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 2418,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tx, y := 1, 7\n\tp, q := &x, &y\n\t*p = *q\n\tfmt.Println(x)\n\tif p == q {\n\t\tfmt.Println(1)\n\t} else {\n\t\tfmt.Println(0)\n\t}\n}\n",
+      "options": [
+        "7, 1",
+        "7, 0",
+        "1, 0",
+        "1, 1"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 2419,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\ntype Inner struct{ n int }\n\ntype Outer struct{ p *Inner }\n\nfunc main() {\n\tin := Inner{n: 2}\n\to := Outer{p: &in}\n\to.p.n = 5\n\tfmt.Println(in.n)\n}\n",
+      "options": [
+        "2",
+        "0",
+        "5",
+        "1"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 2420,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\ntype Inner struct{ n int }\n\ntype Outer struct{ p *Inner }\n\nfunc main() {\n\tin := Inner{n: 2}\n\to1 := Outer{p: &in}\n\to2 := o1\n\to2.p.n = 6\n\tfmt.Println(o1.p.n)\n}\n",
+      "options": [
+        "2",
+        "0",
+        "1",
+        "6"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 2421,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\ntype Outer struct{ n int }\n\nfunc main() {\n\to1 := Outer{n: 2}\n\to2 := o1\n\to2.n = 6\n\tfmt.Println(o1.n)\n}\n",
+      "options": [
+        "2",
+        "6",
+        "0",
+        "1"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 2422,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc mk() *int {\n\tx := 3\n\treturn &x\n}\n\nfunc main() {\n\tp := mk()\n\tfmt.Println(*p)\n}\n",
+      "options": [
+        "0",
+        "3",
+        "1",
+        "2"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 2423,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\ntype T struct{ n int }\n\nfunc main() {\n\ta, b := T{n: 1}, T{n: 2}\n\tpa, pb := &a, &b\n\t*pa, *pb = *pb, *pa\n\tfmt.Println(a.n)\n\tfmt.Println(b.n)\n}\n",
+      "options": [
+        "1, 2",
+        "2, 2",
+        "2, 1",
+        "1, 1"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 2424,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tx, y := 1, 9\n\tp := &x\n\tpp := &p\n\t*pp = &y\n\tfmt.Println(*p)\n}\n",
+      "options": [
+        "1",
+        "0",
+        "8",
+        "9"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 2425,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\ntype T struct{ n int }\n\nfunc main() {\n\ta, b := T{n: 1}, T{n: 2}\n\ts := []*T{&a, &b}\n\tfor _, v := range s {\n\t\tv.n++\n\t}\n\tfmt.Println(a.n)\n}\n",
+      "options": [
+        "2",
+        "1",
+        "3",
+        "0"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 2426,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\ntype T struct{ n int }\n\nfunc (t *T) bump() {\n\tt.n++\n}\n\nfunc main() {\n\ts := []T{{n: 1}, {n: 2}}\n\tfor _, v := range s {\n\t\tv.bump()\n\t}\n\tfmt.Println(s[0].n)\n}\n",
+      "options": [
+        "2",
+        "1",
+        "0",
+        "3"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 2427,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\ntype T struct{ n int }\n\nfunc (t *T) bump() {\n\tt.n++\n}\n\nfunc main() {\n\ts := []T{{n: 1}, {n: 2}}\n\tfor i := range s {\n\t\ts[i].bump()\n\t}\n\tfmt.Println(s[0].n)\n}\n",
+      "options": [
+        "1",
+        "0",
+        "2",
+        "3"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 2428,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\ntype T struct{ n int }\n\nfunc main() {\n\ta, b := T{n: 1}, T{n: 1}\n\tif &a == &b {\n\t\tfmt.Println(1)\n\t} else {\n\t\tfmt.Println(0)\n\t}\n\tif a == b {\n\t\tfmt.Println(1)\n\t} else {\n\t\tfmt.Println(0)\n\t}\n}\n",
+      "options": [
+        "1, 1",
+        "0, 0",
+        "1, 0",
+        "0, 1"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 2429,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tvar i any\n\tvar p *int\n\tif i == nil {\n\t\tfmt.Println(1)\n\t} else {\n\t\tfmt.Println(0)\n\t}\n\tif i == p {\n\t\tfmt.Println(1)\n\t} else {\n\t\tfmt.Println(0)\n\t}\n}\n",
+      "options": [
+        "1, 0",
+        "0, 0",
+        "1, 1",
+        "0, 1"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 2430,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tm := map[int]int{1: 2}\n\tp := &m\n\t*p = map[int]int{3: 4}\n\tfmt.Println(m[3])\n\tfmt.Println(len(m))\n}\n",
+      "options": [
+        "2, 1",
+        "4, 1",
+        "4, 2",
+        "0, 1"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 2431,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\ntype T struct{ n int }\n\nfunc (t T) V() int {\n\treturn t.n\n}\n\nfunc main() {\n\tp := &T{n: 6}\n\tfmt.Println(p.V())\n}\n",
+      "options": [
+        "0",
+        "1",
+        "6",
+        "5"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 2432,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tp := new([]int)\n\tfmt.Println(len(*p))\n\tif *p == nil {\n\t\tfmt.Println(1)\n\t} else {\n\t\tfmt.Println(0)\n\t}\n}\n",
+      "options": [
+        "0, 0",
+        "1, 1",
+        "1, 0",
+        "0, 1"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 2433,
+      "type": "text",
+      "text": "Which methods are in the method set of *T?",
+      "options": [
+        "Methods with receiver T and with *T",
+        "Only methods with receiver *T",
+        "Only methods with receiver T",
+        "None: only T has methods"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 2434,
+      "type": "text",
+      "text": "Which methods are in the method set of T?",
+      "options": [
+        "Methods of T and *T",
+        "Only methods with receiver T",
+        "Only methods with receiver *T",
+        "None"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 2435,
+      "type": "text",
+      "text": "Why does t.bump() compile when bump has receiver *T and t is an addressable T?",
+      "options": [
+        "T is automatically copied to the heap",
+        "The value receiver is called instead",
+        "The compiler calls (&t).bump()",
+        "It works only inside the same package"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 2436,
+      "type": "text",
+      "text": "Does a pointer-receiver method run when the receiver is nil?",
+      "options": [
+        "No. A nil receiver is a compile error",
+        "No. Any such call panics at once",
+        "Yes, but only for exported methods",
+        "Yes. It panics only if the method touches fields"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 2437,
+      "type": "text",
+      "text": "Why is var i any = (*T)(nil) not equal to nil?",
+      "options": [
+        "The interface holds type *T; it is a typed nil, not an empty interface",
+        "nil cannot be stored in any",
+        "(*T)(nil) is not actually nil",
+        "any compares by field values"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 2438,
+      "type": "text",
+      "text": "Why does for _, v := range s on []T not change s’s elements?",
+      "options": [
+        "range forbids writes to structs",
+        "v is a copy of the element",
+        "The whole slice is copied for range",
+        "v has type *T"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 2439,
+      "type": "text",
+      "text": "Why does for _, v := range s on []*T mutate the objects?",
+      "options": [
+        "range does not copy pointers",
+        "v is an index, not a copy",
+        "The pointer is copied; the object behind it is the same",
+        "It works only for nil pointers"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 2440,
+      "type": "text",
+      "text": "How do you update a struct value in a map if you cannot take &m[k]?",
+      "options": [
+        "The only way is unsafe",
+        "Call a pointer-receiver method on m[k]",
+        "It is impossible: map values are immutable",
+        "Read it, change the copy, write it back"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 2441,
+      "type": "text",
+      "text": "How does *[]T differ from []*T?",
+      "options": [
+        "*[]T is a pointer to a slice header; []*T is a slice of pointers to elements",
+        "They are two names for the same type",
+        "*[]T cannot be passed to append",
+        "[]*T stores elements inside the pointer itself"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 2442,
+      "type": "text",
+      "text": "What happens to a local if a function returns &x?",
+      "options": [
+        "A dangling pointer",
+        "The compiler forbids return &x",
+        "x is copied; the pointer refers to the caller’s stack",
+        "The compiler moves it to the heap; the pointer stays valid"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 2443,
+      "type": "text",
+      "text": "Why does v.bump() in a range over []T not change the slice when bump is a pointer receiver?",
+      "options": [
+        "&v is the address of the copy, not the slice cell",
+        "A pointer receiver cannot be called from range",
+        "bump copies the slice",
+        "v in range has type T and is not addressable"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 2444,
+      "type": "text",
+      "text": "Can you assign *T to an interface whose method set is only T’s methods?",
+      "options": [
+        "No: the interface needs exactly T",
+        "Yes: *T’s method set includes T’s methods",
+        "Yes, but only if T is not addressable",
+        "No, until there are methods with receiver *T"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 2445,
+      "type": "text",
+      "text": "Can you assign a T to an interface that needs a method with receiver *T?",
+      "options": [
+        "Yes, the compiler always takes &T",
+        "Yes if T is comparable",
+        "No: T’s method set does not include that method",
+        "Only if T is a zero value"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 2446,
+      "type": "text",
+      "text": "What does p = q do to two *T values if you do not touch *p?",
+      "options": [
+        "The old object’s contents are copied into the new one",
+        "Both pointers become nil",
+        "It is a compile error",
+        "p now points where q points; the old object is unchanged"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 2447,
+      "type": "text",
+      "text": "Why does map[string]*T allow m[\"a\"].n = 9?",
+      "options": [
+        "The map yields a copy of the pointer; the field changes in the shared object",
+        "A map element is addressable when it is a pointer",
+        "The compiler takes &m[\"a\"] for you",
+        "It works only for string keys"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 2448,
+      "type": "text",
+      "text": "Is p + 1 allowed for *T in safe Go?",
+      "options": [
+        "Yes, as in C",
+        "No. Address offset is only through unsafe",
+        "Yes if T is an array",
+        "Yes for *byte"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 2449,
+      "type": "boolean",
+      "text": "The method set of *T includes methods with receiver T.",
+      "correct": true
+    },
+    {
+      "id": 2450,
+      "type": "boolean",
+      "text": "The method set of T includes methods with receiver *T.",
+      "correct": false
+    },
+    {
+      "id": 2451,
+      "type": "boolean",
+      "text": "A pointer-receiver method may be called on nil if it does not touch fields.",
+      "correct": true
+    },
+    {
+      "id": 2452,
+      "type": "boolean",
+      "text": "An interface that holds (*T)(nil) equals nil.",
+      "correct": false
+    },
+    {
+      "id": 2453,
+      "type": "boolean",
+      "text": "In a range over []T, v is a copy of the element.",
+      "correct": true
+    },
+    {
+      "id": 2454,
+      "type": "boolean",
+      "text": "&m[k] is legal when the map value is a struct.",
+      "correct": false
+    },
+    {
+      "id": 2455,
+      "type": "boolean",
+      "text": "Returning &x on a local variable is valid in Go.",
+      "correct": true
+    },
+    {
+      "id": 2456,
+      "type": "boolean",
+      "text": "A non-addressable T (for example a call result) can be auto-converted to *T for a pointer method.",
+      "correct": false
+    },
+    {
+      "id": 2457,
+      "type": "boolean",
+      "text": "Ranging over []*T copies the pointer; the object is shared.",
+      "correct": true
+    },
+    {
+      "id": 2458,
+      "type": "boolean",
+      "text": "Assigning p = q copies the struct T.",
+      "correct": false
+    },
+    {
+      "id": 2459,
+      "type": "boolean",
+      "text": "An addressable t of type T may call a method with receiver *T.",
+      "correct": true
+    },
+    {
+      "id": 2460,
+      "type": "boolean",
+      "text": "A T value can be assigned to an interface that needs a method with receiver *T.",
+      "correct": false
+    },
+    {
+      "id": 2461,
+      "type": "boolean",
+      "text": "To replace the caller’s slice, a function needs *[]T (or must return the new header).",
+      "correct": true
+    },
+    {
+      "id": 2462,
+      "type": "boolean",
+      "text": "A map always copies every key and value when passed to a function.",
+      "correct": false
+    },
+    {
+      "id": 2463,
+      "type": "boolean",
+      "text": "A copy of a struct with a pointer field shares the object behind that pointer.",
+      "correct": true
+    },
+    {
+      "id": 2464,
+      "type": "boolean",
+      "text": "In safe Go you may increment a pointer by sizeof(T).",
+      "correct": false
+    },
+    {
+      "id": 2465,
+      "type": "recall",
+      "text": "What is in the method set of *T?",
+      "answer": "Methods with receiver T and *T."
+    },
+    {
+      "id": 2466,
+      "type": "recall",
+      "text": "What is in the method set of T?",
+      "answer": "Only methods with receiver T."
+    },
+    {
+      "id": 2467,
+      "type": "recall",
+      "text": "When does a method call on a nil pointer panic?",
+      "answer": "When the body touches fields or dereferences the receiver."
+    },
+    {
+      "id": 2468,
+      "type": "recall",
+      "text": "Why is an interface holding (*T)(nil) not nil?",
+      "answer": "It still has dynamic type *T."
+    },
+    {
+      "id": 2469,
+      "type": "recall",
+      "text": "Why does ranging over []T not mutate the original elements through v?",
+      "answer": "v is a copy."
+    },
+    {
+      "id": 2470,
+      "type": "recall",
+      "text": "How do you safely update a struct value in a map?",
+      "answer": "Read, modify, write back."
+    },
+    {
+      "id": 2471,
+      "type": "recall",
+      "text": "What does the compiler do with return &x for a local x?",
+      "answer": "It moves x to the heap."
+    },
+    {
+      "id": 2472,
+      "type": "recall",
+      "text": "Why does v.bump() in a range over []T not change the slice?",
+      "answer": "bump receives the address of the copy v."
+    },
+    {
+      "id": 2473,
+      "type": "recall",
+      "text": "Can you put T in an interface that requires a pointer method?",
+      "answer": "No: that method is not in T’s method set."
+    },
+    {
+      "id": 2474,
+      "type": "recall",
+      "text": "Why would a function take *[]T?",
+      "answer": "To replace the caller’s slice header."
+    },
+    {
+      "id": 2475,
+      "type": "recall",
+      "text": "What is copied when you copy a struct with an *Inner field?",
+      "answer": "The Inner address, not Inner itself."
+    },
+    {
+      "id": 2476,
+      "type": "recall",
+      "text": "Why is a literal not addressable?",
+      "answer": "It has no memory slot whose address can be taken."
+    },
+    {
+      "id": 2477,
+      "type": "recall",
+      "text": "Is p+1 allowed in safe Go?",
+      "answer": "No."
+    },
+    {
+      "id": 2478,
+      "type": "recall",
+      "text": "What happens in p = q for two *T values?",
+      "answer": "p now points where q points."
+    },
+    {
+      "id": 2479,
+      "type": "recall",
+      "text": "Why does m[\"a\"].n = 9 work for a map of pointers?",
+      "answer": "The pointer is copied; there is one object."
+    },
+    {
+      "id": 2480,
+      "type": "recall",
+      "text": "Can you call a pointer method on an addressable T?",
+      "answer": "Yes, the compiler takes &t."
+    }
+  ]
+}

@@ -1,0 +1,1008 @@
+{
+  "stack": "go",
+  "topic": "pointers",
+  "level": "senior",
+  "locale": "en",
+  "questions": [
+    {
+      "id": 2481,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"unsafe\"\n)\n\nfunc main() {\n\tx := 6\n\tp := &x\n\tup := unsafe.Pointer(p)\n\tq := (*int)(up)\n\t*q = 2\n\tfmt.Println(x)\n}\n",
+      "options": [
+        "2",
+        "6",
+        "0",
+        "1"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 2482,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc relink(pp **int, y *int) {\n\t*pp = y\n}\n\nfunc main() {\n\tx, y := 1, 8\n\tp := &x\n\trelink(&p, &y)\n\tfmt.Println(*p)\n\tfmt.Println(x)\n}\n",
+      "options": [
+        "8, 8",
+        "8, 1",
+        "1, 1",
+        "1, 8"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 2483,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"sync/atomic\"\n)\n\nfunc main() {\n\tvar ap atomic.Pointer[int]\n\tx := 5\n\tap.Store(&x)\n\tfmt.Println(*ap.Load())\n}\n",
+      "options": [
+        "0",
+        "1",
+        "5",
+        "4"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 2484,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"sync/atomic\"\n)\n\nfunc main() {\n\tvar ap atomic.Pointer[int]\n\ta, b := 1, 2\n\tap.Store(&a)\n\told := ap.Swap(&b)\n\tfmt.Println(*old)\n\tfmt.Println(*ap.Load())\n}\n",
+      "options": [
+        "2, 1",
+        "1, 1",
+        "2, 2",
+        "1, 2"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 2485,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\ntype I interface{ V() int }\n\ntype T struct{ n int }\n\nfunc (t T) V() int {\n\treturn t.n\n}\n\nfunc main() {\n\tvar i I = &T{n: 4}\n\tfmt.Println(i.V())\n}\n",
+      "options": [
+        "4",
+        "0",
+        "1",
+        "3"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 2486,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\ntype S struct{ s []int }\n\nfunc main() {\n\ta := S{s: []int{1}}\n\tp, q := &a, &a\n\tif p == q {\n\t\tfmt.Println(1)\n\t} else {\n\t\tfmt.Println(0)\n\t}\n}\n",
+      "options": [
+        "0",
+        "1",
+        "2",
+        "3"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 2487,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\ntype S struct{ s []int }\n\nfunc main() {\n\tp, q := &S{}, &S{}\n\tif p == q {\n\t\tfmt.Println(1)\n\t} else {\n\t\tfmt.Println(0)\n\t}\n}\n",
+      "options": [
+        "1",
+        "2",
+        "0",
+        "3"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 2488,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\ntype T struct{ n int }\n\nfunc main() {\n\tvar i any = &T{n: 3}\n\tp := i.(*T)\n\tp.n = 7\n\tfmt.Println(i.(*T).n)\n}\n",
+      "options": [
+        "3",
+        "0",
+        "1",
+        "7"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 2489,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\ntype T struct{ n int }\n\nfunc main() {\n\tvar i any = T{n: 3}\n\tt := i.(T)\n\tt.n = 7\n\tfmt.Println(i.(T).n)\n}\n",
+      "options": [
+        "3",
+        "7",
+        "0",
+        "1"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 2490,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tdefer func() {\n\t\tif recover() != nil {\n\t\t\tfmt.Println(1)\n\t\t} else {\n\t\t\tfmt.Println(0)\n\t\t}\n\t}()\n\tvar pp **int\n\tfmt.Println(**pp)\n}\n",
+      "options": [
+        "0",
+        "1",
+        "2",
+        "3"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 2491,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"reflect\"\n)\n\nfunc main() {\n\tx := 4\n\tv := reflect.ValueOf(&x).Elem()\n\tv.SetInt(8)\n\tfmt.Println(x)\n}\n",
+      "options": [
+        "4",
+        "0",
+        "8",
+        "1"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 2492,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"reflect\"\n)\n\nfunc main() {\n\tx := 4\n\tv := reflect.ValueOf(x)\n\tif v.CanSet() {\n\t\tfmt.Println(1)\n\t} else {\n\t\tfmt.Println(0)\n\t}\n}\n",
+      "options": [
+        "1",
+        "2",
+        "3",
+        "0"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 2493,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\ntype Inner struct{ n int }\n\ntype Outer struct{ *Inner }\n\nfunc main() {\n\to := Outer{Inner: &Inner{n: 4}}\n\to.n = 9\n\tfmt.Println(o.Inner.n)\n}\n",
+      "options": [
+        "9",
+        "4",
+        "0",
+        "1"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 2494,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\ntype Inner struct{ n int }\n\ntype Outer struct{ *Inner }\n\nfunc main() {\n\tdefer func() {\n\t\tif recover() != nil {\n\t\t\tfmt.Println(1)\n\t\t} else {\n\t\t\tfmt.Println(0)\n\t\t}\n\t}()\n\tvar o Outer\n\tfmt.Println(o.n)\n}\n",
+      "options": [
+        "0",
+        "1",
+        "2",
+        "3"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 2495,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"sync/atomic\"\n)\n\nfunc main() {\n\tvar ap atomic.Pointer[int]\n\tif ap.Load() == nil {\n\t\tfmt.Println(1)\n\t} else {\n\t\tfmt.Println(0)\n\t}\n}\n",
+      "options": [
+        "0",
+        "2",
+        "1",
+        "3"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 2496,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"sync/atomic\"\n)\n\nfunc main() {\n\tvar ap atomic.Pointer[int]\n\ta, b := 1, 2\n\tap.Store(&a)\n\tok := ap.CompareAndSwap(&a, &b)\n\tif ok {\n\t\tfmt.Println(1)\n\t} else {\n\t\tfmt.Println(0)\n\t}\n\tfmt.Println(*ap.Load())\n}\n",
+      "options": [
+        "0, 1",
+        "1, 1",
+        "0, 2",
+        "1, 2"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 2497,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"sync/atomic\"\n)\n\nfunc main() {\n\tvar ap atomic.Pointer[int]\n\ta, b := 1, 2\n\tap.Store(&a)\n\tok := ap.CompareAndSwap(&b, &b)\n\tif ok {\n\t\tfmt.Println(1)\n\t} else {\n\t\tfmt.Println(0)\n\t}\n\tfmt.Println(*ap.Load())\n}\n",
+      "options": [
+        "0, 1",
+        "1, 2",
+        "0, 2",
+        "1, 1"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 2498,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tp := new([3]int)\n\tp[1] = 4\n\tfmt.Println(p[1])\n\tfmt.Println(len(p[:]))\n}\n",
+      "options": [
+        "4, 1",
+        "4, 3",
+        "0, 3",
+        "4, 4"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 2499,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"unsafe\"\n)\n\nfunc main() {\n\tx := 5\n\tu := uintptr(unsafe.Pointer(&x))\n\tp := (*int)(unsafe.Pointer(u))\n\tfmt.Println(*p)\n}\n",
+      "options": [
+        "0",
+        "1",
+        "5",
+        "4"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 2500,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\ntype I interface{ N() int }\n\ntype T struct{}\n\nfunc (t *T) N() int {\n\tif t == nil {\n\t\treturn 1\n\t}\n\treturn 0\n}\n\nfunc main() {\n\tvar i I = (*T)(nil)\n\tfmt.Println(i.N())\n}\n",
+      "options": [
+        "0",
+        "2",
+        "3",
+        "1"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 2501,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\ntype I interface{ N() int }\n\ntype T struct{}\n\nfunc (t *T) N() int {\n\treturn 0\n}\n\nfunc main() {\n\tvar i I = (*T)(nil)\n\tif i == nil {\n\t\tfmt.Println(1)\n\t} else {\n\t\tfmt.Println(0)\n\t}\n}\n",
+      "options": [
+        "0",
+        "1",
+        "2",
+        "3"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 2502,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tvar a any = (*int)(nil)\n\tvar b any = (*string)(nil)\n\tif a == b {\n\t\tfmt.Println(1)\n\t} else {\n\t\tfmt.Println(0)\n\t}\n}\n",
+      "options": [
+        "1",
+        "0",
+        "2",
+        "3"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 2503,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tvar a any = (*int)(nil)\n\tvar b any = (*int)(nil)\n\tif a == b {\n\t\tfmt.Println(1)\n\t} else {\n\t\tfmt.Println(0)\n\t}\n}\n",
+      "options": [
+        "0",
+        "2",
+        "1",
+        "3"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 2504,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tx := 3\n\tp := &x\n\tpp := &p\n\tqq := pp\n\t**qq = 8\n\tfmt.Println(x)\n}\n",
+      "options": [
+        "3",
+        "0",
+        "1",
+        "8"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 2505,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tx, y := 1, 2\n\tp := &x\n\tpp := &p\n\t*pp = &y\n\t**pp = 9\n\tfmt.Println(x)\n\tfmt.Println(y)\n}\n",
+      "options": [
+        "1, 9",
+        "9, 9",
+        "1, 2",
+        "9, 2"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 2506,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"reflect\"\n)\n\nfunc main() {\n\tt := reflect.TypeOf(0)\n\tv := reflect.New(t)\n\tv.Elem().SetInt(6)\n\tfmt.Println(v.Elem().Int())\n}\n",
+      "options": [
+        "0",
+        "6",
+        "1",
+        "5"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 2507,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\ntype T struct{ a, b int }\n\nfunc main() {\n\tt := T{a: 1, b: 2}\n\tp := &t.a\n\t*p = 9\n\tfmt.Println(t.a)\n\tfmt.Println(t.b)\n}\n",
+      "options": [
+        "9, 9",
+        "1, 2",
+        "9, 2",
+        "1, 9"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 2508,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"unsafe\"\n)\n\ntype T struct {\n\ta int32\n\tb int32\n}\n\nfunc main() {\n\tt := T{a: 1, b: 2}\n\tp := (*int32)(unsafe.Pointer(uintptr(unsafe.Pointer(&t)) + unsafe.Offsetof(t.b)))\n\tfmt.Println(*p)\n}\n",
+      "options": [
+        "1",
+        "0",
+        "3",
+        "2"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 2509,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\ntype T struct{ n int }\n\nfunc (t *T) add(k int) {\n\tt.n += k\n}\n\nfunc main() {\n\tt := T{n: 1}\n\tf := t.add\n\tf(4)\n\tfmt.Println(t.n)\n}\n",
+      "options": [
+        "5",
+        "1",
+        "4",
+        "0"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 2510,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\ntype T struct{ n int }\n\nfunc (t T) get() int {\n\treturn t.n\n}\n\nfunc main() {\n\tt := T{n: 1}\n\tf := t.get\n\tt.n = 9\n\tfmt.Println(f())\n}\n",
+      "options": [
+        "9",
+        "1",
+        "0",
+        "8"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 2511,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\ntype T struct{ n int }\n\nfunc (t *T) get() int {\n\treturn t.n\n}\n\nfunc main() {\n\tt := T{n: 1}\n\tf := t.get\n\tt.n = 9\n\tfmt.Println(f())\n}\n",
+      "options": [
+        "1",
+        "0",
+        "9",
+        "8"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 2512,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\ntype T struct{ n int }\n\nfunc main() {\n\ta := &T{n: 1}\n\tvar i, j any = a, a\n\tif i == j {\n\t\tfmt.Println(1)\n\t} else {\n\t\tfmt.Println(0)\n\t}\n}\n",
+      "options": [
+        "0",
+        "2",
+        "3",
+        "1"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 2513,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\ntype T struct{ n int }\n\nfunc main() {\n\tvar i, j any = &T{n: 1}, &T{n: 1}\n\tif i == j {\n\t\tfmt.Println(1)\n\t} else {\n\t\tfmt.Println(0)\n\t}\n}\n",
+      "options": [
+        "0",
+        "1",
+        "2",
+        "3"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 2514,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\ntype T struct{ n int }\n\nfunc main() {\n\tvar i, j any = T{n: 1}, T{n: 1}\n\tif i == j {\n\t\tfmt.Println(1)\n\t} else {\n\t\tfmt.Println(0)\n\t}\n}\n",
+      "options": [
+        "0",
+        "1",
+        "2",
+        "3"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 2515,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc swap(a, b **int) {\n\t*a, *b = *b, *a\n}\n\nfunc main() {\n\tx, y := 1, 2\n\tpx, py := &x, &y\n\tswap(&px, &py)\n\tfmt.Println(*px)\n\tfmt.Println(*py)\n\tfmt.Println(x)\n}\n",
+      "options": [
+        "1, 2, 1",
+        "2, 1, 2",
+        "2, 1, 1",
+        "1, 2, 2"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 2516,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc f() *int {\n\tx := 7\n\treturn &x\n}\n\nfunc main() {\n\tp := f()\n\tfmt.Println(*p)\n}\n",
+      "options": [
+        "0",
+        "1",
+        "6",
+        "7"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 2517,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"unsafe\"\n)\n\ntype A int\n\nfunc main() {\n\tvar a A = 3\n\tp := (*int)(unsafe.Pointer(&a))\n\t*p = 9\n\tfmt.Println(int(a))\n}\n",
+      "options": [
+        "9",
+        "3",
+        "0",
+        "1"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 2518,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tx := 2\n\tp := &x\n\tpp := &p\n\tfmt.Println(**pp)\n}\n",
+      "options": [
+        "0",
+        "2",
+        "1",
+        "3"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 2519,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"sync/atomic\"\n)\n\nfunc main() {\n\tvar ap atomic.Pointer[int]\n\ta := 3\n\tap.Store(&a)\n\tap.Store(nil)\n\tif ap.Load() == nil {\n\t\tfmt.Println(1)\n\t} else {\n\t\tfmt.Println(0)\n\t}\n}\n",
+      "options": [
+        "0",
+        "3",
+        "1",
+        "2"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 2520,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\ntype T struct{ n int }\n\nfunc main() {\n\tvar i any = (*T)(nil)\n\tp, ok := i.(*T)\n\tif ok && p == nil {\n\t\tfmt.Println(1)\n\t} else {\n\t\tfmt.Println(0)\n\t}\n}\n",
+      "options": [
+        "0",
+        "2",
+        "3",
+        "1"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 2521,
+      "type": "text",
+      "text": "What is the bridge between *T and another *U?",
+      "options": [
+        "A parenthesized cast (*U)(p)",
+        "unsafe.Pointer",
+        "uintptr by itself",
+        "reflect.Type"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 2522,
+      "type": "text",
+      "text": "Why does uintptr not keep an object alive for GC?",
+      "options": [
+        "GC ignores every unexported field",
+        "uintptr always points into the stack",
+        "It is an integer, not a pointer: the collector does not scan it",
+        "unsafe forbids storing uintptr"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 2523,
+      "type": "text",
+      "text": "When is converting uintptr back to unsafe.Pointer defined?",
+      "options": [
+        "Always; uintptr lasts forever",
+        "Only in init",
+        "Only for stack pointers",
+        "Immediately in the same expression, without parking a bare address across a call that may let GC move the object"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 2524,
+      "type": "text",
+      "text": "Why would a function take **T?",
+      "options": [
+        "To replace the caller’s pointer, not the object behind it",
+        "Dereferencing is faster that way",
+        "Otherwise you cannot change T’s fields",
+        "GC requires **T"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 2525,
+      "type": "text",
+      "text": "Why can you not compare a struct with a []byte field, but you can compare two *S?",
+      "options": [
+        "Pointers are also incomparable",
+        "Pointers compare addresses, not contents; a slice field makes T incomparable",
+        "A slice compares by length",
+        "GC forbids == on structs"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 2526,
+      "type": "text",
+      "text": "What does i == j compare when both any values hold *T?",
+      "options": [
+        "Deep equality of the structs",
+        "Only types; addresses are ignored",
+        "The dynamic type and pointer identity",
+        "A hash of the contents"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 2527,
+      "type": "text",
+      "text": "Why is reflect.ValueOf(x).CanSet() false, while ValueOf(&x).Elem() is often true?",
+      "options": [
+        "reflect cannot change int",
+        "CanSet requires unsafe",
+        "Elem always panics on a pointer",
+        "ValueOf(x) is a copy; a pointer’s Elem refers to the original variable"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 2528,
+      "type": "text",
+      "text": "What does the method value t.add bind when add has a pointer receiver?",
+      "options": [
+        "A pointer to t; later writes to t are visible",
+        "A copy of t at creation time",
+        "Nothing: it is only the method name",
+        "An interface holding a typed nil"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 2529,
+      "type": "text",
+      "text": "What does the method value t.get bind when get has a value receiver?",
+      "options": [
+        "A pointer to t",
+        "A copy of t at creation time",
+        "Always the current t",
+        "nil until you call it"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 2530,
+      "type": "text",
+      "text": "What does atomic.Pointer[T] add over a plain *T?",
+      "options": [
+        "A ban on nil",
+        "A deep copy of T",
+        "Atomic Store/Load/CAS without a race on the pointer itself",
+        "Pointer arithmetic"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 2531,
+      "type": "text",
+      "text": "Why does the promoted field o.n panic when Outer embeds a nil *Inner?",
+      "options": [
+        "Embedding pointers is forbidden",
+        "n is unexported",
+        "Outer is incomparable",
+        "It dereferences the nil Inner pointer"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 2532,
+      "type": "text",
+      "text": "Does Go have dangling pointers to a finished stack frame?",
+      "options": [
+        "No: escape analysis moves the variable to the heap",
+        "Yes, as in C",
+        "Yes if you return &x from a goroutine",
+        "Only for unsafe.Pointer"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 2533,
+      "type": "text",
+      "text": "What happens on i.(*T) when i holds a typed nil *T?",
+      "options": [
+        "A panic",
+        "ok is true, the value is a nil *T",
+        "ok is false",
+        "ok is true and an empty interface"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 2534,
+      "type": "text",
+      "text": "Why are two any values holding (*int)(nil) and (*string)(nil) unequal?",
+      "options": [
+        "nil is never equal to nil",
+        "any does not compare pointers",
+        "Different dynamic types",
+        "Strings are incomparable"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 2535,
+      "type": "text",
+      "text": "What does assigning a T (not *T) to an interface copy?",
+      "options": [
+        "A pointer to the original variable",
+        "Nothing; the interface refers to the stack",
+        "Only the method set",
+        "A copy of T into the interface; later mutations touch only that copy"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 2536,
+      "type": "text",
+      "text": "Why convert uintptr back to unsafe.Pointer in the same Offsetof expression?",
+      "options": [
+        "So the address does not live as an integer across GC safe points",
+        "Otherwise Offsetof returns *T",
+        "Escape analysis requires it",
+        "uintptr cannot be added to Offsetof"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 2537,
+      "type": "text",
+      "text": "Can you compare two *S values when S has an incomparable field?",
+      "options": [
+        "No: *S is also incomparable",
+        "Yes: you compare addresses, not S",
+        "Only if neither is nil",
+        "Only through reflect.DeepEqual"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 2538,
+      "type": "text",
+      "text": "What does reflect.New(t) do?",
+      "options": [
+        "Returns a nil pointer of type t",
+        "Copies t",
+        "Allocates a zero value and returns a Value of a pointer to it",
+        "Panics if t is not a struct"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 2539,
+      "type": "text",
+      "text": "What does swap(a, b **int) change?",
+      "options": [
+        "The int values",
+        "The pointer types",
+        "Only the first argument",
+        "Which pointer variables point where, not the int values"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 2540,
+      "type": "text",
+      "text": "Why does (*int)(unsafe.Pointer(&a)) work for type A int?",
+      "options": [
+        "Same layout; unsafe.Pointer strips the type",
+        "A and int are the same type to the compiler",
+        "Any named types are interchangeable",
+        "GC converts A to int by itself"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 2541,
+      "type": "boolean",
+      "text": "uintptr is a pointer as far as the garbage collector is concerned.",
+      "correct": false
+    },
+    {
+      "id": 2542,
+      "type": "boolean",
+      "text": "A *T can be turned into a *U of another type through unsafe.Pointer.",
+      "correct": true
+    },
+    {
+      "id": 2543,
+      "type": "boolean",
+      "text": "A function with **T can replace the caller’s pointer.",
+      "correct": true
+    },
+    {
+      "id": 2544,
+      "type": "boolean",
+      "text": "Two *S values are comparable even if S is incomparable because of a slice.",
+      "correct": true
+    },
+    {
+      "id": 2545,
+      "type": "boolean",
+      "text": "An any holding (*T)(nil) equals a nil interface.",
+      "correct": false
+    },
+    {
+      "id": 2546,
+      "type": "boolean",
+      "text": "reflect.ValueOf(x) for a variable x is usually CanSet.",
+      "correct": false
+    },
+    {
+      "id": 2547,
+      "type": "boolean",
+      "text": "A method value with a pointer receiver sees later changes to the receiver.",
+      "correct": true
+    },
+    {
+      "id": 2548,
+      "type": "boolean",
+      "text": "A method value with a value receiver copies the receiver at creation time.",
+      "correct": true
+    },
+    {
+      "id": 2549,
+      "type": "boolean",
+      "text": "atomic.Pointer[T].Load on a zero value yields nil.",
+      "correct": true
+    },
+    {
+      "id": 2550,
+      "type": "boolean",
+      "text": "Go lets you return &local and get a dangling pointer.",
+      "correct": false
+    },
+    {
+      "id": 2551,
+      "type": "boolean",
+      "text": "A type assert to *T succeeds when the interface holds a typed nil *T.",
+      "correct": true
+    },
+    {
+      "id": 2552,
+      "type": "boolean",
+      "text": "Two any values with typed nils of different types are equal because both are nil.",
+      "correct": false
+    },
+    {
+      "id": 2553,
+      "type": "boolean",
+      "text": "A T value in an interface is a copy, not a reference to the original variable.",
+      "correct": true
+    },
+    {
+      "id": 2554,
+      "type": "boolean",
+      "text": "Embedding a nil *Inner makes reading a promoted field a safe zero.",
+      "correct": false
+    },
+    {
+      "id": 2555,
+      "type": "boolean",
+      "text": "Adding uintptr and Offsetof should stay in one expression that converts back to a pointer.",
+      "correct": true
+    },
+    {
+      "id": 2556,
+      "type": "boolean",
+      "text": "A direct cast (*float64)(intPtr) without unsafe compiles.",
+      "correct": false
+    },
+    {
+      "id": 2557,
+      "type": "boolean",
+      "text": "CompareAndSwap on atomic.Pointer compares addresses, not *T.",
+      "correct": true
+    },
+    {
+      "id": 2558,
+      "type": "boolean",
+      "text": "unsafe.Pointer can be converted to *T.",
+      "correct": true
+    },
+    {
+      "id": 2559,
+      "type": "boolean",
+      "text": "An interface compares two *T values by deep field equality.",
+      "correct": false
+    },
+    {
+      "id": 2560,
+      "type": "boolean",
+      "text": "reflect.New allocates a zero and yields a pointer to it.",
+      "correct": true
+    },
+    {
+      "id": 2561,
+      "type": "recall",
+      "text": "Which type bridges different *T and *U?",
+      "answer": "unsafe.Pointer."
+    },
+    {
+      "id": 2562,
+      "type": "recall",
+      "text": "Why must you not park an address in uintptr?",
+      "answer": "GC does not treat uintptr as a pointer and may move the object."
+    },
+    {
+      "id": 2563,
+      "type": "recall",
+      "text": "Why take **T?",
+      "answer": "To replace the caller’s pointer."
+    },
+    {
+      "id": 2564,
+      "type": "recall",
+      "text": "What does == compare for two pointers to an incomparable type?",
+      "answer": "Addresses."
+    },
+    {
+      "id": 2565,
+      "type": "recall",
+      "text": "How do you mutate a variable through reflect?",
+      "answer": "ValueOf(&x).Elem() and Set; a ValueOf(x) copy is not settable."
+    },
+    {
+      "id": 2566,
+      "type": "recall",
+      "text": "What does a pointer-receiver method value capture?",
+      "answer": "A pointer to the receiver."
+    },
+    {
+      "id": 2567,
+      "type": "recall",
+      "text": "What does a value-receiver method value capture?",
+      "answer": "A copy of the receiver."
+    },
+    {
+      "id": 2568,
+      "type": "recall",
+      "text": "Are there dangling stack pointers in safe Go?",
+      "answer": "No: the variable moves to the heap."
+    },
+    {
+      "id": 2569,
+      "type": "recall",
+      "text": "What does an interface holding (*T)(nil) equal?",
+      "answer": "Not nil: type *T is still there."
+    },
+    {
+      "id": 2570,
+      "type": "recall",
+      "text": "What does atomic.Pointer do?",
+      "answer": "Stores and swaps a *T atomically."
+    },
+    {
+      "id": 2571,
+      "type": "recall",
+      "text": "What is copied when assigning T to an interface?",
+      "answer": "The T value."
+    },
+    {
+      "id": 2572,
+      "type": "recall",
+      "text": "Why does o.n panic with a nil embedded *Inner?",
+      "answer": "A nil dereference."
+    },
+    {
+      "id": 2573,
+      "type": "recall",
+      "text": "How are two any values that hold *T compared?",
+      "answer": "By type and pointer identity."
+    },
+    {
+      "id": 2574,
+      "type": "recall",
+      "text": "What does a type assert to *T return for a typed nil?",
+      "answer": "A nil *T and ok true."
+    },
+    {
+      "id": 2575,
+      "type": "recall",
+      "text": "What does swap(**T, **T) change?",
+      "answer": "Where the pointers point, not the objects."
+    },
+    {
+      "id": 2576,
+      "type": "recall",
+      "text": "What does reflect.New do?",
+      "answer": "new via reflect: a pointer to a zero."
+    },
+    {
+      "id": 2577,
+      "type": "recall",
+      "text": "What does pointer CompareAndSwap compare?",
+      "answer": "Addresses."
+    },
+    {
+      "id": 2578,
+      "type": "recall",
+      "text": "Is unsafe needed to turn *A into *int when type A int?",
+      "answer": "Yes: there is no direct conversion between distinct pointer types."
+    },
+    {
+      "id": 2579,
+      "type": "recall",
+      "text": "What is a typed nil in an interface?",
+      "answer": "A (type, nil data) pair; the interface is not empty."
+    },
+    {
+      "id": 2580,
+      "type": "recall",
+      "text": "Why can you not Set ValueOf(x)?",
+      "answer": "It is a copy, not an addressable slot of the original variable."
+    }
+  ]
+}

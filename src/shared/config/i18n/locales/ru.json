@@ -93,7 +93,8 @@
       "slices": "Слайсы",
       "goroutines": "Горутины",
       "channels": "Каналы",
-      "contexts": "Контексты"
+      "contexts": "Контексты",
+      "pointers": "Указатели"
     },
     "levels": {
       "junior": "Junior",
