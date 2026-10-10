@@ -89,7 +89,8 @@
       "prototypes": "Prototypes",
       "modules": "Modules",
       "promises": "Promises",
-      "base": "Base"
+      "base": "Base",
+      "slices": "Slices"
     },
     "levels": {
       "junior": "Junior",

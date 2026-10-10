@@ -1,0 +1,1008 @@
+{
+  "stack": "go",
+  "topic": "slices",
+  "level": "senior",
+  "locale": "en",
+  "questions": [
+    {
+      "id": 1641,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tbig := make([]int, 1000)\n\tsmall := big[10:12]\n\tfmt.Println(len(small))\n\tfmt.Println(cap(small))\n}",
+      "options": [
+        "2, 990",
+        "2, 12",
+        "2, 1000",
+        "12, 990"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1642,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tbig := make([]int, 1000)\n\tsmall := big[10:12:12]\n\tfmt.Println(len(small))\n\tfmt.Println(cap(small))\n}",
+      "options": [
+        "2, 990",
+        "2, 2",
+        "2, 12",
+        "10, 2"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1643,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tbs := []byte(\"ab\")\n\tst := string(bs)\n\tbs[0] = 'Z'\n\tfmt.Println(int(st[0]))\n\tfmt.Println(int(bs[0]))\n}",
+      "options": [
+        "90, 90",
+        "97, 97",
+        "97, 90",
+        "90, 97"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1644,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tst := \"ab\"\n\tbs := []byte(st)\n\tbs[0] = 'Z'\n\tfmt.Println(int(st[0]))\n\tfmt.Println(int(bs[0]))\n}",
+      "options": [
+        "90, 90",
+        "97, 97",
+        "90, 97",
+        "97, 90"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1645,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tvar nb []byte\n\tnb = append(nb, \"hi\"...)\n\tfmt.Println(len(nb))\n\tfmt.Println(int(nb[0]))\n}",
+      "options": [
+        "2, 104",
+        "2, 105",
+        "2, 97",
+        "1, 104"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1646,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"encoding/json\"\n\t\"fmt\"\n)\n\nfunc main() {\n\tjn, _ := json.Marshal([]int(nil))\n\tje, _ := json.Marshal([]int{})\n\tfmt.Println(len(jn))\n\tfmt.Println(len(je))\n}",
+      "options": [
+        "2, 2",
+        "4, 2",
+        "2, 4",
+        "4, 4"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1647,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"slices\"\n)\n\nfunc main() {\n\ts := []int{1, 2, 3, 4}\n\ts = slices.Delete(s, 1, 2)\n\tfmt.Println(s[:cap(s)][3])\n}",
+      "options": [
+        "4",
+        "3",
+        "0",
+        "2"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1648,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\ts := []int{1, 2, 3, 4}\n\ts = append(s[:1], s[2:]...)\n\tfmt.Println(s[:cap(s)][3])\n}",
+      "options": [
+        "0",
+        "3",
+        "1",
+        "4"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1649,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\ts := make([]int, 5)\n\ts = append(s, 6)\n\tfmt.Println(len(s))\n\tfmt.Println(cap(s))\n}",
+      "options": [
+        "6, 10",
+        "6, 8",
+        "6, 5",
+        "5, 10"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1650,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\ts := make([]int, 8)\n\ts = append(s, 9)\n\tfmt.Println(len(s))\n\tfmt.Println(cap(s))\n}",
+      "options": [
+        "9, 8",
+        "9, 16",
+        "9, 12",
+        "8, 16"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1651,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\ts := make([]int, 0, 4)\n\ts = append(s, 1, 2, 3, 4, 5)\n\tfmt.Println(len(s))\n\tfmt.Println(cap(s))\n}",
+      "options": [
+        "5, 4",
+        "5, 5",
+        "5, 8",
+        "5, 10"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1652,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\ts := []byte{1, 2, 3}\n\ts = append(s, 4)\n\tfmt.Println(len(s))\n\tfmt.Println(cap(s))\n}",
+      "options": [
+        "4, 4",
+        "4, 6",
+        "4, 3",
+        "4, 8"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1653,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"slices\"\n)\n\nfunc main() {\n\ts := []int{1, 1, 2, 2, 3}\n\ts = slices.Compact(s)\n\tfmt.Println(len(s))\n\tfmt.Println(s[0])\n\tfmt.Println(s[2])\n}",
+      "options": [
+        "3, 1, 3",
+        "5, 1, 3",
+        "3, 1, 2",
+        "4, 1, 3"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1654,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"slices\"\n)\n\nfunc main() {\n\ts := []int{1, 2, 3}\n\tslices.Reverse(s)\n\tfmt.Println(s[0])\n\tfmt.Println(s[2])\n}",
+      "options": [
+        "1, 3",
+        "3, 1",
+        "3, 2",
+        "2, 1"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1655,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"slices\"\n)\n\nfunc main() {\n\ts := []int{3, 1, 2}\n\tslices.Sort(s)\n\tfmt.Println(s[0])\n\tfmt.Println(s[2])\n}",
+      "options": [
+        "3, 2",
+        "1, 2",
+        "1, 3",
+        "3, 1"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1656,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"slices\"\n)\n\nfunc main() {\n\ti, ok := slices.BinarySearch([]int{1, 3, 5}, 3)\n\tn := 0\n\tif ok {\n\t\tn = 1\n\t}\n\tfmt.Println(i)\n\tfmt.Println(n)\n}",
+      "options": [
+        "3, 1",
+        "0, 1",
+        "1, 0",
+        "1, 1"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1657,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"slices\"\n)\n\nfunc main() {\n\ti, ok := slices.BinarySearch([]int{1, 3, 5}, 2)\n\tn := 0\n\tif ok {\n\t\tn = 1\n\t}\n\tfmt.Println(i)\n\tfmt.Println(n)\n}",
+      "options": [
+        "1, 0",
+        "2, 0",
+        "0, 0",
+        "1, 1"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1658,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"slices\"\n)\n\nfunc main() {\n\tn := 0\n\tif slices.Contains([]int{1, 2, 3}, 2) {\n\t\tn = 1\n\t}\n\tfmt.Println(n)\n\tfmt.Println(slices.Index([]int{1, 2, 3}, 4))\n}",
+      "options": [
+        "1, 4",
+        "1, -1",
+        "0, -1",
+        "1, 3"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1659,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"slices\"\n)\n\nfunc main() {\n\tfmt.Println(slices.Max([]int{1, 7, 3}))\n\tfmt.Println(slices.Min([]int{1, 7, 3}))\n}",
+      "options": [
+        "1, 7",
+        "7, 3",
+        "7, 1",
+        "3, 1"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1660,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"slices\"\n)\n\nfunc main() {\n\tfmt.Println(slices.Compare([]int{1, 2}, []int{1, 3}))\n}",
+      "options": [
+        "1",
+        "0",
+        "2",
+        "-1"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1661,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"slices\"\n)\n\nfunc main() {\n\tfmt.Println(slices.Compare([]int{1}, []int{1, 0}))\n}",
+      "options": [
+        "-1",
+        "1",
+        "0",
+        "1, 0"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1662,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\trows := make([][]int, 2)\n\tbase := []int{1}\n\trows[0] = base\n\trows[1] = base\n\trows[0][0] = 9\n\tfmt.Println(rows[0][0])\n\tfmt.Println(rows[1][0])\n}",
+      "options": [
+        "1, 9",
+        "9, 9",
+        "9, 1",
+        "1, 1"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1663,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\trows := make([][]int, 2)\n\trows[0] = []int{1}\n\trows[1] = rows[0]\n\trows[0] = append(rows[0], 2)\n\tfmt.Println(len(rows[0]))\n\tfmt.Println(len(rows[1]))\n}",
+      "options": [
+        "1, 1",
+        "2, 2",
+        "2, 1",
+        "1, 2"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1664,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"slices\"\n)\n\nfunc main() {\n\ts := []int{1, 2, 3}\n\ts = slices.Replace(s, 1, 2)\n\tfmt.Println(len(s))\n\tfmt.Println(s[0])\n\tfmt.Println(s[1])\n}",
+      "options": [
+        "3, 1, 3",
+        "2, 1, 2",
+        "1, 1, 3",
+        "2, 1, 3"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1665,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"slices\"\n)\n\nfunc main() {\n\ts := make([]int, 2, 8)\n\ts = slices.Clip(s)\n\tfmt.Println(len(s))\n\tfmt.Println(cap(s))\n}",
+      "options": [
+        "2, 2",
+        "2, 8",
+        "8, 8",
+        "2, 0"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1666,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\ts := []int{}\n\ts = append(s, 1)\n\tn := 0\n\tif s == nil {\n\t\tn = 1\n\t}\n\tfmt.Println(n)\n\tfmt.Println(len(s))\n}",
+      "options": [
+        "1, 1",
+        "0, 1",
+        "0, 0",
+        "1, 0"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1667,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tdst := make([]int, 3)\n\tn := copy(dst, []int{3, 4})\n\tfmt.Println(n)\n\tfmt.Println(dst[0])\n\tfmt.Println(dst[2])\n}",
+      "options": [
+        "3, 3, 4",
+        "2, 3, 4",
+        "2, 3, 0",
+        "2, 4, 0"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1668,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\ts := make([]int, 2, 4)\n\ts[0], s[1] = 1, 2\n\tout := func(x []int) []int {\n\t\treturn append(x, 8)\n\t}(s)\n\tfmt.Println(len(s))\n\tfmt.Println(len(out))\n}",
+      "options": [
+        "3, 3",
+        "2, 2",
+        "3, 2",
+        "2, 3"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1669,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"slices\"\n)\n\nfunc main() {\n\ts := []int{1, 2, 3}\n\ts = slices.Insert(s, 1, 8, 9)\n\tfmt.Println(len(s))\n\tfmt.Println(s[2])\n}",
+      "options": [
+        "5, 9",
+        "5, 8",
+        "4, 9",
+        "5, 2"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1670,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\ts := []int{1, 2, 3, 4, 5}\n\tdefer func() {\n\t\tif recover() != nil {\n\t\t\tfmt.Println(1)\n\t\t}\n\t}()\n\t_ = s[:20]\n\tfmt.Println(0)\n}",
+      "options": [
+        "0",
+        "1",
+        "20",
+        "5"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1671,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\ta := [6]int{1, 2, 3, 4, 5, 6}\n\tt := a[2:4:4]\n\tt = append(t, 8)\n\tfmt.Println(a[4])\n\tfmt.Println(t[2])\n}",
+      "options": [
+        "8, 8",
+        "5, 4",
+        "5, 8",
+        "4, 8"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1672,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\ta := [6]int{1, 2, 3, 4, 5, 6}\n\tt := a[2:4]\n\tt = append(t, 8)\n\tfmt.Println(a[4])\n}",
+      "options": [
+        "5",
+        "4",
+        "6",
+        "8"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1673,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"slices\"\n)\n\nfunc main() {\n\ts := []int{1, 2, 3}\n\ts = slices.Replace(s, 1, 2, 8, 9)\n\tfmt.Println(len(s))\n\tfmt.Println(s[1])\n\tfmt.Println(s[2])\n}",
+      "options": [
+        "4, 8, 9",
+        "3, 8, 9",
+        "4, 8, 3",
+        "4, 2, 9"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1674,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"slices\"\n)\n\nfunc main() {\n\ts := []int{1, 2}\n\ts = slices.Grow(s, 10)\n\tc := cap(s)\n\ts = append(s, 3)\n\tsame := 0\n\tif cap(s) == c {\n\t\tsame = 1\n\t}\n\tfmt.Println(same)\n\tfmt.Println(s[2])\n}",
+      "options": [
+        "0, 3",
+        "1, 3",
+        "1, 1",
+        "1, 2"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1675,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"encoding/json\"\n\t\"fmt\"\n)\n\nfunc main() {\n\tvar s []int\n\tjson.Unmarshal([]byte(\"[1,2]\"), &s)\n\tfmt.Println(len(s))\n\tfmt.Println(s[1])\n}",
+      "options": [
+        "2, 1",
+        "1, 2",
+        "2, 2",
+        "0, 2"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1676,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"encoding/json\"\n\t\"fmt\"\n)\n\nfunc main() {\n\ts := []int{1}\n\tjson.Unmarshal([]byte(\"null\"), &s)\n\tn := 0\n\tif s == nil {\n\t\tn = 1\n\t}\n\tfmt.Println(n)\n\tfmt.Println(len(s))\n}",
+      "options": [
+        "0, 1",
+        "1, 1",
+        "0, 0",
+        "1, 0"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1677,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"slices\"\n)\n\nfunc main() {\n\tfmt.Println(slices.Index([]int{1, 2, 3}, 2))\n}",
+      "options": [
+        "1",
+        "2",
+        "0",
+        "-1"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1678,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tsrc := []int{9, 8, 7, 6, 5}\n\tcopy(src[2:], src[:3])\n\tfmt.Println(src[0])\n\tfmt.Println(src[2])\n\tfmt.Println(src[4])\n}",
+      "options": [
+        "9, 7, 5",
+        "9, 9, 7",
+        "8, 9, 7",
+        "9, 8, 7"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1679,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\ttype P struct{ N int }\n\tps := []*P{{1}, {2}}\n\tfor _, v := range ps {\n\t\tv.N = 9\n\t}\n\tfmt.Println(ps[0].N)\n\tfmt.Println(ps[1].N)\n}",
+      "options": [
+        "1, 2",
+        "9, 2",
+        "9, 9",
+        "1, 9"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1680,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\ts := []int{1, 2, 3}\n\tu := s[0:0:0]\n\tu = append(u, 7)\n\tfmt.Println(s[0])\n\tfmt.Println(u[0])\n}",
+      "options": [
+        "7, 7",
+        "1, 1",
+        "7, 1",
+        "1, 7"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1681,
+      "type": "text",
+      "text": "Why can a small subslice of a large array keep all that memory alive?",
+      "options": [
+        "The header points at the same array; GC keeps the whole array object",
+        "The small slice’s len equals the large one’s",
+        "The subslice copies the whole array into the header",
+        "cap is always 2"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1682,
+      "type": "text",
+      "text": "Do string([]byte) and []byte(string) copy the bytes?",
+      "options": [
+        "No, both share the buffer",
+        "Yes. A string is immutable, so the bytes live in a separate array",
+        "Only string([]byte) copies",
+        "Only []byte(string) copies"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1683,
+      "type": "text",
+      "text": "How does encoding/json encode a nil slice versus empty []T{}?",
+      "options": [
+        "Both as []",
+        "Both as null",
+        "nil → null, []T{} → []",
+        "nil → [], []T{} → null"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1684,
+      "type": "text",
+      "text": "How does slices.Delete differ from append(s[:i], s[j:]...) in the array tail?",
+      "options": [
+        "Delete does not change len",
+        "The append trick zeros the tail; Delete does not",
+        "Both always allocate a new array",
+        "Delete zeros evicted elements; the append trick leaves old values past the new len"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1685,
+      "type": "text",
+      "text": "What does json.Unmarshal(\"null\", &s) do to slice s?",
+      "options": [
+        "It sets s to nil",
+        "It leaves s as it was",
+        "It makes s empty but non-nil",
+        "It is an error"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1686,
+      "type": "text",
+      "text": "Why does writing v.Field in for _, v := range []*T change the elements?",
+      "options": [
+        "range does not copy pointers",
+        "v is a copy of the pointer, but it still points at the same struct",
+        "range always writes through to the original slice",
+        "It works only for nil pointers"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1687,
+      "type": "text",
+      "text": "How do you drop a large array while keeping a few elements?",
+      "options": [
+        "s = s[i:j] is enough",
+        "s = s[:0] is enough",
+        "Copy the needed elements into a new slice (Clone/copy), or clip cap to len and stop holding the old header",
+        "Assign cap(s) = len(s)"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1688,
+      "type": "text",
+      "text": "What does slices.Compare return when a is lexicographically less than b?",
+      "options": [
+        "1",
+        "0",
+        "the length of a",
+        "-1"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1689,
+      "type": "text",
+      "text": "What does slices.Compact do?",
+      "options": [
+        "It collapses consecutive equal elements to one, like unique on runs",
+        "It removes all duplicates in any order",
+        "It sorts the slice",
+        "It sets cap to 0"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1690,
+      "type": "text",
+      "text": "Where does slices.Reverse change elements?",
+      "options": [
+        "In a new array; the original is untouched",
+        "In place, in the same array",
+        "Only in a copy of the header",
+        "Reverse is only for strings"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1691,
+      "type": "text",
+      "text": "What does slices.BinarySearch do when the value is missing?",
+      "options": [
+        "It returns -1 and false",
+        "It panics",
+        "The index where it would be inserted, and found=false",
+        "Index 0 and true"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1692,
+      "type": "text",
+      "text": "Why may two [][]int entries stop sharing an array after append on one of them?",
+      "options": [
+        "append always copies both rows",
+        "[][]int cannot share arrays",
+        "append changes only the outer slice",
+        "If the inner slice’s cap is exhausted, append yields a new array; the other header still points at the old one"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1693,
+      "type": "text",
+      "text": "What does append(dst, str...) do for []byte and string?",
+      "options": [
+        "It appends the string’s bytes onto the byte slice",
+        "It does not compile",
+        "It appends runes, not bytes",
+        "It replaces dst with the string"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1694,
+      "type": "text",
+      "text": "Why call slices.Grow before a series of appends?",
+      "options": [
+        "To increase len immediately",
+        "To grow cap ahead of time so each append does not reallocate",
+        "To zero the slice",
+        "It disables append"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1695,
+      "type": "text",
+      "text": "What happens to an array if you take a[i:j] without a third index and then append?",
+      "options": [
+        "The array never changes",
+        "append is forbidden on a slice from an array",
+        "If spare cap remains, the tail of the array is overwritten",
+        "The array becomes nil"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1696,
+      "type": "text",
+      "text": "What does json.Unmarshal(\"[1,2]\", &s) do to var s []int?",
+      "options": [
+        "It leaves s nil",
+        "It is an error because s is nil",
+        "It writes only into cap and does not change len",
+        "It allocates a slice and fills in the elements"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1697,
+      "type": "text",
+      "text": "What does slices.Index return when the element is missing?",
+      "options": [
+        "-1",
+        "0",
+        "len(s)",
+        "panic"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1698,
+      "type": "text",
+      "text": "Does slices.Sort mutate the original slice?",
+      "options": [
+        "No, it returns a sorted copy",
+        "Yes, it sorts in place",
+        "Only if cap == len",
+        "Only for []int"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1699,
+      "type": "text",
+      "text": "Why does s[0:0:0]; append(..., x) not write s[0] of the original?",
+      "options": [
+        "append always writes s[0]",
+        "s[0:0:0] is illegal",
+        "cap is clipped to 0, so append takes a new array",
+        "append ignores the third index"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1700,
+      "type": "text",
+      "text": "What does slices.Replace(s, i, j, vs...) do when vs is longer than j-i?",
+      "options": [
+        "Extra vs values are dropped",
+        "It panics",
+        "It replaces using only the first j-i of vs",
+        "It inserts all vs values; the slice length grows"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1701,
+      "type": "boolean",
+      "text": "A subslice big[i:j] can keep the whole big array alive.",
+      "correct": true
+    },
+    {
+      "id": 1702,
+      "type": "boolean",
+      "text": "string([]byte) shares the buffer with the original []byte, so a byte write changes the string.",
+      "correct": false
+    },
+    {
+      "id": 1703,
+      "type": "boolean",
+      "text": "json.Marshal yields null for a nil slice and [] for []T{}.",
+      "correct": true
+    },
+    {
+      "id": 1704,
+      "type": "boolean",
+      "text": "slices.Delete leaves old values in the tail past the new len, like the append trick.",
+      "correct": false
+    },
+    {
+      "id": 1705,
+      "type": "boolean",
+      "text": "json.Unmarshal(\"null\", &s) sets the slice to nil.",
+      "correct": true
+    },
+    {
+      "id": 1706,
+      "type": "boolean",
+      "text": "In a range over []*T, writing v.Field changes the struct on the heap.",
+      "correct": true
+    },
+    {
+      "id": 1707,
+      "type": "boolean",
+      "text": "s = s[i:j] always lets GC drop the tail of a large array.",
+      "correct": false
+    },
+    {
+      "id": 1708,
+      "type": "boolean",
+      "text": "slices.Compare returns -1 when the first slice is less.",
+      "correct": true
+    },
+    {
+      "id": 1709,
+      "type": "boolean",
+      "text": "slices.Compact removes non-unique elements anywhere, not only consecutive ones.",
+      "correct": false
+    },
+    {
+      "id": 1710,
+      "type": "boolean",
+      "text": "slices.Reverse rearranges elements in place.",
+      "correct": true
+    },
+    {
+      "id": 1711,
+      "type": "boolean",
+      "text": "BinarySearch returns -1 when the element is missing.",
+      "correct": false
+    },
+    {
+      "id": 1712,
+      "type": "boolean",
+      "text": "append on one [][]int row can detach it from another row if cap is exhausted.",
+      "correct": true
+    },
+    {
+      "id": 1713,
+      "type": "boolean",
+      "text": "append([]byte, string...) is allowed and appends bytes.",
+      "correct": true
+    },
+    {
+      "id": 1714,
+      "type": "boolean",
+      "text": "slices.Grow immediately increases len by n.",
+      "correct": false
+    },
+    {
+      "id": 1715,
+      "type": "boolean",
+      "text": "append on a[i:j] without a third index can overwrite a’s tail if cap remains.",
+      "correct": true
+    },
+    {
+      "id": 1716,
+      "type": "boolean",
+      "text": "slices.Index returns -1 when the element is missing.",
+      "correct": true
+    },
+    {
+      "id": 1717,
+      "type": "boolean",
+      "text": "slices.Sort does not mutate the original slice.",
+      "correct": false
+    },
+    {
+      "id": 1718,
+      "type": "boolean",
+      "text": "s[0:0:0] then append writes the original s[0].",
+      "correct": false
+    },
+    {
+      "id": 1719,
+      "type": "boolean",
+      "text": "slices.Replace can grow length if more elements are put in than were cut.",
+      "correct": true
+    },
+    {
+      "id": 1720,
+      "type": "boolean",
+      "text": "[]byte(string) copies bytes; writing the slice does not change the string.",
+      "correct": true
+    },
+    {
+      "id": 1721,
+      "type": "recall",
+      "text": "Why can small := big[i:j] keep all of big alive?",
+      "answer": "The header pointer refers to the same array; GC does not trim the array to the small slice’s cap."
+    },
+    {
+      "id": 1722,
+      "type": "recall",
+      "text": "Does []byte(string) copy the data?",
+      "answer": "Yes. A string is immutable; the slice gets its own array."
+    },
+    {
+      "id": 1723,
+      "type": "recall",
+      "text": "What does json.Marshal write for a nil slice and for []T{}?",
+      "answer": "null and [] respectively."
+    },
+    {
+      "id": 1724,
+      "type": "recall",
+      "text": "Does slices.Delete zero the tail past the new len?",
+      "answer": "Yes, so references are not kept. The plain append trick does not."
+    },
+    {
+      "id": 1725,
+      "type": "recall",
+      "text": "What does unmarshaling JSON null into *[]T do?",
+      "answer": "It assigns nil."
+    },
+    {
+      "id": 1726,
+      "type": "recall",
+      "text": "Why does ranging over pointers mutate the structs?",
+      "answer": "The pointer is copied; the object behind it is the same."
+    },
+    {
+      "id": 1727,
+      "type": "recall",
+      "text": "How do you avoid keeping a large array alive with a small slice?",
+      "answer": "Copy the elements into a new slice, or clip cap (Clip / full slice) and drop the old header."
+    },
+    {
+      "id": 1728,
+      "type": "recall",
+      "text": "What does slices.Compare return when a < b?",
+      "answer": "-1."
+    },
+    {
+      "id": 1729,
+      "type": "recall",
+      "text": "What does slices.Compact collapse?",
+      "answer": "Only consecutive equal elements."
+    },
+    {
+      "id": 1730,
+      "type": "recall",
+      "text": "Is slices.Reverse in-place?",
+      "answer": "Yes, it rearranges elements of the same array."
+    },
+    {
+      "id": 1731,
+      "type": "recall",
+      "text": "What does BinarySearch return when the element is missing?",
+      "answer": "The insertion index and false."
+    },
+    {
+      "id": 1732,
+      "type": "recall",
+      "text": "When do two [][]int rows stop sharing an inner array?",
+      "answer": "When append on one row exceeds its cap and allocates a new array."
+    },
+    {
+      "id": 1733,
+      "type": "recall",
+      "text": "What does append(b, s...) do for []byte b and string s?",
+      "answer": "It appends the string’s bytes onto b."
+    },
+    {
+      "id": 1734,
+      "type": "recall",
+      "text": "Does slices.Grow change len?",
+      "answer": "No, it prepares cap for later appends."
+    },
+    {
+      "id": 1735,
+      "type": "recall",
+      "text": "What happens to array a after append on a[i:j] with no third index, if cap allows?",
+      "answer": "The array tail is overwritten by the new element."
+    },
+    {
+      "id": 1736,
+      "type": "recall",
+      "text": "What does slices.Index return when the element is missing?",
+      "answer": "-1."
+    },
+    {
+      "id": 1737,
+      "type": "recall",
+      "text": "Does slices.Sort sort in place?",
+      "answer": "Yes."
+    },
+    {
+      "id": 1738,
+      "type": "recall",
+      "text": "Why does append after s[:0:0] not write the old array?",
+      "answer": "Capacity is 0, so a new array is required."
+    },
+    {
+      "id": 1739,
+      "type": "recall",
+      "text": "Can slices.Replace increase len?",
+      "answer": "Yes, if more elements are inserted than were cut."
+    },
+    {
+      "id": 1740,
+      "type": "recall",
+      "text": "Does writing a []byte taken from a string change that string?",
+      "answer": "No. The bytes were copied."
+    }
+  ]
+}

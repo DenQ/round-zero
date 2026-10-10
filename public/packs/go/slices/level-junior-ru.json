@@ -1,0 +1,608 @@
+{
+  "stack": "go",
+  "topic": "slices",
+  "level": "junior",
+  "locale": "ru",
+  "questions": [
+    {
+      "id": 1501,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tvar s []int\n\tfmt.Println(len(s))\n\tfmt.Println(cap(s))\n}",
+      "options": [
+        "0, 0",
+        "0, 1",
+        "1, 0",
+        "1, 1"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1502,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\ts := []int{}\n\tfmt.Println(len(s))\n\tfmt.Println(cap(s))\n}",
+      "options": [
+        "1, 0",
+        "0, 0",
+        "0, 1",
+        "1, 1"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1503,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\ts := []int{2, 4, 6}\n\tfmt.Println(len(s))\n\tfmt.Println(cap(s))\n\tfmt.Println(s[1])\n}",
+      "options": [
+        "3, 3, 2",
+        "2, 3, 4",
+        "3, 3, 4",
+        "3, 6, 4"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1504,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\ts := make([]int, 3)\n\tfmt.Println(len(s))\n\tfmt.Println(cap(s))\n\tfmt.Println(s[2])\n}",
+      "options": [
+        "3, 3, 3",
+        "0, 3, 0",
+        "3, 0, 0",
+        "3, 3, 0"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1505,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\ts := make([]int, 2, 5)\n\tfmt.Println(len(s))\n\tfmt.Println(cap(s))\n}",
+      "options": [
+        "2, 5",
+        "5, 2",
+        "2, 2",
+        "5, 5"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1506,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\ts := []int{7, 8, 9}\n\tfmt.Println(s[0])\n\tfmt.Println(s[2])\n}",
+      "options": [
+        "7, 8",
+        "7, 9",
+        "8, 9",
+        "9, 7"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1507,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\ts := []int{1, 2, 3, 4, 5}\n\tt := s[1:3]\n\tfmt.Println(len(t))\n\tfmt.Println(cap(t))\n\tfmt.Println(t[0])\n}",
+      "options": [
+        "2, 2, 2",
+        "2, 5, 1",
+        "2, 4, 2",
+        "3, 4, 2"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1508,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\ts := make([]int, 2, 4)\n\ts[0], s[1] = 1, 2\n\tt := s[:3]\n\tfmt.Println(len(t))\n\tfmt.Println(cap(t))\n\tfmt.Println(t[2])\n}",
+      "options": [
+        "2, 4, 0",
+        "3, 3, 0",
+        "4, 4, 2",
+        "3, 4, 0"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1509,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\ts := []int{1, 2, 3, 4}\n\tt := s[1:3]\n\tt[0] = 9\n\tfmt.Println(s[1])\n\tfmt.Println(t[0])\n}",
+      "options": [
+        "9, 9",
+        "2, 9",
+        "9, 2",
+        "1, 9"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1510,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\ts := []int{10, 20, 30, 40}\n\tt := s[:2]\n\tfmt.Println(len(t))\n\tfmt.Println(cap(t))\n}",
+      "options": [
+        "2, 2",
+        "2, 4",
+        "4, 4",
+        "2, 3"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1511,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\ts := []int{1, 2, 3, 4, 5}\n\tt := s[2:]\n\tfmt.Println(len(t))\n\tfmt.Println(cap(t))\n\tfmt.Println(t[0])\n}",
+      "options": [
+        "3, 5, 3",
+        "2, 3, 3",
+        "3, 3, 3",
+        "3, 3, 1"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1512,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\ta := [4]int{1, 2, 3, 4}\n\ts := a[1:3]\n\ta[1] = 8\n\tfmt.Println(s[0])\n\tfmt.Println(len(s))\n}",
+      "options": [
+        "2, 2",
+        "8, 4",
+        "2, 3",
+        "8, 2"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1513,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tvar s []int\n\ts = append(s, 4)\n\tfmt.Println(len(s))\n\tfmt.Println(s[0])\n}",
+      "options": [
+        "1, 4",
+        "0, 4",
+        "1, 0",
+        "4, 1"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1514,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\ts := make([]int, 2, 4)\n\ts[0], s[1] = 1, 2\n\tt := s\n\ts = append(s, 9)\n\tfmt.Println(len(t))\n\tfmt.Println(len(s))\n\tu := t[:3]\n\tfmt.Println(u[2])\n}",
+      "options": [
+        "3, 3, 9",
+        "2, 3, 9",
+        "2, 2, 9",
+        "2, 3, 0"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1515,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\ts := make([]int, 2)\n\ts[0], s[1] = 1, 2\n\tt := s\n\ts = append(s, 3)\n\ts[0] = 7\n\tfmt.Println(t[0])\n\tfmt.Println(s[0])\n\tfmt.Println(len(t))\n}",
+      "options": [
+        "7, 7, 2",
+        "1, 7, 3",
+        "1, 7, 2",
+        "7, 1, 2"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1516,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\ts := []int{1}\n\ts = append(s, 2, 3)\n\tfmt.Println(len(s))\n\tfmt.Println(s[2])\n}",
+      "options": [
+        "2, 3",
+        "3, 2",
+        "1, 3",
+        "3, 3"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1517,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\ts := make([]int, 1, 3)\n\ts[0] = 5\n\tt := append(s, 6)\n\ts[0] = 8\n\tfmt.Println(s[0])\n\tfmt.Println(t[0])\n\tfmt.Println(len(s))\n\tfmt.Println(len(t))\n}",
+      "options": [
+        "8, 8, 1, 2",
+        "8, 5, 1, 2",
+        "5, 8, 1, 2",
+        "8, 8, 2, 2"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1518,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\ts := []int{1, 2}\n\tt := append(s, 3)\n\tt[0] = 9\n\tfmt.Println(s[0])\n\tfmt.Println(t[0])\n}",
+      "options": [
+        "9, 9",
+        "1, 9",
+        "1, 1",
+        "9, 1"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1519,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tdst := make([]int, 2)\n\tsrc := []int{7, 8, 9}\n\tn := copy(dst, src)\n\tfmt.Println(n)\n\tfmt.Println(dst[0])\n\tfmt.Println(dst[1])\n}",
+      "options": [
+        "3, 7, 8",
+        "2, 7, 9",
+        "2, 7, 8",
+        "2, 0, 0"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1520,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tdst := []int{1, 2, 3}\n\tsrc := []int{9}\n\tn := copy(dst, src)\n\tfmt.Println(n)\n\tfmt.Println(dst[0])\n\tfmt.Println(dst[2])\n}",
+      "options": [
+        "1, 9, 9",
+        "3, 9, 3",
+        "1, 1, 3",
+        "1, 9, 3"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1521,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tdst := make([]int, 1)\n\tsrc := []int{4, 5}\n\tn := copy(dst, src)\n\tfmt.Println(n)\n\tfmt.Println(len(dst))\n\tfmt.Println(dst[0])\n}",
+      "options": [
+        "1, 1, 4",
+        "2, 2, 4",
+        "1, 2, 4",
+        "2, 1, 4"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1522,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\ts := []int{2, 4, 6}\n\tsum := 0\n\tlast := 0\n\tfor i, v := range s {\n\t\tsum += v\n\t\tlast = i\n\t}\n\tfmt.Println(sum)\n\tfmt.Println(last)\n}",
+      "options": [
+        "12, 3",
+        "12, 2",
+        "6, 2",
+        "12, 1"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1523,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\ta := [3]int{1, 2, 3}\n\ts := a[:]\n\ts[1] = 8\n\tfmt.Println(a[1])\n\tfmt.Println(len(s))\n}",
+      "options": [
+        "2, 3",
+        "8, 2",
+        "8, 3",
+        "2, 8"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1524,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\ts := make([]int, 4, 6)\n\tfmt.Println(s[3])\n\tfmt.Println(len(s))\n\tfmt.Println(cap(s))\n}",
+      "options": [
+        "4, 4, 6",
+        "0, 6, 6",
+        "0, 4, 4",
+        "0, 4, 6"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1525,
+      "type": "text",
+      "text": "Из каких трёх полей состоит заголовок слайса?",
+      "options": [
+        "Указатель на массив, длина, ёмкость",
+        "Только длина и ёмкость",
+        "Сами элементы и длина",
+        "Указатель и хеш элементов"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1526,
+      "type": "text",
+      "text": "Где лежат элементы слайса?",
+      "options": [
+        "Внутри заголовка, рядом с len и cap",
+        "В подлежащем массиве. Заголовок хранит указатель на него",
+        "В отдельной таблице на каждый индекс",
+        "Только на стеке вызова, без массива"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1527,
+      "type": "text",
+      "text": "Когда два слайса видят запись в один и тот же элемент?",
+      "options": [
+        "Всегда, у всех слайсов один массив на процесс",
+        "Только если их получили через copy",
+        "Когда их окна пересекаются на одном подлежащем массиве",
+        "Никогда. Запись копирует массив сразу"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1528,
+      "type": "text",
+      "text": "Когда append выделяет новый подлежащий массив?",
+      "options": [
+        "При каждом вызове",
+        "Только если слайс был nil",
+        "Только если длина уже равна нулю",
+        "Когда новая длина больше текущей ёмкости"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1529,
+      "type": "text",
+      "text": "Чем nil-слайс отличается от []int{}?",
+      "options": [
+        "У обоих len и cap равны 0, но только nil сравнивается с nil",
+        "У []int{} длина 1",
+        "nil нельзя передать в len",
+        "У них разные нулевые значения элементов"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1530,
+      "type": "text",
+      "text": "Чем make([]int, n) заполняет новые элементы?",
+      "options": [
+        "Случайными числами",
+        "Нулями, нулевым значением типа",
+        "Ничем: индексы до n недоступны, пока не append",
+        "Копией n из другого слайса"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1531,
+      "type": "text",
+      "text": "Сколько элементов копирует copy и что она делает с len(dst)?",
+      "options": [
+        "Всегда len(src); len(dst) становится равен этому числу",
+        "Всегда len(dst); лишние элементы src дописываются в конец",
+        "min(len(dst), len(src)); длина dst не растёт",
+        "cap(dst); незаполненный хвост dst обрезается"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1532,
+      "type": "text",
+      "text": "Чему равны len и cap у t := s[i:j]?",
+      "options": [
+        "len = j, cap = i",
+        "len = j - i, cap = len(s)",
+        "len = i, cap = j - i",
+        "len = j - i, cap = cap(s) - i"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1533,
+      "type": "text",
+      "text": "До какого индекса можно расширить слайс выражением s[:k] без panic?",
+      "options": [
+        "k может быть до cap(s) включительно",
+        "k не может быть больше len(s)",
+        "k может быть любым положительным числом",
+        "k должен быть строго меньше len(s)"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1534,
+      "type": "text",
+      "text": "Что делает append со старой переменной, если результат не присвоить обратно?",
+      "options": [
+        "Её len всё равно растёт на месте",
+        "Заголовок в этой переменной не меняется: len остаётся прежним",
+        "Переменная становится nil",
+        "Это ошибка компиляции"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1535,
+      "type": "text",
+      "text": "Что происходит с массивом, если записать элемент через слайс, полученный как a[:]?",
+      "options": [
+        "Массив не меняется: слайс сразу копирует все элементы",
+        "Меняется только копия на куче, массив на стеке прежний",
+        "Элемент массива меняется: слайс смотрит в тот же массив",
+        "Массив становится слайсом и теряет фиксированную длину"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1536,
+      "type": "text",
+      "text": "Что получает функция, если передать ей слайс аргументом?",
+      "options": [
+        "Указатель на заголовок, без копии",
+        "Полную копию подлежащего массива",
+        "Копию только длины, без указателя",
+        "Копию заголовка. Массив по указателю тот же, пока append не выделит новый"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1537,
+      "type": "boolean",
+      "text": "У var s []int и длина, и ёмкость равны 0.",
+      "correct": true
+    },
+    {
+      "id": 1538,
+      "type": "boolean",
+      "text": "Выражение []int{} == nil истинно.",
+      "correct": false
+    },
+    {
+      "id": 1539,
+      "type": "boolean",
+      "text": "У make([]int, 3) ёмкость равна 3.",
+      "correct": true
+    },
+    {
+      "id": 1540,
+      "type": "boolean",
+      "text": "append всегда выделяет новый подлежащий массив.",
+      "correct": false
+    },
+    {
+      "id": 1541,
+      "type": "boolean",
+      "text": "copy увеличивает len(dst), если src длиннее dst.",
+      "correct": false
+    },
+    {
+      "id": 1542,
+      "type": "boolean",
+      "text": "Два слайса с общим массивом и пересекающимся окном видят запись друг друга в элемент.",
+      "correct": true
+    },
+    {
+      "id": 1543,
+      "type": "boolean",
+      "text": "Для любого слайса s верно cap(s[1:]) == cap(s)-1, если len(s) >= 1.",
+      "correct": true
+    },
+    {
+      "id": 1544,
+      "type": "boolean",
+      "text": "Обращение s[len(s)] для непустого слайса допустимо и даёт последний элемент.",
+      "correct": false
+    },
+    {
+      "id": 1545,
+      "type": "boolean",
+      "text": "У make([]int, 2, 8) длина равна 2.",
+      "correct": true
+    },
+    {
+      "id": 1546,
+      "type": "boolean",
+      "text": "Передача слайса в функцию копирует заголовок, а не весь массив.",
+      "correct": true
+    },
+    {
+      "id": 1547,
+      "type": "boolean",
+      "text": "Если вызвать append(s, x) и не взять результат, len переменной s всё равно увеличивается.",
+      "correct": false
+    },
+    {
+      "id": 1548,
+      "type": "boolean",
+      "text": "Заголовок слайса хранит сами элементы внутри своих трёх полей, без массива.",
+      "correct": false
+    },
+    {
+      "id": 1549,
+      "type": "recall",
+      "text": "Какие три поля у заголовка слайса?",
+      "answer": "Указатель на подлежащий массив, длина и ёмкость."
+    },
+    {
+      "id": 1550,
+      "type": "recall",
+      "text": "Чему равны len и cap у make([]int, 2, 5)?",
+      "answer": "Длина 2, ёмкость 5."
+    },
+    {
+      "id": 1551,
+      "type": "recall",
+      "text": "Чему равны len и cap у var s []int?",
+      "answer": "Оба равны 0. Это nil-слайс."
+    },
+    {
+      "id": 1552,
+      "type": "recall",
+      "text": "Сколько элементов копирует copy(dst, src)?",
+      "answer": "min(len(dst), len(src)). Длина dst не растёт."
+    },
+    {
+      "id": 1553,
+      "type": "recall",
+      "text": "Когда append может оставить тот же подлежащий массив?",
+      "answer": "Когда новая длина не больше текущей ёмкости."
+    },
+    {
+      "id": 1554,
+      "type": "recall",
+      "text": "Чему равны элементы make([]int, n) до записи?",
+      "answer": "Нули — нулевое значение int."
+    },
+    {
+      "id": 1555,
+      "type": "recall",
+      "text": "Чему равна длина s[i:j]?",
+      "answer": "j - i."
+    },
+    {
+      "id": 1556,
+      "type": "recall",
+      "text": "Чему равна ёмкость s[i:j]?",
+      "answer": "cap(s) - i."
+    },
+    {
+      "id": 1557,
+      "type": "recall",
+      "text": "Равно ли []int{} значению nil?",
+      "answer": "Нет. Длина у обоих 0, но пустой литерал с nil не сравнивается."
+    },
+    {
+      "id": 1558,
+      "type": "recall",
+      "text": "Что нужно сделать с результатом append?",
+      "answer": "Присвоить его: вернётся (возможно новый) заголовок слайса."
+    },
+    {
+      "id": 1559,
+      "type": "recall",
+      "text": "Что происходит с массивом при записи через слайс a[:]?",
+      "answer": "Меняется элемент самого массива: слайс смотрит в него."
+    },
+    {
+      "id": 1560,
+      "type": "recall",
+      "text": "Что копируется при передаче слайса в функцию?",
+      "answer": "Только заголовок. Подлежащий массив тот же, пока append не выделит новый."
+    }
+  ]
+}
