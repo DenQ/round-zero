@@ -1,0 +1,608 @@
+{
+  "stack": "go",
+  "topic": "maps",
+  "level": "junior",
+  "locale": "ru",
+  "questions": [
+    {
+      "id": 2581,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tvar m map[string]int\n\tfmt.Println(len(m))\n\tn := 0\n\tif m == nil {\n\t\tn = 1\n\t}\n\tfmt.Println(n)\n\tfmt.Println(m[\"a\"])\n}\n",
+      "options": [
+        "0, 1, 0",
+        "0, 0, 0",
+        "1, 1, 0",
+        "0, 1, 1"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 2582,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tm := map[string]int{}\n\tfmt.Println(len(m))\n\tn := 0\n\tif m == nil {\n\t\tn = 1\n\t}\n\tfmt.Println(n)\n}\n",
+      "options": [
+        "0, 1",
+        "0, 0",
+        "1, 0",
+        "1, 1"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 2583,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tm := map[string]int{}\n\tm[\"a\"] = 3\n\tfmt.Println(m[\"a\"])\n\tfmt.Println(len(m))\n}\n",
+      "options": [
+        "0, 1",
+        "3, 0",
+        "3, 1",
+        "3, 3"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 2584,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tm := make(map[int]int)\n\tm[1] = 2\n\tfmt.Println(len(m))\n\tfmt.Println(m[1])\n}\n",
+      "options": [
+        "0, 2",
+        "1, 0",
+        "2, 1",
+        "1, 2"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 2585,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tm := make(map[int]int, 8)\n\tm[1] = 1\n\tm[2] = 2\n\tm[3] = 3\n\tfmt.Println(len(m))\n}\n",
+      "options": [
+        "3",
+        "8",
+        "0",
+        "11"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 2586,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tm := map[string]int{\"a\": 1, \"b\": 2}\n\tfmt.Println(len(m))\n\tfmt.Println(m[\"a\"])\n}\n",
+      "options": [
+        "1, 1",
+        "2, 1",
+        "2, 2",
+        "2, 0"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 2587,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tm := map[string]int{\"a\": 1}\n\tm[\"a\"] = 7\n\tfmt.Println(m[\"a\"])\n\tfmt.Println(len(m))\n}\n",
+      "options": [
+        "1, 1",
+        "7, 2",
+        "7, 1",
+        "1, 7"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 2588,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tvar m map[int]int\n\tfmt.Println(m[5])\n}\n",
+      "options": [
+        "5",
+        "1",
+        "nil",
+        "0"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 2589,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tm := map[int]int{1: 0}\n\tfmt.Println(m[1])\n\tfmt.Println(m[2])\n}\n",
+      "options": [
+        "0, 0",
+        "0, 1",
+        "1, 0",
+        "0, 2"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 2590,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tm := map[string]bool{}\n\tv := 0\n\tif m[\"x\"] {\n\t\tv = 1\n\t}\n\tfmt.Println(v)\n}\n",
+      "options": [
+        "1",
+        "0",
+        "2",
+        "3"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 2591,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tm := map[string]string{}\n\tfmt.Println(len(m[\"a\"]))\n}\n",
+      "options": [
+        "1",
+        "3",
+        "0",
+        "5"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 2592,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tm := map[string]int{\"a\": 4}\n\tv, ok := m[\"a\"]\n\tn := 0\n\tif ok {\n\t\tn = 1\n\t}\n\tfmt.Println(v)\n\tfmt.Println(n)\n}\n",
+      "options": [
+        "4, 0",
+        "0, 1",
+        "0, 0",
+        "4, 1"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 2593,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tm := map[string]int{\"a\": 4}\n\tv, ok := m[\"b\"]\n\tn := 0\n\tif ok {\n\t\tn = 1\n\t}\n\tfmt.Println(v)\n\tfmt.Println(n)\n}\n",
+      "options": [
+        "0, 0",
+        "0, 1",
+        "4, 0",
+        "4, 1"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 2594,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tm := map[int]int{1: 8}\n\tdelete(m, 1)\n\tfmt.Println(len(m))\n\tfmt.Println(m[1])\n}\n",
+      "options": [
+        "1, 8",
+        "0, 0",
+        "0, 8",
+        "1, 0"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 2595,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tm := map[int]int{1: 8}\n\tdelete(m, 2)\n\tfmt.Println(len(m))\n\tfmt.Println(m[1])\n}\n",
+      "options": [
+        "0, 0",
+        "1, 0",
+        "1, 8",
+        "0, 8"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 2596,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tm := map[int]int{1: 1, 2: 2}\n\tdelete(m, 1)\n\tm[3] = 3\n\tfmt.Println(len(m))\n}\n",
+      "options": [
+        "1",
+        "3",
+        "0",
+        "2"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 2597,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tvar m map[int]int\n\tn := 0\n\tfor range m {\n\t\tn++\n\t}\n\tfmt.Println(n)\n\tfmt.Println(len(m))\n}\n",
+      "options": [
+        "0, 0",
+        "0, 1",
+        "1, 0",
+        "1, 1"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 2598,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tm := map[int]int{}\n\tn := 0\n\tfor range m {\n\t\tn++\n\t}\n\tfmt.Println(n)\n}\n",
+      "options": [
+        "1",
+        "0",
+        "2",
+        "3"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 2599,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tm := map[int]int{1: 10, 2: 20, 3: 30}\n\ts, n := 0, 0\n\tfor _, v := range m {\n\t\ts += v\n\t\tn++\n\t}\n\tfmt.Println(n)\n\tfmt.Println(s)\n}\n",
+      "options": [
+        "3, 0",
+        "0, 60",
+        "3, 60",
+        "2, 60"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 2600,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc add(m map[int]int) {\n\tm[1] = 9\n}\n\nfunc main() {\n\tm := map[int]int{1: 1}\n\tadd(m)\n\tfmt.Println(m[1])\n}\n",
+      "options": [
+        "1",
+        "0",
+        "8",
+        "9"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 2601,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc add(m map[int]int) {\n\tm[2] = 4\n}\n\nfunc main() {\n\tm := map[int]int{1: 1}\n\tadd(m)\n\tfmt.Println(len(m))\n\tfmt.Println(m[2])\n}\n",
+      "options": [
+        "2, 4",
+        "1, 0",
+        "2, 0",
+        "1, 4"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 2602,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tm := map[int]int{1: 1}\n\tn := 0\n\tif m == nil {\n\t\tn = 1\n\t}\n\tfmt.Println(n)\n}\n",
+      "options": [
+        "1",
+        "0",
+        "2",
+        "3"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 2603,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tvar m map[int]int\n\tdelete(m, 1)\n\tfmt.Println(len(m))\n}\n",
+      "options": [
+        "1",
+        "2",
+        "0",
+        "3"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 2604,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tm := map[string]int{\"x\": 5}\n\tv, ok := m[\"x\"]\n\ta := 0\n\tif ok {\n\t\ta = 1\n\t}\n\tdelete(m, \"x\")\n\tv2, ok2 := m[\"x\"]\n\tb := 0\n\tif ok2 {\n\t\tb = 1\n\t}\n\tfmt.Println(v)\n\tfmt.Println(a)\n\tfmt.Println(v2)\n\tfmt.Println(b)\n}\n",
+      "options": [
+        "5, 1, 5, 1",
+        "5, 0, 0, 0",
+        "0, 1, 0, 0",
+        "5, 1, 0, 0"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 2605,
+      "type": "text",
+      "text": "Чем var m map[int]int отличается от m := map[int]int{}?",
+      "options": [
+        "var — nil; {} — пустая и не nil. У обеих len 0",
+        "Оба nil с длиной 0",
+        "{} имеет длину 1",
+        "В var уже можно писать"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 2606,
+      "type": "text",
+      "text": "Что делает запись в nil map?",
+      "options": [
+        "Это ошибка компиляции",
+        "Паника во время выполнения",
+        "Создаёт пустую map и записывает ключ",
+        "Ничего не происходит"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 2607,
+      "type": "text",
+      "text": "Зачем форма comma-ok v, ok := m[k]?",
+      "options": [
+        "ok — хеш ключа",
+        "Так нужно читать любую map",
+        "ok ложен, если ключа нет, даже если хранился zero value",
+        "ok истинен только для строковых ключей"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 2608,
+      "type": "text",
+      "text": "Гарантирует ли range по map фиксированный порядок ключей?",
+      "options": [
+        "Да: по возрастанию ключа",
+        "Да: порядок вставки",
+        "Да: обратный порядок вставки",
+        "Нет. Порядок не специфицирован и может меняться"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 2609,
+      "type": "text",
+      "text": "Что такое n в make(map[K]V, n)?",
+      "options": [
+        "Подсказка по ёмкости, не максимум длины",
+        "Жёсткий потолок: (n+1)-я вставка паникует",
+        "Начальная длина, как у make([]T, n)",
+        "Число бакетов, которое больше не растёт"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 2610,
+      "type": "text",
+      "text": "Что получает функция, если передать ей map?",
+      "options": [
+        "Копию каждой пары ключ-значение",
+        "Копию заголовка, который смотрит на ту же таблицу",
+        "Ничего: map передаётся по имени",
+        "Указатель на переменную вызывающего"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 2611,
+      "type": "text",
+      "text": "Какие типы могут быть ключами map?",
+      "options": [
+        "Любой тип, включая слайсы",
+        "Только строки и целые",
+        "Сравнимые типы: те, для которых есть ==",
+        "Только указатели"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 2612,
+      "type": "text",
+      "text": "Что делает delete(m, k), если k нет в m?",
+      "options": [
+        "Паникует",
+        "Возвращает false",
+        "Вставляет k с zero value",
+        "Ничего не делает"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 2613,
+      "type": "text",
+      "text": "Что даёт чтение отсутствующего ключа v := m[k]?",
+      "options": [
+        "Zero value типа значения",
+        "Панику",
+        "Всегда nil",
+        "Ошибку компиляции без comma-ok"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 2614,
+      "type": "text",
+      "text": "Безопасны ли len, range и delete на nil map?",
+      "options": [
+        "Безопасен только len; range и delete паникуют",
+        "Да. len 0, range ничего не делает, delete — no-op",
+        "Все три паникуют",
+        "Безопасен только delete"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 2615,
+      "type": "text",
+      "text": "Что происходит с len при перезаписи существующего ключа?",
+      "options": [
+        "len увеличивается на 1",
+        "len становится 0",
+        "len не меняется",
+        "len увеличивается на 2"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 2616,
+      "type": "text",
+      "text": "Можно ли сравнить две map через m1 == m2?",
+      "options": [
+        "Да, по содержимому",
+        "Да, по указателю заголовка",
+        "Да, если обе пустые",
+        "Нет. Map сравнима только с nil"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 2617,
+      "type": "boolean",
+      "text": "var m map[int]int равна nil.",
+      "correct": true
+    },
+    {
+      "id": 2618,
+      "type": "boolean",
+      "text": "m := map[int]int{} равна nil.",
+      "correct": false
+    },
+    {
+      "id": 2619,
+      "type": "boolean",
+      "text": "Присваивание в nil map вызывает панику.",
+      "correct": true
+    },
+    {
+      "id": 2620,
+      "type": "boolean",
+      "text": "delete по nil map вызывает панику.",
+      "correct": false
+    },
+    {
+      "id": 2621,
+      "type": "boolean",
+      "text": "for range по nil map вызывает панику.",
+      "correct": false
+    },
+    {
+      "id": 2622,
+      "type": "boolean",
+      "text": "make(map[int]int, 4) отвергает пятую вставку.",
+      "correct": false
+    },
+    {
+      "id": 2623,
+      "type": "boolean",
+      "text": "range обходит ключи map по возрастанию.",
+      "correct": false
+    },
+    {
+      "id": 2624,
+      "type": "boolean",
+      "text": "Сравнение m == nil разрешено.",
+      "correct": true
+    },
+    {
+      "id": 2625,
+      "type": "boolean",
+      "text": "Отсутствующий int-ключ читается как 0.",
+      "correct": true
+    },
+    {
+      "id": 2626,
+      "type": "boolean",
+      "text": "Передача map копирует каждую пару ключ/значение.",
+      "correct": false
+    },
+    {
+      "id": 2627,
+      "type": "boolean",
+      "text": "Повторная запись того же ключа увеличивает len.",
+      "correct": false
+    },
+    {
+      "id": 2628,
+      "type": "boolean",
+      "text": "ok в v, ok := m[k] ложен, если ключа нет.",
+      "correct": true
+    },
+    {
+      "id": 2629,
+      "type": "recall",
+      "text": "Какое zero value у типа map?",
+      "answer": "nil"
+    },
+    {
+      "id": 2630,
+      "type": "recall",
+      "text": "Как отличить сохранённый zero value от отсутствующего ключа?",
+      "answer": "Формой comma-ok v, ok := m[k]."
+    },
+    {
+      "id": 2631,
+      "type": "recall",
+      "text": "Что будет при записи в nil map?",
+      "answer": "Паника во время выполнения."
+    },
+    {
+      "id": 2632,
+      "type": "recall",
+      "text": "Специфицирован ли порядок обхода map?",
+      "answer": "Нет."
+    },
+    {
+      "id": 2633,
+      "type": "recall",
+      "text": "Что означает n в make(map[K]V, n)?",
+      "answer": "Подсказка для аллокации, не потолок длины."
+    },
+    {
+      "id": 2634,
+      "type": "recall",
+      "text": "Что копируется при передаче map в функцию?",
+      "answer": "Заголовок map; таблица общая."
+    },
+    {
+      "id": 2635,
+      "type": "recall",
+      "text": "Какое ограничение у ключей map?",
+      "answer": "Они должны быть comparable."
+    },
+    {
+      "id": 2636,
+      "type": "recall",
+      "text": "Что делает delete для отсутствующего ключа?",
+      "answer": "Ничего."
+    },
+    {
+      "id": 2637,
+      "type": "recall",
+      "text": "Чему равен len nil map?",
+      "answer": "0"
+    },
+    {
+      "id": 2638,
+      "type": "recall",
+      "text": "Назови два способа получить пустую не-nil map.",
+      "answer": "make(map[K]V) или литерал map[K]V{}."
+    },
+    {
+      "id": 2639,
+      "type": "recall",
+      "text": "Что значит ok в v, ok := m[k]?",
+      "answer": "Присутствует ли k в map."
+    },
+    {
+      "id": 2640,
+      "type": "recall",
+      "text": "С чем map можно сравнить через ==?",
+      "answer": "Только с nil."
+    }
+  ]
+}

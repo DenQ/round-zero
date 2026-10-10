@@ -1,0 +1,1008 @@
+{
+  "stack": "go",
+  "topic": "maps",
+  "level": "senior",
+  "locale": "en",
+  "questions": [
+    {
+      "id": 2721,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tm := map[int]int{1: 1, 2: 2}\n\tclear(m)\n\tn := 0\n\tif m == nil {\n\t\tn = 1\n\t}\n\tfmt.Println(len(m))\n\tfmt.Println(n)\n}\n",
+      "options": [
+        "0, 0",
+        "0, 1",
+        "2, 0",
+        "2, 1"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 2722,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tm := map[int]int{1: 1}\n\tclear(m)\n\tm[3] = 9\n\tfmt.Println(len(m))\n\tfmt.Println(m[1])\n\tfmt.Println(m[3])\n}\n",
+      "options": [
+        "0, 0, 9",
+        "1, 0, 9",
+        "1, 1, 9",
+        "2, 0, 9"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 2723,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tm := map[int]int{}\n\tclear(m)\n\tfmt.Println(len(m))\n}\n",
+      "options": [
+        "1",
+        "2",
+        "0",
+        "3"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 2724,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"math\"\n)\n\nfunc main() {\n\tm := map[float64]int{}\n\tnan := math.NaN()\n\tm[nan] = 1\n\tm[nan] = 2\n\tfmt.Println(len(m))\n}\n",
+      "options": [
+        "1",
+        "0",
+        "3",
+        "2"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 2725,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"math\"\n)\n\nfunc main() {\n\tm := map[float64]int{}\n\tnan := math.NaN()\n\tm[nan] = 1\n\t_, ok := m[nan]\n\tn := 0\n\tif ok {\n\t\tn = 1\n\t}\n\tfmt.Println(n)\n}\n",
+      "options": [
+        "0",
+        "1",
+        "2",
+        "3"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 2726,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\ta, b := 1, 1\n\tm := map[*int]int{&a: 3, &b: 4}\n\tfmt.Println(len(m))\n\tfmt.Println(m[&a])\n}\n",
+      "options": [
+        "1, 3",
+        "2, 3",
+        "2, 4",
+        "1, 4"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 2727,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\ta := 1\n\tm := map[*int]int{}\n\tm[&a] = 3\n\tm[&a] = 8\n\tfmt.Println(len(m))\n\tfmt.Println(m[&a])\n}\n",
+      "options": [
+        "2, 8",
+        "1, 3",
+        "1, 8",
+        "2, 3"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 2728,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tm := map[any]int{}\n\tm[1] = 1\n\tm[int(1)] = 9\n\tfmt.Println(len(m))\n\tfmt.Println(m[1])\n}\n",
+      "options": [
+        "2, 9",
+        "1, 1",
+        "2, 1",
+        "1, 9"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 2729,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tm := map[any]int{}\n\tm[1] = 1\n\tm[int8(1)] = 3\n\tfmt.Println(len(m))\n\tfmt.Println(m[1])\n\tfmt.Println(m[int8(1)])\n}\n",
+      "options": [
+        "2, 1, 3",
+        "1, 3, 3",
+        "2, 3, 3",
+        "1, 1, 3"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 2730,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tm := map[string]map[int]int{\"a\": {1: 2}}\n\tm[\"a\"] = map[int]int{8: 8}\n\tfmt.Println(len(m))\n\tfmt.Println(m[\"a\"][1])\n\tfmt.Println(m[\"a\"][8])\n}\n",
+      "options": [
+        "1, 2, 8",
+        "1, 0, 8",
+        "2, 0, 8",
+        "1, 0, 0"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 2731,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tm := map[int]int{1: 4, 2: 5}\n\tfor k := range m {\n\t\tm[k] = 0\n\t}\n\tfmt.Println(m[1] + m[2])\n}\n",
+      "options": [
+        "9",
+        "4",
+        "0",
+        "5"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 2732,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"maps\"\n)\n\nfunc main() {\n\tm := map[int]int{1: 2}\n\tc := maps.Clone(m)\n\tc[1] = 9\n\tfmt.Println(m[1])\n\tfmt.Println(c[1])\n}\n",
+      "options": [
+        "9, 9",
+        "2, 2",
+        "9, 2",
+        "2, 9"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 2733,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"maps\"\n)\n\nfunc main() {\n\ta := map[int]int{1: 2, 3: 4}\n\tb := map[int]int{3: 4, 1: 2}\n\tn := 0\n\tif maps.Equal(a, b) {\n\t\tn = 1\n\t}\n\tfmt.Println(n)\n}\n",
+      "options": [
+        "1",
+        "0",
+        "2",
+        "3"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 2734,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"maps\"\n)\n\nfunc main() {\n\ta := map[int]int{1: 2}\n\tb := map[int]int{1: 3}\n\tn := 0\n\tif maps.Equal(a, b) {\n\t\tn = 1\n\t}\n\tfmt.Println(n)\n}\n",
+      "options": [
+        "1",
+        "0",
+        "2",
+        "3"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 2735,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"maps\"\n)\n\nfunc main() {\n\tvar m map[int]int\n\tc := maps.Clone(m)\n\tn := 0\n\tif c == nil {\n\t\tn = 1\n\t}\n\tfmt.Println(n)\n}\n",
+      "options": [
+        "0",
+        "2",
+        "1",
+        "3"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 2736,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"maps\"\n)\n\nfunc main() {\n\tvar a map[int]int\n\tvar b map[int]int\n\tn := 0\n\tif maps.Equal(a, b) {\n\t\tn = 1\n\t}\n\tfmt.Println(n)\n}\n",
+      "options": [
+        "0",
+        "2",
+        "3",
+        "1"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 2737,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"maps\"\n)\n\nfunc main() {\n\tvar a map[int]int\n\tb := map[int]int{}\n\tn := 0\n\tif maps.Equal(a, b) {\n\t\tn = 1\n\t}\n\tfmt.Println(n)\n}\n",
+      "options": [
+        "1",
+        "0",
+        "2",
+        "3"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 2738,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"maps\"\n)\n\ntype T struct{ n int }\n\nfunc main() {\n\tp := &T{n: 1}\n\tm := map[string]*T{\"a\": p}\n\tc := maps.Clone(m)\n\tc[\"a\"].n = 9\n\tfmt.Println(m[\"a\"].n)\n}\n",
+      "options": [
+        "1",
+        "9",
+        "0",
+        "8"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 2739,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"math\"\n)\n\nfunc main() {\n\tm := map[float64]int{}\n\tm[0] = 1\n\tm[math.Copysign(0, -1)] = 2\n\tfmt.Println(len(m))\n\tfmt.Println(m[0])\n}\n",
+      "options": [
+        "2, 2",
+        "1, 1",
+        "1, 2",
+        "2, 1"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 2740,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tm := map[[2]int]int{{1, 2}: 7}\n\tfmt.Println(m[[2]int{1, 2}])\n\tfmt.Println(m[[2]int{2, 1}])\n}\n",
+      "options": [
+        "7, 7",
+        "0, 0",
+        "0, 7",
+        "7, 0"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 2741,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"maps\"\n)\n\nfunc main() {\n\tm := map[int]int{1: 1, 2: 2}\n\tc := maps.Clone(m)\n\tfmt.Println(len(m))\n\tfmt.Println(len(c))\n}\n",
+      "options": [
+        "2, 2",
+        "2, 0",
+        "0, 2",
+        "1, 2"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 2742,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tm := map[int]int{1: 1, 2: 2, 3: 3}\n\tfor k := range m {\n\t\tif k != 1 {\n\t\t\tdelete(m, k)\n\t\t}\n\t}\n\tfmt.Println(len(m))\n\tfmt.Println(m[1])\n}\n",
+      "options": [
+        "3, 1",
+        "1, 1",
+        "0, 0",
+        "1, 0"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 2743,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"maps\"\n)\n\nfunc main() {\n\tm := map[int]int{1: 2}\n\tc := maps.Clone(m)\n\tn := 0\n\tif maps.Equal(m, c) {\n\t\tn = 1\n\t}\n\tc[1] = 8\n\tk := 0\n\tif maps.Equal(m, c) {\n\t\tk = 1\n\t}\n\tfmt.Println(n)\n\tfmt.Println(k)\n}\n",
+      "options": [
+        "1, 1",
+        "0, 0",
+        "1, 0",
+        "0, 1"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 2744,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\ntype K struct{ a [2]int }\n\nfunc main() {\n\tm := map[K]int{{a: [2]int{1, 2}}: 5}\n\tfmt.Println(m[K{a: [2]int{1, 2}}])\n\tfmt.Println(m[K{a: [2]int{1, 3}}])\n}\n",
+      "options": [
+        "5, 5",
+        "0, 0",
+        "0, 5",
+        "5, 0"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 2745,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tm := map[bool]int{true: 1, false: 2}\n\tfmt.Println(len(m))\n\tfmt.Println(m[true] + m[false])\n}\n",
+      "options": [
+        "2, 3",
+        "1, 3",
+        "2, 1",
+        "2, 2"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 2746,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tm := map[int]int{1: 1, 2: 2}\n\tclear(m)\n\t_, ok := m[1]\n\tn := 0\n\tif ok {\n\t\tn = 1\n\t}\n\tfmt.Println(n)\n\tfmt.Println(len(m))\n}\n",
+      "options": [
+        "1, 0",
+        "0, 0",
+        "0, 2",
+        "1, 2"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 2747,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"maps\"\n)\n\nfunc main() {\n\tm := map[int]int{1: 1}\n\tc := maps.Clone(m)\n\tc[2] = 2\n\tfmt.Println(len(m))\n\tfmt.Println(len(c))\n}\n",
+      "options": [
+        "2, 2",
+        "1, 1",
+        "1, 2",
+        "0, 2"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 2748,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tvar m map[any]int\n\tm = map[any]int{}\n\tfmt.Println(m[\"x\"])\n\tfmt.Println(len(m))\n}\n",
+      "options": [
+        "0, 1",
+        "1, 0",
+        "1, 1",
+        "0, 0"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 2749,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"maps\"\n)\n\nfunc main() {\n\ta := map[string]int{\"a\": 1}\n\tb := map[string]int{\"a\": 1, \"b\": 1}\n\tn := 0\n\tif maps.Equal(a, b) {\n\t\tn = 1\n\t}\n\tfmt.Println(n)\n}\n",
+      "options": [
+        "0",
+        "1",
+        "2",
+        "3"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 2750,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tp := new(int)\n\tm := map[any]int{p: 4}\n\tfmt.Println(m[p])\n\tfmt.Println(m[new(int)])\n}\n",
+      "options": [
+        "4, 4",
+        "4, 0",
+        "0, 0",
+        "0, 4"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 2751,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tm := map[int]int{1: 2}\n\tclear(m)\n\tclear(m)\n\tm[4] = 4\n\tfmt.Println(len(m))\n\tfmt.Println(m[4])\n}\n",
+      "options": [
+        "0, 4",
+        "1, 0",
+        "1, 4",
+        "2, 4"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 2752,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"math\"\n)\n\nfunc main() {\n\tm := map[float64]int{}\n\tm[math.NaN()] = 1\n\tm[math.NaN()] = 1\n\tfmt.Println(len(m))\n}\n",
+      "options": [
+        "1",
+        "0",
+        "3",
+        "2"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 2753,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tm := map[string]int{\"a\": 1, \"b\": 2}\n\tsum := 0\n\tfor k, v := range m {\n\t\tsum += v\n\t\tm[k] = v + 10\n\t}\n\tfmt.Println(m[\"a\"] + m[\"b\"])\n\tfmt.Println(sum)\n}\n",
+      "options": [
+        "23, 3",
+        "3, 3",
+        "23, 23",
+        "3, 23"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 2754,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"maps\"\n)\n\nfunc main() {\n\tm := map[int]int{1: 1}\n\tc := maps.Clone(m)\n\tclear(c)\n\tfmt.Println(len(m))\n\tfmt.Println(len(c))\n}\n",
+      "options": [
+        "0, 0",
+        "1, 0",
+        "1, 1",
+        "0, 1"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 2755,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tm := map[[1]string]int{{\"a\"}: 6}\n\tfmt.Println(m[[1]string{\"a\"}])\n\tfmt.Println(len(m))\n}\n",
+      "options": [
+        "0, 1",
+        "6, 0",
+        "6, 1",
+        "6, 6"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 2756,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\ttype K struct{ s string }\n\tm := map[K]int{{s: \"x\"}: 2}\n\tfmt.Println(m[K{s: \"x\"}])\n\tfmt.Println(m[K{s: \"y\"}])\n}\n",
+      "options": [
+        "2, 2",
+        "0, 0",
+        "0, 2",
+        "2, 0"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 2757,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tm := map[int]int{1: 10, 2: 20}\n\tfor k, v := range m {\n\t\tif k == 1 {\n\t\t\tm[2] = v\n\t\t}\n\t}\n\tfmt.Println(m[2])\n}\n",
+      "options": [
+        "10",
+        "20",
+        "0",
+        "30"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 2758,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"maps\"\n)\n\nfunc main() {\n\ta := map[int]int{}\n\tb := make(map[int]int, 32)\n\tn := 0\n\tif maps.Equal(a, b) {\n\t\tn = 1\n\t}\n\tfmt.Println(n)\n}\n",
+      "options": [
+        "0",
+        "1",
+        "2",
+        "32"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 2759,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tm := map[int]int{1: 1}\n\tm[1] = m[1] + m[2]\n\tfmt.Println(m[1])\n\tfmt.Println(len(m))\n}\n",
+      "options": [
+        "2, 1",
+        "1, 2",
+        "1, 1",
+        "0, 1"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 2760,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"maps\"\n)\n\nfunc main() {\n\tm := map[int]int{1: 1, 2: 2}\n\tc := maps.Clone(m)\n\tdelete(c, 2)\n\tfmt.Println(len(m))\n\tfmt.Println(len(c))\n}\n",
+      "options": [
+        "1, 1",
+        "2, 2",
+        "2, 0",
+        "2, 1"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 2761,
+      "type": "text",
+      "text": "What does clear(m) do to a non-nil map?",
+      "options": [
+        "Deletes all keys; m stays non-nil with len 0",
+        "Sets m to nil",
+        "Frees the variable so later writes panic",
+        "It is only defined for slices"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 2762,
+      "type": "text",
+      "text": "Why can two NaN keys both live in one map[float64]V?",
+      "options": [
+        "NaN equals itself",
+        "NaN != NaN, so each insert misses existing NaN keys",
+        "float keys are interned",
+        "The runtime rejects the second NaN"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 2763,
+      "type": "text",
+      "text": "What happens on concurrent writes to the same map without sync?",
+      "options": [
+        "One writer is silently dropped",
+        "It is a recoverable panic always",
+        "A fatal runtime error: concurrent map writes",
+        "The map becomes nil"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 2764,
+      "type": "text",
+      "text": "Is map iteration order stable across runs of the same binary?",
+      "options": [
+        "Yes, it is insertion order",
+        "Yes, keys are sorted",
+        "Only for string keys",
+        "No. A hash seed randomizes iteration"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 2765,
+      "type": "text",
+      "text": "Does delete guarantee that the map’s memory is returned to the OS at once?",
+      "options": [
+        "No. The table need not shrink immediately",
+        "Yes, always",
+        "Yes if len reaches 0",
+        "Yes for string keys only"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 2766,
+      "type": "text",
+      "text": "Is maps.Clone a deep copy of pointer values?",
+      "options": [
+        "Yes, it clones pointed-to objects",
+        "No. It copies the pairs; pointer values still share the object",
+        "It clones only keys",
+        "It panics on pointer values"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 2767,
+      "type": "text",
+      "text": "Does maps.Equal treat nil and empty maps as equal?",
+      "options": [
+        "No",
+        "Only if both have a size hint of 0",
+        "Yes",
+        "It panics on nil"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 2768,
+      "type": "text",
+      "text": "Are 0 and -0 distinct keys in map[float64]V?",
+      "options": [
+        "Yes, they hash apart",
+        "Only in maps.Clone",
+        "It is a compile error to use -0",
+        "No. They compare equal, so they are one key"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 2769,
+      "type": "text",
+      "text": "Two any keys int(1) and int8(1) — same map slot?",
+      "options": [
+        "No. Dynamic types differ, so the keys differ",
+        "Yes. The numbers are equal",
+        "Yes after conversion in the runtime",
+        "interface keys are illegal"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 2770,
+      "type": "text",
+      "text": "What does maps.Clone(nil) return?",
+      "options": [
+        "An empty non-nil map",
+        "nil",
+        "A panic",
+        "A map with length -1"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 2771,
+      "type": "text",
+      "text": "Why is a map element not addressable (&m[k] illegal)?",
+      "options": [
+        "Values live only on the stack",
+        "Keys are always strings",
+        "The table may grow and move entries",
+        "The compiler forbids pointers as values"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 2772,
+      "type": "text",
+      "text": "A range that writes another existing key — is that allowed?",
+      "options": [
+        "No, it always panics",
+        "Only via delete",
+        "Only if you update the current key",
+        "Yes. Updating existing keys during range is allowed"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 2773,
+      "type": "text",
+      "text": "What is the usual result of a concurrent range and write?",
+      "options": [
+        "A runtime panic: concurrent map iteration and map write",
+        "Silent data loss only",
+        "A compile error",
+        "The range skips new keys by spec"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 2774,
+      "type": "text",
+      "text": "Pointer keys in a map compare by what?",
+      "options": [
+        "The pointed-to value",
+        "Identity of the pointer",
+        "The type name only",
+        "They are not comparable"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 2775,
+      "type": "text",
+      "text": "Does make’s size hint stop later growth?",
+      "options": [
+        "Yes, inserts beyond the hint panic",
+        "Yes, extra keys overwrite slot 0",
+        "No. The table can still grow more buckets",
+        "The hint becomes len"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 2776,
+      "type": "text",
+      "text": "After clear(m), can you insert into m without make again?",
+      "options": [
+        "No, m is nil",
+        "Only with maps.Clone",
+        "Only for keys that existed before clear",
+        "Yes if m was non-nil"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 2777,
+      "type": "text",
+      "text": "int(1) and int(1) as any keys — one entry or two?",
+      "options": [
+        "One. Same dynamic type and value",
+        "Two. Boxed numbers never match",
+        "It panics",
+        "It is a compile error"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 2778,
+      "type": "text",
+      "text": "Can a struct with a slice field be a map key?",
+      "options": [
+        "Yes always",
+        "No. The struct is not comparable",
+        "Yes if the slice is nil",
+        "Yes after freeze"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 2779,
+      "type": "text",
+      "text": "Does maps.Equal care about insertion order?",
+      "options": [
+        "Yes, order must match",
+        "Yes for string keys",
+        "No. It compares the key/value pairs as a set",
+        "It sorts keys first"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 2780,
+      "type": "text",
+      "text": "Is looking up a stored NaN key with the same variable guaranteed to hit?",
+      "options": [
+        "Yes, identity of the variable is enough",
+        "Yes if you use comma-ok",
+        "NaN cannot be stored",
+        "No. NaN does not equal NaN, so ok is false"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 2781,
+      "type": "boolean",
+      "text": "clear(m) sets a non-nil map variable to nil.",
+      "correct": false
+    },
+    {
+      "id": 2782,
+      "type": "boolean",
+      "text": "Each stored NaN is a distinct map key.",
+      "correct": true
+    },
+    {
+      "id": 2783,
+      "type": "boolean",
+      "text": "Concurrent map writes without a lock are a fatal runtime error.",
+      "correct": true
+    },
+    {
+      "id": 2784,
+      "type": "boolean",
+      "text": "maps.Clone(nil) returns nil.",
+      "correct": true
+    },
+    {
+      "id": 2785,
+      "type": "boolean",
+      "text": "maps.Equal(nil, map[K]V{}) is false.",
+      "correct": false
+    },
+    {
+      "id": 2786,
+      "type": "boolean",
+      "text": "0 and -0 are the same float64 map key.",
+      "correct": true
+    },
+    {
+      "id": 2787,
+      "type": "boolean",
+      "text": "maps.Clone deep-copies pointer values.",
+      "correct": false
+    },
+    {
+      "id": 2788,
+      "type": "boolean",
+      "text": "An array of strings can be a map key.",
+      "correct": true
+    },
+    {
+      "id": 2789,
+      "type": "boolean",
+      "text": "A struct that contains a slice can be a map key.",
+      "correct": false
+    },
+    {
+      "id": 2790,
+      "type": "boolean",
+      "text": "Updating another existing key during range is allowed.",
+      "correct": true
+    },
+    {
+      "id": 2791,
+      "type": "boolean",
+      "text": "delete immediately returns all table memory to the OS.",
+      "correct": false
+    },
+    {
+      "id": 2792,
+      "type": "boolean",
+      "text": "Iteration order is randomized with a hash seed.",
+      "correct": true
+    },
+    {
+      "id": 2793,
+      "type": "boolean",
+      "text": "int and int8 boxed as any collide as one key.",
+      "correct": false
+    },
+    {
+      "id": 2794,
+      "type": "boolean",
+      "text": "Pointer map keys compare the pointed-to bits, not the address.",
+      "correct": false
+    },
+    {
+      "id": 2795,
+      "type": "boolean",
+      "text": "After clear, a still-non-nil map accepts new inserts.",
+      "correct": true
+    },
+    {
+      "id": 2796,
+      "type": "boolean",
+      "text": "make’s hint is a maximum number of keys.",
+      "correct": false
+    },
+    {
+      "id": 2797,
+      "type": "boolean",
+      "text": "Looking up a NaN key with the same float variable always succeeds.",
+      "correct": false
+    },
+    {
+      "id": 2798,
+      "type": "boolean",
+      "text": "maps.Equal ignores insertion order.",
+      "correct": true
+    },
+    {
+      "id": 2799,
+      "type": "boolean",
+      "text": "Concurrent range and write can panic.",
+      "correct": true
+    },
+    {
+      "id": 2800,
+      "type": "boolean",
+      "text": "clear on an empty non-nil map panics.",
+      "correct": false
+    },
+    {
+      "id": 2801,
+      "type": "recall",
+      "text": "What does clear leave behind: nil or empty non-nil?",
+      "answer": "Empty and non-nil if m was non-nil."
+    },
+    {
+      "id": 2802,
+      "type": "recall",
+      "text": "Why do two NaN inserts both stick?",
+      "answer": "NaN is not equal to NaN, so lookup never hits the prior key."
+    },
+    {
+      "id": 2803,
+      "type": "recall",
+      "text": "What error do unsynchronized concurrent map writes cause?",
+      "answer": "Fatal: concurrent map writes."
+    },
+    {
+      "id": 2804,
+      "type": "recall",
+      "text": "What does maps.Clone(nil) return?",
+      "answer": "nil"
+    },
+    {
+      "id": 2805,
+      "type": "recall",
+      "text": "Are nil and empty maps equal according to maps.Equal?",
+      "answer": "Yes."
+    },
+    {
+      "id": 2806,
+      "type": "recall",
+      "text": "Do 0 and -0 share a float64 map slot?",
+      "answer": "Yes."
+    },
+    {
+      "id": 2807,
+      "type": "recall",
+      "text": "Is maps.Clone deep for pointer values?",
+      "answer": "No. It is shallow."
+    },
+    {
+      "id": 2808,
+      "type": "recall",
+      "text": "Why is &m[k] forbidden?",
+      "answer": "Map entries are not addressable; the table may move."
+    },
+    {
+      "id": 2809,
+      "type": "recall",
+      "text": "What randomizes range order?",
+      "answer": "A per-map hash seed."
+    },
+    {
+      "id": 2810,
+      "type": "recall",
+      "text": "How do pointer keys compare?",
+      "answer": "By pointer identity."
+    },
+    {
+      "id": 2811,
+      "type": "recall",
+      "text": "Does delete have to shrink the table at once?",
+      "answer": "No."
+    },
+    {
+      "id": 2812,
+      "type": "recall",
+      "text": "What panic can concurrent iteration plus a write raise?",
+      "answer": "concurrent map iteration and map write"
+    },
+    {
+      "id": 2813,
+      "type": "recall",
+      "text": "Do int(1) and int8(1) as any collide?",
+      "answer": "No. The dynamic types differ."
+    },
+    {
+      "id": 2814,
+      "type": "recall",
+      "text": "Can a struct with a slice field be a key?",
+      "answer": "No. It is not comparable."
+    },
+    {
+      "id": 2815,
+      "type": "recall",
+      "text": "After clear(m) on a live map, do you need make before the next insert?",
+      "answer": "No."
+    },
+    {
+      "id": 2816,
+      "type": "recall",
+      "text": "Does maps.Equal depend on insertion order?",
+      "answer": "No."
+    },
+    {
+      "id": 2817,
+      "type": "recall",
+      "text": "What does a NaN lookup typically yield for ok?",
+      "answer": "false"
+    },
+    {
+      "id": 2818,
+      "type": "recall",
+      "text": "Is updating an existing key during range specified as allowed?",
+      "answer": "Yes."
+    },
+    {
+      "id": 2819,
+      "type": "recall",
+      "text": "What does make’s n hint control?",
+      "answer": "Initial bucket allocation, not max len."
+    },
+    {
+      "id": 2820,
+      "type": "recall",
+      "text": "What does maps.Clone copy?",
+      "answer": "A new map with the same key/value pairs (shallow)."
+    }
+  ]
+}
