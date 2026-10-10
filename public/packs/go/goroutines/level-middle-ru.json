@@ -1,0 +1,408 @@
+{
+  "stack": "go",
+  "topic": "goroutines",
+  "level": "middle",
+  "locale": "ru",
+  "questions": [
+    {
+      "id": 1781,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"sync\"\n)\n\nfunc main() {\n\tvar wg sync.WaitGroup\n\tvar out [3]int\n\tfor i := 0; i < 3; i++ {\n\t\twg.Add(1)\n\t\tgo func() {\n\t\t\tdefer wg.Done()\n\t\t\tout[i] = i\n\t\t}()\n\t}\n\twg.Wait()\n\tfmt.Println(out[0])\n\tfmt.Println(out[1])\n\tfmt.Println(out[2])\n}\n",
+      "options": [
+        "0, 1, 2",
+        "2, 2, 2",
+        "3, 3, 3",
+        "0, 0, 0"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1782,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"runtime\"\n\t\"sync\"\n)\n\nfunc main() {\n\tvar wg sync.WaitGroup\n\twg.Add(1)\n\tgo func() {\n\t\tdefer wg.Done()\n\t\tdefer fmt.Println(1)\n\t\truntime.Goexit()\n\t\tfmt.Println(2)\n\t}()\n\twg.Wait()\n\tfmt.Println(3)\n}\n",
+      "options": [
+        "1, 2, 3",
+        "1, 3",
+        "2, 3",
+        "3"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1783,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"runtime\"\n)\n\nfunc main() {\n\truntime.GOMAXPROCS(3)\n\tfmt.Println(runtime.GOMAXPROCS(3))\n}\n",
+      "options": [
+        "1",
+        "0",
+        "3",
+        "2"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1784,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"sync\"\n)\n\nfunc main() {\n\tvar wg sync.WaitGroup\n\twg.Add(1)\n\tgo func() {\n\t\tdefer wg.Done()\n\t\tdefer func() {\n\t\t\tfmt.Println(recover())\n\t\t}()\n\t\tpanic(4)\n\t}()\n\twg.Wait()\n}\n",
+      "options": [
+        "panic",
+        "nil",
+        "<nil>",
+        "4"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1785,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"sync\"\n)\n\nfunc main() {\n\tvar wg sync.WaitGroup\n\twg.Add(1)\n\tvar p *int\n\tgo func() {\n\t\tdefer wg.Done()\n\t\tx := 11\n\t\tp = &x\n\t}()\n\twg.Wait()\n\tfmt.Println(*p)\n}\n",
+      "options": [
+        "11",
+        "0",
+        "nil",
+        "1"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1786,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"sync\"\n)\n\nfunc main() {\n\ts := []int{2, 4, 6}\n\tvar wg sync.WaitGroup\n\tvar out [3]int\n\tfor i, v := range s {\n\t\twg.Add(1)\n\t\tgo func() {\n\t\t\tdefer wg.Done()\n\t\t\tout[i] = v\n\t\t}()\n\t}\n\twg.Wait()\n\tfmt.Println(out[0])\n\tfmt.Println(out[1])\n\tfmt.Println(out[2])\n}\n",
+      "options": [
+        "6, 6, 6",
+        "2, 4, 6",
+        "0, 1, 2",
+        "2, 2, 2"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1787,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"sync\"\n)\n\ntype box struct{ n int }\n\nfunc (b *box) inc() {\n\tb.n++\n}\n\nfunc main() {\n\tb := &box{n: 3}\n\tvar wg sync.WaitGroup\n\twg.Add(1)\n\tgo func() {\n\t\tdefer wg.Done()\n\t\tb.inc()\n\t}()\n\twg.Wait()\n\tfmt.Println(b.n)\n}\n",
+      "options": [
+        "3",
+        "5",
+        "4",
+        "0"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1788,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"sync\"\n)\n\nfunc main() {\n\tvar wg sync.WaitGroup\n\twg.Add(1)\n\tgo func() {\n\t\tdefer wg.Done()\n\t\tdefer func() {\n\t\t\tfmt.Println(recover())\n\t\t}()\n\t}()\n\twg.Wait()\n}\n",
+      "options": [
+        "0",
+        "false",
+        "true",
+        "<nil>"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1789,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"sync\"\n)\n\nfunc f(wg *sync.WaitGroup) {\n\tx := 8\n\tgo func() {\n\t\tdefer wg.Done()\n\t\tfmt.Println(x)\n\t}()\n}\n\nfunc main() {\n\tvar wg sync.WaitGroup\n\twg.Add(1)\n\tf(&wg)\n\twg.Wait()\n}\n",
+      "options": [
+        "8",
+        "0",
+        "nil",
+        "1"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1790,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"runtime\"\n\t\"sync\"\n)\n\nfunc main() {\n\tvar wg sync.WaitGroup\n\twg.Add(1)\n\tgo func() {\n\t\tdefer wg.Done()\n\t\tdefer fmt.Println(9)\n\t\tfmt.Println(1)\n\t\truntime.Goexit()\n\t\tfmt.Println(4)\n\t}()\n\twg.Wait()\n\tfmt.Println(0)\n}\n",
+      "options": [
+        "1, 4, 9, 0",
+        "1, 9, 0",
+        "9, 1, 0",
+        "1, 0"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1791,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"sync\"\n)\n\nfunc main() {\n\tn := 1\n\tvar wg sync.WaitGroup\n\twg.Add(1)\n\tgo func() {\n\t\tdefer wg.Done()\n\t\tn = n * 4\n\t}()\n\twg.Wait()\n\tfmt.Println(n)\n}\n",
+      "options": [
+        "1",
+        "0",
+        "4",
+        "5"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1792,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"sync\"\n)\n\nfunc main() {\n\tvar wg sync.WaitGroup\n\tvar out [3]int\n\tfor i := 0; i < 3; i++ {\n\t\twg.Add(1)\n\t\tgo func() {\n\t\t\tdefer wg.Done()\n\t\t\tout[i] = 2 - i\n\t\t}()\n\t}\n\twg.Wait()\n\tfmt.Println(out[0])\n\tfmt.Println(out[1])\n\tfmt.Println(out[2])\n}\n",
+      "options": [
+        "0, 1, 2",
+        "2, 2, 2",
+        "0, 0, 0",
+        "2, 1, 0"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1793,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"sync\"\n)\n\nfunc main() {\n\tn := 0\n\tvar wg sync.WaitGroup\n\tfor i := 0; i < 5; i++ {\n\t\twg.Add(1)\n\t\tgo func() {\n\t\t\tdefer wg.Done()\n\t\t\tn++\n\t\t}()\n\t\twg.Wait()\n\t}\n\tfmt.Println(n)\n}\n",
+      "options": [
+        "5",
+        "0",
+        "4",
+        "1"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1794,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"sync\"\n)\n\nfunc main() {\n\ta := 1\n\tvar wg sync.WaitGroup\n\twg.Add(1)\n\tgo func() {\n\t\tdefer wg.Done()\n\t\ta = 2\n\t}()\n\twg.Wait()\n\tfmt.Println(a)\n\ta = 3\n\tfmt.Println(a)\n}\n",
+      "options": [
+        "1, 3",
+        "2, 3",
+        "2, 2",
+        "3, 3"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1795,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"sync\"\n)\n\nfunc main() {\n\ts := make([]int, 1)\n\tvar wg sync.WaitGroup\n\twg.Add(1)\n\tgo func() {\n\t\tdefer wg.Done()\n\t\ts[0] = 5\n\t}()\n\twg.Wait()\n\tfmt.Println(s[0])\n\tfmt.Println(len(s))\n}\n",
+      "options": [
+        "5, 0",
+        "0, 1",
+        "5, 1",
+        "1, 5"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1796,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"sync\"\n)\n\ntype acc struct{ v int }\n\nfunc (a acc) show() {\n\tfmt.Println(a.v)\n}\n\nfunc main() {\n\ta := acc{v: 7}\n\tvar wg sync.WaitGroup\n\twg.Add(1)\n\tgo func() {\n\t\tdefer wg.Done()\n\t\ta.show()\n\t}()\n\twg.Wait()\n\tfmt.Println(a.v)\n}\n",
+      "options": [
+        "0, 7",
+        "7, 0",
+        "7",
+        "7, 7"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1797,
+      "type": "text",
+      "text": "Что делает runtime.Goexit в горутине?",
+      "options": [
+        "Завершает горутину после всех её defer; это не паника",
+        "Завершает весь процесс",
+        "То же, что return из main",
+        "Снимает только текущий defer"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1798,
+      "type": "text",
+      "text": "С Go 1.22 что происходит с переменной цикла в go func(){ ... i }?",
+      "options": [
+        "Все горутины видят одно и то же i после цикла",
+        "На каждую итерацию своя переменная",
+        "i копируется только при GOMAXPROCS>1",
+        "Компилятор запрещает захват i"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1799,
+      "type": "text",
+      "text": "Что означает GOMAXPROCS(1) для горутин?",
+      "options": [
+        "Разрешена только одна горутина",
+        "go становится последовательным вызовом",
+        "Одновременно исполняется не больше одного потока Go; горутины всё равно чередуются",
+        "Отключается планировщик"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1800,
+      "type": "text",
+      "text": "Почему горутина, которая крутит for {} и которую никто не ждёт, — утечка?",
+      "options": [
+        "Она занимает отдельный процесс ОС",
+        "for {} запрещён языком",
+        "Она сразу паникует",
+        "Она не завершится сама и будет держать стек и состояние до конца процесса"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1801,
+      "type": "text",
+      "text": "Что делает runtime.Gosched?",
+      "options": [
+        "Подсказывает планировщику уступить процессор другой горутине",
+        "Убивает текущую горутину",
+        "Ждёт, пока все горутины закончатся",
+        "Ставит GOMAXPROCS в 0"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1802,
+      "type": "text",
+      "text": "Две горутины пишут в одну переменную без синхронизации. Что это?",
+      "options": [
+        "Определённый порядок: сначала main",
+        "Гонка данных: результат не определён",
+        "Компилятор вставляет блокировку сам",
+        "Допустимо, если тип int"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1803,
+      "type": "text",
+      "text": "Как ведёт себя стек горутины?",
+      "options": [
+        "Фиксированные 8 МиБ, как у потока ОС",
+        "Всегда один байт",
+        "Стартует маленьким и при необходимости растёт (и может сжиматься)",
+        "Общий стек на все горутины"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1804,
+      "type": "text",
+      "text": "Локальная переменная, адрес которой уходит в горутину, после возврата функции-создателя:",
+      "options": [
+        "Всегда висячий указатель",
+        "Живёт только если GOMAXPROCS>1",
+        "Нельзя: компилятор ошибка",
+        "Компилятор уносит её в кучу; указатель остаётся валидным"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1805,
+      "type": "boolean",
+      "text": "runtime.Goexit — это паника, её ловит recover.",
+      "correct": false
+    },
+    {
+      "id": 1806,
+      "type": "boolean",
+      "text": "defer в горутине всё равно выполняется при Goexit.",
+      "correct": true
+    },
+    {
+      "id": 1807,
+      "type": "boolean",
+      "text": "GOMAXPROCS(1) запрещает больше одной горутины.",
+      "correct": false
+    },
+    {
+      "id": 1808,
+      "type": "boolean",
+      "text": "С Go 1.22 у каждой итерации for своя переменная цикла.",
+      "correct": true
+    },
+    {
+      "id": 1809,
+      "type": "boolean",
+      "text": "Несинхронизированная запись в одну переменную из двух горутин — гонка.",
+      "correct": true
+    },
+    {
+      "id": 1810,
+      "type": "boolean",
+      "text": "Стек горутины с самого начала равен стеку потока ОС.",
+      "correct": false
+    },
+    {
+      "id": 1811,
+      "type": "boolean",
+      "text": "Gosched завершает текущую горутину навсегда.",
+      "correct": false
+    },
+    {
+      "id": 1812,
+      "type": "boolean",
+      "text": "Горутина с бесконечным for {} без выхода живёт до конца процесса.",
+      "correct": true
+    },
+    {
+      "id": 1813,
+      "type": "recall",
+      "text": "Что делает runtime.Goexit?",
+      "answer": "Завершает текущую горутину, выполнив defer. Это не паника."
+    },
+    {
+      "id": 1814,
+      "type": "recall",
+      "text": "Как с Go 1.22 устроена переменная цикла for при захвате горутиной?",
+      "answer": "На каждую итерацию своя переменная, не одна на весь цикл."
+    },
+    {
+      "id": 1815,
+      "type": "recall",
+      "text": "Что ограничивает GOMAXPROCS?",
+      "answer": "Число потоков, одновременно исполняющих Go-код, не число горутин."
+    },
+    {
+      "id": 1816,
+      "type": "recall",
+      "text": "Что такое гонка данных между горутинами?",
+      "answer": "Конкурирующий доступ к памяти без синхронизации; результат не определён."
+    },
+    {
+      "id": 1817,
+      "type": "recall",
+      "text": "Что делает runtime.Gosched?",
+      "answer": "Уступает процессор: текущая горутина может быть снята с потока."
+    },
+    {
+      "id": 1818,
+      "type": "recall",
+      "text": "Как растёт стек горутины?",
+      "answer": "С малого размера, по мере нужды; это не фиксированные мегабайты потока."
+    },
+    {
+      "id": 1819,
+      "type": "recall",
+      "text": "Почему забытая горутина в for {} — утечка?",
+      "answer": "Она никогда не выйдет и держит ресурсы до конца процесса."
+    },
+    {
+      "id": 1820,
+      "type": "recall",
+      "text": "Куда девается локальная переменная, если её адрес читает другая горутина?",
+      "answer": "Её уносят в кучу, указатель остаётся живым."
+    }
+  ]
+}

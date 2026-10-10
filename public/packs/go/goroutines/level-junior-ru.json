@@ -1,0 +1,408 @@
+{
+  "stack": "go",
+  "topic": "goroutines",
+  "level": "junior",
+  "locale": "ru",
+  "questions": [
+    {
+      "id": 1741,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"sync\"\n)\n\nfunc main() {\n\tvar wg sync.WaitGroup\n\twg.Add(1)\n\tgo func() {\n\t\tdefer wg.Done()\n\t\tfmt.Println(2)\n\t}()\n\twg.Wait()\n\tfmt.Println(1)\n}\n",
+      "options": [
+        "2, 1",
+        "1, 2",
+        "1",
+        "2"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1742,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"sync\"\n)\n\nfunc main() {\n\tn := 4\n\tvar wg sync.WaitGroup\n\twg.Add(1)\n\tgo func(v int) {\n\t\tdefer wg.Done()\n\t\tfmt.Println(v)\n\t}(n)\n\tn = 8\n\twg.Wait()\n}\n",
+      "options": [
+        "8",
+        "4",
+        "0",
+        "12"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1743,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"sync\"\n)\n\nfunc main() {\n\tvar wg sync.WaitGroup\n\twg.Add(1)\n\tgo func() {\n\t\tdefer wg.Done()\n\t\tfmt.Println(3)\n\t\tfmt.Println(5)\n\t}()\n\twg.Wait()\n}\n",
+      "options": [
+        "5, 3",
+        "3",
+        "3, 5",
+        "5"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1744,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"sync\"\n)\n\nfunc show() {\n\tfmt.Println(9)\n}\n\nfunc main() {\n\tvar wg sync.WaitGroup\n\twg.Add(1)\n\tgo func() {\n\t\tdefer wg.Done()\n\t\tshow()\n\t}()\n\twg.Wait()\n}\n",
+      "options": [
+        "0",
+        "1",
+        "nil",
+        "9"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1745,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"sync\"\n)\n\nfunc main() {\n\tvar wg sync.WaitGroup\n\twg.Add(1)\n\tgo func() {\n\t\tdefer wg.Done()\n\t\tfmt.Println(1)\n\t}()\n\twg.Wait()\n\twg.Add(1)\n\tgo func() {\n\t\tdefer wg.Done()\n\t\tfmt.Println(2)\n\t}()\n\twg.Wait()\n}\n",
+      "options": [
+        "1, 2",
+        "2, 1",
+        "1",
+        "2"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1746,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"sync\"\n)\n\nfunc main() {\n\tvar wg sync.WaitGroup\n\twg.Add(2)\n\tgo func() {\n\t\tdefer wg.Done()\n\t\tfmt.Println(7)\n\t}()\n\tgo func() {\n\t\tdefer wg.Done()\n\t\tfmt.Println(7)\n\t}()\n\twg.Wait()\n}\n",
+      "options": [
+        "7",
+        "7, 7",
+        "0, 7",
+        "7, 0"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1747,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"sync\"\n)\n\nfunc main() {\n\tvar wg sync.WaitGroup\n\twg.Add(1)\n\tgo func() {\n\t\tdefer wg.Done()\n\t\tvar inner sync.WaitGroup\n\t\tinner.Add(1)\n\t\tgo func() {\n\t\t\tdefer inner.Done()\n\t\t\tfmt.Println(4)\n\t\t}()\n\t\tinner.Wait()\n\t\tfmt.Println(5)\n\t}()\n\twg.Wait()\n}\n",
+      "options": [
+        "5, 4",
+        "4",
+        "4, 5",
+        "5"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1748,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"sync\"\n)\n\nfunc main() {\n\tvar wg sync.WaitGroup\n\twg.Add(1)\n\tgo func() {\n\t\tdefer wg.Done()\n\t\tdefer func() {\n\t\t\trecover()\n\t\t\tfmt.Println(1)\n\t\t}()\n\t\tpanic(\"boom\")\n\t}()\n\twg.Wait()\n\tfmt.Println(6)\n}\n",
+      "options": [
+        "boom, 6",
+        "6",
+        "1",
+        "1, 6"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1749,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"sync\"\n)\n\nfunc main() {\n\tvar x int\n\tvar wg sync.WaitGroup\n\twg.Add(1)\n\tgo func() {\n\t\tdefer wg.Done()\n\t\tx = 3 + 4\n\t}()\n\twg.Wait()\n\tfmt.Println(x)\n}\n",
+      "options": [
+        "7",
+        "0",
+        "3",
+        "4"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1750,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"sync\"\n)\n\nfunc main() {\n\tvar wg sync.WaitGroup\n\twg.Add(1)\n\tgo func() {\n\t\tdefer wg.Done()\n\t\tfmt.Println(8)\n\t}()\n\twg.Wait()\n\tfmt.Println(8)\n\tfmt.Println(8)\n}\n",
+      "options": [
+        "8",
+        "8, 8, 8",
+        "8, 8",
+        "0, 8, 8"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1751,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"sync\"\n)\n\nfunc main() {\n\ta, b := 2, 5\n\tvar wg sync.WaitGroup\n\twg.Add(1)\n\tgo func(x, y int) {\n\t\tdefer wg.Done()\n\t\tfmt.Println(x)\n\t\tfmt.Println(y)\n\t}(a, b)\n\twg.Wait()\n}\n",
+      "options": [
+        "5, 2",
+        "2",
+        "2, 5",
+        "0, 0"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1752,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"sync\"\n)\n\nfunc main() {\n\tn := 10\n\tvar wg sync.WaitGroup\n\twg.Add(1)\n\tgo func() {\n\t\tdefer wg.Done()\n\t\tn++\n\t}()\n\twg.Wait()\n\tfmt.Println(n)\n}\n",
+      "options": [
+        "10",
+        "9",
+        "0",
+        "11"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1753,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"sync\"\n)\n\nfunc main() {\n\tfmt.Println(1)\n\tvar wg sync.WaitGroup\n\twg.Add(1)\n\tgo func() {\n\t\tdefer wg.Done()\n\t\tfmt.Println(2)\n\t\tfmt.Println(3)\n\t}()\n\twg.Wait()\n}\n",
+      "options": [
+        "1, 2, 3",
+        "2, 3, 1",
+        "1, 3, 2",
+        "1"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1754,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"sync\"\n)\n\nfunc main() {\n\tvar wg sync.WaitGroup\n\twg.Add(1)\n\tgo func() {\n\t\twg.Done()\n\t}()\n\twg.Wait()\n\tfmt.Println(0)\n}\n",
+      "options": [
+        "1",
+        "0",
+        "nil",
+        "0, 0"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1755,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"sync\"\n)\n\nfunc main() {\n\tvar a [2]int\n\tvar wg sync.WaitGroup\n\twg.Add(1)\n\tgo func() {\n\t\tdefer wg.Done()\n\t\ta[0] = 6\n\t\ta[1] = 1\n\t}()\n\twg.Wait()\n\tfmt.Println(a[0])\n\tfmt.Println(a[1])\n}\n",
+      "options": [
+        "1, 6",
+        "0, 0",
+        "6, 1",
+        "6"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1756,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"sync\"\n)\n\nfunc main() {\n\tvar wg sync.WaitGroup\n\twg.Add(1)\n\tgo func() {\n\t\tdefer wg.Done()\n\t\tdefer fmt.Println(2)\n\t\tdefer fmt.Println(3)\n\t\tfmt.Println(1)\n\t}()\n\twg.Wait()\n}\n",
+      "options": [
+        "1, 2, 3",
+        "2, 3, 1",
+        "3, 2, 1",
+        "1, 3, 2"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1757,
+      "type": "text",
+      "text": "Что делает оператор go?",
+      "options": [
+        "Запускает вызов функции как новую горутину",
+        "Создаёт новый процесс ОС",
+        "Блокирует текущую горутину, пока вызов не закончится",
+        "Компилирует функцию отдельно"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1758,
+      "type": "text",
+      "text": "Где вычисляются аргументы в go f(x)?",
+      "options": [
+        "В новой горутине, перед телом f",
+        "В текущей горутине, до старта новой",
+        "После того как f вернёт значение",
+        "Только на другом ядре"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1759,
+      "type": "text",
+      "text": "Что происходит с другими горутинами, когда main возвращается?",
+      "options": [
+        "Они дорабатывают, процесс ждёт",
+        "Их переносят в фон как демоны",
+        "Процесс завершается, их останавливают",
+        "Их превращают в OS-потоки"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1760,
+      "type": "text",
+      "text": "Можно ли присвоить результат функции, запущенной через go?",
+      "options": [
+        "Да: x := go f()",
+        "Да, если f возвращает один int",
+        "Да, через return у go",
+        "Нет. go f() — оператор, значений не даёт"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1761,
+      "type": "text",
+      "text": "Поймает ли recover в main панику другой горутины?",
+      "options": [
+        "Нет. recover действует только в той горутине, где паника",
+        "Да, если recover в defer main",
+        "Да, всегда",
+        "Только при GOMAXPROCS(1)"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1762,
+      "type": "text",
+      "text": "Что синтаксически обязано идти после go?",
+      "options": [
+        "Имя пакета",
+        "Вызов функции",
+        "Тип возвращаемого значения",
+        "Канал"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1763,
+      "type": "text",
+      "text": "Соотносятся ли горутины с потоками ОС один к одному?",
+      "options": [
+        "Да, каждая горутина — свой поток",
+        "Да, кроме main",
+        "Нет. Много горутин мультиплексируются на меньшее число потоков",
+        "Только на Linux"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1764,
+      "type": "text",
+      "text": "Гарантирован ли запуск горутины, если main сразу возвращается?",
+      "options": [
+        "Да, runtime дождётся первой строки",
+        "Да, если функция короткая",
+        "Да, go всегда синхронный на один шаг",
+        "Нет. Выход из main завершает процесс без такого обещания"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1765,
+      "type": "boolean",
+      "text": "go f() ждёт конца f, прежде чем выполнить следующую строку.",
+      "correct": false
+    },
+    {
+      "id": 1766,
+      "type": "boolean",
+      "text": "Через оператор go нельзя вернуть значения вызывающему.",
+      "correct": true
+    },
+    {
+      "id": 1767,
+      "type": "boolean",
+      "text": "Паника в горутине без recover завершает всю программу.",
+      "correct": true
+    },
+    {
+      "id": 1768,
+      "type": "boolean",
+      "text": "recover в той же горутине, где паника, может её остановить.",
+      "correct": true
+    },
+    {
+      "id": 1769,
+      "type": "boolean",
+      "text": "Каждая горутина всегда параллельно бежит на своём ядре.",
+      "correct": false
+    },
+    {
+      "id": 1770,
+      "type": "boolean",
+      "text": "Каждый go создаёт новый поток ОС.",
+      "correct": false
+    },
+    {
+      "id": 1771,
+      "type": "boolean",
+      "text": "Аргументы вызова с go считаются до старта новой горутины.",
+      "correct": true
+    },
+    {
+      "id": 1772,
+      "type": "boolean",
+      "text": "Незавершённые горутины удерживают процесс после возврата из main.",
+      "correct": false
+    },
+    {
+      "id": 1773,
+      "type": "recall",
+      "text": "Что запускает go f()?",
+      "answer": "Новую горутину с вызовом f()."
+    },
+    {
+      "id": 1774,
+      "type": "recall",
+      "text": "Где вычисляется x в go f(x)?",
+      "answer": "В горутине, которая выполняет go, до старта новой."
+    },
+    {
+      "id": 1775,
+      "type": "recall",
+      "text": "Что будет с программой, когда возвращается main?",
+      "answer": "Процесс выходит, остальные горутины останавливают."
+    },
+    {
+      "id": 1776,
+      "type": "recall",
+      "text": "Даёт ли go f() значения для присваивания?",
+      "answer": "Нет. Это оператор, не выражение."
+    },
+    {
+      "id": 1777,
+      "type": "recall",
+      "text": "Поймает ли recover в main панику другой горутины?",
+      "answer": "Нет. Только recover в той же горутине."
+    },
+    {
+      "id": 1778,
+      "type": "recall",
+      "text": "Что обязано стоять после ключевого слова go?",
+      "answer": "Вызов функции."
+    },
+    {
+      "id": 1779,
+      "type": "recall",
+      "text": "Горутина — это поток ОС?",
+      "answer": "Нет. Много горутин живут на меньшем числе потоков."
+    },
+    {
+      "id": 1780,
+      "type": "recall",
+      "text": "Обязана ли горутина успеть выполниться, если main уже вышел?",
+      "answer": "Нет, такого обещания нет."
+    }
+  ]
+}

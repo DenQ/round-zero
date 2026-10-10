@@ -70,6 +70,16 @@ export const catalog = [
         labelKey: 'catalog.topics.slices',
         levels: PACK_LEVELS,
       },
+      {
+        slug: 'goroutines',
+        labelKey: 'catalog.topics.goroutines',
+        levels: PACK_LEVELS,
+      },
+      {
+        slug: 'channels',
+        labelKey: 'catalog.topics.channels',
+        levels: PACK_LEVELS,
+      },
     ],
   },
   { slug: 'sql', labelKey: 'catalog.stacks.sql', topics: [] },

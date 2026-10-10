@@ -90,7 +90,9 @@
       "modules": "Модули",
       "promises": "Промисы",
       "base": "База",
-      "slices": "Слайсы"
+      "slices": "Слайсы",
+      "goroutines": "Горутины",
+      "channels": "Каналы"
     },
     "levels": {
       "junior": "Junior",
