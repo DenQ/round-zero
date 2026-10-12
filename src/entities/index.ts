@@ -28,6 +28,15 @@ export {
 } from './saved-game'
 export type { SavedGame, SavedGamesState } from './saved-game'
 export {
+  flagCrookedQuestion,
+  isCrookedQuestion,
+  readCrookedQuestions,
+  toggleCrookedQuestion,
+  unflagCrookedQuestion,
+  useCrookedQuestions,
+} from './crooked-question'
+export type { CrookedQuestion, CrookedQuestionsState } from './crooked-question'
+export {
   BOOLEAN_FALSE_INDEX,
   BOOLEAN_TRUE_INDEX,
   getQuestionCorrectIndex,

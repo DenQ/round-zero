@@ -4,6 +4,7 @@ import Stack from '@mui/material/Stack'
 import { useTranslation } from 'react-i18next'
 import type { ActivityPackRef } from '@entities/activity'
 import { isQuestionCorrect, QuestionCard, type Question } from '@entities/question'
+import { FlagCrookedQuestionButton } from '@features/flag-crooked-question'
 import { packLevelLabel, packTopicLabel } from '@shared/lib/packs'
 import { GameHeader } from './GameHeader'
 
@@ -54,6 +55,7 @@ export function QuizRound({
         selectedIndex={selectedIndex}
         revealed={revealed}
         onSelect={onSelect}
+        headerEnd={<FlagCrookedQuestionButton question={question} pack={pack} />}
       />
 
       {revealed ? (

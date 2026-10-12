@@ -58,7 +58,14 @@
     "resetConfirmTitle": "Reset statistics?",
     "resetConfirmBody": "Activity, points, and growth history will be deleted.",
     "resetConfirm": "Reset",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "crookedTitle": "Crooked questions",
+    "crookedDescription": "Questions you flagged during a round. The list stays on this device only.",
+    "crookedShow": "Show crooked questions",
+    "crookedEmpty": "No flagged questions yet.",
+    "crookedItem": "ID {{id}}",
+    "crookedCopy": "Copy all",
+    "crookedCopied": "Copied"
   },
   "about": {
     "title": "About",
@@ -95,6 +102,10 @@
     "error": "Failed to load the pack.",
     "notFound": "Pack not found.",
     "question": "Question {{n}}",
+    "crooked": {
+      "flag": "Mark as a crooked question",
+      "unflag": "Remove from crooked questions"
+    },
     "game": {
       "play": "Play",
       "title": "Score more points",

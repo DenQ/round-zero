@@ -9,6 +9,7 @@ import Stack from '@mui/material/Stack'
 import Typography from '@mui/material/Typography'
 import { clearActivity } from '@entities/activity'
 import { clearRating } from '@entities/rating'
+import { CrookedQuestionsSection } from '@features/flag-crooked-question'
 import { useTranslation } from 'react-i18next'
 
 export function SettingsPage() {
@@ -35,6 +36,8 @@ export function SettingsPage() {
         <Typography color="text.secondary">{t('settings.streak')}</Typography>
         <Typography color="text.secondary">{t('settings.levels')}</Typography>
       </Stack>
+
+      <CrookedQuestionsSection />
 
       <Stack spacing={1.5}>
         <Typography variant="h6" component="h2">
