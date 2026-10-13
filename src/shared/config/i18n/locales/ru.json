@@ -89,7 +89,8 @@
       "prototypes": "Прототипы",
       "modules": "Модули",
       "promises": "Промисы",
-      "base": "База"
+      "base": "База",
+      "slices": "Слайсы"
     },
     "levels": {
       "junior": "Junior",

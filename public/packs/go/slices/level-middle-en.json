@@ -1,0 +1,808 @@
+{
+  "stack": "go",
+  "topic": "slices",
+  "level": "middle",
+  "locale": "en",
+  "questions": [
+    {
+      "id": 1561,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\ts := []int{1, 2, 3, 4, 5}\n\tt := s[1:3:3]\n\tfmt.Println(len(t))\n\tfmt.Println(cap(t))\n\tfmt.Println(t[0])\n}",
+      "options": [
+        "2, 2, 2",
+        "2, 4, 2",
+        "2, 3, 2",
+        "3, 2, 2"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1562,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\ts := []int{1, 2, 3, 4, 5}\n\tt := s[1:3:4]\n\tfmt.Println(len(t))\n\tfmt.Println(cap(t))\n}",
+      "options": [
+        "2, 4",
+        "2, 3",
+        "2, 2",
+        "3, 4"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1563,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\ts := []int{1, 2, 3, 4, 5}\n\tt := s[1:4:5]\n\tfmt.Println(len(t))\n\tfmt.Println(cap(t))\n\tfmt.Println(t[2])\n}",
+      "options": [
+        "3, 5, 4",
+        "4, 4, 4",
+        "3, 4, 4",
+        "3, 4, 3"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1564,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\ts := make([]int, 2, 5)\n\ts[0], s[1] = 1, 2\n\tv := s[:2:2]\n\tv = append(v, 9)\n\tfmt.Println(s[1])\n\tfmt.Println(len(s))\n\tfmt.Println(v[2])\n}",
+      "options": [
+        "2, 3, 9",
+        "9, 2, 9",
+        "2, 2, 2",
+        "2, 2, 9"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1565,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\ta := []int{10, 20, 30, 40}\n\tb := a[:2]\n\tb = append(b, 99)\n\tfmt.Println(a[2])\n\tfmt.Println(a[3])\n}",
+      "options": [
+        "99, 40",
+        "30, 40",
+        "99, 99",
+        "20, 99"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1566,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\ts := []int{1, 2, 3, 4, 5, 6}\n\tt := s[2:4]\n\tt = append(t, 7, 8)\n\tfmt.Println(s[4])\n\tfmt.Println(s[5])\n}",
+      "options": [
+        "5, 6",
+        "7, 8",
+        "4, 5",
+        "7, 6"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1567,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\ts := []int{1, 2, 3, 4, 5, 6}\n\tt := s[2:4:4]\n\tt = append(t, 7, 8)\n\tfmt.Println(s[4])\n\tfmt.Println(s[5])\n}",
+      "options": [
+        "7, 8",
+        "4, 5",
+        "5, 6",
+        "7, 6"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1568,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\ts := make([]int, 2)\n\ts = append(s, 3)\n\tfmt.Println(len(s))\n\tfmt.Println(cap(s))\n}",
+      "options": [
+        "3, 3",
+        "2, 4",
+        "3, 2",
+        "3, 4"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1569,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\ts := make([]int, 3)\n\ts = append(s, 4)\n\tfmt.Println(len(s))\n\tfmt.Println(cap(s))\n}",
+      "options": [
+        "4, 6",
+        "4, 8",
+        "4, 3",
+        "6, 6"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1570,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tsrc := []int{1, 2, 3, 4}\n\tcopy(src[1:], src)\n\tfmt.Println(src[0])\n\tfmt.Println(src[1])\n\tfmt.Println(src[2])\n\tfmt.Println(src[3])\n}",
+      "options": [
+        "1, 2, 3, 4",
+        "1, 1, 2, 3",
+        "1, 1, 1, 1",
+        "2, 3, 4, 4"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1571,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tsrc := []int{1, 2, 3, 4}\n\tcopy(src, src[1:])\n\tfmt.Println(src[0])\n\tfmt.Println(src[1])\n\tfmt.Println(src[2])\n\tfmt.Println(src[3])\n}",
+      "options": [
+        "1, 2, 3, 4",
+        "2, 3, 4, 1",
+        "2, 3, 4, 4",
+        "1, 1, 2, 3"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1572,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\ts := []int{1, 2, 3}\n\ts = append(s, s...)\n\tfmt.Println(len(s))\n\tfmt.Println(s[0])\n\tfmt.Println(s[5])\n}",
+      "options": [
+        "6, 1, 1",
+        "5, 1, 3",
+        "6, 1, 2",
+        "6, 1, 3"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1573,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\ts := []int{1, 2, 3, 4}\n\ts = append(s[:1], s[2:]...)\n\tfmt.Println(len(s))\n\tfmt.Println(s[0])\n\tfmt.Println(s[2])\n}",
+      "options": [
+        "3, 1, 4",
+        "3, 1, 3",
+        "2, 1, 4",
+        "3, 2, 4"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1574,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\ts := []int{1, 2, 3}\n\ts = append(s[:1], append([]int{9}, s[1:]...)...)\n\tfmt.Println(len(s))\n\tfmt.Println(s[1])\n}",
+      "options": [
+        "3, 9",
+        "4, 9",
+        "4, 2",
+        "3, 2"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1575,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"slices\"\n)\n\nfunc main() {\n\ts := []int{1, 2, 3, 4, 5}\n\tc := slices.Clip(s[:2])\n\tfmt.Println(len(c))\n\tfmt.Println(cap(c))\n}",
+      "options": [
+        "2, 5",
+        "5, 2",
+        "2, 2",
+        "2, 3"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1576,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"slices\"\n)\n\nfunc main() {\n\ts := []int{1, 2, 3, 4}\n\ts = slices.Delete(s, 1, 3)\n\tfmt.Println(len(s))\n\tfmt.Println(s[0])\n\tfmt.Println(s[1])\n}",
+      "options": [
+        "2, 2, 3",
+        "3, 1, 4",
+        "2, 1, 3",
+        "2, 1, 4"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1577,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"slices\"\n)\n\nfunc main() {\n\ts := []int{1, 2, 3}\n\ts = slices.Insert(s, 1, 8, 9)\n\tfmt.Println(len(s))\n\tfmt.Println(s[1])\n}",
+      "options": [
+        "5, 8",
+        "4, 8",
+        "5, 9",
+        "5, 2"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1578,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"slices\"\n)\n\nfunc main() {\n\ts := []int{1, 2, 3}\n\tc := slices.Clone(s)\n\tc[0] = 9\n\tfmt.Println(s[0])\n\tfmt.Println(c[0])\n}",
+      "options": [
+        "9, 9",
+        "1, 9",
+        "1, 1",
+        "9, 1"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1579,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"slices\"\n)\n\nfunc main() {\n\tn := 0\n\tif slices.Equal([]int{}, []int(nil)) {\n\t\tn = 1\n\t}\n\tfmt.Println(n)\n}",
+      "options": [
+        "0",
+        "2",
+        "1",
+        "3"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1580,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\ts := []int{1, 2}\n\tfunc(x []int) {\n\t\tx[0] = 7\n\t\t_ = append(x, 8)\n\t}(s)\n\tfmt.Println(s[0])\n\tfmt.Println(len(s))\n}",
+      "options": [
+        "1, 3",
+        "7, 3",
+        "1, 2",
+        "7, 2"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1581,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\ts := []int{1, 2, 3, 4}\n\tz := s[:0]\n\tfmt.Println(len(z))\n\tfmt.Println(cap(z))\n}",
+      "options": [
+        "0, 4",
+        "0, 0",
+        "4, 4",
+        "0, 3"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1582,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\ts := []int{1, 2, 3, 4}\n\tz := s[:0:0]\n\tfmt.Println(len(z))\n\tfmt.Println(cap(z))\n}",
+      "options": [
+        "0, 4",
+        "0, 0",
+        "4, 0",
+        "0, 1"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1583,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\trow := [][]int{{1, 2}, {3}}\n\trow[0] = append(row[0], 9)\n\tfmt.Println(len(row[0]))\n\tfmt.Println(row[0][2])\n}",
+      "options": [
+        "2, 9",
+        "3, 2",
+        "3, 9",
+        "3, 3"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1584,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\ta := [5]int{1, 2, 3, 4, 5}\n\tt := a[1:3]\n\tt = append(t, 9)\n\tfmt.Println(a[3])\n}",
+      "options": [
+        "4",
+        "5",
+        "2",
+        "9"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1585,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\ta := [5]int{1, 2, 3, 4, 5}\n\tt := a[1:3:3]\n\tt = append(t, 9)\n\tfmt.Println(a[3])\n\tfmt.Println(t[2])\n}",
+      "options": [
+        "4, 9",
+        "9, 9",
+        "4, 4",
+        "5, 9"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1586,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"slices\"\n)\n\nfunc main() {\n\ts := []int{1, 2, 3, 4}\n\ts = slices.Replace(s, 1, 3, 7)\n\tfmt.Println(len(s))\n\tfmt.Println(s[1])\n}",
+      "options": [
+        "4, 7",
+        "3, 7",
+        "3, 2",
+        "2, 7"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1587,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\ttype P struct{ N int }\n\tps := []P{{1}, {2}}\n\tfor _, v := range ps {\n\t\tv.N = 9\n\t}\n\tfmt.Println(ps[0].N)\n}",
+      "options": [
+        "9",
+        "2",
+        "1",
+        "0"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1588,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\ttype P struct{ N int }\n\tps := []P{{1}, {2}}\n\tfor i := range ps {\n\t\tps[i].N = 9\n\t}\n\tfmt.Println(ps[0].N)\n\tfmt.Println(ps[1].N)\n}",
+      "options": [
+        "1, 2",
+        "9, 2",
+        "1, 9",
+        "9, 9"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1589,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"slices\"\n)\n\nfunc main() {\n\ts := []int{1, 2}\n\ts = slices.Grow(s, 10)\n\tok := 0\n\tif cap(s) >= 12 {\n\t\tok = 1\n\t}\n\tfmt.Println(len(s))\n\tfmt.Println(ok)\n}",
+      "options": [
+        "2, 1",
+        "12, 1",
+        "2, 0",
+        "1, 1"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1590,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\ts := []int{1, 2, 3, 4}\n\td := make([]int, 0, 2)\n\tn := copy(d, s)\n\tfmt.Println(n)\n\tfmt.Println(len(d))\n}",
+      "options": [
+        "2, 2",
+        "0, 0",
+        "4, 0",
+        "0, 2"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1591,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\ts := []int{5, 4, 3, 2, 1}\n\ts = s[:0]\n\ts = append(s, 9)\n\tfmt.Println(len(s))\n\tfmt.Println(s[0])\n}",
+      "options": [
+        "5, 9",
+        "0, 9",
+        "1, 9",
+        "1, 5"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1592,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\ts := make([]int, 2, 4)\n\tdefer func() {\n\t\tif recover() != nil {\n\t\t\tfmt.Println(1)\n\t\t}\n\t}()\n\t_ = s[:5]\n\tfmt.Println(0)\n}",
+      "options": [
+        "0",
+        "5",
+        "4",
+        "1"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1593,
+      "type": "text",
+      "text": "What is the capacity of t := s[i:j:k]?",
+      "options": [
+        "k - i. The third index clips cap, not len",
+        "cap(s) - i, same as s[i:j]",
+        "j - i",
+        "k"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1594,
+      "type": "text",
+      "text": "Why take s[:n:n] before append?",
+      "options": [
+        "So that len becomes n*2",
+        "So cap becomes n and append cannot overwrite the rest of the original array",
+        "It forbids append",
+        "To copy the elements into a new array at once"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1595,
+      "type": "text",
+      "text": "What does append into s[:i] do when unused cap remains?",
+      "options": [
+        "It always allocates a new array",
+        "It writes only past the original len; s[i:] is untouched",
+        "It writes into the same array and overwrites s[i], s[i+1], …",
+        "It panics if i < cap"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1596,
+      "type": "text",
+      "text": "How does copy behave on overlapping slices of one array?",
+      "options": [
+        "The result is undefined",
+        "It always panics",
+        "Only the non-overlapping part is copied",
+        "The copy is correct, like memmove: overlap does not scramble the data"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1597,
+      "type": "text",
+      "text": "Where does append(s, s...) take the elements to append from?",
+      "options": [
+        "From a snapshot of the original s before growth: the old length is appended",
+        "From s after it grew, so the duplication is different",
+        "Only the first element of s",
+        "The compiler rejects it"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1598,
+      "type": "text",
+      "text": "Does slices.Equal treat nil and empty []int{} as equal?",
+      "options": [
+        "No, only == treats them that way",
+        "Yes: it compares elements, and both are empty",
+        "Yes only if both also have cap 0",
+        "It panics"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1599,
+      "type": "text",
+      "text": "What does s[:0] keep?",
+      "options": [
+        "Only the pointer; cap becomes 0",
+        "Nothing: it is a new nil",
+        "The same array and the old cap, length 0 — the buffer can be reused",
+        "The length, but not cap"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1600,
+      "type": "text",
+      "text": "What can a function do to a slice argument without returning a new header?",
+      "options": [
+        "Grow the caller’s variable len",
+        "Replace the caller’s cap",
+        "Make the caller’s variable nil",
+        "Write elements of the shared array; the caller’s own len/cap do not change"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1601,
+      "type": "text",
+      "text": "What does slices.Clip(s) do?",
+      "options": [
+        "It returns s[:len(s):len(s)] — cap becomes equal to len",
+        "It clears the slice",
+        "It always copies elements into a new array",
+        "It trims len down to cap"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1602,
+      "type": "text",
+      "text": "How does slices.Clone(s) differ from t := s[:]?",
+      "options": [
+        "Not at all: both share the array",
+        "Clone copies elements into a new array; s[:] is only a new header",
+        "Clone zeros the original s",
+        "s[:] copies; Clone does not"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1603,
+      "type": "text",
+      "text": "Why does writing v.N in for _, v := range []T not change the slice?",
+      "options": [
+        "range forbids writing to v",
+        "T is always immutable",
+        "v is a copy of the element, not the slot in the array",
+        "range walks a one-shot copy of the whole slice"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1604,
+      "type": "text",
+      "text": "What does slices.Grow(s, n) do to len?",
+      "options": [
+        "It increases len by n",
+        "It sets len to n",
+        "It zeros len",
+        "It leaves len unchanged; if needed it grows cap so n appends need no new array"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1605,
+      "type": "text",
+      "text": "What does slices.Delete(s, i, j) do to the array tail past the new len (Go 1.21+)?",
+      "options": [
+        "It zeros the evicted elements so they do not keep references alive",
+        "It leaves the old values in the tail, like append(s[:i], s[j:]...)",
+        "It always allocates a new array",
+        "It sets cap to 0"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1606,
+      "type": "text",
+      "text": "How large may k be in s[i:j:k]?",
+      "options": [
+        "k ≤ len(s)",
+        "k ≤ cap(s). Otherwise it panics",
+        "k is unbounded",
+        "k ≤ j"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1607,
+      "type": "text",
+      "text": "When must append on a subslice take a new array, looking only at that subslice’s cap?",
+      "options": [
+        "When the new len is ≤ cap of the original s, even if the subslice cap is exhausted",
+        "Never: a subslice always writes into the original array",
+        "When the subslice’s new length is greater than its own cap",
+        "Only if the subslice was nil"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1608,
+      "type": "text",
+      "text": "Why does copy into a dst with len 0 copy nothing even if cap(dst) > 0?",
+      "options": [
+        "copy looks at cap(dst)",
+        "It is a compile error",
+        "copy requires dst to be nil",
+        "copy transfers min(len(dst), len(src)); if len(dst)=0 that is 0"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1609,
+      "type": "boolean",
+      "text": "s[i:j:j] has capacity equal to its length.",
+      "correct": true
+    },
+    {
+      "id": 1610,
+      "type": "boolean",
+      "text": "append into s[:i] with spare cap never overwrites s[i].",
+      "correct": false
+    },
+    {
+      "id": 1611,
+      "type": "boolean",
+      "text": "copy on overlapping slices of one array is defined and safe.",
+      "correct": true
+    },
+    {
+      "id": 1612,
+      "type": "boolean",
+      "text": "slices.Equal treats nil and empty []int as equal.",
+      "correct": true
+    },
+    {
+      "id": 1613,
+      "type": "boolean",
+      "text": "s[:0] sets capacity to 0.",
+      "correct": false
+    },
+    {
+      "id": 1614,
+      "type": "boolean",
+      "text": "A function can change the caller’s s[0] without returning a slice.",
+      "correct": true
+    },
+    {
+      "id": 1615,
+      "type": "boolean",
+      "text": "A function can grow the caller’s slice len without returning append’s result.",
+      "correct": false
+    },
+    {
+      "id": 1616,
+      "type": "boolean",
+      "text": "slices.Clip makes cap equal to len.",
+      "correct": true
+    },
+    {
+      "id": 1617,
+      "type": "boolean",
+      "text": "In for _, v := range []struct{...}, writing v changes the slice element.",
+      "correct": false
+    },
+    {
+      "id": 1618,
+      "type": "boolean",
+      "text": "The third index in s[i:j:k] cannot be greater than cap(s).",
+      "correct": true
+    },
+    {
+      "id": 1619,
+      "type": "boolean",
+      "text": "append(s, s...) always keeps the same backing array.",
+      "correct": false
+    },
+    {
+      "id": 1620,
+      "type": "boolean",
+      "text": "slices.Clone(s) shares s’s array.",
+      "correct": false
+    },
+    {
+      "id": 1621,
+      "type": "boolean",
+      "text": "After Clip, appending one element no longer fits the old cap and takes a new array.",
+      "correct": true
+    },
+    {
+      "id": 1622,
+      "type": "boolean",
+      "text": "slices.Insert can increase a slice’s length.",
+      "correct": true
+    },
+    {
+      "id": 1623,
+      "type": "boolean",
+      "text": "copy into a slice with len 0 copies cap(dst) elements when cap > 0.",
+      "correct": false
+    },
+    {
+      "id": 1624,
+      "type": "boolean",
+      "text": "s[:k] panics when k > cap(s).",
+      "correct": true
+    },
+    {
+      "id": 1625,
+      "type": "recall",
+      "text": "What is the capacity of s[i:j:k]?",
+      "answer": "k - i."
+    },
+    {
+      "id": 1626,
+      "type": "recall",
+      "text": "Why write s[:n:n] before append?",
+      "answer": "To clip cap to n so append cannot overwrite the rest of the original array."
+    },
+    {
+      "id": 1627,
+      "type": "recall",
+      "text": "What happens to s[i] if you append into s[:i] while spare cap remains?",
+      "answer": "The new element is written at s[i] of the same array."
+    },
+    {
+      "id": 1628,
+      "type": "recall",
+      "text": "Is copy safe when dst and src overlap?",
+      "answer": "Yes. It behaves like memmove; the data is not scrambled."
+    },
+    {
+      "id": 1629,
+      "type": "recall",
+      "text": "How many elements does append(s, s...) add?",
+      "answer": "As many as len(s) was before the call."
+    },
+    {
+      "id": 1630,
+      "type": "recall",
+      "text": "What does slices.Clip do?",
+      "answer": "It returns a slice with cap = len, same array up to that new bound."
+    },
+    {
+      "id": 1631,
+      "type": "recall",
+      "text": "Besides length 0, what does s[:0] keep?",
+      "answer": "The pointer and the old capacity — the buffer can be filled again."
+    },
+    {
+      "id": 1632,
+      "type": "recall",
+      "text": "Are nil and []int{} equal for slices.Equal?",
+      "answer": "Yes. It compares elements; both are empty."
+    },
+    {
+      "id": 1633,
+      "type": "recall",
+      "text": "Why does for _, v := range not change []T?",
+      "answer": "v is a copy of the element."
+    },
+    {
+      "id": 1634,
+      "type": "recall",
+      "text": "Does slices.Clone copy the backing array?",
+      "answer": "Yes. A new array with the same elements."
+    },
+    {
+      "id": 1635,
+      "type": "recall",
+      "text": "Does append inside a function change the caller’s argument len?",
+      "answer": "No, unless the result is returned and assigned outside."
+    },
+    {
+      "id": 1636,
+      "type": "recall",
+      "text": "Does slices.Grow change length?",
+      "answer": "No. Only cap grows if needed."
+    },
+    {
+      "id": 1637,
+      "type": "recall",
+      "text": "What does slices.Delete do to the tail past the new len?",
+      "answer": "It zeros the evicted elements."
+    },
+    {
+      "id": 1638,
+      "type": "recall",
+      "text": "What bounds the third index k in s[i:j:k]?",
+      "answer": "k is at most cap(s), otherwise panic."
+    },
+    {
+      "id": 1639,
+      "type": "recall",
+      "text": "Why does copy into a len-0 dst copy nothing?",
+      "answer": "The count is min(len(dst), len(src)), and len(dst) is 0."
+    },
+    {
+      "id": 1640,
+      "type": "recall",
+      "text": "What happens for s[:k] if k > cap(s)?",
+      "answer": "panic: slice bounds out of range."
+    }
+  ]
+}
