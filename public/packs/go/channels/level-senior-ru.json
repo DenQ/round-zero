@@ -1,0 +1,1008 @@
+{
+  "stack": "go",
+  "topic": "channels",
+  "level": "senior",
+  "locale": "ru",
+  "questions": [
+    {
+      "id": 2001,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tch := make(chan int, 1)\n\tch <- 2\n\tclose(ch)\n\tn := 0\n\tfor range ch {\n\t\tn++\n\t}\n\tfmt.Println(n)\n}\n",
+      "options": [
+        "1",
+        "0",
+        "2",
+        "1, 0"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 2002,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tvar ch chan int\n\tfmt.Println(ch == nil)\n}\n",
+      "options": [
+        "false",
+        "true",
+        "0",
+        "<nil>"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 2003,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tch := make(chan int, 4)\n\tch <- 1\n\tch <- 2\n\t<-ch\n\tfmt.Println(cap(ch))\n\tfmt.Println(len(ch))\n}\n",
+      "options": [
+        "4, 2",
+        "3, 1",
+        "4, 1",
+        "4, 0"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 2004,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tch := make(chan int, 1)\n\tselect {\n\tcase <-ch:\n\t\tfmt.Println(1)\n\tdefault:\n\t\tfmt.Println(0)\n\t}\n}\n",
+      "options": [
+        "1",
+        "false",
+        "0, 1",
+        "0"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 2005,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tout := make(chan int)\n\tgo func() {\n\t\tout <- 1\n\t\tout <- 2\n\t\tclose(out)\n\t}()\n\tvar sum int\n\tfor v := range out {\n\t\tsum += v\n\t}\n\tfmt.Println(sum)\n}\n",
+      "options": [
+        "3",
+        "1",
+        "2",
+        "0"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 2006,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tch := make(chan int, 1)\n\tclose(ch)\n\tselect {\n\tcase v, ok := <-ch:\n\t\tfmt.Println(v)\n\t\tfmt.Println(ok)\n\t}\n}\n",
+      "options": [
+        "0, true",
+        "0, false",
+        "false",
+        "0"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 2007,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tch := make(chan bool, 1)\n\tch <- true\n\tfmt.Println(<-ch)\n}\n",
+      "options": [
+        "false",
+        "1",
+        "true",
+        "true, false"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 2008,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tdone := make(chan struct{})\n\tclose(done)\n\t_, ok := <-done\n\tfmt.Println(ok)\n}\n",
+      "options": [
+        "true",
+        "{}",
+        "0",
+        "false"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 2009,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tch := make(chan int, 2)\n\tch <- 10\n\tch <- 20\n\tfmt.Println(<-ch)\n\tfmt.Println(<-ch)\n\tfmt.Println(cap(ch))\n}\n",
+      "options": [
+        "10, 20, 2",
+        "10, 20, 0",
+        "20, 10, 2",
+        "10, 20"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 2010,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\trecv := func(c <-chan int) int {\n\t\treturn <-c\n\t}\n\tch := make(chan int, 1)\n\tch <- 9\n\tfmt.Println(recv(ch))\n}\n",
+      "options": [
+        "0",
+        "9",
+        "1",
+        "9, 0"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 2011,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\ta := make(chan int, 1)\n\tb := make(chan int)\n\ta <- 4\n\tselect {\n\tcase <-b:\n\t\tfmt.Println(1)\n\tcase v := <-a:\n\t\tfmt.Println(v)\n\t}\n}\n",
+      "options": [
+        "1",
+        "0",
+        "4",
+        "4, 1"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 2012,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tch := make(chan int)\n\tselect {\n\tdefault:\n\t\tfmt.Println(6)\n\tcase ch <- 1:\n\t\tfmt.Println(1)\n\t}\n}\n",
+      "options": [
+        "1",
+        "0",
+        "6, 1",
+        "6"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 2013,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tch := make(chan int, 3)\n\tfmt.Println(len(ch))\n\tch <- 1\n\tch <- 1\n\tfmt.Println(len(ch))\n}\n",
+      "options": [
+        "0, 2",
+        "0, 0",
+        "2, 2",
+        "0, 3"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 2014,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tch := make(chan int, 1)\n\tch <- 5\n\tclose(ch)\n\tfmt.Println(<-ch)\n\tv, ok := <-ch\n\tfmt.Println(v)\n\tfmt.Println(ok)\n}\n",
+      "options": [
+        "5, 5, false",
+        "5, 0, false",
+        "5, 0, true",
+        "0, 0, false"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 2015,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tvar ch chan int\n\tselect {\n\tdefault:\n\t\tfmt.Println(2)\n\tcase <-ch:\n\t\tfmt.Println(1)\n\tcase ch <- 0:\n\t\tfmt.Println(0)\n\t}\n}\n",
+      "options": [
+        "1",
+        "0",
+        "2",
+        "1, 0"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 2016,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tch := make(chan int, 1)\n\tch <- 8\n\tx := <-ch\n\tch <- x + 1\n\tfmt.Println(<-ch)\n}\n",
+      "options": [
+        "8",
+        "1",
+        "9, 8",
+        "9"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 2017,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"sync\"\n)\n\nfunc main() {\n\tch := make(chan int, 1)\n\tvar wg sync.WaitGroup\n\twg.Add(1)\n\tgo func() {\n\t\tdefer wg.Done()\n\t\tch <- 3\n\t}()\n\twg.Wait()\n\tfmt.Println(<-ch)\n}\n",
+      "options": [
+        "3",
+        "0",
+        "1",
+        "3, 0"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 2018,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tch := make(chan int, 2)\n\tclose(ch)\n\tn := 0\n\tfor range ch {\n\t\tn++\n\t}\n\tfmt.Println(n)\n}\n",
+      "options": [
+        "2",
+        "0",
+        "1",
+        "0, 2"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 2019,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tch := make(chan byte, 1)\n\tch <- 65\n\tfmt.Println(<-ch)\n}\n",
+      "options": [
+        "A",
+        "0",
+        "65",
+        "65, 0"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 2020,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tch := make(chan int, 1)\n\tch <- 1\n\tfmt.Println(len(ch) == cap(ch))\n}\n",
+      "options": [
+        "false",
+        "1",
+        "1, 1",
+        "true"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 2021,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tch := make(chan int)\n\tgo func() {\n\t\tch <- 1\n\t\tclose(ch)\n\t}()\n\tfmt.Println(<-ch)\n\tv, ok := <-ch\n\tfmt.Println(v)\n\tfmt.Println(ok)\n}\n",
+      "options": [
+        "1, 0, false",
+        "1, 1, false",
+        "1, 0, true",
+        "0, 0, false"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 2022,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tch := make(chan int, 4)\n\tfor i := 0; i < 4; i++ {\n\t\tch <- i\n\t}\n\tfmt.Println(<-ch)\n\tfmt.Println(<-ch)\n\tfmt.Println(len(ch))\n}\n",
+      "options": [
+        "0, 1, 4",
+        "0, 1, 2",
+        "1, 2, 2",
+        "0, 1, 0"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 2023,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tch := make(chan int, 1)\n\tselect {\n\tcase ch <- 9:\n\t\tfmt.Println(<-ch)\n\tdefault:\n\t\tfmt.Println(0)\n\t}\n}\n",
+      "options": [
+        "0",
+        "1",
+        "9",
+        "9, 0"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 2024,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\ttype empty struct{}\n\tch := make(chan empty, 1)\n\tch <- empty{}\n\tclose(ch)\n\tn := 0\n\tfor range ch {\n\t\tn++\n\t}\n\tfmt.Println(n)\n}\n",
+      "options": [
+        "0",
+        "{}",
+        "1, 0",
+        "1"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 2025,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tch := make(chan int, 2)\n\tch <- 2\n\tch <- 4\n\tclose(ch)\n\ts := 1\n\tfor v := range ch {\n\t\ts *= v\n\t}\n\tfmt.Println(s)\n}\n",
+      "options": [
+        "8",
+        "6",
+        "2",
+        "4"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 2026,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tch := make(chan int, 1)\n\tok := true\n\tselect {\n\tcase _, ok = <-ch:\n\tdefault:\n\t\tok = false\n\t}\n\tfmt.Println(ok)\n}\n",
+      "options": [
+        "true",
+        "false",
+        "0",
+        "false, true"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 2027,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tch := make(chan int, 3)\n\tch <- 1\n\tfmt.Println(cap(ch) - len(ch))\n}\n",
+      "options": [
+        "3",
+        "1",
+        "2",
+        "0"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 2028,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tin := make(chan int, 2)\n\tin <- 5\n\tin <- 7\n\tclose(in)\n\tout := make(chan int, 2)\n\tfor v := range in {\n\t\tout <- v * 2\n\t}\n\tclose(out)\n\tfmt.Println(<-out)\n\tfmt.Println(<-out)\n}\n",
+      "options": [
+        "5, 7",
+        "10, 7",
+        "14, 10",
+        "10, 14"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 2029,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tch := make(chan int, 1)\n\tch <- 0\n\tfmt.Println(<-ch)\n\tfmt.Println(len(ch))\n}\n",
+      "options": [
+        "0, 0",
+        "0, 1",
+        "1, 0",
+        "0"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 2030,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tch := make(chan int, 1)\n\tclose(ch)\n\tselect {\n\tcase <-ch:\n\t\tfmt.Println(1)\n\tdefault:\n\t\tfmt.Println(0)\n\t}\n}\n",
+      "options": [
+        "0",
+        "1",
+        "false",
+        "1, 0"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 2031,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tch := make(chan int, 2)\n\tch <- 3\n\tfmt.Println(len(ch))\n\tch <- 4\n\tfmt.Println(len(ch))\n}\n",
+      "options": [
+        "0, 1",
+        "1, 1",
+        "1, 2",
+        "2, 2"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 2032,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tch := make(chan string, 1)\n\tgo func() {\n\t\tch <- \"a\"\n\t\tclose(ch)\n\t}()\n\tfmt.Println(<-ch)\n\tfmt.Println(<-ch)\n}\n",
+      "options": [
+        "a",
+        "a, a",
+        " ",
+        "a, "
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 2033,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tch := make(chan int, 1)\n\tch <- 1\n\t<-ch\n\tch <- 2\n\tfmt.Println(<-ch)\n}\n",
+      "options": [
+        "2",
+        "1",
+        "1, 2",
+        "0"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 2034,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tch := make(chan int, 5)\n\tfmt.Println(cap(ch))\n\tclose(ch)\n\tfmt.Println(cap(ch))\n}\n",
+      "options": [
+        "5, 0",
+        "5, 5",
+        "0, 0",
+        "5"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 2035,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tch := make(chan int, 1)\n\tch <- 4\n\tselect {\n\tcase v := <-ch:\n\t\tfmt.Println(v + 1)\n\tdefault:\n\t\tfmt.Println(0)\n\t}\n}\n",
+      "options": [
+        "4",
+        "0",
+        "5",
+        "5, 0"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 2036,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tleft := make(chan int, 1)\n\tleft <- 11\n\tclose(left)\n\tfmt.Println(<-left)\n\tfmt.Println(<-left)\n}\n",
+      "options": [
+        "11",
+        "0, 0",
+        "11, 11",
+        "11, 0"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 2037,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tch := make(chan int, 2)\n\tch <- 1\n\tclose(ch)\n\tfmt.Println(len(ch))\n\t<-ch\n\tfmt.Println(len(ch))\n}\n",
+      "options": [
+        "1, 0",
+        "2, 0",
+        "1, 1",
+        "0, 0"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 2038,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tch := make(chan int, 1)\n\tfmt.Println(len(ch))\n\tselect {\n\tcase ch <- 1:\n\t\tfmt.Println(len(ch))\n\t}\n}\n",
+      "options": [
+        "1, 1",
+        "0, 1",
+        "0, 0",
+        "0"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 2039,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tch := make(chan int, 3)\n\tch <- 2\n\tch <- 2\n\tch <- 2\n\tclose(ch)\n\tn := 0\n\tfor v := range ch {\n\t\tn += v\n\t}\n\tfmt.Println(n)\n}\n",
+      "options": [
+        "2",
+        "3",
+        "6",
+        "0"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 2040,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tch := make(chan int, 1)\n\tch <- 7\n\tv, ok := <-ch\n\tfmt.Println(v)\n\tfmt.Println(ok)\n\tclose(ch)\n\t_, ok = <-ch\n\tfmt.Println(ok)\n}\n",
+      "options": [
+        "7, true, true",
+        "7, false, false",
+        "7, true",
+        "7, true, false"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 2041,
+      "type": "text",
+      "text": "Если в select готовы несколько case, какой возьмут?",
+      "options": [
+        "Псевдослучайный готовый, не обязательно первый в тексте",
+        "Всегда верхний в исходнике",
+        "Все сразу",
+        "default"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 2042,
+      "type": "text",
+      "text": "Почему close часто используют как сигнал «работы больше нет»?",
+      "options": [
+        "close копирует все значения в main",
+        "Все ждущие receive просыпаются и видят закрытие; range заканчивается",
+        "close убивает горутины",
+        "close ставит GOMAXPROCS в 0"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 2043,
+      "type": "text",
+      "text": "Чем receive из nil отличается от receive из закрытого пустого?",
+      "options": [
+        "Оба паникуют",
+        "Оба дают ok false сразу",
+        "nil блокируется; закрытый сразу даёт нуль и ok false",
+        "nil даёт ok false; закрытый блокируется"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 2044,
+      "type": "text",
+      "text": "Можно ли снова открыть закрытый канал?",
+      "options": [
+        "Да, вторым make на ту же переменную — это уже другой канал",
+        "Да, close наоборот",
+        "Да, отправив nil",
+        "Нет: данный канал закрыт навсегда; новый только через новый make"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 2045,
+      "type": "text",
+      "text": "Почему send-only в API отправителя полезен?",
+      "options": [
+        "Компилятор не даст там читать и случайно осушить канал",
+        "Это быстрее runtime",
+        "Так close запрещён везде",
+        "Так канал не может быть nil"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 2046,
+      "type": "text",
+      "text": "Что не так с «угадать» порядок двух готовых case без default?",
+      "options": [
+        "Порядок всегда как в тексте",
+        "Выбор среди готовых недетерминирован — для code-вопроса с одним логом это гонка",
+        "select запрещает два case",
+        "Go сортирует по имени канала"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 2047,
+      "type": "text",
+      "text": "close(nil) — что будет?",
+      "options": [
+        "Ничего",
+        "Делает канал пустым открытым",
+        "Паника",
+        "Блок"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 2048,
+      "type": "text",
+      "text": "Может ли одна горутина и send, и receive на одном unbuffered канале без другой стороны?",
+      "options": [
+        "Да, если сначала send",
+        "Да, если сначала receive",
+        "Да, в одном выражении",
+        "Нет: unbuffered send ждёт другую горутину — будет deadlock"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 2049,
+      "type": "text",
+      "text": "Буфер как «скользящее окно» между производителем и потребителем: cap это что?",
+      "options": [
+        "Максимум значений без встречи send/recv в один момент",
+        "Число горутин",
+        "Счётчик close",
+        "Глубина стека"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 2050,
+      "type": "text",
+      "text": "Почему «сигнальный» канал часто chan struct{}?",
+      "options": [
+        "struct{} нельзя закрыть",
+        "Пустое значение ничего не несёт, важен факт send/close",
+        "Это быстрее int",
+        "Так требует spec"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 2051,
+      "type": "text",
+      "text": "После close повторный receive (буфер пуст) — блокируется?",
+      "options": [
+        "Да, всегда",
+        "Да, пока не будет нового send",
+        "Нет, сразу нуль и ok false, сколько ни читай",
+        "Паника со второго раза"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 2052,
+      "type": "text",
+      "text": "Направленность канала — это свойство значения или переменной?",
+      "options": [
+        "Только runtime-флаг внутри канала",
+        "Она меняется после close",
+        "Она живёт в куче рядом с буфером",
+        "Это тип переменной/параметра: один и тот же канал можно видеть как chan, chan<- или <-chan"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 2053,
+      "type": "text",
+      "text": "Можно ли close с send-only (chan<-) переменной?",
+      "options": [
+        "Нет, close принимает только двунаправленный chan T",
+        "Да, close(chan<- T) компилируется; нельзя close на <-chan T",
+        "Да, но только после cap send",
+        "Только для struct{}"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 2054,
+      "type": "text",
+      "text": "Fairness select: даёт ли runtime квант каждому case по кругу?",
+      "options": [
+        "Да, строго по очереди case",
+        "Гарантирован только случайный выбор среди готовых, не round-robin для спящих",
+        "Всегда default если он есть, иначе round-robin",
+        "По хэшу указателя канала"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 2055,
+      "type": "text",
+      "text": "Зачем иногда делают `ch = nil` после обработки case в цикле select?",
+      "options": [
+        "Чтобы освободить буфер",
+        "Чтобы close",
+        "Чтобы эта ветка больше не выбиралась",
+        "Чтобы len стал -1"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 2056,
+      "type": "text",
+      "text": "Передача канала по значению копирует буфер?",
+      "options": [
+        "Да, как у слайса до 2.0",
+        "Да, глубокая копия",
+        "Копируется только указатель; буфер один",
+        "Каналы нельзя передавать"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 2057,
+      "type": "text",
+      "text": "Может ли close разбудить несколько ждущих receive?",
+      "options": [
+        "Нет, только одного",
+        "Только если буфер > 1",
+        "Только main",
+        "Да, все ждущие receive на этом канале видят закрытие"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 2058,
+      "type": "text",
+      "text": "Send в закрытый и close(nil) — общее?",
+      "options": [
+        "Оба паникуют",
+        "Оба блокируются",
+        "Оба дают ok false",
+        "Оба успешны"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 2059,
+      "type": "text",
+      "text": "Почему нельзя «угадать» вывод двух горутин, которые обе делают send в один буфер 2 без порядка wait?",
+      "options": [
+        "Буфер 2 запрещён",
+        "Порядок send не зафиксирован — для вопроса нужен happens-before",
+        "Print из канала всегда сортирует",
+        "Это всегда  deadlock"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 2060,
+      "type": "text",
+      "text": "Пустой struct{} в канале занимает место в буфере?",
+      "options": [
+        "Нет, cap игнорируется для struct{}",
+        "Нет, такие send не считаются",
+        "Да, каждый send занимает один слот len, даже если значение пустое",
+        "Только после close"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 2061,
+      "type": "boolean",
+      "text": "Если несколько case в select готовы, выбирается псевдослучайно один из них.",
+      "correct": true
+    },
+    {
+      "id": 2062,
+      "type": "boolean",
+      "text": "Закрытый канал можно открыть тем же close.",
+      "correct": false
+    },
+    {
+      "id": 2063,
+      "type": "boolean",
+      "text": "Receive из nil блокируется; из закрытого пустого — нет.",
+      "correct": true
+    },
+    {
+      "id": 2064,
+      "type": "boolean",
+      "text": "close(nil) безопасен.",
+      "correct": false
+    },
+    {
+      "id": 2065,
+      "type": "boolean",
+      "text": "Один и тот же канал можно передать как chan<- и как <-chan.",
+      "correct": true
+    },
+    {
+      "id": 2066,
+      "type": "boolean",
+      "text": "Unbuffered send и receive в одной горутине без select всегда безопасны.",
+      "correct": false
+    },
+    {
+      "id": 2067,
+      "type": "boolean",
+      "text": "close будит всех, кто ждёт receive на этом канале.",
+      "correct": true
+    },
+    {
+      "id": 2068,
+      "type": "boolean",
+      "text": "Передача канала копирует буфер целиком.",
+      "correct": false
+    },
+    {
+      "id": 2069,
+      "type": "boolean",
+      "text": "После close пустого канала receive никогда больше не блокируется.",
+      "correct": true
+    },
+    {
+      "id": 2070,
+      "type": "boolean",
+      "text": "select всегда берёт первый готовый case сверху файла.",
+      "correct": false
+    },
+    {
+      "id": 2071,
+      "type": "boolean",
+      "text": "Присвоение ch = nil отключает case с этим ch в select.",
+      "correct": true
+    },
+    {
+      "id": 2072,
+      "type": "boolean",
+      "text": "close на chan<- T компилируется; на <-chan T — нет.",
+      "correct": true
+    },
+    {
+      "id": 2073,
+      "type": "boolean",
+      "text": "chan struct{} удобен, когда важно событие, а не полезная нагрузка.",
+      "correct": true
+    },
+    {
+      "id": 2074,
+      "type": "boolean",
+      "text": "cap зависит от того, закрыт канал или нет.",
+      "correct": false
+    },
+    {
+      "id": 2075,
+      "type": "boolean",
+      "text": "Повторный receive из закрытого пустого канала снова даёт нуль и ok false.",
+      "correct": true
+    },
+    {
+      "id": 2076,
+      "type": "boolean",
+      "text": "Два готовых send в select без default дают стабильный порядок логов.",
+      "correct": false
+    },
+    {
+      "id": 2077,
+      "type": "boolean",
+      "text": "len считает занятые слоты буфера, даже для struct{}.",
+      "correct": true
+    },
+    {
+      "id": 2078,
+      "type": "boolean",
+      "text": "Send в закрытый канал — это ok false, не паника.",
+      "correct": false
+    },
+    {
+      "id": 2079,
+      "type": "boolean",
+      "text": "Новый make на ту же переменную — это уже другой канал.",
+      "correct": true
+    },
+    {
+      "id": 2080,
+      "type": "boolean",
+      "text": "Nil и закрытый канал ведут себя одинаково на receive.",
+      "correct": false
+    },
+    {
+      "id": 2081,
+      "type": "recall",
+      "text": "Как select выбирает среди нескольких готовых case?",
+      "answer": "Псевдослучайно один из готовых."
+    },
+    {
+      "id": 2082,
+      "type": "recall",
+      "text": "close как сигнал — в чём идея?",
+      "answer": "Все ждущие receive видят конец потока, range выходит."
+    },
+    {
+      "id": 2083,
+      "type": "recall",
+      "text": "nil vs закрытый пустой на receive?",
+      "answer": "nil блокируется; закрытый сразу нуль и ok false."
+    },
+    {
+      "id": 2084,
+      "type": "recall",
+      "text": "Что делает close(nil)?",
+      "answer": "Паникует."
+    },
+    {
+      "id": 2085,
+      "type": "recall",
+      "text": "Можно ли открыть закрытый канал?",
+      "answer": "Нет. Только новый make — новый канал."
+    },
+    {
+      "id": 2086,
+      "type": "recall",
+      "text": "Направленность — где она?",
+      "answer": "В типе переменной, не внутри буфера."
+    },
+    {
+      "id": 2087,
+      "type": "recall",
+      "text": "Зачем ch = nil в цикле select?",
+      "answer": "Выключить эту ветку."
+    },
+    {
+      "id": 2088,
+      "type": "recall",
+      "text": "Копируется ли буфер при присваивании канала?",
+      "answer": "Нет, копируется ссылка на один канал."
+    },
+    {
+      "id": 2089,
+      "type": "recall",
+      "text": "close и несколько ждущих receive?",
+      "answer": "Просыпаются все."
+    },
+    {
+      "id": 2090,
+      "type": "recall",
+      "text": "Send и recv unbuffered в одной горутине?",
+      "answer": "Deadlock: некому встретиться."
+    },
+    {
+      "id": 2091,
+      "type": "recall",
+      "text": "Почему chan struct{} для сигнала?",
+      "answer": "Нет полезной нагрузки, важен факт события/close."
+    },
+    {
+      "id": 2092,
+      "type": "recall",
+      "text": "Стабилен ли порядок двух готовых case?",
+      "answer": "Нет."
+    },
+    {
+      "id": 2093,
+      "type": "recall",
+      "text": "Receive после close пустого — блок?",
+      "answer": "Нет, всегда нуль и ok false."
+    },
+    {
+      "id": 2094,
+      "type": "recall",
+      "text": "close(chan<- T)?",
+      "answer": "Компилируется. Нельзя close на <-chan T."
+    },
+    {
+      "id": 2095,
+      "type": "recall",
+      "text": "Send в закрытый?",
+      "answer": "Паника."
+    },
+    {
+      "id": 2096,
+      "type": "recall",
+      "text": "Что даёт новый make на ту же переменную?",
+      "answer": "Другой канал; старый не «открывается»."
+    },
+    {
+      "id": 2097,
+      "type": "recall",
+      "text": "len для struct{} в буфере?",
+      "answer": "Каждый send занимает слот."
+    },
+    {
+      "id": 2098,
+      "type": "recall",
+      "text": "Гарантирует ли select round-robin спящим?",
+      "answer": "Нет, только случайный выбор среди уже готовых."
+    },
+    {
+      "id": 2099,
+      "type": "recall",
+      "text": "Как отключить case без удаления кода?",
+      "answer": "Положить в переменную nil."
+    },
+    {
+      "id": 2100,
+      "type": "recall",
+      "text": "Один канал, два типа взгляда?",
+      "answer": "Да: chan T, chan<- T, <-chan T — один объект."
+    }
+  ]
+}

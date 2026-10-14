@@ -90,7 +90,9 @@
       "modules": "Modules",
       "promises": "Promises",
       "base": "Base",
-      "slices": "Slices"
+      "slices": "Slices",
+      "goroutines": "Goroutines",
+      "channels": "Channels"
     },
     "levels": {
       "junior": "Junior",

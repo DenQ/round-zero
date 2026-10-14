@@ -1,0 +1,808 @@
+{
+  "stack": "go",
+  "topic": "channels",
+  "level": "middle",
+  "locale": "en",
+  "questions": [
+    {
+      "id": 1921,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tch := make(chan int)\n\tgo func() {\n\t\tch <- 6\n\t}()\n\tfmt.Println(<-ch)\n}\n",
+      "options": [
+        "6",
+        "0",
+        "1",
+        "6, 0"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1922,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"sync\"\n)\n\nfunc main() {\n\tvar wg sync.WaitGroup\n\tch := make(chan int)\n\twg.Add(1)\n\tgo func() {\n\t\tdefer wg.Done()\n\t\tfmt.Println(<-ch)\n\t}()\n\tch <- 4\n\twg.Wait()\n}\n",
+      "options": [
+        "0",
+        "4",
+        "1",
+        "4, 0"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1923,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tch := make(chan int)\n\tselect {\n\tcase ch <- 1:\n\t\tfmt.Println(1)\n\tdefault:\n\t\tfmt.Println(4)\n\t}\n}\n",
+      "options": [
+        "1",
+        "0",
+        "4",
+        "4, 1"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1924,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tch := make(chan int, 1)\n\tch <- 8\n\tselect {\n\tcase v := <-ch:\n\t\tfmt.Println(v)\n\tdefault:\n\t\tfmt.Println(0)\n\t}\n}\n",
+      "options": [
+        "0",
+        "1",
+        "8, 0",
+        "8"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1925,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tvar ch chan int\n\tselect {\n\tcase <-ch:\n\t\tfmt.Println(1)\n\tdefault:\n\t\tfmt.Println(3)\n\t}\n}\n",
+      "options": [
+        "3",
+        "1",
+        "0",
+        "<nil>"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1926,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tch := make(chan int, 3)\n\tch <- 1\n\tch <- 2\n\tch <- 3\n\tclose(ch)\n\tfor v := range ch {\n\t\tfmt.Println(v)\n\t}\n}\n",
+      "options": [
+        "3, 2, 1",
+        "1, 2, 3",
+        "1, 2",
+        "0, 0, 0"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1927,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tch := make(chan int, 2)\n\tch <- 1\n\tch <- 2\n\t<-ch\n\t<-ch\n\tfmt.Println(cap(ch))\n}\n",
+      "options": [
+        "0",
+        "1",
+        "2",
+        "2, 0"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1928,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tch := make(chan int, 1)\n\tch <- 5\n\tvar r <-chan int = ch\n\tfmt.Println(<-r)\n}\n",
+      "options": [
+        "0",
+        "1",
+        "5, 0",
+        "5"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1929,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tsend := func(c chan<- int, v int) {\n\t\tc <- v\n\t}\n\tch := make(chan int, 1)\n\tsend(ch, 7)\n\tfmt.Println(<-ch)\n}\n",
+      "options": [
+        "7",
+        "0",
+        "1",
+        "7, 0"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1930,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tch := make(chan int, 2)\n\tch <- 9\n\tch <- 8\n\tfmt.Println(<-ch)\n\tfmt.Println(<-ch)\n\tfmt.Println(len(ch))\n}\n",
+      "options": [
+        "8, 9, 0",
+        "9, 8, 0",
+        "9, 8, 2",
+        "9, 8"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1931,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tch := make(chan string, 1)\n\tch <- \"ok\"\n\tv, ok := <-ch\n\tfmt.Println(v)\n\tfmt.Println(ok)\n}\n",
+      "options": [
+        "ok, false",
+        "true",
+        "ok, true",
+        "ok"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1932,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tch := make(chan int, 1)\n\tclose(ch)\n\t_, ok := <-ch\n\tfmt.Println(ok)\n}\n",
+      "options": [
+        "true",
+        "0",
+        "false, 0",
+        "false"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1933,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tch := make(chan int, 1)\n\tch <- 1\n\tselect {\n\tcase ch <- 2:\n\t\tfmt.Println(1)\n\tdefault:\n\t\tfmt.Println(0)\n\t}\n}\n",
+      "options": [
+        "0",
+        "1",
+        "2",
+        "0, 1"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1934,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tch := make(chan int)\n\tgo func() {\n\t\tfmt.Println(<-ch)\n\t}()\n\tch <- 12\n}\n",
+      "options": [
+        "0",
+        "12",
+        "1",
+        "12, 0"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1935,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tch := make(chan int, 3)\n\tch <- 4\n\tch <- 5\n\tch <- 6\n\tclose(ch)\n\tfor v := range ch {\n\t\tfmt.Println(v)\n\t}\n}\n",
+      "options": [
+        "6, 5, 4",
+        "4, 5",
+        "4, 5, 6",
+        "4"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1936,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tch := make(chan int, 0)\n\tfmt.Println(cap(ch))\n}\n",
+      "options": [
+        "1",
+        "nil",
+        "0, 0",
+        "0"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1937,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tch := make(chan int, 8)\n\tfmt.Println(cap(ch))\n\tfmt.Println(len(ch))\n}\n",
+      "options": [
+        "8, 0",
+        "0, 8",
+        "8, 8",
+        "0, 0"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1938,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tch := make(chan int, 1)\n\tch <- 3\n\tclose(ch)\n\tv1, ok1 := <-ch\n\tv2, ok2 := <-ch\n\tfmt.Println(v1)\n\tfmt.Println(ok1)\n\tfmt.Println(v2)\n\tfmt.Println(ok2)\n}\n",
+      "options": [
+        "3, false, 0, false",
+        "3, true, 0, false",
+        "3, true, 3, false",
+        "0, false, 0, false"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1939,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tready := make(chan int, 1)\n\tblocked := make(chan int)\n\tready <- 8\n\tselect {\n\tcase v := <-ready:\n\t\tfmt.Println(v)\n\tcase <-blocked:\n\t\tfmt.Println(0)\n\t}\n}\n",
+      "options": [
+        "0",
+        "1",
+        "8",
+        "8, 0"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1940,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\ta := make(chan int)\n\tb := make(chan int)\n\tselect {\n\tcase <-a:\n\t\tfmt.Println(1)\n\tcase <-b:\n\t\tfmt.Println(2)\n\tdefault:\n\t\tfmt.Println(9)\n\t}\n}\n",
+      "options": [
+        "1",
+        "2",
+        "1, 2",
+        "9"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1941,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tch := make(chan int, 1)\n\tch <- 2\n\tclose(ch)\n\tfor v := range ch {\n\t\tfmt.Println(v)\n\t}\n}\n",
+      "options": [
+        "2",
+        "0",
+        "2, 0",
+        "2, false"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1942,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tch := make(chan int, 2)\n\tclose(ch)\n\tfmt.Println(len(ch))\n}\n",
+      "options": [
+        "2",
+        "0",
+        "1",
+        "false"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1943,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tch := make(chan int, 3)\n\tch <- 1\n\tch <- 2\n\tch <- 3\n\tclose(ch)\n\tsum := 0\n\tfor v := range ch {\n\t\tsum += v\n\t}\n\tfmt.Println(sum)\n}\n",
+      "options": [
+        "3",
+        "0",
+        "6",
+        "1, 2, 3"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1944,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tvar ch chan int\n\tfmt.Println(len(ch))\n\tfmt.Println(cap(ch))\n}\n",
+      "options": [
+        "0, 1",
+        "<nil>",
+        "1, 0",
+        "0, 0"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1945,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tvar ch chan int\n\tselect {\n\tcase ch <- 1:\n\t\tfmt.Println(1)\n\tdefault:\n\t\tfmt.Println(5)\n\t}\n}\n",
+      "options": [
+        "5",
+        "1",
+        "0",
+        "<nil>"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1946,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tch := make(chan int, 2)\n\tch <- 1\n\tch <- 2\n\tfmt.Println(len(ch))\n}\n",
+      "options": [
+        "0",
+        "2",
+        "1",
+        "2, 2"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1947,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tch := make(chan int, 1)\n\tclose(ch)\n\tfmt.Println(<-ch)\n}\n",
+      "options": [
+        "1",
+        "false",
+        "0",
+        "panic"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1948,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tch := make(chan int)\n\tgo func() {\n\t\tch <- 15\n\t}()\n\tfmt.Println(<-ch)\n}\n",
+      "options": [
+        "0",
+        "1",
+        "15, 0",
+        "15"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1949,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"sync\"\n)\n\nfunc main() {\n\tvar wg sync.WaitGroup\n\tch := make(chan int)\n\twg.Add(1)\n\tgo func() {\n\t\tdefer wg.Done()\n\t\tfmt.Println(<-ch)\n\t\tfmt.Println(<-ch)\n\t}()\n\tch <- 1\n\tch <- 2\n\twg.Wait()\n}\n",
+      "options": [
+        "1, 2",
+        "2, 1",
+        "1",
+        "1, 2, 0"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1950,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tch := make(chan int, 1)\n\tch <- 4\n\tfmt.Println(len(ch))\n\tfmt.Println(cap(ch))\n}\n",
+      "options": [
+        "0, 1",
+        "1, 1",
+        "1, 0",
+        "4, 1"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1951,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tch := make(chan int, 1)\n\tch <- 6\n\tclose(ch)\n\tv, ok := <-ch\n\tfmt.Println(v)\n\tfmt.Println(ok)\n}\n",
+      "options": [
+        "6, false",
+        "0, false",
+        "6, true",
+        "6"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1952,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tch := make(chan int, 2)\n\tch <- 7\n\tfmt.Println(<-ch)\n\tfmt.Println(len(ch))\n\tfmt.Println(cap(ch))\n}\n",
+      "options": [
+        "7, 1, 2",
+        "7, 0, 0",
+        "0, 0, 2",
+        "7, 0, 2"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1953,
+      "type": "text",
+      "text": "What does a default branch in select do?",
+      "options": [
+        "Runs if no case is ready, without blocking",
+        "Waits for every case",
+        "Closes every channel",
+        "Always panics"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1954,
+      "type": "text",
+      "text": "Why does send into a full buffer with select default not block?",
+      "options": [
+        "The buffer grows by itself",
+        "default runs at once; the send is not taken",
+        "Send into a full buffer never blocks",
+        "default closes the channel"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1955,
+      "type": "text",
+      "text": "Can you still receive values after close if they remain buffered?",
+      "options": [
+        "No, close wipes them",
+        "Only via cap",
+        "Yes: the buffer first, then zeros with ok false",
+        "Only if the channel is nil"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1956,
+      "type": "text",
+      "text": "What happens on a second close(ch)?",
+      "options": [
+        "Nothing",
+        "The channel becomes nil",
+        "ok becomes true",
+        "A panic"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1957,
+      "type": "text",
+      "text": "Why pass chan<- T into a function?",
+      "options": [
+        "So the function can only send, not receive",
+        "To forbid close",
+        "It is faster",
+        "Otherwise the channel will not compile"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1958,
+      "type": "text",
+      "text": "select without default, if no case is ready — what happens?",
+      "options": [
+        "Return with ok false",
+        "Block until some case becomes ready",
+        "A panic",
+        "Pick the first case in source order"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1959,
+      "type": "text",
+      "text": "How is a nil channel useful in select?",
+      "options": [
+        "It is always ready",
+        "It equals a closed channel",
+        "Its case is never chosen — you can disable that branch",
+        "It closes the others"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1960,
+      "type": "text",
+      "text": "Unbuffered send and receive also synchronize. Why?",
+      "options": [
+        "Because cap is always 1",
+        "Because close is required",
+        "Because GC waits",
+        "The handoff happens only when both sides meet"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1961,
+      "type": "text",
+      "text": "What does receive return from a closed channel that still has buffered values?",
+      "options": [
+        "The value and ok true until the buffer is empty",
+        "Always ok false",
+        "A panic",
+        "A block"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1962,
+      "type": "text",
+      "text": "Why can range without close hang?",
+      "options": [
+        "range is forbidden",
+        "It waits for the next value or a close",
+        "range reads cap times and then still waits",
+        "It is a compiler bug"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1963,
+      "type": "text",
+      "text": "Can you close a receive-only channel (<-chan T) from that side?",
+      "options": [
+        "Yes, always",
+        "Yes, after range",
+        "No: close needs a bidirectional (or send) view; on <-chan it does not compile",
+        "Yes if the channel is nil"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1964,
+      "type": "text",
+      "text": "What is the unbuffered channel “handshake”?",
+      "options": [
+        "Two closes in a row",
+        "select default",
+        "len == cap",
+        "Send and receive happen together as one transfer"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1965,
+      "type": "text",
+      "text": "Buffer is full. A plain send (not select) — what happens?",
+      "options": [
+        "The goroutine blocks until someone receives",
+        "The value overwrites the first",
+        "A panic",
+        "ok false"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1966,
+      "type": "text",
+      "text": "Is a receive case on a closed channel ready in select?",
+      "options": [
+        "No, select waits forever",
+        "Yes, the case is ready: zero and ok false if the buffer is empty",
+        "Only with default",
+        "Only for buffered channels"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1967,
+      "type": "text",
+      "text": "cap after send and receive on a buffered channel:",
+      "options": [
+        "Grows",
+        "Drops to len",
+        "Does not change: it is the buffer size",
+        "Becomes 0 after close"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1968,
+      "type": "text",
+      "text": "The zero value of var ch chan int is what?",
+      "options": [
+        "An open unbuffered channel",
+        "A closed channel",
+        "A channel of buffer 0, already made",
+        "nil; send/recv without default block"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1969,
+      "type": "boolean",
+      "text": "select with default does not block if no case is ready.",
+      "correct": true
+    },
+    {
+      "id": 1970,
+      "type": "boolean",
+      "text": "A second close of the same channel is fine.",
+      "correct": false
+    },
+    {
+      "id": 1971,
+      "type": "boolean",
+      "text": "After close, buffered values are still read with ok true.",
+      "correct": true
+    },
+    {
+      "id": 1972,
+      "type": "boolean",
+      "text": "A case on a nil channel in select may be chosen.",
+      "correct": false
+    },
+    {
+      "id": 1973,
+      "type": "boolean",
+      "text": "Unbuffered send synchronizes sender and receiver.",
+      "correct": true
+    },
+    {
+      "id": 1974,
+      "type": "boolean",
+      "text": "close sets cap to zero.",
+      "correct": false
+    },
+    {
+      "id": 1975,
+      "type": "boolean",
+      "text": "You cannot close a <-chan T.",
+      "correct": true
+    },
+    {
+      "id": 1976,
+      "type": "boolean",
+      "text": "select without default and with no ready case returns at once.",
+      "correct": false
+    },
+    {
+      "id": 1977,
+      "type": "boolean",
+      "text": "A full buffer: a plain send waits.",
+      "correct": true
+    },
+    {
+      "id": 1978,
+      "type": "boolean",
+      "text": "Receive from a closed empty channel is not ready in select.",
+      "correct": false
+    },
+    {
+      "id": 1979,
+      "type": "boolean",
+      "text": "Passing chan<- T forbids receive in that function.",
+      "correct": true
+    },
+    {
+      "id": 1980,
+      "type": "boolean",
+      "text": "len of a nil channel panics.",
+      "correct": false
+    },
+    {
+      "id": 1981,
+      "type": "boolean",
+      "text": "range over a channel without close may never finish.",
+      "correct": true
+    },
+    {
+      "id": 1982,
+      "type": "boolean",
+      "text": "make(chan T, 0) is a zero buffer, same as unbuffered.",
+      "correct": true
+    },
+    {
+      "id": 1983,
+      "type": "boolean",
+      "text": "ok false means a zero arrived from an open channel.",
+      "correct": false
+    },
+    {
+      "id": 1984,
+      "type": "boolean",
+      "text": "A closed channel stays closed forever.",
+      "correct": true
+    },
+    {
+      "id": 1985,
+      "type": "recall",
+      "text": "What does default do in select?",
+      "answer": "A non-blocking fallback if no case is ready."
+    },
+    {
+      "id": 1986,
+      "type": "recall",
+      "text": "What happens on a second close?",
+      "answer": "A panic."
+    },
+    {
+      "id": 1987,
+      "type": "recall",
+      "text": "How do you disable a select branch?",
+      "answer": "Set the channel to nil."
+    },
+    {
+      "id": 1988,
+      "type": "recall",
+      "text": "Is receive from a closed empty channel ready?",
+      "answer": "Yes: immediate zero and ok false."
+    },
+    {
+      "id": 1989,
+      "type": "recall",
+      "text": "Does cap change from send/recv?",
+      "answer": "No, it is the buffer size."
+    },
+    {
+      "id": 1990,
+      "type": "recall",
+      "text": "What is a channel’s zero value?",
+      "answer": "nil."
+    },
+    {
+      "id": 1991,
+      "type": "recall",
+      "text": "Why is unbuffered a barrier?",
+      "answer": "Send and receive meet and only then transfer the value."
+    },
+    {
+      "id": 1992,
+      "type": "recall",
+      "text": "Can you close a <-chan T?",
+      "answer": "No, it does not compile."
+    },
+    {
+      "id": 1993,
+      "type": "recall",
+      "text": "What if range never sees a close?",
+      "answer": "It hangs waiting for a value or close."
+    },
+    {
+      "id": 1994,
+      "type": "recall",
+      "text": "What does chan<- T in a parameter mean?",
+      "answer": "The function may only send."
+    },
+    {
+      "id": 1995,
+      "type": "recall",
+      "text": "Full buffer and send without select?",
+      "answer": "Block until a receive."
+    },
+    {
+      "id": 1996,
+      "type": "recall",
+      "text": "Does the buffer remain after close?",
+      "answer": "Yes, it can still be drained."
+    },
+    {
+      "id": 1997,
+      "type": "recall",
+      "text": "len and cap of a nil channel?",
+      "answer": "Both 0."
+    },
+    {
+      "id": 1998,
+      "type": "recall",
+      "text": "select without default, all cases asleep?",
+      "answer": "Waits until one wakes."
+    },
+    {
+      "id": 1999,
+      "type": "recall",
+      "text": "ok true after close?",
+      "answer": "Yes, while buffered values remain."
+    },
+    {
+      "id": 2000,
+      "type": "recall",
+      "text": "What kind of channel is make(chan T, 0)?",
+      "answer": "Unbuffered, cap 0."
+    }
+  ]
+}
