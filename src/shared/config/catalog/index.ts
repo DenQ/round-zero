@@ -80,6 +80,11 @@ export const catalog = [
         labelKey: 'catalog.topics.channels',
         levels: PACK_LEVELS,
       },
+      {
+        slug: 'contexts',
+        labelKey: 'catalog.topics.contexts',
+        levels: PACK_LEVELS,
+      },
     ],
   },
   { slug: 'sql', labelKey: 'catalog.stacks.sql', topics: [] },

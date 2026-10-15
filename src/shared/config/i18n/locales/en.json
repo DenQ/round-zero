@@ -92,7 +92,8 @@
       "base": "Base",
       "slices": "Slices",
       "goroutines": "Goroutines",
-      "channels": "Channels"
+      "channels": "Channels",
+      "contexts": "Contexts"
     },
     "levels": {
       "junior": "Junior",
