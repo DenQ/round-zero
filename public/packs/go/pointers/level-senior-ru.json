@@ -1,0 +1,1008 @@
+{
+  "stack": "go",
+  "topic": "pointers",
+  "level": "senior",
+  "locale": "ru",
+  "questions": [
+    {
+      "id": 2481,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"unsafe\"\n)\n\nfunc main() {\n\tx := 6\n\tp := &x\n\tup := unsafe.Pointer(p)\n\tq := (*int)(up)\n\t*q = 2\n\tfmt.Println(x)\n}\n",
+      "options": [
+        "2",
+        "6",
+        "0",
+        "1"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 2482,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc relink(pp **int, y *int) {\n\t*pp = y\n}\n\nfunc main() {\n\tx, y := 1, 8\n\tp := &x\n\trelink(&p, &y)\n\tfmt.Println(*p)\n\tfmt.Println(x)\n}\n",
+      "options": [
+        "8, 8",
+        "8, 1",
+        "1, 1",
+        "1, 8"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 2483,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"sync/atomic\"\n)\n\nfunc main() {\n\tvar ap atomic.Pointer[int]\n\tx := 5\n\tap.Store(&x)\n\tfmt.Println(*ap.Load())\n}\n",
+      "options": [
+        "0",
+        "1",
+        "5",
+        "4"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 2484,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"sync/atomic\"\n)\n\nfunc main() {\n\tvar ap atomic.Pointer[int]\n\ta, b := 1, 2\n\tap.Store(&a)\n\told := ap.Swap(&b)\n\tfmt.Println(*old)\n\tfmt.Println(*ap.Load())\n}\n",
+      "options": [
+        "2, 1",
+        "1, 1",
+        "2, 2",
+        "1, 2"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 2485,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\ntype I interface{ V() int }\n\ntype T struct{ n int }\n\nfunc (t T) V() int {\n\treturn t.n\n}\n\nfunc main() {\n\tvar i I = &T{n: 4}\n\tfmt.Println(i.V())\n}\n",
+      "options": [
+        "4",
+        "0",
+        "1",
+        "3"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 2486,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\ntype S struct{ s []int }\n\nfunc main() {\n\ta := S{s: []int{1}}\n\tp, q := &a, &a\n\tif p == q {\n\t\tfmt.Println(1)\n\t} else {\n\t\tfmt.Println(0)\n\t}\n}\n",
+      "options": [
+        "0",
+        "1",
+        "2",
+        "3"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 2487,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\ntype S struct{ s []int }\n\nfunc main() {\n\tp, q := &S{}, &S{}\n\tif p == q {\n\t\tfmt.Println(1)\n\t} else {\n\t\tfmt.Println(0)\n\t}\n}\n",
+      "options": [
+        "1",
+        "2",
+        "0",
+        "3"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 2488,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\ntype T struct{ n int }\n\nfunc main() {\n\tvar i any = &T{n: 3}\n\tp := i.(*T)\n\tp.n = 7\n\tfmt.Println(i.(*T).n)\n}\n",
+      "options": [
+        "3",
+        "0",
+        "1",
+        "7"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 2489,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\ntype T struct{ n int }\n\nfunc main() {\n\tvar i any = T{n: 3}\n\tt := i.(T)\n\tt.n = 7\n\tfmt.Println(i.(T).n)\n}\n",
+      "options": [
+        "3",
+        "7",
+        "0",
+        "1"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 2490,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tdefer func() {\n\t\tif recover() != nil {\n\t\t\tfmt.Println(1)\n\t\t} else {\n\t\t\tfmt.Println(0)\n\t\t}\n\t}()\n\tvar pp **int\n\tfmt.Println(**pp)\n}\n",
+      "options": [
+        "0",
+        "1",
+        "2",
+        "3"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 2491,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"reflect\"\n)\n\nfunc main() {\n\tx := 4\n\tv := reflect.ValueOf(&x).Elem()\n\tv.SetInt(8)\n\tfmt.Println(x)\n}\n",
+      "options": [
+        "4",
+        "0",
+        "8",
+        "1"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 2492,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"reflect\"\n)\n\nfunc main() {\n\tx := 4\n\tv := reflect.ValueOf(x)\n\tif v.CanSet() {\n\t\tfmt.Println(1)\n\t} else {\n\t\tfmt.Println(0)\n\t}\n}\n",
+      "options": [
+        "1",
+        "2",
+        "3",
+        "0"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 2493,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\ntype Inner struct{ n int }\n\ntype Outer struct{ *Inner }\n\nfunc main() {\n\to := Outer{Inner: &Inner{n: 4}}\n\to.n = 9\n\tfmt.Println(o.Inner.n)\n}\n",
+      "options": [
+        "9",
+        "4",
+        "0",
+        "1"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 2494,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\ntype Inner struct{ n int }\n\ntype Outer struct{ *Inner }\n\nfunc main() {\n\tdefer func() {\n\t\tif recover() != nil {\n\t\t\tfmt.Println(1)\n\t\t} else {\n\t\t\tfmt.Println(0)\n\t\t}\n\t}()\n\tvar o Outer\n\tfmt.Println(o.n)\n}\n",
+      "options": [
+        "0",
+        "1",
+        "2",
+        "3"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 2495,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"sync/atomic\"\n)\n\nfunc main() {\n\tvar ap atomic.Pointer[int]\n\tif ap.Load() == nil {\n\t\tfmt.Println(1)\n\t} else {\n\t\tfmt.Println(0)\n\t}\n}\n",
+      "options": [
+        "0",
+        "2",
+        "1",
+        "3"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 2496,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"sync/atomic\"\n)\n\nfunc main() {\n\tvar ap atomic.Pointer[int]\n\ta, b := 1, 2\n\tap.Store(&a)\n\tok := ap.CompareAndSwap(&a, &b)\n\tif ok {\n\t\tfmt.Println(1)\n\t} else {\n\t\tfmt.Println(0)\n\t}\n\tfmt.Println(*ap.Load())\n}\n",
+      "options": [
+        "0, 1",
+        "1, 1",
+        "0, 2",
+        "1, 2"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 2497,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"sync/atomic\"\n)\n\nfunc main() {\n\tvar ap atomic.Pointer[int]\n\ta, b := 1, 2\n\tap.Store(&a)\n\tok := ap.CompareAndSwap(&b, &b)\n\tif ok {\n\t\tfmt.Println(1)\n\t} else {\n\t\tfmt.Println(0)\n\t}\n\tfmt.Println(*ap.Load())\n}\n",
+      "options": [
+        "0, 1",
+        "1, 2",
+        "0, 2",
+        "1, 1"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 2498,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tp := new([3]int)\n\tp[1] = 4\n\tfmt.Println(p[1])\n\tfmt.Println(len(p[:]))\n}\n",
+      "options": [
+        "4, 1",
+        "4, 3",
+        "0, 3",
+        "4, 4"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 2499,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"unsafe\"\n)\n\nfunc main() {\n\tx := 5\n\tu := uintptr(unsafe.Pointer(&x))\n\tp := (*int)(unsafe.Pointer(u))\n\tfmt.Println(*p)\n}\n",
+      "options": [
+        "0",
+        "1",
+        "5",
+        "4"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 2500,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\ntype I interface{ N() int }\n\ntype T struct{}\n\nfunc (t *T) N() int {\n\tif t == nil {\n\t\treturn 1\n\t}\n\treturn 0\n}\n\nfunc main() {\n\tvar i I = (*T)(nil)\n\tfmt.Println(i.N())\n}\n",
+      "options": [
+        "0",
+        "2",
+        "3",
+        "1"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 2501,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\ntype I interface{ N() int }\n\ntype T struct{}\n\nfunc (t *T) N() int {\n\treturn 0\n}\n\nfunc main() {\n\tvar i I = (*T)(nil)\n\tif i == nil {\n\t\tfmt.Println(1)\n\t} else {\n\t\tfmt.Println(0)\n\t}\n}\n",
+      "options": [
+        "0",
+        "1",
+        "2",
+        "3"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 2502,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tvar a any = (*int)(nil)\n\tvar b any = (*string)(nil)\n\tif a == b {\n\t\tfmt.Println(1)\n\t} else {\n\t\tfmt.Println(0)\n\t}\n}\n",
+      "options": [
+        "1",
+        "0",
+        "2",
+        "3"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 2503,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tvar a any = (*int)(nil)\n\tvar b any = (*int)(nil)\n\tif a == b {\n\t\tfmt.Println(1)\n\t} else {\n\t\tfmt.Println(0)\n\t}\n}\n",
+      "options": [
+        "0",
+        "2",
+        "1",
+        "3"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 2504,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tx := 3\n\tp := &x\n\tpp := &p\n\tqq := pp\n\t**qq = 8\n\tfmt.Println(x)\n}\n",
+      "options": [
+        "3",
+        "0",
+        "1",
+        "8"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 2505,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tx, y := 1, 2\n\tp := &x\n\tpp := &p\n\t*pp = &y\n\t**pp = 9\n\tfmt.Println(x)\n\tfmt.Println(y)\n}\n",
+      "options": [
+        "1, 9",
+        "9, 9",
+        "1, 2",
+        "9, 2"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 2506,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"reflect\"\n)\n\nfunc main() {\n\tt := reflect.TypeOf(0)\n\tv := reflect.New(t)\n\tv.Elem().SetInt(6)\n\tfmt.Println(v.Elem().Int())\n}\n",
+      "options": [
+        "0",
+        "6",
+        "1",
+        "5"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 2507,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\ntype T struct{ a, b int }\n\nfunc main() {\n\tt := T{a: 1, b: 2}\n\tp := &t.a\n\t*p = 9\n\tfmt.Println(t.a)\n\tfmt.Println(t.b)\n}\n",
+      "options": [
+        "9, 9",
+        "1, 2",
+        "9, 2",
+        "1, 9"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 2508,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"unsafe\"\n)\n\ntype T struct {\n\ta int32\n\tb int32\n}\n\nfunc main() {\n\tt := T{a: 1, b: 2}\n\tp := (*int32)(unsafe.Pointer(uintptr(unsafe.Pointer(&t)) + unsafe.Offsetof(t.b)))\n\tfmt.Println(*p)\n}\n",
+      "options": [
+        "1",
+        "0",
+        "3",
+        "2"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 2509,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\ntype T struct{ n int }\n\nfunc (t *T) add(k int) {\n\tt.n += k\n}\n\nfunc main() {\n\tt := T{n: 1}\n\tf := t.add\n\tf(4)\n\tfmt.Println(t.n)\n}\n",
+      "options": [
+        "5",
+        "1",
+        "4",
+        "0"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 2510,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\ntype T struct{ n int }\n\nfunc (t T) get() int {\n\treturn t.n\n}\n\nfunc main() {\n\tt := T{n: 1}\n\tf := t.get\n\tt.n = 9\n\tfmt.Println(f())\n}\n",
+      "options": [
+        "9",
+        "1",
+        "0",
+        "8"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 2511,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\ntype T struct{ n int }\n\nfunc (t *T) get() int {\n\treturn t.n\n}\n\nfunc main() {\n\tt := T{n: 1}\n\tf := t.get\n\tt.n = 9\n\tfmt.Println(f())\n}\n",
+      "options": [
+        "1",
+        "0",
+        "9",
+        "8"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 2512,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\ntype T struct{ n int }\n\nfunc main() {\n\ta := &T{n: 1}\n\tvar i, j any = a, a\n\tif i == j {\n\t\tfmt.Println(1)\n\t} else {\n\t\tfmt.Println(0)\n\t}\n}\n",
+      "options": [
+        "0",
+        "2",
+        "3",
+        "1"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 2513,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\ntype T struct{ n int }\n\nfunc main() {\n\tvar i, j any = &T{n: 1}, &T{n: 1}\n\tif i == j {\n\t\tfmt.Println(1)\n\t} else {\n\t\tfmt.Println(0)\n\t}\n}\n",
+      "options": [
+        "0",
+        "1",
+        "2",
+        "3"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 2514,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\ntype T struct{ n int }\n\nfunc main() {\n\tvar i, j any = T{n: 1}, T{n: 1}\n\tif i == j {\n\t\tfmt.Println(1)\n\t} else {\n\t\tfmt.Println(0)\n\t}\n}\n",
+      "options": [
+        "0",
+        "1",
+        "2",
+        "3"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 2515,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc swap(a, b **int) {\n\t*a, *b = *b, *a\n}\n\nfunc main() {\n\tx, y := 1, 2\n\tpx, py := &x, &y\n\tswap(&px, &py)\n\tfmt.Println(*px)\n\tfmt.Println(*py)\n\tfmt.Println(x)\n}\n",
+      "options": [
+        "1, 2, 1",
+        "2, 1, 2",
+        "2, 1, 1",
+        "1, 2, 2"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 2516,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc f() *int {\n\tx := 7\n\treturn &x\n}\n\nfunc main() {\n\tp := f()\n\tfmt.Println(*p)\n}\n",
+      "options": [
+        "0",
+        "1",
+        "6",
+        "7"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 2517,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"unsafe\"\n)\n\ntype A int\n\nfunc main() {\n\tvar a A = 3\n\tp := (*int)(unsafe.Pointer(&a))\n\t*p = 9\n\tfmt.Println(int(a))\n}\n",
+      "options": [
+        "9",
+        "3",
+        "0",
+        "1"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 2518,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tx := 2\n\tp := &x\n\tpp := &p\n\tfmt.Println(**pp)\n}\n",
+      "options": [
+        "0",
+        "2",
+        "1",
+        "3"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 2519,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"sync/atomic\"\n)\n\nfunc main() {\n\tvar ap atomic.Pointer[int]\n\ta := 3\n\tap.Store(&a)\n\tap.Store(nil)\n\tif ap.Load() == nil {\n\t\tfmt.Println(1)\n\t} else {\n\t\tfmt.Println(0)\n\t}\n}\n",
+      "options": [
+        "0",
+        "3",
+        "1",
+        "2"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 2520,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\ntype T struct{ n int }\n\nfunc main() {\n\tvar i any = (*T)(nil)\n\tp, ok := i.(*T)\n\tif ok && p == nil {\n\t\tfmt.Println(1)\n\t} else {\n\t\tfmt.Println(0)\n\t}\n}\n",
+      "options": [
+        "0",
+        "2",
+        "3",
+        "1"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 2521,
+      "type": "text",
+      "text": "Какой мост между *T и другим *U?",
+      "options": [
+        "Любое приведение в скобках (*U)(p)",
+        "unsafe.Pointer",
+        "uintptr сам по себе",
+        "reflect.Type"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 2522,
+      "type": "text",
+      "text": "Почему uintptr не держит объект живым для GC?",
+      "options": [
+        "GC игнорирует все неэкспортируемые поля",
+        "uintptr всегда указывает в стек",
+        "Это целое, не указатель: сборщик его не сканирует",
+        "unsafe запрещает хранить uintptr"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 2523,
+      "type": "text",
+      "text": "Когда конвертация uintptr обратно в unsafe.Pointer определена?",
+      "options": [
+        "Всегда, uintptr вечный",
+        "Только в init",
+        "Только для указателей на стек",
+        "Сразу в том же выражении, без сохранения «голого» адреса через вызов, который может сдвинуть GC"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 2524,
+      "type": "text",
+      "text": "Зачем функции **T?",
+      "options": [
+        "Чтобы подменить указатель у вызывающего, а не объект за ним",
+        "Так быстрее разыменование",
+        "Иначе нельзя менять поля T",
+        "**T нужен сборщику мусора"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 2525,
+      "type": "text",
+      "text": "Почему структуру с []byte нельзя сравнивать, а два *S — можно?",
+      "options": [
+        "Указатели тоже несравнимы",
+        "Указатели сравнивают адреса, не содержимое; слайс в значении делает T несравнимым",
+        "Слайс сравнивается по длине",
+        "GC запрещает == для структур"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 2526,
+      "type": "text",
+      "text": "Что сравнивает i == j, если оба any держат *T?",
+      "options": [
+        "Глубокое равенство структур",
+        "Только типы, адреса игнорируются",
+        "Динамический тип и идентичность указателя",
+        "Хэш содержимого"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 2527,
+      "type": "text",
+      "text": "Почему reflect.ValueOf(x).CanSet() ложно, а ValueOf(&x).Elem() часто истинно?",
+      "options": [
+        "reflect не умеет менять int",
+        "CanSet требует unsafe",
+        "Elem всегда паникует на указателе",
+        "ValueOf(x) — копия; Elem указателя ссылается на исходную переменную"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 2528,
+      "type": "text",
+      "text": "Что связывает method value t.add, если add имеет pointer receiver?",
+      "options": [
+        "Указатель на t; поздние записи в t видны",
+        "Копию t на момент создания",
+        "Ничего: это только имя метода",
+        "Интерфейс с typed nil"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 2529,
+      "type": "text",
+      "text": "Что связывает method value t.get, если get имеет value receiver?",
+      "options": [
+        "Указатель на t",
+        "Копию t на момент создания",
+        "Всегда актуальное t",
+        "nil, пока не вызовешь"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 2530,
+      "type": "text",
+      "text": "Что делает atomic.Pointer[T] по сравнению с обычным *T?",
+      "options": [
+        "Запрет nil",
+        "Глубокое копирование T",
+        "Атомарные Store/Load/CAS без гонки на сам указатель",
+        "Арифметику указателей"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 2531,
+      "type": "text",
+      "text": "Почему promoted-поле o.n паникует, если Outer встраивает nil *Inner?",
+      "options": [
+        "Встраивание указателей запрещено",
+        "n не экспортировано",
+        "Outer несравним",
+        "Это разыменование nil-указателя Inner"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 2532,
+      "type": "text",
+      "text": "Есть ли в Go висячие указатели на ушедший кадр стека?",
+      "options": [
+        "Нет: escape analysis уносит переменную в кучу",
+        "Да, как в C",
+        "Да, если вернуть &x из горутины",
+        "Только для unsafe.Pointer"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 2533,
+      "type": "text",
+      "text": "Что происходит при type assert i.(*T), если i держит typed nil *T?",
+      "options": [
+        "Паника",
+        "ok true, значение nil *T",
+        "ok false",
+        "ok true и пустой интерфейс"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 2534,
+      "type": "text",
+      "text": "Почему два any с (*int)(nil) и (*string)(nil) не равны?",
+      "options": [
+        "nil никогда не равен nil",
+        "any не сравнивает указатели",
+        "Разные динамические типы",
+        "Строки несравнимы"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 2535,
+      "type": "text",
+      "text": "Что копирует присваивание интерфейсу значения T, не *T?",
+      "options": [
+        "Указатель на исходную переменную",
+        "Ничего, интерфейс хранит ссылку на стек",
+        "Только method set",
+        "Копию T внутрь интерфейса; дальше меняется только эта копия"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 2536,
+      "type": "text",
+      "text": "Зачем сразу конвертировать uintptr обратно в unsafe.Pointer в одном выражении с Offsetof?",
+      "options": [
+        "Чтобы адрес не жил как целое между сейф-пойнтами GC",
+        "Иначе Offsetof возвращает *T",
+        "Так требует escape analysis",
+        "uintptr нельзя складывать с Offsetof"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 2537,
+      "type": "text",
+      "text": "Можно ли сравнивать два *S, если S содержит несравнимое поле?",
+      "options": [
+        "Нет: *S тоже несравним",
+        "Да: сравниваются адреса, не S",
+        "Только если оба не nil",
+        "Только через reflect.DeepEqual"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 2538,
+      "type": "text",
+      "text": "Что делает reflect.New(t)?",
+      "options": [
+        "Возвращает nil-указатель типа t",
+        "Копирует t",
+        "Выделяет zero value и возвращает Value указателя на него",
+        "Паникует, если t не структура"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 2539,
+      "type": "text",
+      "text": "Что меняет swap(a, b **int)?",
+      "options": [
+        "Значения int местами",
+        "Типы указателей",
+        "Только первый аргумент",
+        "Какие переменные-указатели на что смотрят, не значения int"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 2540,
+      "type": "text",
+      "text": "Почему (*int)(unsafe.Pointer(&a)) работает для type A int?",
+      "options": [
+        "Одинаковый layout; unsafe.Pointer снимает тип",
+        "A и int — один тип для компилятора",
+        "Любые именованные типы взаимозаменяемы",
+        "GC сам приводит A к int"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 2541,
+      "type": "boolean",
+      "text": "uintptr — указатель для сборщика мусора.",
+      "correct": false
+    },
+    {
+      "id": 2542,
+      "type": "boolean",
+      "text": "*T можно через unsafe.Pointer превратить в *U другого типа.",
+      "correct": true
+    },
+    {
+      "id": 2543,
+      "type": "boolean",
+      "text": "Функция с **T может подменить указатель у вызывающего.",
+      "correct": true
+    },
+    {
+      "id": 2544,
+      "type": "boolean",
+      "text": "Два *S сравнимы, даже если S несравним из‑за слайса.",
+      "correct": true
+    },
+    {
+      "id": 2545,
+      "type": "boolean",
+      "text": "any с (*T)(nil) равен nil-интерфейсу.",
+      "correct": false
+    },
+    {
+      "id": 2546,
+      "type": "boolean",
+      "text": "reflect.ValueOf(x) для переменной x обычно CanSet.",
+      "correct": false
+    },
+    {
+      "id": 2547,
+      "type": "boolean",
+      "text": "Method value с pointer receiver видит поздние изменения получателя.",
+      "correct": true
+    },
+    {
+      "id": 2548,
+      "type": "boolean",
+      "text": "Method value с value receiver копирует получателя в момент создания.",
+      "correct": true
+    },
+    {
+      "id": 2549,
+      "type": "boolean",
+      "text": "atomic.Pointer[T].Load на zero value даёт nil.",
+      "correct": true
+    },
+    {
+      "id": 2550,
+      "type": "boolean",
+      "text": "Go позволяет вернуть &local и получить висячий указатель.",
+      "correct": false
+    },
+    {
+      "id": 2551,
+      "type": "boolean",
+      "text": "Type assert к *T успешен, если интерфейс держит typed nil *T.",
+      "correct": true
+    },
+    {
+      "id": 2552,
+      "type": "boolean",
+      "text": "Два any с typed nil разных типов равны, потому что оба nil.",
+      "correct": false
+    },
+    {
+      "id": 2553,
+      "type": "boolean",
+      "text": "Значение T в интерфейсе — копия, не ссылка на исходную переменную.",
+      "correct": true
+    },
+    {
+      "id": 2554,
+      "type": "boolean",
+      "text": "Встраивание nil *Inner делает чтение promoted-поля безопасным zero.",
+      "correct": false
+    },
+    {
+      "id": 2555,
+      "type": "boolean",
+      "text": "Складывать uintptr и Offsetof нужно в одном выражении с обратной конвертацией в указатель.",
+      "correct": true
+    },
+    {
+      "id": 2556,
+      "type": "boolean",
+      "text": "Прямое приведение (*float64)(intPtr) без unsafe компилируется.",
+      "correct": false
+    },
+    {
+      "id": 2557,
+      "type": "boolean",
+      "text": "CompareAndSwap у atomic.Pointer сравнивает адреса, не *T.",
+      "correct": true
+    },
+    {
+      "id": 2558,
+      "type": "boolean",
+      "text": "unsafe.Pointer можно конвертировать в *T.",
+      "correct": true
+    },
+    {
+      "id": 2559,
+      "type": "boolean",
+      "text": "Интерфейс сравнивает два *T по глубокому равенству полей.",
+      "correct": false
+    },
+    {
+      "id": 2560,
+      "type": "boolean",
+      "text": "reflect.New выделяет zero и даёт указатель на него.",
+      "correct": true
+    },
+    {
+      "id": 2561,
+      "type": "recall",
+      "text": "Какой тип — мост между разными *T и *U?",
+      "answer": "unsafe.Pointer."
+    },
+    {
+      "id": 2562,
+      "type": "recall",
+      "text": "Почему нельзя долго хранить адрес в uintptr?",
+      "answer": "GC не считает uintptr указателем и может перенести объект."
+    },
+    {
+      "id": 2563,
+      "type": "recall",
+      "text": "Зачем аргумент **T?",
+      "answer": "Чтобы подменить указатель вызывающего."
+    },
+    {
+      "id": 2564,
+      "type": "recall",
+      "text": "Что сравнивается в == двух указателей на несравнимый тип?",
+      "answer": "Адреса."
+    },
+    {
+      "id": 2565,
+      "type": "recall",
+      "text": "Как мутировать переменную через reflect?",
+      "answer": "ValueOf(&x).Elem() и Set; копия ValueOf(x) не сеттится."
+    },
+    {
+      "id": 2566,
+      "type": "recall",
+      "text": "Что захватывает method value с pointer receiver?",
+      "answer": "Указатель на получателя."
+    },
+    {
+      "id": 2567,
+      "type": "recall",
+      "text": "Что захватывает method value с value receiver?",
+      "answer": "Копию получателя."
+    },
+    {
+      "id": 2568,
+      "type": "recall",
+      "text": "Есть ли висячие указатели на стек в безопасном Go?",
+      "answer": "Нет: переменная уходит в кучу."
+    },
+    {
+      "id": 2569,
+      "type": "recall",
+      "text": "Чему равен интерфейс с (*T)(nil)?",
+      "answer": "Не nil: тип *T ещё там."
+    },
+    {
+      "id": 2570,
+      "type": "recall",
+      "text": "Что делает atomic.Pointer?",
+      "answer": "Атомарно хранит и подменяет *T."
+    },
+    {
+      "id": 2571,
+      "type": "recall",
+      "text": "Что копируется при присвоении T в интерфейс?",
+      "answer": "Значение T."
+    },
+    {
+      "id": 2572,
+      "type": "recall",
+      "text": "Почему o.n паникует при nil embedded *Inner?",
+      "answer": "Разыменование nil."
+    },
+    {
+      "id": 2573,
+      "type": "recall",
+      "text": "Как сравниваются два any, держащие *T?",
+      "answer": "По типу и идентичности указателя."
+    },
+    {
+      "id": 2574,
+      "type": "recall",
+      "text": "Что возвращает type assert к *T на typed nil?",
+      "answer": "nil *T и ok true."
+    },
+    {
+      "id": 2575,
+      "type": "recall",
+      "text": "Что меняет функция swap(**T, **T)?",
+      "answer": "Куда смотрят указатели, не объекты."
+    },
+    {
+      "id": 2576,
+      "type": "recall",
+      "text": "Что делает reflect.New?",
+      "answer": "new через reflect: указатель на zero."
+    },
+    {
+      "id": 2577,
+      "type": "recall",
+      "text": "CompareAndSwap указателей сравнивает что?",
+      "answer": "Адреса."
+    },
+    {
+      "id": 2578,
+      "type": "recall",
+      "text": "Нужен ли unsafe, чтобы из *A сделать *int при type A int?",
+      "answer": "Да: прямого приведения указателей разных типов нет."
+    },
+    {
+      "id": 2579,
+      "type": "recall",
+      "text": "Что такое typed nil в интерфейсе?",
+      "answer": "Пара (тип, nil-данные); интерфейс не пуст."
+    },
+    {
+      "id": 2580,
+      "type": "recall",
+      "text": "Почему ValueOf(x) нельзя Set?",
+      "answer": "Это копия, не адресуемый слот исходной переменной."
+    }
+  ]
+}
