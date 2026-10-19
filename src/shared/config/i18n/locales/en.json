@@ -94,7 +94,8 @@
       "goroutines": "Goroutines",
       "channels": "Channels",
       "contexts": "Contexts",
-      "pointers": "Pointers"
+      "pointers": "Pointers",
+      "maps": "Maps"
     },
     "levels": {
       "junior": "Junior",

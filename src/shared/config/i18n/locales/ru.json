@@ -94,7 +94,8 @@
       "goroutines": "Горутины",
       "channels": "Каналы",
       "contexts": "Контексты",
-      "pointers": "Указатели"
+      "pointers": "Указатели",
+      "maps": "Maps"
     },
     "levels": {
       "junior": "Junior",
