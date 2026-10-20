@@ -121,10 +121,19 @@
       "packSize_few": "В паке {{count}} вопроса.",
       "packSize_many": "В паке {{count}} вопросов.",
       "packSize_other": "В паке {{count}} вопросов.",
+      "packCoverage": "Отвечено {{percent}}%.",
       "packUntouched": "{{n}} вы ещё не трогали.",
       "packAllTouched": "Вы уже отвечали на все.",
+      "packEverWrong": "Ошибались на {{n}}.",
+      "packNoMistakes": "Пока нет ошибок в этом наборе.",
       "roundSize": "Количество вопросов",
       "typeFilter": "Типы вопросов",
+      "poolMode": "Набор вопросов",
+      "modes": {
+        "all": "Все",
+        "untouched": "Новые",
+        "everWrong": "Ошибки"
+      },
       "types": {
         "all": "Все",
         "code": "Код",
@@ -152,6 +161,7 @@
       "resultScore": "{{score}} из {{total}}",
       "resultPoints": "Баллы",
       "playAgain": "Сыграть снова",
+      "backToPack": "К настройкам пака",
       "unfinished": "Игра не закончена",
       "continue": "Продолжить",
       "discard": "Удалить"

@@ -5,7 +5,9 @@ export { installActivityRecovery, rebuildActivityByDay } from './model/rebuild-b
 export { recordAnswer } from './model/record-answer'
 export { clearActivity, emptyActivity, readActivity } from './model/storage'
 export { useActivity } from './model/use-activity'
-export { countUntouchedQuestions, isQuestionTouched } from './model/untouched'
+export { summarizePackActivity } from './model/summarize'
+export { countUntouchedQuestions, hasQuestionEverLost, isQuestionTouched } from './model/untouched'
+export type { PackActivitySummary } from './model/summarize'
 export type {
   ActivityPackRef,
   ActivityState,

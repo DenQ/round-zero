@@ -119,10 +119,19 @@
       "subtitleAll": "All questions from this pack",
       "packSize_one": "The pack has {{count}} question.",
       "packSize_other": "The pack has {{count}} questions.",
+      "packCoverage": "{{percent}}% answered.",
       "packUntouched": "{{n}} you haven't touched yet.",
       "packAllTouched": "You've already answered all of them.",
+      "packEverWrong": "You've missed {{n}} before.",
+      "packNoMistakes": "No mistakes in this set yet.",
       "roundSize": "Number of questions",
       "typeFilter": "Question types",
+      "poolMode": "Question set",
+      "modes": {
+        "all": "All",
+        "untouched": "New",
+        "everWrong": "Mistakes"
+      },
       "types": {
         "all": "All",
         "code": "Code",
@@ -148,6 +157,7 @@
       "resultScore": "{{score}} of {{total}}",
       "resultPoints": "Points",
       "playAgain": "Play again",
+      "backToPack": "Pack settings",
       "unfinished": "Game in progress",
       "continue": "Continue",
       "discard": "Delete"

@@ -2,15 +2,17 @@ import PlayArrowIcon from '@mui/icons-material/PlayArrow'
 import Badge from '@mui/material/Badge'
 import Box from '@mui/material/Box'
 import IconButton from '@mui/material/IconButton'
+import LinearProgress from '@mui/material/LinearProgress'
 import Slider from '@mui/material/Slider'
 import Stack from '@mui/material/Stack'
 import ToggleButton from '@mui/material/ToggleButton'
 import Typography from '@mui/material/Typography'
 import { useTranslation } from 'react-i18next'
-import { countUntouchedQuestions } from '@entities/activity'
+import { summarizePackActivity, useActivity } from '@entities/activity'
 import { QUESTION_TYPES, type Question, type QuestionType } from '@entities/question'
 import { MIN_ROUND_SIZE, type RoundSize } from '../model/constants'
 import { countQuestionsByType } from '../model/filterQuestions'
+import { countQuestionsByPoolMode, QUIZ_POOL_MODES, type QuizPoolMode } from '../model/pool-mode'
 import { areAllQuestionTypesSelected } from '../model/toggleQuestionTypes'
 import { SavedGameActions } from './SavedGameActions'
 
@@ -27,7 +29,10 @@ const typeBadgeSx = {
 
 type PlayOfferProps = {
   questions: Question[]
+  typed: Question[]
   pool: Question[]
+  poolMode: QuizPoolMode
+  onPoolModeChange: (mode: QuizPoolMode) => void
   roundSize: RoundSize
   resolvedRoundSize: number
   onRoundSizeChange: (size: RoundSize) => void
@@ -41,7 +46,10 @@ type PlayOfferProps = {
 
 export function PlayOffer({
   questions,
+  typed,
   pool,
+  poolMode,
+  onPoolModeChange,
   roundSize,
   resolvedRoundSize,
   onRoundSizeChange,
@@ -53,15 +61,28 @@ export function PlayOffer({
   onDiscard,
 }: PlayOfferProps) {
   const { t } = useTranslation()
+  const activity = useActivity()
   const allTypesSelected = areAllQuestionTypesSelected(typeFilter)
   const typeCounts = countQuestionsByType(questions)
+  const modeCounts = countQuestionsByPoolMode(typed, activity)
+  const stats = summarizePackActivity(
+    typed.map((question) => question.id),
+    activity,
+  )
   const canPlay = pool.length > 0
   const usingAll = roundSize === 'all' || resolvedRoundSize === pool.length
-  const untouched = countUntouchedQuestions(pool.map((question) => question.id))
-  const packStats =
-    untouched > 0
-      ? `${t('quiz.game.packSize', { count: pool.length })} ${t('quiz.game.packUntouched', { n: untouched })}`
-      : `${t('quiz.game.packSize', { count: pool.length })} ${t('quiz.game.packAllTouched')}`
+  const coverageLabel =
+    stats.total === 0
+      ? t('quiz.game.packSize', { count: 0 })
+      : `${t('quiz.game.packSize', { count: stats.total })} ${t('quiz.game.packCoverage', { percent: stats.coveragePercent })}`
+  const untouchedLabel =
+    stats.untouched > 0
+      ? t('quiz.game.packUntouched', { n: stats.untouched })
+      : t('quiz.game.packAllTouched')
+  const mistakesLabel =
+    stats.everWrong > 0
+      ? t('quiz.game.packEverWrong', { n: stats.everWrong })
+      : t('quiz.game.packNoMistakes')
   const subtitle = usingAll
     ? t('quiz.game.subtitleAll')
     : t('quiz.game.subtitle', { count: resolvedRoundSize })
@@ -101,6 +122,30 @@ export function PlayOffer({
           </TypeToggle>
         ))}
       </Box>
+      <Box
+        role="group"
+        aria-label={t('quiz.game.poolMode')}
+        sx={{
+          display: 'flex',
+          flexWrap: 'wrap',
+          justifyContent: 'center',
+          columnGap: 1.5,
+          rowGap: 2.5,
+          px: 1,
+        }}
+      >
+        {QUIZ_POOL_MODES.map((mode) => (
+          <TypeToggle
+            key={mode}
+            value={mode}
+            selected={poolMode === mode}
+            count={modeCounts[mode]}
+            onClick={() => onPoolModeChange(mode)}
+          >
+            {t(`quiz.game.modes.${mode}`)}
+          </TypeToggle>
+        ))}
+      </Box>
       <Stack
         direction="row"
         spacing={2}
@@ -133,9 +178,22 @@ export function PlayOffer({
       <Typography variant="h6" component="p">
         {t('quiz.game.title')}
       </Typography>
-      <Typography color="text.secondary" sx={{ textAlign: 'center' }}>
-        {packStats}
-      </Typography>
+      <Stack spacing={0.75} sx={{ alignItems: 'center', width: 'min(100%, 22rem)', px: 2 }}>
+        <Typography color="text.secondary" sx={{ textAlign: 'center' }}>
+          {coverageLabel}
+        </Typography>
+        {stats.total > 0 ? (
+          <LinearProgress
+            variant="determinate"
+            value={stats.coveragePercent}
+            aria-label={t('quiz.game.packCoverage', { percent: stats.coveragePercent })}
+            sx={{ width: '100%', height: 8, borderRadius: 1 }}
+          />
+        ) : null}
+        <Typography color="text.secondary" sx={{ textAlign: 'center' }}>
+          {untouchedLabel} {mistakesLabel}
+        </Typography>
+      </Stack>
       <Typography variant="body2" color="text.secondary" sx={{ textAlign: 'center' }}>
         {subtitle}
       </Typography>

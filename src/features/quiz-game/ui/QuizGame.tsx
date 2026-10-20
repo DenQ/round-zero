@@ -36,7 +36,16 @@ export function QuizGame({ questions, pack }: QuizGameProps) {
   }
 
   if (game.phase === 'result') {
-    return <RoundResult pack={pack} score={game.score} total={game.total} onReplay={game.start} />
+    return (
+      <RoundResult
+        pack={pack}
+        score={game.score}
+        total={game.total}
+        onReplay={game.start}
+        canReplay={game.canReplay}
+        onBackToPack={game.backToPack}
+      />
+    )
   }
 
   if (game.questionCount === 0) {
@@ -46,7 +55,10 @@ export function QuizGame({ questions, pack }: QuizGameProps) {
   return (
     <PlayOffer
       questions={questions}
+      typed={game.typed}
       pool={game.pool}
+      poolMode={game.poolMode}
+      onPoolModeChange={game.setPoolMode}
       roundSize={game.roundSize}
       resolvedRoundSize={game.resolvedRoundSize}
       onRoundSizeChange={game.setRoundSize}

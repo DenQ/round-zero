@@ -6,6 +6,11 @@ export function isQuestionTouched(state: ActivityState, questionId: number): boo
   return Boolean(question && (question.wins.length > 0 || question.loses.length > 0))
 }
 
+export function hasQuestionEverLost(state: ActivityState, questionId: number): boolean {
+  const question = state.byQuestion[questionId]
+  return Boolean(question && question.loses.length > 0)
+}
+
 export function countUntouchedQuestions(
   questionIds: readonly number[],
   state: ActivityState = readActivity(),

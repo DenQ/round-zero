@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import type { ActivityPackRef } from '@entities/activity'
-import { getPackKey, recordAnswer } from '@entities/activity'
+import { getPackKey, recordAnswer, useActivity } from '@entities/activity'
 import { ensureRatingBackfill, recordRating } from '@entities/rating'
 import { isQuestionCorrect, type Question, type QuestionType } from '@entities/question'
 import {
@@ -14,6 +14,8 @@ import {
 import { resolveRoundSize, type RoundSize } from './constants'
 import { filterQuestions } from './filterQuestions'
 import { pickQuestions } from './pickQuestions'
+import { filterByPoolMode, type QuizPoolMode } from './pool-mode'
+import { readPoolMode, writePoolMode } from './pool-mode-storage'
 import { rehydrateSavedGame } from './rehydrate'
 import { readRoundSize, writeRoundSize } from './round-size-storage'
 import { readTypeFilter, writeTypeFilter } from './type-filter-storage'
@@ -36,8 +38,11 @@ export function useQuizGame(questions: Question[], pack: ActivityPackRef) {
   const [sourceQuestions, setSourceQuestions] = useState(questions)
   const [roundSize, setRoundSizeState] = useState<RoundSize>(readRoundSize)
   const [typeFilter, setTypeFilter] = useState<QuestionType[]>(readTypeFilter)
+  const [poolMode, setPoolModeState] = useState<QuizPoolMode>(readPoolMode)
   const stateRef = useRef(state)
-  const pool = filterQuestions(questions, typeFilter)
+  const activity = useActivity()
+  const typed = filterQuestions(questions, typeFilter)
+  const pool = filterByPoolMode(typed, poolMode, activity)
   const resolvedRoundSize = resolveRoundSize(roundSize, pool.length)
   const packKey = getPackKey(pack)
 
@@ -63,6 +68,11 @@ export function useQuizGame(questions: Question[], pack: ActivityPackRef) {
     setRoundSizeState(size)
   }, [])
 
+  const setPoolMode = useCallback((mode: QuizPoolMode) => {
+    writePoolMode(mode)
+    setPoolModeState(mode)
+  }, [])
+
   const commit = useCallback(
     (next: GameState) => {
       stateRef.current = next
@@ -78,6 +88,10 @@ export function useQuizGame(questions: Question[], pack: ActivityPackRef) {
     },
     [pack],
   )
+
+  const backToPack = useCallback(() => {
+    commit(idleState)
+  }, [commit])
 
   const start = useCallback(() => {
     if (pool.length === 0 || resolvedRoundSize < 1) {
@@ -175,7 +189,10 @@ export function useQuizGame(questions: Question[], pack: ActivityPackRef) {
     return {
       phase: 'idle' as const,
       questionCount: questions.length,
+      typed,
       pool,
+      poolMode,
+      setPoolMode,
       roundSize,
       resolvedRoundSize,
       setRoundSize,
@@ -191,7 +208,9 @@ export function useQuizGame(questions: Question[], pack: ActivityPackRef) {
       phase: 'result' as const,
       score: countScore(state.round, state.answers),
       total: state.round.length,
+      canReplay: pool.length > 0,
       start,
+      backToPack,
     }
   }
 
