@@ -5,9 +5,11 @@ import { QuizPage } from '@pages/quiz'
 import { SettingsPage } from '@pages/settings'
 import { AppLayout } from '@widgets/app-layout'
 
+const basename = import.meta.env.BASE_URL.replace(/\/$/, '')
+
 export function AppRouter() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={basename || undefined}>
       <Routes>
         <Route element={<AppLayout />}>
           <Route index element={<HomePage />} />

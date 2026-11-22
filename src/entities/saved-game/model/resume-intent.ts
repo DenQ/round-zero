@@ -42,7 +42,18 @@ function readBootResumePack(): string | null {
     return null
   }
 
-  return packKeyFromPath(window.location.pathname)
+  return packKeyFromPath(appPathname())
+}
+
+function appPathname(): string {
+  const pathname = window.location.pathname
+  const base = import.meta.env.BASE_URL.replace(/\/$/, '')
+  if (!base || !pathname.startsWith(base)) {
+    return pathname
+  }
+
+  const rest = pathname.slice(base.length)
+  return rest.startsWith('/') ? rest : `/${rest}`
 }
 
 function packKeyFromPath(pathname: string): string | null {
