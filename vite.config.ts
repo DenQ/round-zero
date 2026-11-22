@@ -5,7 +5,17 @@ import { defineConfig } from 'vite'
 
 const rootDir = fileURLToPath(new URL('.', import.meta.url))
 
+function pagesBase(): string {
+  const configured = process.env.PAGES_BASE
+  if (!configured || configured === '/') {
+    return '/'
+  }
+
+  return configured.endsWith('/') ? configured : `${configured}/`
+}
+
 export default defineConfig({
+  base: pagesBase(),
   plugins: [react()],
   server: {
     port: 5180,

@@ -57,5 +57,5 @@ export function getPackCacheKey({ stack, topic, level, locale }: PackRef): strin
 }
 
 export function getPackUrl({ stack, topic, level, locale }: PackRef): string {
-  return `/packs/${stack}/${topic}/level-${level}-${locale}.json`
+  return `${import.meta.env.BASE_URL}packs/${stack}/${topic}/level-${level}-${locale}.json`
 }
