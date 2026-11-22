@@ -1,0 +1,408 @@
+{
+  "stack": "react",
+  "topic": "base",
+  "level": "middle",
+  "locale": "ru",
+  "questions": [
+    {
+      "id": 821,
+      "type": "code",
+      "language": "jsx",
+      "text": "import { useEffect } from 'react'\nfunction App() {\n  useEffect(() => {\n    console.log(2)\n  })\n  console.log(1)\n  return null\n}",
+      "options": [
+        "1, 2",
+        "2, 1",
+        "1",
+        "2"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 822,
+      "type": "code",
+      "language": "jsx",
+      "text": "import { useEffect } from 'react'\nfunction App() {\n  useEffect(() => {\n    console.log(2)\n  })\n  useEffect(() => {\n    console.log(3)\n  })\n  console.log(1)\n  return null\n}",
+      "options": [
+        "2, 3, 1",
+        "1, 2, 3",
+        "1, 3, 2",
+        "3, 2, 1"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 823,
+      "type": "code",
+      "language": "jsx",
+      "text": "import { useEffect } from 'react'\nfunction Child() {\n  useEffect(() => {\n    console.log(2)\n  })\n  console.log(1)\n  return null\n}\nfunction App() {\n  useEffect(() => {\n    console.log(4)\n  })\n  console.log(3)\n  return <Child />\n}",
+      "options": [
+        "3, 4, 1, 2",
+        "1, 2, 3, 4",
+        "3, 1, 2, 4",
+        "3, 1, 4, 2"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 824,
+      "type": "code",
+      "language": "jsx",
+      "text": "import { useEffect } from 'react'\nfunction Hidden() {\n  useEffect(() => {\n    console.log(1)\n  })\n  return null\n}\nfunction App() {\n  console.log(2)\n  return false && <Hidden />\n}",
+      "options": [
+        "2, 1",
+        "1",
+        "1, 2",
+        "2"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 825,
+      "type": "code",
+      "language": "jsx",
+      "text": "import { useEffect } from 'react'\nfunction App() {\n  useEffect(() => {\n    console.log(1)\n  })\n  return null\n}",
+      "options": [
+        "1",
+        "0",
+        "undefined",
+        "1, 1"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 826,
+      "type": "code",
+      "language": "jsx",
+      "text": "import { useEffect, useState } from 'react'\nfunction App() {\n  const [n, setN] = useState(0)\n  console.log(n)\n  useEffect(() => {\n    setN(n + 1)\n    setN(n + 1)\n  }, [])\n  return null\n}",
+      "options": [
+        "0, 2",
+        "0, 1",
+        "0, 1, 1",
+        "1"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 827,
+      "type": "code",
+      "language": "jsx",
+      "text": "import { useEffect, useState } from 'react'\nfunction App() {\n  const [n, setN] = useState(0)\n  console.log(n)\n  useEffect(() => {\n    setN((x) => x + 1)\n    setN((x) => x + 1)\n  }, [])\n  return null\n}",
+      "options": [
+        "0, 1",
+        "0, 1, 2",
+        "0, 2",
+        "2"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 828,
+      "type": "code",
+      "language": "jsx",
+      "text": "import { useEffect, useState } from 'react'\nfunction App() {\n  const [item, setItem] = useState({ n: 1 })\n  console.log(1)\n  useEffect(() => {\n    item.n = 2\n    setItem(item)\n  }, [])\n  return null\n}",
+      "options": [
+        "1, 1",
+        "1, 2",
+        "2",
+        "1"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 829,
+      "type": "code",
+      "language": "jsx",
+      "text": "import { useEffect, useState } from 'react'\nfunction App() {\n  const [item, setItem] = useState({ n: 1 })\n  console.log(item.n)\n  useEffect(() => {\n    setItem({ n: 2 })\n  }, [])\n  return null\n}",
+      "options": [
+        "1, 2",
+        "1",
+        "2",
+        "1, 1"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 830,
+      "type": "code",
+      "language": "jsx",
+      "text": "import { useEffect, useState } from 'react'\nfunction App() {\n  const [n, setN] = useState(0)\n  console.log(n)\n  useEffect(() => {\n    if (n < 3) setN(n + 1)\n  })\n  return null\n}",
+      "options": [
+        "0, 1",
+        "0, 1, 2, 3",
+        "0",
+        "0, 1, 2"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 831,
+      "type": "code",
+      "language": "jsx",
+      "text": "import { useEffect, useState } from 'react'\nfunction App() {\n  const [n, setN] = useState(0)\n  console.log(n)\n  useEffect(() => {\n    setN(1)\n  }, [])\n  return null\n}",
+      "options": [
+        "0",
+        "0, 1, 1",
+        "0, 1",
+        "1"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 832,
+      "type": "code",
+      "language": "jsx",
+      "text": "import { useEffect, useState } from 'react'\nfunction App() {\n  const [n, setN] = useState(0)\n  useEffect(() => {\n    console.log(n)\n    if (n === 0) setN(1)\n    return () => console.log(9)\n  })\n  return null\n}",
+      "options": [
+        "9, 0, 1",
+        "0, 1",
+        "0, 1, 9",
+        "0, 9, 1"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 833,
+      "type": "code",
+      "language": "jsx",
+      "text": "import { useEffect, useState } from 'react'\nfunction App() {\n  const [a, setA] = useState(0)\n  const [b, setB] = useState(0)\n  console.log(a)\n  console.log(b)\n  useEffect(() => {\n    setA(1)\n    setB(2)\n  }, [])\n  return null\n}",
+      "options": [
+        "0, 0, 1, 2",
+        "0, 0, 1, 0, 1, 2",
+        "0, 0, 1, 2, 2",
+        "1, 2"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 834,
+      "type": "code",
+      "language": "jsx",
+      "text": "import { useEffect, useState } from 'react'\nfunction App() {\n  const [n, setN] = useState(0)\n  console.log(n)\n  useEffect(() => {\n    if (n < 2) setN((x) => x + 1)\n  }, [{}])\n  return null\n}",
+      "options": [
+        "0, 1",
+        "0, 1, 2",
+        "0",
+        "0, 1, 2, 2"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 835,
+      "type": "code",
+      "language": "jsx",
+      "text": "import { useEffect, useState } from 'react'\nfunction App() {\n  const [n, setN] = useState(0)\n  console.log(n)\n  useEffect(() => {\n    if (n < 2) setN((x) => x + 1)\n  }, [0])\n  return null\n}",
+      "options": [
+        "0, 1, 2",
+        "0",
+        "0, 1",
+        "1"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 836,
+      "type": "code",
+      "language": "jsx",
+      "text": "import { useEffect, useState } from 'react'\nfunction App() {\n  const [n] = useState(1)\n  const next = n + 2\n  useEffect(() => {\n    console.log(next)\n  })\n  return null\n}",
+      "options": [
+        "1",
+        "2",
+        "1, 3",
+        "3"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 837,
+      "type": "text",
+      "text": "Чем два setN(x => x + 1) в одном эффекте отличаются от двух setN(n + 1)?",
+      "options": [
+        "Функция видит уже поставленное обновление. Оба setN(n + 1) закрывают одно и то же n",
+        "Ничем. Оба варианта ставят одно и то же итоговое значение",
+        "setN(n + 1) видит более свежее n, чем функция",
+        "Функциональная форма запрещена внутри эффекта"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 838,
+      "type": "text",
+      "text": "Сколько повторных рендеров дадут setA и setB, вызванные друг за другом в одном эффекте?",
+      "options": [
+        "Два. Каждый сеттер рендерит отдельно",
+        "Один. Обновления из одного эффекта складываются в один рендер",
+        "Ни одного, пока не кончится весь эффект и таймер",
+        "Три: после эффекта и после каждого сеттера"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 839,
+      "type": "text",
+      "text": "Почему значение, которое целиком считается из props, не кладут в state?",
+      "options": [
+        "State запрещено читать в том же компоненте, где есть props",
+        "Props приходят позже state, поэтому копия всегда свежее",
+        "State запоминает первое значение и не следует за новыми props. Считать нужно прямо в рендере",
+        "React сбрасывает такой state на каждом рендере"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 840,
+      "type": "text",
+      "text": "Когда выполняется тело useEffect относительно функции компонента?",
+      "options": [
+        "До return, вместе с остальным телом",
+        "Вместо рендера, если массив зависимостей пуст",
+        "Только по клику, даже без обработчика",
+        "После того как рендер уже отдан. Не во время вызова компонента"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 841,
+      "type": "text",
+      "text": "Что делает пустой массив зависимостей у эффекта?",
+      "options": [
+        "Оставляет запуск на монтирование. Следующие рендеры этот эффект не повторяют",
+        "Запрещает первый запуск",
+        "Повторяет эффект на каждый рендер",
+        "Запускает эффект до вызова компонента"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 842,
+      "type": "text",
+      "text": "Когда вызывается cleanup эффекта?",
+      "options": [
+        "Сразу после return компонента, до эффекта",
+        "Перед следующим запуском этого эффекта и при размонтировании. Перед самым первым запуском его нет",
+        "Только если массив зависимостей пуст",
+        "Перед каждым рендером, даже без эффекта"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 843,
+      "type": "text",
+      "text": "Куда класть запрос, который нужен только по клику?",
+      "options": [
+        "В тело рендера, рядом с return",
+        "В useEffect без зависимостей",
+        "В обработчик события. Эффект после рендера не знает, что был клик",
+        "В начальное значение useState"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 844,
+      "type": "text",
+      "text": "Почему setItem(item) после item.n = 2 может не дать новый рендер?",
+      "options": [
+        "Мутация объекта запрещена и сеттер выбрасывается",
+        "Поле n не входит в state, поэтому рендер не нужен",
+        "Эффект не имеет права вызывать сеттер",
+        "В сеттер попала та же ссылка. React сравнивает её через Object.is и пропускает рендер"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 845,
+      "type": "boolean",
+      "text": "setA и setB в одном эффекте всегда дают два отдельных повторных рендера.",
+      "correct": false
+    },
+    {
+      "id": 846,
+      "type": "boolean",
+      "text": "useEffect ребёнка выполняется раньше useEffect родителя.",
+      "correct": true
+    },
+    {
+      "id": 847,
+      "type": "boolean",
+      "text": "Cleanup вызывается ещё до самого первого запуска эффекта.",
+      "correct": false
+    },
+    {
+      "id": 848,
+      "type": "boolean",
+      "text": "Новый объект в массиве зависимостей считается изменением на каждом рендере.",
+      "correct": true
+    },
+    {
+      "id": 849,
+      "type": "boolean",
+      "text": "Компонент, который не смонтировали, всё равно выполняет свой useEffect.",
+      "correct": false
+    },
+    {
+      "id": 850,
+      "type": "boolean",
+      "text": "Функция в сеттере получает самое свежее поставленное значение, а не n из замыкания рендера.",
+      "correct": true
+    },
+    {
+      "id": 851,
+      "type": "boolean",
+      "text": "Эффект с пустым массивом зависимостей запускается после каждого рендера.",
+      "correct": false
+    },
+    {
+      "id": 852,
+      "type": "boolean",
+      "text": "Управляемое поле показывает текст из state через value.",
+      "correct": true
+    },
+    {
+      "id": 853,
+      "type": "recall",
+      "text": "Что выполняется раньше: тело компонента или его useEffect?",
+      "answer": "Тело компонента. Эффект выполняется уже после этого рендера."
+    },
+    {
+      "id": 854,
+      "type": "recall",
+      "text": "Какое итоговое n дадут два setN(n + 1) в одном эффекте, если в этом рендере n равно 0?",
+      "answer": "1. Оба вызова закрывают 0 и ставят 1. Повторный рендер один."
+    },
+    {
+      "id": 855,
+      "type": "recall",
+      "text": "Какое итоговое n дадут два setN(x => x + 1) в одном эффекте, если n равно 0?",
+      "answer": "2. Вторая функция видит единицу, которую поставила первая."
+    },
+    {
+      "id": 856,
+      "type": "recall",
+      "text": "Какой массив зависимостей оставляет эффект только на монтирование?",
+      "answer": "Пустой массив []. Без массива эффект идёт после каждого рендера."
+    },
+    {
+      "id": 857,
+      "type": "recall",
+      "text": "Как React сравнивает значения в массиве зависимостей?",
+      "answer": "Через Object.is. Новый объект на каждом рендере — это другая зависимость."
+    },
+    {
+      "id": 858,
+      "type": "recall",
+      "text": "Где держать число, которое целиком выводится из props?",
+      "answer": "Считать его во время рендера. Копия в state останется на первом значении."
+    },
+    {
+      "id": 859,
+      "type": "recall",
+      "text": "Почему эффект без массива зависимостей зацикливается, если каждый запуск делает setState?",
+      "answer": "Обновление state снова рендерит компонент, а рендер снова запускает этот эффект."
+    },
+    {
+      "id": 860,
+      "type": "recall",
+      "text": "Куда девается запрос, который нужен только после клика, если его положили в рендер?",
+      "answer": "Он уйдёт во время рендера, без клика. Для клика нужен обработчик."
+    }
+  ]
+}

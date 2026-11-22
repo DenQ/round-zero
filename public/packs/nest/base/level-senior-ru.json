@@ -1,0 +1,408 @@
+{
+  "stack": "nest",
+  "topic": "base",
+  "level": "senior",
+  "locale": "ru",
+  "questions": [
+    {
+      "id": 1221,
+      "type": "code",
+      "language": "ts",
+      "text": "providers: [{ provide: 'N', useValue: 6 }]\nconsole.log(app.get('N'))",
+      "options": [
+        "6",
+        "undefined",
+        "N",
+        "0"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1222,
+      "type": "code",
+      "language": "ts",
+      "text": "@Injectable()\nclass Impl {\n  n = 0\n}\nclass Token {}\nproviders: [Impl, { provide: Token, useClass: Impl }]\nconst a = app.get(Impl)\nconst b = app.get(Token)\na.n = 1\nconsole.log(b.n)",
+      "options": [
+        "1",
+        "0",
+        "undefined",
+        "2"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1223,
+      "type": "code",
+      "language": "ts",
+      "text": "providers: [{ provide: 'N', useFactory: () => 11 }]\nconsole.log(app.get('N'))",
+      "options": [
+        "undefined",
+        "0",
+        "11",
+        "N"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1224,
+      "type": "code",
+      "language": "ts",
+      "text": "@Injectable()\nclass Src {\n  n = 1\n}\nproviders: [Src, { provide: 'X', useExisting: Src }]\napp.get(Src).n = 7\nconsole.log(app.get('X').n)",
+      "options": [
+        "1",
+        "undefined",
+        "0",
+        "7"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1225,
+      "type": "code",
+      "language": "ts",
+      "text": "@Injectable()\nclass A {\n  constructor(@Inject('B') public b: unknown) {}\n}\n@Injectable()\nclass B {\n  constructor(@Inject('A') public a: unknown) {}\n}\ntry {\n  await Test.createTestingModule({\n    providers: [\n      { provide: 'A', useClass: A },\n      { provide: 'B', useClass: B },\n    ],\n  }).compile()\n  console.log(1)\n} catch {\n  console.log(0)\n}",
+      "options": [
+        "0",
+        "1",
+        "undefined",
+        "A"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1226,
+      "type": "code",
+      "language": "ts",
+      "text": "@Injectable()\nclass S {\n  n = 4\n}\n@Injectable()\nclass Box {\n  constructor(private ref: ModuleRef) {}\n  read() {\n    return this.ref.get(S).n\n  }\n}\nconsole.log(app.get(Box).read())",
+      "options": [
+        "undefined",
+        "4",
+        "0",
+        "S"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1227,
+      "type": "code",
+      "language": "ts",
+      "text": "@Module({})\nclass Dyn {\n  static register(n: number) {\n    return {\n      module: Dyn,\n      providers: [{ provide: 'CFG', useValue: n }],\n      exports: ['CFG'],\n    }\n  }\n}\n@Module({ imports: [Dyn.register(3)] })\nclass App {}\nconsole.log(app.get('CFG'))",
+      "options": [
+        "undefined",
+        "Dyn",
+        "3",
+        "CFG"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1228,
+      "type": "code",
+      "language": "ts",
+      "text": "@Injectable()\nclass S {\n  n() {\n    return 1\n  }\n}\nconst app = await Test.createTestingModule({ providers: [S] })\n  .overrideProvider(S)\n  .useValue({ n: () => 8 })\n  .compile()\nconsole.log(app.get(S).n())",
+      "options": [
+        "1",
+        "undefined",
+        "0",
+        "8"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1229,
+      "type": "code",
+      "language": "ts",
+      "text": "@Injectable()\nclass L implements OnModuleInit, OnApplicationBootstrap {\n  onModuleInit() {\n    console.log(1)\n  }\n  onApplicationBootstrap() {\n    console.log(2)\n  }\n}\nawait app.init()",
+      "options": [
+        "1, 2",
+        "2, 1",
+        "1",
+        "2"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1230,
+      "type": "code",
+      "language": "ts",
+      "text": "@Injectable()\nclass Dep {\n  n = 2\n}\nproviders: [\n  Dep,\n  {\n    provide: 'N',\n    inject: [Dep],\n    useFactory: (d: Dep) => d.n * 4,\n  },\n]\nconsole.log(app.get('N'))",
+      "options": [
+        "2",
+        "8",
+        "4",
+        "6"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1231,
+      "type": "code",
+      "language": "ts",
+      "text": "@Injectable()\nclass Only {\n  n = 3\n}\n@Module({ providers: [Only], exports: [Only] })\nclass Inner {}\n@Module({ imports: [Inner] })\nclass Root {}\nconsole.log(app.select(Inner).get(Only).n)",
+      "options": [
+        "undefined",
+        "0",
+        "3",
+        "Inner"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1232,
+      "type": "code",
+      "language": "ts",
+      "text": "@Injectable()\nclass S {\n  n() {\n    return 1\n  }\n}\n@Injectable()\nclass Fake {\n  n() {\n    return 9\n  }\n}\nconst app = await Test.createTestingModule({ providers: [S] })\n  .overrideProvider(S)\n  .useClass(Fake)\n  .compile()\nconsole.log(app.get(S).n())",
+      "options": [
+        "1",
+        "Fake",
+        "undefined",
+        "9"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1233,
+      "type": "code",
+      "language": "ts",
+      "text": "providers: [{ provide: 'N', useFactory: async () => 5 }]\nconsole.log(app.get('N'))",
+      "options": [
+        "5",
+        "Promise",
+        "undefined",
+        "0"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1234,
+      "type": "code",
+      "language": "ts",
+      "text": "@Injectable()\nclass A {\n  n = 2\n}\nproviders: [A, { provide: 'B', useExisting: A }, { provide: 'C', useExisting: 'B' }]\napp.get(A).n = 4\nconsole.log(app.get('C').n)",
+      "options": [
+        "2",
+        "4",
+        "undefined",
+        "B"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1235,
+      "type": "code",
+      "language": "ts",
+      "text": "let n = 0\nproviders: [{\n  provide: 'N',\n  useFactory: () => {\n    n += 1\n    return n\n  },\n}]\nconsole.log(app.get('N'))\nconsole.log(app.get('N'))",
+      "options": [
+        "1, 2",
+        "0, 0",
+        "1, 1",
+        "2, 2"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1236,
+      "type": "code",
+      "language": "ts",
+      "text": "providers: [\n  { provide: 'N', useValue: 1 },\n  { provide: 'N', useValue: 2 },\n]\nconsole.log(app.get('N'))",
+      "options": [
+        "1",
+        "undefined",
+        "1, 2",
+        "2"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1237,
+      "type": "text",
+      "text": "Чем useExisting отличается от useClass?",
+      "options": [
+        "useExisting — алиас того же экземпляра. useClass создаёт другой экземпляр этого класса",
+        "В рантайме это одно и то же",
+        "useExisting всегда создаёт новый экземпляр",
+        "useClass нельзя направить на класс с @Injectable"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1238,
+      "type": "text",
+      "text": "Зачем двум классам, которые внедряют друг друга, forwardRef?",
+      "options": [
+        "Чтобы сделать их REQUEST-scoped",
+        "Чтобы Nest разорвал круговую зависимость, а не упал на compile",
+        "Чтобы не нужен был emitDecoratorMetadata",
+        "Чтобы оба класса сами попали в exports"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1239,
+      "type": "text",
+      "text": "Что должен вернуть register() динамического модуля?",
+      "options": [
+        "Только список провайдеров",
+        "Экземпляр Nest-приложения",
+        "Объект с module (класс) и при необходимости providers/exports",
+        "Promise, который Nest игнорирует"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1240,
+      "type": "text",
+      "text": "Когда onApplicationBootstrap относительно onModuleInit?",
+      "options": [
+        "До onModuleInit",
+        "Вместо onModuleInit",
+        "Только при HTTP-ошибках",
+        "После onModuleInit у всех модулей, когда приложение уже поднято"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1241,
+      "type": "text",
+      "text": "На что влияет overrideProvider в TestingModule?",
+      "options": [
+        "Только этот testing-модуль, не боевую связку AppModule",
+        "Глобальный runtime Nest для всех тестовых файлов",
+        "package.json приложения",
+        "Живой HTTP-сервер уже запущенного процесса"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1242,
+      "type": "text",
+      "text": "Что такое inject: [Dep] у провайдера с useFactory?",
+      "options": [
+        "Подсказка только для TypeScript, Nest её игнорирует",
+        "Токены, которые Nest передаёт в factory аргументами, в этом порядке",
+        "Параметры HTTP-маршрута",
+        "Список модулей для import"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1243,
+      "type": "text",
+      "text": "Что делает app.select(Inner)?",
+      "options": [
+        "Удаляет модуль Inner",
+        "Поднимает отдельный HTTP-сервер для Inner",
+        "Сужает поиск до контекста этого модуля, чтобы get() брал провайдеры Inner",
+        "Подменяет Inner моком"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1244,
+      "type": "text",
+      "text": "Если в одном модуле два провайдера с одним токеном, кого вернёт get()?",
+      "options": [
+        "Первую регистрацию",
+        "Массив из обоих",
+        "Nest бросает на compile",
+        "Побеждает последняя регистрация"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1245,
+      "type": "boolean",
+      "text": "useClass для второго токена создаёт отдельный экземпляр, не тот же, что у исходного класса.",
+      "correct": true
+    },
+    {
+      "id": 1246,
+      "type": "boolean",
+      "text": "Провайдер с useFactory по умолчанию создаётся заново на каждый get().",
+      "correct": false
+    },
+    {
+      "id": 1247,
+      "type": "boolean",
+      "text": "Круговая constructor injection компилируется без forwardRef.",
+      "correct": false
+    },
+    {
+      "id": 1248,
+      "type": "boolean",
+      "text": "ModuleRef.get может достать провайдер, зарегистрированный в том же модуле.",
+      "correct": true
+    },
+    {
+      "id": 1249,
+      "type": "boolean",
+      "text": "onApplicationBootstrap вызывается раньше onModuleInit.",
+      "correct": false
+    },
+    {
+      "id": 1250,
+      "type": "boolean",
+      "text": "async useFactory для app.get() всё равно резолвится во внутреннее значение.",
+      "correct": true
+    },
+    {
+      "id": 1251,
+      "type": "boolean",
+      "text": "useExisting — алиас того же экземпляра, что и указанный токен.",
+      "correct": true
+    },
+    {
+      "id": 1252,
+      "type": "boolean",
+      "text": "overrideProvider в тесте меняет боевой AppModule у запущенного сервера.",
+      "correct": false
+    },
+    {
+      "id": 1253,
+      "type": "recall",
+      "text": "Назовите четыре ключа кастомного провайдера: значение, класс, фабрика, алиас.",
+      "answer": "useValue, useClass, useFactory, useExisting."
+    },
+    {
+      "id": 1254,
+      "type": "recall",
+      "text": "Какой helper разрывает круговую constructor injection?",
+      "answer": "forwardRef()."
+    },
+    {
+      "id": 1255,
+      "type": "recall",
+      "text": "Метод TestingModule, который подменяет провайдер на этот compile?",
+      "answer": "overrideProvider."
+    },
+    {
+      "id": 1256,
+      "type": "recall",
+      "text": "Какой класс позволяет провайдеру искать другие провайдеры в рантайме?",
+      "answer": "ModuleRef."
+    },
+    {
+      "id": 1257,
+      "type": "recall",
+      "text": "Когда вызывается onModuleInit и когда onApplicationBootstrap?",
+      "answer": "onModuleInit — когда провайдеры этого модуля готовы. onApplicationBootstrap — когда поднято всё приложение."
+    },
+    {
+      "id": 1258,
+      "type": "recall",
+      "text": "Какую форму объекта возвращает register() динамического модуля?",
+      "answer": "{ module: класс, providers, exports } по необходимости."
+    },
+    {
+      "id": 1259,
+      "type": "recall",
+      "text": "Если один токен зарегистрирован в модуле дважды, какая регистрация действует?",
+      "answer": "Последняя."
+    },
+    {
+      "id": 1260,
+      "type": "recall",
+      "text": "Выполнится ли default-scoped useFactory снова на втором get()?",
+      "answer": "Нет. Первый результат кэшируется как синглтон."
+    }
+  ]
+}

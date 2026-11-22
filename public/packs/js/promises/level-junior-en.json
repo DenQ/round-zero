@@ -1,0 +1,408 @@
+{
+  "stack": "js",
+  "topic": "promises",
+  "level": "junior",
+  "locale": "en",
+  "questions": [
+    {
+      "id": 541,
+      "type": "code",
+      "language": "js",
+      "text": "new Promise((resolve) => {\n  console.log(1);\n  resolve(2);\n}).then((n) => console.log(n));\nconsole.log(3);",
+      "options": [
+        "1, 3, 2",
+        "1, 2, 3",
+        "2, 1, 3",
+        "3, 1, 2"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 542,
+      "type": "code",
+      "language": "js",
+      "text": "Promise.resolve(1)\n  .then((n) => n + 2)\n  .then((n) => console.log(n));",
+      "options": [
+        "1",
+        "3",
+        "2",
+        "undefined"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 543,
+      "type": "code",
+      "language": "js",
+      "text": "Promise.resolve()\n  .then(() => {\n    throw 1;\n  })\n  .catch(() => console.log(2))\n  .then(() => console.log(3));",
+      "options": [
+        "1, 2",
+        "1, 3",
+        "2, 3",
+        "3, 2"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 544,
+      "type": "code",
+      "language": "js",
+      "text": "Promise.resolve(1)\n  .then((n) => console.log(n))\n  .catch(() => console.log(2))\n  .then(() => console.log(3));",
+      "options": [
+        "1, 2, 3",
+        "1, 2",
+        "2, 3",
+        "1, 3"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 545,
+      "type": "code",
+      "language": "js",
+      "text": "Promise.resolve(1)\n  .finally(() => console.log(2))\n  .then((n) => console.log(n));",
+      "options": [
+        "2, 1",
+        "1, 2",
+        "2, 2",
+        "1, 1"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 546,
+      "type": "code",
+      "language": "js",
+      "text": "Promise.reject(1)\n  .finally(() => console.log(2))\n  .catch((n) => console.log(n));",
+      "options": [
+        "1, 2",
+        "2, 1",
+        "1",
+        "2"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 547,
+      "type": "code",
+      "language": "js",
+      "text": "const p = Promise.resolve(1);\np.then((n) => console.log(n));\np.then((n) => console.log(n + 1));",
+      "options": [
+        "1",
+        "2",
+        "1, 2",
+        "2, 1"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 548,
+      "type": "code",
+      "language": "js",
+      "text": "Promise.resolve(1)\n  .then((n) => {\n    console.log(n);\n  })\n  .then((n) => console.log(n === undefined ? 0 : n));",
+      "options": [
+        "1, 1",
+        "0, 1",
+        "1",
+        "1, 0"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 549,
+      "type": "text",
+      "text": "When does the executor of new Promise run?",
+      "options": [
+        "Synchronously, before new Promise returns",
+        "As a microtask, after the current code",
+        "On the next timer turn",
+        "Only after the first then is attached"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 550,
+      "type": "text",
+      "text": "When does then run if the promise is already fulfilled?",
+      "options": [
+        "Immediately, before the next line",
+        "As a microtask, after the current synchronous code",
+        "On the timer queue",
+        "Only when the promise was created with new Promise"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 551,
+      "type": "text",
+      "text": "What does return inside a then callback do to the promise that then itself returned?",
+      "options": [
+        "It rejects that promise",
+        "The returned value is ignored",
+        "It fulfills that promise with the returned value, when the value is not a thenable",
+        "It writes the value into the original promise a second time"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 552,
+      "type": "text",
+      "text": "What happens when the executor calls resolve a second time?",
+      "options": [
+        "Both values are delivered, in order",
+        "The second call rejects the promise",
+        "The promise stays pending",
+        "The second call changes nothing. The first settlement stays"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 553,
+      "type": "text",
+      "text": "How does Promise.all place results into its array?",
+      "options": [
+        "Each result keeps the index of its input, whichever input settled first",
+        "Results are sorted by settlement time",
+        "The array contains only the first fulfillment",
+        "Rejected inputs are stored as null"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 554,
+      "type": "text",
+      "text": "What does an async function hand back to its caller?",
+      "options": [
+        "The returned value, directly",
+        "A promise, always",
+        "undefined, always",
+        "A promise only when the body contains await"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 555,
+      "type": "boolean",
+      "text": "A then callback on an already fulfilled promise runs before the next synchronous line.",
+      "correct": false
+    },
+    {
+      "id": 556,
+      "type": "boolean",
+      "text": "new Promise runs its executor before the constructor returns.",
+      "correct": true
+    },
+    {
+      "id": 557,
+      "type": "boolean",
+      "text": "A second resolve replaces the fulfillment value.",
+      "correct": false
+    },
+    {
+      "id": 558,
+      "type": "boolean",
+      "text": "Promise.all rejects when any input rejects.",
+      "correct": true
+    },
+    {
+      "id": 559,
+      "type": "boolean",
+      "text": "An async function returns a promise even when the body returns a number.",
+      "correct": true
+    },
+    {
+      "id": 560,
+      "type": "boolean",
+      "text": "throw inside an async function escapes synchronously into the caller.",
+      "correct": false
+    },
+    {
+      "id": 561,
+      "type": "recall",
+      "text": "Which method adds a fulfillment callback and returns a new promise?",
+      "answer": "then. The new promise follows what the callback returns or throws."
+    },
+    {
+      "id": 562,
+      "type": "recall",
+      "text": "Which method handles a rejection and can make the chain fulfilled again?",
+      "answer": "catch. A returned value fulfills the promise that catch returns."
+    },
+    {
+      "id": 563,
+      "type": "recall",
+      "text": "Which method runs after both fulfillment and rejection and keeps an ordinary result?",
+      "answer": "finally. A plain return value does not replace the previous settlement."
+    },
+    {
+      "id": 564,
+      "type": "recall",
+      "text": "Which static method fulfills with an array of results in input order?",
+      "answer": "Promise.all. One rejection rejects the whole call."
+    },
+    {
+      "id": 565,
+      "type": "recall",
+      "text": "Which static method settles with the first settled input?",
+      "answer": "Promise.race. Either a fulfillment or a rejection can win."
+    },
+    {
+      "id": 566,
+      "type": "recall",
+      "text": "What does Promise.resolve return when given an existing native promise?",
+      "answer": "That same promise. A native promise is not wrapped again."
+    },
+    {
+      "id": 567,
+      "type": "code",
+      "language": "js",
+      "text": "async function f() {\n  console.log(1);\n  await Promise.resolve();\n  console.log(2);\n}\nf();\nconsole.log(3);",
+      "options": [
+        "1, 3, 2",
+        "1, 2, 3",
+        "3, 1, 2",
+        "2, 1, 3"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 568,
+      "type": "code",
+      "language": "js",
+      "text": "async function f() {\n  return 4;\n}\nf().then((n) => console.log(n));\nconsole.log(5);",
+      "options": [
+        "4, 5",
+        "5, 4",
+        "4",
+        "5"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 569,
+      "type": "code",
+      "language": "js",
+      "text": "async function f() {\n  throw 1;\n}\ntry {\n  f().catch((n) => console.log(n));\n  console.log(2);\n} catch {\n  console.log(3);\n}",
+      "options": [
+        "3, 1",
+        "1, 2",
+        "2, 1",
+        "3"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 570,
+      "type": "code",
+      "language": "js",
+      "text": "Promise.all([Promise.resolve(2), Promise.resolve(1)]).then(([a, b]) => {\n  console.log(a);\n  console.log(b);\n});",
+      "options": [
+        "1, 2",
+        "2",
+        "1",
+        "2, 1"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 571,
+      "type": "code",
+      "language": "js",
+      "text": "Promise.all([\n  Promise.resolve(1),\n  Promise.reject(2),\n  Promise.resolve(3),\n]).then(\n  () => console.log(0),\n  (n) => console.log(n),\n);",
+      "options": [
+        "2",
+        "1",
+        "3",
+        "0"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 572,
+      "type": "code",
+      "language": "js",
+      "text": "Promise.race([\n  Promise.reject(1),\n  Promise.resolve(2),\n]).then(\n  (n) => console.log(n),\n  (n) => console.log(n),\n);",
+      "options": [
+        "2",
+        "1",
+        "0",
+        "1, 2"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 573,
+      "type": "code",
+      "language": "js",
+      "text": "new Promise((resolve) => {\n  resolve(1);\n  resolve(2);\n}).then((n) => console.log(n));",
+      "options": [
+        "1, 2",
+        "2",
+        "1",
+        "2, 1"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 574,
+      "type": "code",
+      "language": "js",
+      "text": "const p = Promise.resolve(1);\nconsole.log(Promise.resolve(p) === p ? 1 : 0);",
+      "options": [
+        "0",
+        "2",
+        "undefined",
+        "1"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 575,
+      "type": "text",
+      "text": "What does throw inside an async function do?",
+      "options": [
+        "It throws into the caller synchronously",
+        "It fulfills the returned promise with the thrown value",
+        "It rejects the promise that the async function returned",
+        "It disappears when nobody awaits the call"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 576,
+      "type": "text",
+      "text": "Which input decides Promise.race?",
+      "options": [
+        "The fulfillment of the last input",
+        "An array of every settlement",
+        "The first rejection only. Fulfillments are ignored",
+        "Whichever input settles first, by fulfillment or rejection"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 577,
+      "type": "boolean",
+      "text": "A then callback that returns nothing forwards the previous fulfillment value.",
+      "correct": false
+    },
+    {
+      "id": 578,
+      "type": "boolean",
+      "text": "Two then calls on the same promise both run when it fulfills.",
+      "correct": true
+    },
+    {
+      "id": 579,
+      "type": "recall",
+      "text": "Where does the body of an async function run before its first await?",
+      "answer": "Synchronously, on the call. Code after the await runs later as a continuation."
+    },
+    {
+      "id": 580,
+      "type": "recall",
+      "text": "What does the promise of an async function fulfill with when the function returns 5?",
+      "answer": "With 5. The caller receives a promise of that number."
+    }
+  ]
+}

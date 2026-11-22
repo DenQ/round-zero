@@ -1,0 +1,1008 @@
+{
+  "stack": "go",
+  "topic": "slices",
+  "level": "senior",
+  "locale": "ru",
+  "questions": [
+    {
+      "id": 1641,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tbig := make([]int, 1000)\n\tsmall := big[10:12]\n\tfmt.Println(len(small))\n\tfmt.Println(cap(small))\n}",
+      "options": [
+        "2, 990",
+        "2, 12",
+        "2, 1000",
+        "12, 990"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1642,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tbig := make([]int, 1000)\n\tsmall := big[10:12:12]\n\tfmt.Println(len(small))\n\tfmt.Println(cap(small))\n}",
+      "options": [
+        "2, 990",
+        "2, 2",
+        "2, 12",
+        "10, 2"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1643,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tbs := []byte(\"ab\")\n\tst := string(bs)\n\tbs[0] = 'Z'\n\tfmt.Println(int(st[0]))\n\tfmt.Println(int(bs[0]))\n}",
+      "options": [
+        "90, 90",
+        "97, 97",
+        "97, 90",
+        "90, 97"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1644,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tst := \"ab\"\n\tbs := []byte(st)\n\tbs[0] = 'Z'\n\tfmt.Println(int(st[0]))\n\tfmt.Println(int(bs[0]))\n}",
+      "options": [
+        "90, 90",
+        "97, 97",
+        "90, 97",
+        "97, 90"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1645,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tvar nb []byte\n\tnb = append(nb, \"hi\"...)\n\tfmt.Println(len(nb))\n\tfmt.Println(int(nb[0]))\n}",
+      "options": [
+        "2, 104",
+        "2, 105",
+        "2, 97",
+        "1, 104"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1646,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"encoding/json\"\n\t\"fmt\"\n)\n\nfunc main() {\n\tjn, _ := json.Marshal([]int(nil))\n\tje, _ := json.Marshal([]int{})\n\tfmt.Println(len(jn))\n\tfmt.Println(len(je))\n}",
+      "options": [
+        "2, 2",
+        "4, 2",
+        "2, 4",
+        "4, 4"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1647,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"slices\"\n)\n\nfunc main() {\n\ts := []int{1, 2, 3, 4}\n\ts = slices.Delete(s, 1, 2)\n\tfmt.Println(s[:cap(s)][3])\n}",
+      "options": [
+        "4",
+        "3",
+        "0",
+        "2"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1648,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\ts := []int{1, 2, 3, 4}\n\ts = append(s[:1], s[2:]...)\n\tfmt.Println(s[:cap(s)][3])\n}",
+      "options": [
+        "0",
+        "3",
+        "1",
+        "4"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1649,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\ts := make([]int, 5)\n\ts = append(s, 6)\n\tfmt.Println(len(s))\n\tfmt.Println(cap(s))\n}",
+      "options": [
+        "6, 10",
+        "6, 8",
+        "6, 5",
+        "5, 10"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1650,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\ts := make([]int, 8)\n\ts = append(s, 9)\n\tfmt.Println(len(s))\n\tfmt.Println(cap(s))\n}",
+      "options": [
+        "9, 8",
+        "9, 16",
+        "9, 12",
+        "8, 16"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1651,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\ts := make([]int, 0, 4)\n\ts = append(s, 1, 2, 3, 4, 5)\n\tfmt.Println(len(s))\n\tfmt.Println(cap(s))\n}",
+      "options": [
+        "5, 4",
+        "5, 5",
+        "5, 8",
+        "5, 10"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1652,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\ts := []byte{1, 2, 3}\n\ts = append(s, 4)\n\tfmt.Println(len(s))\n\tfmt.Println(cap(s))\n}",
+      "options": [
+        "4, 4",
+        "4, 6",
+        "4, 3",
+        "4, 8"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1653,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"slices\"\n)\n\nfunc main() {\n\ts := []int{1, 1, 2, 2, 3}\n\ts = slices.Compact(s)\n\tfmt.Println(len(s))\n\tfmt.Println(s[0])\n\tfmt.Println(s[2])\n}",
+      "options": [
+        "3, 1, 3",
+        "5, 1, 3",
+        "3, 1, 2",
+        "4, 1, 3"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1654,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"slices\"\n)\n\nfunc main() {\n\ts := []int{1, 2, 3}\n\tslices.Reverse(s)\n\tfmt.Println(s[0])\n\tfmt.Println(s[2])\n}",
+      "options": [
+        "1, 3",
+        "3, 1",
+        "3, 2",
+        "2, 1"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1655,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"slices\"\n)\n\nfunc main() {\n\ts := []int{3, 1, 2}\n\tslices.Sort(s)\n\tfmt.Println(s[0])\n\tfmt.Println(s[2])\n}",
+      "options": [
+        "3, 2",
+        "1, 2",
+        "1, 3",
+        "3, 1"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1656,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"slices\"\n)\n\nfunc main() {\n\ti, ok := slices.BinarySearch([]int{1, 3, 5}, 3)\n\tn := 0\n\tif ok {\n\t\tn = 1\n\t}\n\tfmt.Println(i)\n\tfmt.Println(n)\n}",
+      "options": [
+        "3, 1",
+        "0, 1",
+        "1, 0",
+        "1, 1"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1657,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"slices\"\n)\n\nfunc main() {\n\ti, ok := slices.BinarySearch([]int{1, 3, 5}, 2)\n\tn := 0\n\tif ok {\n\t\tn = 1\n\t}\n\tfmt.Println(i)\n\tfmt.Println(n)\n}",
+      "options": [
+        "1, 0",
+        "2, 0",
+        "0, 0",
+        "1, 1"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1658,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"slices\"\n)\n\nfunc main() {\n\tn := 0\n\tif slices.Contains([]int{1, 2, 3}, 2) {\n\t\tn = 1\n\t}\n\tfmt.Println(n)\n\tfmt.Println(slices.Index([]int{1, 2, 3}, 4))\n}",
+      "options": [
+        "1, 4",
+        "1, -1",
+        "0, -1",
+        "1, 3"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1659,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"slices\"\n)\n\nfunc main() {\n\tfmt.Println(slices.Max([]int{1, 7, 3}))\n\tfmt.Println(slices.Min([]int{1, 7, 3}))\n}",
+      "options": [
+        "1, 7",
+        "7, 3",
+        "7, 1",
+        "3, 1"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1660,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"slices\"\n)\n\nfunc main() {\n\tfmt.Println(slices.Compare([]int{1, 2}, []int{1, 3}))\n}",
+      "options": [
+        "1",
+        "0",
+        "2",
+        "-1"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1661,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"slices\"\n)\n\nfunc main() {\n\tfmt.Println(slices.Compare([]int{1}, []int{1, 0}))\n}",
+      "options": [
+        "-1",
+        "1",
+        "0",
+        "1, 0"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1662,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\trows := make([][]int, 2)\n\tbase := []int{1}\n\trows[0] = base\n\trows[1] = base\n\trows[0][0] = 9\n\tfmt.Println(rows[0][0])\n\tfmt.Println(rows[1][0])\n}",
+      "options": [
+        "1, 9",
+        "9, 9",
+        "9, 1",
+        "1, 1"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1663,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\trows := make([][]int, 2)\n\trows[0] = []int{1}\n\trows[1] = rows[0]\n\trows[0] = append(rows[0], 2)\n\tfmt.Println(len(rows[0]))\n\tfmt.Println(len(rows[1]))\n}",
+      "options": [
+        "1, 1",
+        "2, 2",
+        "2, 1",
+        "1, 2"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1664,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"slices\"\n)\n\nfunc main() {\n\ts := []int{1, 2, 3}\n\ts = slices.Replace(s, 1, 2)\n\tfmt.Println(len(s))\n\tfmt.Println(s[0])\n\tfmt.Println(s[1])\n}",
+      "options": [
+        "3, 1, 3",
+        "2, 1, 2",
+        "1, 1, 3",
+        "2, 1, 3"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1665,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"slices\"\n)\n\nfunc main() {\n\ts := make([]int, 2, 8)\n\ts = slices.Clip(s)\n\tfmt.Println(len(s))\n\tfmt.Println(cap(s))\n}",
+      "options": [
+        "2, 2",
+        "2, 8",
+        "8, 8",
+        "2, 0"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1666,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\ts := []int{}\n\ts = append(s, 1)\n\tn := 0\n\tif s == nil {\n\t\tn = 1\n\t}\n\tfmt.Println(n)\n\tfmt.Println(len(s))\n}",
+      "options": [
+        "1, 1",
+        "0, 1",
+        "0, 0",
+        "1, 0"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1667,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tdst := make([]int, 3)\n\tn := copy(dst, []int{3, 4})\n\tfmt.Println(n)\n\tfmt.Println(dst[0])\n\tfmt.Println(dst[2])\n}",
+      "options": [
+        "3, 3, 4",
+        "2, 3, 4",
+        "2, 3, 0",
+        "2, 4, 0"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1668,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\ts := make([]int, 2, 4)\n\ts[0], s[1] = 1, 2\n\tout := func(x []int) []int {\n\t\treturn append(x, 8)\n\t}(s)\n\tfmt.Println(len(s))\n\tfmt.Println(len(out))\n}",
+      "options": [
+        "3, 3",
+        "2, 2",
+        "3, 2",
+        "2, 3"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1669,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"slices\"\n)\n\nfunc main() {\n\ts := []int{1, 2, 3}\n\ts = slices.Insert(s, 1, 8, 9)\n\tfmt.Println(len(s))\n\tfmt.Println(s[2])\n}",
+      "options": [
+        "5, 9",
+        "5, 8",
+        "4, 9",
+        "5, 2"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1670,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\ts := []int{1, 2, 3, 4, 5}\n\tdefer func() {\n\t\tif recover() != nil {\n\t\t\tfmt.Println(1)\n\t\t}\n\t}()\n\t_ = s[:20]\n\tfmt.Println(0)\n}",
+      "options": [
+        "0",
+        "1",
+        "20",
+        "5"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1671,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\ta := [6]int{1, 2, 3, 4, 5, 6}\n\tt := a[2:4:4]\n\tt = append(t, 8)\n\tfmt.Println(a[4])\n\tfmt.Println(t[2])\n}",
+      "options": [
+        "8, 8",
+        "5, 4",
+        "5, 8",
+        "4, 8"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1672,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\ta := [6]int{1, 2, 3, 4, 5, 6}\n\tt := a[2:4]\n\tt = append(t, 8)\n\tfmt.Println(a[4])\n}",
+      "options": [
+        "5",
+        "4",
+        "6",
+        "8"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1673,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"slices\"\n)\n\nfunc main() {\n\ts := []int{1, 2, 3}\n\ts = slices.Replace(s, 1, 2, 8, 9)\n\tfmt.Println(len(s))\n\tfmt.Println(s[1])\n\tfmt.Println(s[2])\n}",
+      "options": [
+        "4, 8, 9",
+        "3, 8, 9",
+        "4, 8, 3",
+        "4, 2, 9"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1674,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"slices\"\n)\n\nfunc main() {\n\ts := []int{1, 2}\n\ts = slices.Grow(s, 10)\n\tc := cap(s)\n\ts = append(s, 3)\n\tsame := 0\n\tif cap(s) == c {\n\t\tsame = 1\n\t}\n\tfmt.Println(same)\n\tfmt.Println(s[2])\n}",
+      "options": [
+        "0, 3",
+        "1, 3",
+        "1, 1",
+        "1, 2"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1675,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"encoding/json\"\n\t\"fmt\"\n)\n\nfunc main() {\n\tvar s []int\n\tjson.Unmarshal([]byte(\"[1,2]\"), &s)\n\tfmt.Println(len(s))\n\tfmt.Println(s[1])\n}",
+      "options": [
+        "2, 1",
+        "1, 2",
+        "2, 2",
+        "0, 2"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1676,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"encoding/json\"\n\t\"fmt\"\n)\n\nfunc main() {\n\ts := []int{1}\n\tjson.Unmarshal([]byte(\"null\"), &s)\n\tn := 0\n\tif s == nil {\n\t\tn = 1\n\t}\n\tfmt.Println(n)\n\tfmt.Println(len(s))\n}",
+      "options": [
+        "0, 1",
+        "1, 1",
+        "0, 0",
+        "1, 0"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1677,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport (\n\t\"fmt\"\n\t\"slices\"\n)\n\nfunc main() {\n\tfmt.Println(slices.Index([]int{1, 2, 3}, 2))\n}",
+      "options": [
+        "1",
+        "2",
+        "0",
+        "-1"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1678,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tsrc := []int{9, 8, 7, 6, 5}\n\tcopy(src[2:], src[:3])\n\tfmt.Println(src[0])\n\tfmt.Println(src[2])\n\tfmt.Println(src[4])\n}",
+      "options": [
+        "9, 7, 5",
+        "9, 9, 7",
+        "8, 9, 7",
+        "9, 8, 7"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1679,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\ttype P struct{ N int }\n\tps := []*P{{1}, {2}}\n\tfor _, v := range ps {\n\t\tv.N = 9\n\t}\n\tfmt.Println(ps[0].N)\n\tfmt.Println(ps[1].N)\n}",
+      "options": [
+        "1, 2",
+        "9, 2",
+        "9, 9",
+        "1, 9"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1680,
+      "type": "code",
+      "language": "go",
+      "text": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\ts := []int{1, 2, 3}\n\tu := s[0:0:0]\n\tu = append(u, 7)\n\tfmt.Println(s[0])\n\tfmt.Println(u[0])\n}",
+      "options": [
+        "7, 7",
+        "1, 1",
+        "7, 1",
+        "1, 7"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1681,
+      "type": "text",
+      "text": "Почему маленький подслайс большого массива может держать всю память?",
+      "options": [
+        "Заголовок хранит указатель на тот же массив; GC смотрит на весь объект массива",
+        "len маленького слайса равен len большого",
+        "Подслайс копирует весь массив в заголовок",
+        "cap всегда равен 2"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1682,
+      "type": "text",
+      "text": "Копирует ли преобразование string([]byte) / []byte(string) данные?",
+      "options": [
+        "Нет, оба делят буфер",
+        "Да. Строка неизменяема, поэтому нужен отдельный массив байт",
+        "Копирует только string([]byte)",
+        "Копирует только []byte(string)"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1683,
+      "type": "text",
+      "text": "Как encoding/json кодирует nil-слайс и пустой []T{}?",
+      "options": [
+        "Оба как []",
+        "Оба как null",
+        "nil → null, []T{} → []",
+        "nil → [], []T{} → null"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1684,
+      "type": "text",
+      "text": "Чем slices.Delete отличается от append(s[:i], s[j:]...) в хвосте массива?",
+      "options": [
+        "Delete не меняет len",
+        "append-трюк обнуляет хвост, Delete нет",
+        "Они всегда выделяют новый массив",
+        "Delete обнуляет вытесненные элементы; append-трюк оставляет старые значения за новым len"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1685,
+      "type": "text",
+      "text": "Что делает json.Unmarshal(\"null\", &s) со слайсом s?",
+      "options": [
+        "Ставит s в nil",
+        "Оставляет s как был",
+        "Делает s пустым не-nil",
+        "Это ошибка"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1686,
+      "type": "text",
+      "text": "Почему for _, v := range []*T и запись v.Field меняет элементы?",
+      "options": [
+        "range не копирует указатели",
+        "v — копия указателя, но он указывает на ту же структуру",
+        "range всегда пишет в исходный слайс",
+        "Это работает только для nil-указателей"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1687,
+      "type": "text",
+      "text": "Как отпустить большой массив, оставив маленькие данные?",
+      "options": [
+        "Достаточно s = s[i:j]",
+        "Достаточно s = s[:0]",
+        "Скопировать нужное в новый слайс (Clone/copy) или обрезать cap до len и не держать старый заголовок",
+        "Вызвать cap(s) = len(s)"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1688,
+      "type": "text",
+      "text": "Что возвращает slices.Compare, если a лексикографически меньше b?",
+      "options": [
+        "1",
+        "0",
+        "длину a",
+        "-1"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1689,
+      "type": "text",
+      "text": "Что делает slices.Compact?",
+      "options": [
+        "Сжимает подряд одинаковые элементы до одного, как unique на отсортированных сериях",
+        "Удаляет все дубликаты в любом порядке",
+        "Сортирует слайс",
+        "Ставит cap в 0"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1690,
+      "type": "text",
+      "text": "Где slices.Reverse меняет элементы?",
+      "options": [
+        "В новом массиве; исходный не трогает",
+        "На месте, в том же массиве",
+        "Только в копии заголовка",
+        "Reverse только для строк"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1691,
+      "type": "text",
+      "text": "Что делает slices.BinarySearch, если значения нет?",
+      "options": [
+        "Возвращает -1 и false",
+        "Это panic",
+        "Индекс, куда вставить, и found=false",
+        "Индекс 0 и true"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1692,
+      "type": "text",
+      "text": "Почему два элемента [][]int могут перестать разделять массив после append в один из них?",
+      "options": [
+        "append всегда копирует оба ряда",
+        "[][]int не может разделять массивы",
+        "append меняет только внешний слайс",
+        "Если cap внутреннего слайса кончился, append даёт новый массив; второй заголовок смотрит на старый"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1693,
+      "type": "text",
+      "text": "Что делает append(dst, str...) для []byte и string?",
+      "options": [
+        "Дописывает байты строки в слайс байт",
+        "Это не компилируется",
+        "Дописывает руны, не байты",
+        "Заменяет dst строкой"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1694,
+      "type": "text",
+      "text": "Зачем slices.Grow перед серией append?",
+      "options": [
+        "Чтобы сразу увеличить len",
+        "Чтобы заранее вырастить cap и не перевыделять массив на каждом append",
+        "Чтобы обнулить слайс",
+        "Это отключает append"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1695,
+      "type": "text",
+      "text": "Что будет с массивом, если взять a[i:j] без третьего индекса и сделать append?",
+      "options": [
+        "Массив никогда не меняется",
+        "append запрещён для слайса из массива",
+        "При свободном cap хвост массива затирается",
+        "Массив становится nil"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1696,
+      "type": "text",
+      "text": "Что делает json.Unmarshal(\"[1,2]\", &s) с var s []int?",
+      "options": [
+        "Оставляет s nil",
+        "Это ошибка, потому что s nil",
+        "Пишет только в cap, len не меняет",
+        "Выделяет слайс и заполняет элементами"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1697,
+      "type": "text",
+      "text": "Что возвращает slices.Index, если элемента нет?",
+      "options": [
+        "-1",
+        "0",
+        "len(s)",
+        "panic"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1698,
+      "type": "text",
+      "text": "Меняет ли slices.Sort исходный слайс?",
+      "options": [
+        "Нет, возвращает отсортированную копию",
+        "Да, сортирует на месте",
+        "Только если cap == len",
+        "Только для []int"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1699,
+      "type": "text",
+      "text": "Почему s[0:0:0]; append(..., x) не пишет в исходный s[0]?",
+      "options": [
+        "append всегда пишет в s[0]",
+        "s[0:0:0] запрещён",
+        "cap обрезан до 0, append берёт новый массив",
+        "append игнорирует третий индекс"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1700,
+      "type": "text",
+      "text": "Что делает slices.Replace(s, i, j, vs...), если vs длиннее чем j-i?",
+      "options": [
+        "Лишние vs отбрасываются",
+        "Это panic",
+        "Заменяет только первые j-i из vs",
+        "Вставляет все vs, длина слайса растёт"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1701,
+      "type": "boolean",
+      "text": "Подслайс big[i:j] может удерживать весь массив big в памяти.",
+      "correct": true
+    },
+    {
+      "id": 1702,
+      "type": "boolean",
+      "text": "string([]byte) и исходный []byte делят один буфер, запись в байты меняет строку.",
+      "correct": false
+    },
+    {
+      "id": 1703,
+      "type": "boolean",
+      "text": "json.Marshal для nil-слайса даёт null, для []T{} — [].",
+      "correct": true
+    },
+    {
+      "id": 1704,
+      "type": "boolean",
+      "text": "slices.Delete оставляет старые значения в хвосте за новым len, как append-трюк.",
+      "correct": false
+    },
+    {
+      "id": 1705,
+      "type": "boolean",
+      "text": "json.Unmarshal(\"null\", &s) ставит слайс в nil.",
+      "correct": true
+    },
+    {
+      "id": 1706,
+      "type": "boolean",
+      "text": "В range по []*T запись в v.Field меняет структуру в куче.",
+      "correct": true
+    },
+    {
+      "id": 1707,
+      "type": "boolean",
+      "text": "s = s[i:j] всегда отпускает хвост большого массива для GC.",
+      "correct": false
+    },
+    {
+      "id": 1708,
+      "type": "boolean",
+      "text": "slices.Compare возвращает -1, если первый слайс меньше.",
+      "correct": true
+    },
+    {
+      "id": 1709,
+      "type": "boolean",
+      "text": "slices.Compact удаляет неуникальные элементы в любом месте, не только подряд.",
+      "correct": false
+    },
+    {
+      "id": 1710,
+      "type": "boolean",
+      "text": "slices.Reverse переставляет элементы на месте.",
+      "correct": true
+    },
+    {
+      "id": 1711,
+      "type": "boolean",
+      "text": "BinarySearch при отсутствии элемента возвращает -1.",
+      "correct": false
+    },
+    {
+      "id": 1712,
+      "type": "boolean",
+      "text": "append в один ряд [][]int может отвязать его от другого ряда, если cap кончился.",
+      "correct": true
+    },
+    {
+      "id": 1713,
+      "type": "boolean",
+      "text": "append([]byte, string...) допустим и дописывает байты.",
+      "correct": true
+    },
+    {
+      "id": 1714,
+      "type": "boolean",
+      "text": "slices.Grow сразу увеличивает len на n.",
+      "correct": false
+    },
+    {
+      "id": 1715,
+      "type": "boolean",
+      "text": "append в a[i:j] без третьего индекса при запасе cap портит хвост массива a.",
+      "correct": true
+    },
+    {
+      "id": 1716,
+      "type": "boolean",
+      "text": "slices.Index при отсутствии элемента возвращает -1.",
+      "correct": true
+    },
+    {
+      "id": 1717,
+      "type": "boolean",
+      "text": "slices.Sort не меняет исходный слайс.",
+      "correct": false
+    },
+    {
+      "id": 1718,
+      "type": "boolean",
+      "text": "s[0:0:0] затем append пишет в исходный s[0].",
+      "correct": false
+    },
+    {
+      "id": 1719,
+      "type": "boolean",
+      "text": "slices.Replace может увеличить длину, если подставить больше элементов, чем вырезано.",
+      "correct": true
+    },
+    {
+      "id": 1720,
+      "type": "boolean",
+      "text": "Преобразование []byte(string) копирует байты, запись в слайс не меняет строку.",
+      "correct": true
+    },
+    {
+      "id": 1721,
+      "type": "recall",
+      "text": "Почему small := big[i:j] может держать весь big?",
+      "answer": "Указатель в заголовке смотрит на тот же массив; GC не режет массив по cap маленького слайса."
+    },
+    {
+      "id": 1722,
+      "type": "recall",
+      "text": "Копирует ли []byte(string) данные?",
+      "answer": "Да. Строка неизменяема, слайс получает свой массив."
+    },
+    {
+      "id": 1723,
+      "type": "recall",
+      "text": "Что json.Marshal пишет для nil-слайса и для []T{}?",
+      "answer": "null и [] соответственно."
+    },
+    {
+      "id": 1724,
+      "type": "recall",
+      "text": "Обнуляет ли slices.Delete хвост за новым len?",
+      "answer": "Да, чтобы не держать ссылки. Обычный append-трюк этого не делает."
+    },
+    {
+      "id": 1725,
+      "type": "recall",
+      "text": "Что делает Unmarshal JSON null в *[]T?",
+      "answer": "Присваивает nil."
+    },
+    {
+      "id": 1726,
+      "type": "recall",
+      "text": "Почему range по указателям меняет структуры?",
+      "answer": "Копируется указатель, объект за ним тот же."
+    },
+    {
+      "id": 1727,
+      "type": "recall",
+      "text": "Как не удерживать большой массив маленьким слайсом?",
+      "answer": "Скопировать элементы в новый слайс или обрезать cap (Clip / полный срез) и отбросить старый заголовок."
+    },
+    {
+      "id": 1728,
+      "type": "recall",
+      "text": "Какой результат slices.Compare, если a < b?",
+      "answer": "-1."
+    },
+    {
+      "id": 1729,
+      "type": "recall",
+      "text": "Что сжимает slices.Compact?",
+      "answer": "Только подряд идущие равные элементы."
+    },
+    {
+      "id": 1730,
+      "type": "recall",
+      "text": "На месте ли slices.Reverse?",
+      "answer": "Да, переставляет элементы того же массива."
+    },
+    {
+      "id": 1731,
+      "type": "recall",
+      "text": "Что возвращает BinarySearch, если элемента нет?",
+      "answer": "Индекс вставки и false."
+    },
+    {
+      "id": 1732,
+      "type": "recall",
+      "text": "Когда два [][]int перестают делить внутренний массив?",
+      "answer": "Когда append в один ряд превышает его cap и выделяет новый массив."
+    },
+    {
+      "id": 1733,
+      "type": "recall",
+      "text": "Что делает append(b, s...) для []byte b и string s?",
+      "answer": "Дописывает байты строки в b."
+    },
+    {
+      "id": 1734,
+      "type": "recall",
+      "text": "Меняет ли slices.Grow len?",
+      "answer": "Нет, готовит cap для будущих append."
+    },
+    {
+      "id": 1735,
+      "type": "recall",
+      "text": "Что будет с массивом a после append в a[i:j] без третьего индекса, если cap позволяет?",
+      "answer": "Хвост массива затирается новым элементом."
+    },
+    {
+      "id": 1736,
+      "type": "recall",
+      "text": "Что вернёт slices.Index, если элемента нет?",
+      "answer": "-1."
+    },
+    {
+      "id": 1737,
+      "type": "recall",
+      "text": "Сортирует ли slices.Sort на месте?",
+      "answer": "Да."
+    },
+    {
+      "id": 1738,
+      "type": "recall",
+      "text": "Почему append после s[:0:0] не пишет в старый массив?",
+      "answer": "Ёмкость 0, нужен новый массив."
+    },
+    {
+      "id": 1739,
+      "type": "recall",
+      "text": "Может ли slices.Replace увеличить len?",
+      "answer": "Да, если вставить больше элементов, чем вырезали."
+    },
+    {
+      "id": 1740,
+      "type": "recall",
+      "text": "Меняет ли запись в []byte, полученный из string, саму строку?",
+      "answer": "Нет. Байты скопированы."
+    }
+  ]
+}

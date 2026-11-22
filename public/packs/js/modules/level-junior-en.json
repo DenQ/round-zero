@@ -1,0 +1,208 @@
+{
+  "stack": "js",
+  "topic": "modules",
+  "level": "junior",
+  "locale": "en",
+  "questions": [
+    {
+      "id": 661,
+      "type": "code",
+      "language": "js",
+      "text": "import { n } from 'data:text/javascript,export const n = 1';\nconsole.log(n);",
+      "options": [
+        "1",
+        "0",
+        "2",
+        "3"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 662,
+      "type": "code",
+      "language": "js",
+      "text": "import n from 'data:text/javascript,export default 2';\nconsole.log(n);",
+      "options": [
+        "1",
+        "2",
+        "0",
+        "3"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 663,
+      "type": "code",
+      "language": "js",
+      "text": "import { n as m } from 'data:text/javascript,export const n = 3';\nconsole.log(m);",
+      "options": [
+        "1",
+        "0",
+        "3",
+        "2"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 664,
+      "type": "code",
+      "language": "js",
+      "text": "import * as ns from 'data:text/javascript,export const n = 4';\nconsole.log(ns.n);",
+      "options": [
+        "1",
+        "2",
+        "0",
+        "4"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 665,
+      "type": "code",
+      "language": "js",
+      "text": "const url = 'data:text/javascript,' + encodeURIComponent('let n = 0; export function next(){ n += 1; return n }');\nconst a = await import(url);\nconst b = await import(url);\nconsole.log(a.next());\nconsole.log(b.next());",
+      "options": [
+        "1, 1",
+        "1, 2",
+        "2, 1",
+        "2, 2"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 666,
+      "type": "code",
+      "language": "js",
+      "text": "var n = 1;\nconsole.log(typeof globalThis.n === 'undefined' ? 1 : 0);",
+      "options": [
+        "0",
+        "2",
+        "1",
+        "3"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 667,
+      "type": "code",
+      "language": "js",
+      "text": "console.log(n);\nimport { n } from 'data:text/javascript,export const n = 7';",
+      "options": [
+        "0",
+        "1",
+        "2",
+        "7"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 668,
+      "type": "code",
+      "language": "js",
+      "text": "import { m } from 'data:text/javascript,const n = 8; export { n as m }';\nconsole.log(m);",
+      "options": [
+        "8",
+        "0",
+        "1",
+        "2"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 669,
+      "type": "text",
+      "text": "Where can static import and export be declared?",
+      "options": [
+        "Only at the top level of a module. Inside a function, if, or block they are a syntax error",
+        "Inside any function, as long as that function is not nested",
+        "Only on the first line of the file",
+        "Anywhere a function can be called"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 670,
+      "type": "text",
+      "text": "How many default exports can one module have?",
+      "options": [
+        "As many as it has named exports",
+        "At most one. Named exports can be many",
+        "Exactly one: a module without default is invalid",
+        "None. default belongs in a separate file"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 671,
+      "type": "text",
+      "text": "What is the specifier of a static import?",
+      "options": [
+        "Any expression. It is evaluated when execution reaches that line",
+        "The name of a local variable in this file",
+        "A string literal. The module graph is built from it before the body runs",
+        "The promise returned by import()"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 672,
+      "type": "text",
+      "text": "What is import './side.mjs' without a binding list for?",
+      "options": [
+        "To delete that module's exports",
+        "To copy its variables onto the global object",
+        "To wait until the file changes on disk",
+        "To evaluate the module for side effects. Importing the same URL again does not run the body"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 673,
+      "type": "boolean",
+      "text": "One module can export a default and named bindings at the same time.",
+      "correct": true
+    },
+    {
+      "id": 674,
+      "type": "boolean",
+      "text": "A static import inside if loads the module only when that branch runs.",
+      "correct": false
+    },
+    {
+      "id": 675,
+      "type": "boolean",
+      "text": "The name in import value from must match a variable name in the exporting file.",
+      "correct": false
+    },
+    {
+      "id": 676,
+      "type": "boolean",
+      "text": "Module code runs in strict mode.",
+      "correct": true
+    },
+    {
+      "id": 677,
+      "type": "recall",
+      "text": "What is the namespace object property that holds export default?",
+      "answer": "default. Named exports sit under their own names."
+    },
+    {
+      "id": 678,
+      "type": "recall",
+      "text": "What does import(specifier) return?",
+      "answer": "A promise. On success the value is the module namespace object, not one export."
+    },
+    {
+      "id": 679,
+      "type": "recall",
+      "text": "What is a specifier that starts with ./ or ../ resolved against?",
+      "answer": "The URL of the current module, not the process working directory."
+    },
+    {
+      "id": 680,
+      "type": "recall",
+      "text": "Which prefixes make a specifier relative?",
+      "answer": "./ and ../. A name without one of those is a bare specifier, resolved by the host."
+    }
+  ]
+}

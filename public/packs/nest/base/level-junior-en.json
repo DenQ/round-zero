@@ -1,0 +1,408 @@
+{
+  "stack": "nest",
+  "topic": "base",
+  "level": "junior",
+  "locale": "en",
+  "questions": [
+    {
+      "id": 1141,
+      "type": "code",
+      "language": "ts",
+      "text": "@Injectable()\nclass Counter {\n  n = 0\n}\nconst a = app.get(Counter)\nconst b = app.get(Counter)\na.n = 1\nconsole.log(b.n)",
+      "options": [
+        "1",
+        "0",
+        "undefined",
+        "2"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1142,
+      "type": "code",
+      "language": "ts",
+      "text": "@Controller()\nclass HelloController {\n  @Get()\n  ping() {\n    return 2\n  }\n}\nconsole.log(app.get(HelloController).ping())",
+      "options": [
+        "undefined",
+        "2",
+        "0",
+        "1"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1143,
+      "type": "code",
+      "language": "ts",
+      "text": "@Injectable()\nclass Num {\n  value() {\n    return 3\n  }\n}\n@Injectable()\nclass Box {\n  constructor(private num: Num) {}\n  read() {\n    return this.num.value()\n  }\n}\nconsole.log(app.get(Box).read())",
+      "options": [
+        "undefined",
+        "0",
+        "3",
+        "Num"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1144,
+      "type": "code",
+      "language": "ts",
+      "text": "@Injectable()\nclass Sum {\n  add(a: number, b: number) {\n    return a + b\n  }\n}\n@Controller()\nclass SumController {\n  constructor(private sum: Sum) {}\n  @Get()\n  run() {\n    return this.sum.add(2, 3)\n  }\n}\nconsole.log(app.get(SumController).run())",
+      "options": [
+        "23",
+        "2",
+        "3",
+        "5"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1145,
+      "type": "code",
+      "language": "ts",
+      "text": "const n = await new ParseIntPipe().transform('4', {\n  type: 'param',\n  data: 'id',\n})\nconsole.log(n)",
+      "options": [
+        "4",
+        "\"4\"",
+        "NaN",
+        "400"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1146,
+      "type": "code",
+      "language": "ts",
+      "text": "try {\n  await new ParseIntPipe().transform('x', {\n    type: 'query',\n    data: 'n',\n  })\n} catch (e) {\n  console.log(e.getStatus())\n}",
+      "options": [
+        "200",
+        "400",
+        "500",
+        "NaN"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1147,
+      "type": "code",
+      "language": "ts",
+      "text": "console.log(new HttpException('x', 418).getStatus())",
+      "options": [
+        "500",
+        "200",
+        "418",
+        "404"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1148,
+      "type": "code",
+      "language": "ts",
+      "text": "const p = new DefaultValuePipe(5)\nconsole.log(p.transform(undefined, { type: 'query' }))\nconsole.log(p.transform(8, { type: 'query' }))",
+      "options": [
+        "undefined, 8",
+        "5, 5",
+        "undefined, undefined",
+        "5, 8"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1149,
+      "type": "code",
+      "language": "ts",
+      "text": "class TimesPipe {\n  constructor(private n: number) {}\n  transform(value: number) {\n    return value * this.n\n  }\n}\nconsole.log(new TimesPipe(3).transform(2))",
+      "options": [
+        "6",
+        "5",
+        "23",
+        "3"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1150,
+      "type": "code",
+      "language": "ts",
+      "text": "@Injectable()\nclass Hidden {\n  n = 7\n}\n@Module({ providers: [Hidden], exports: [Hidden] })\nclass A {}\n@Module({ imports: [A] })\nclass B {}\nconsole.log(app.get(Hidden).n)",
+      "options": [
+        "undefined",
+        "7",
+        "0",
+        "Error"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1151,
+      "type": "code",
+      "language": "ts",
+      "text": "@Injectable()\nclass Hidden {}\n@Injectable()\nclass Consumer {\n  constructor(public h: Hidden) {}\n}\n@Module({ providers: [Hidden] })\nclass A {}\n@Module({ imports: [A], providers: [Consumer] })\nclass B {}\ntry {\n  await Test.createTestingModule({ imports: [B] }).compile()\n  console.log(1)\n} catch {\n  console.log(0)\n}",
+      "options": [
+        "1",
+        "undefined",
+        "0",
+        "Hidden"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1152,
+      "type": "code",
+      "language": "ts",
+      "text": "@Controller()\nclass DoneController {\n  @HttpCode(204)\n  done() {\n    return 9\n  }\n}\nconsole.log(new DoneController().done())",
+      "options": [
+        "204",
+        "undefined",
+        "null",
+        "9"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1153,
+      "type": "code",
+      "language": "ts",
+      "text": "class Missing {}\n@Injectable()\nclass Box {\n  constructor(@Optional() private missing?: Missing) {}\n  flag() {\n    return this.missing ? 1 : 0\n  }\n}\nconsole.log(app.get(Box).flag())",
+      "options": [
+        "0",
+        "1",
+        "undefined",
+        "Error"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1154,
+      "type": "code",
+      "language": "ts",
+      "text": "@Injectable()\nclass A {\n  n = 1\n}\n@Injectable()\nclass B {\n  n = 2\n}\n@Injectable()\nclass C {\n  constructor(private a: A, private b: B) {}\n  out() {\n    return this.a.n + this.b.n\n  }\n}\nconsole.log(app.get(C).out())",
+      "options": [
+        "12",
+        "3",
+        "1",
+        "2"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1155,
+      "type": "code",
+      "language": "ts",
+      "text": "console.log(HttpStatus.CREATED)",
+      "options": [
+        "200",
+        "204",
+        "201",
+        "201 Created"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1156,
+      "type": "code",
+      "language": "ts",
+      "text": "console.log(\n  await new ParseFloatPipe().transform('1.5', {\n    type: 'query',\n    data: 'n',\n  }),\n)",
+      "options": [
+        "1",
+        "15",
+        "NaN",
+        "1.5"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1157,
+      "type": "text",
+      "text": "What does listing a provider in exports allow?",
+      "options": [
+        "A module that imports this one can inject that provider",
+        "The provider is created twice, once per importer",
+        "The class is exposed as an HTTP route",
+        "Nest skips constructor injection for that class"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1158,
+      "type": "text",
+      "text": "When does Nest call a method marked @Get()?",
+      "options": [
+        "When the module file is imported",
+        "On a matching HTTP request, not at import time",
+        "Once when the process starts",
+        "When you write new Controller()"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1159,
+      "type": "text",
+      "text": "What does ParseIntPipe pass into the handler?",
+      "options": [
+        "The raw string from the URL",
+        "A Promise the handler must await",
+        "A number. The param is a string until the pipe runs",
+        "A Buffer"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1160,
+      "type": "text",
+      "text": "Who constructs a constructor parameter of an @Injectable class?",
+      "options": [
+        "The class itself with new inside the constructor",
+        "The HTTP client",
+        "Node require",
+        "Nest. The container creates the dependency and passes it in"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1161,
+      "type": "text",
+      "text": "Why is a DTO often a class rather than an interface?",
+      "options": [
+        "A class exists at runtime, so ValidationPipe can see it. An interface is erased",
+        "Interfaces cannot be a @Body() type",
+        "Classes serialize to JSON faster",
+        "Nest forbids interfaces in TypeScript"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1162,
+      "type": "text",
+      "text": "What type is @Param('id') without a pipe?",
+      "options": [
+        "number, if the path looks numeric",
+        "string. Route params stay strings until a pipe transforms them",
+        "integer",
+        "unknown"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1163,
+      "type": "text",
+      "text": "What does throw new Error('no') become in a Nest HTTP app by default?",
+      "options": [
+        "400 Bad Request",
+        "404 Not Found",
+        "500. Nest maps unknown errors to Internal Server Error",
+        "The process exits"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1164,
+      "type": "text",
+      "text": "What does listing a class in providers tell Nest?",
+      "options": [
+        "Register an HTTP route for that class",
+        "Export it to every module in the app",
+        "Treat it as middleware",
+        "Create or reuse it and inject it where that type is requested"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1165,
+      "type": "boolean",
+      "text": "A default-scoped provider is one instance for the whole application.",
+      "correct": true
+    },
+    {
+      "id": 1166,
+      "type": "boolean",
+      "text": "@Controller() registers routes even if the class is not listed in any module.",
+      "correct": false
+    },
+    {
+      "id": 1167,
+      "type": "boolean",
+      "text": "@Optional() lets the constructor run if that dependency is not registered.",
+      "correct": true
+    },
+    {
+      "id": 1168,
+      "type": "boolean",
+      "text": "You must export a provider to inject it inside the same module that declares it.",
+      "correct": false
+    },
+    {
+      "id": 1169,
+      "type": "boolean",
+      "text": "@HttpCode(204) changes the return value when you call the method as a plain class.",
+      "correct": false
+    },
+    {
+      "id": 1170,
+      "type": "boolean",
+      "text": "ParseIntPipe throws with status 400 when the value is not an integer.",
+      "correct": true
+    },
+    {
+      "id": 1171,
+      "type": "boolean",
+      "text": "Two app.get() calls for a default-scoped class return the same instance.",
+      "correct": true
+    },
+    {
+      "id": 1172,
+      "type": "boolean",
+      "text": "@Body() always runs class-validator, even with no ValidationPipe.",
+      "correct": false
+    },
+    {
+      "id": 1173,
+      "type": "recall",
+      "text": "Which decorator marks a class Nest can inject as a provider?",
+      "answer": "@Injectable()."
+    },
+    {
+      "id": 1174,
+      "type": "recall",
+      "text": "Which @Module field lists HTTP controllers?",
+      "answer": "controllers."
+    },
+    {
+      "id": 1175,
+      "type": "recall",
+      "text": "Which built-in pipe turns a string param into an integer?",
+      "answer": "ParseIntPipe."
+    },
+    {
+      "id": 1176,
+      "type": "recall",
+      "text": "Which @Module field shares providers with modules that import this one?",
+      "answer": "exports."
+    },
+    {
+      "id": 1177,
+      "type": "recall",
+      "text": "Which decorator reads the JSON request body?",
+      "answer": "@Body()."
+    },
+    {
+      "id": 1178,
+      "type": "recall",
+      "text": "Default HTTP status for a successful @Get() that returns a value?",
+      "answer": "200."
+    },
+    {
+      "id": 1179,
+      "type": "recall",
+      "text": "Who instantiates a controller listed in a module?",
+      "answer": "Nest's DI container, not user code with new."
+    },
+    {
+      "id": 1180,
+      "type": "recall",
+      "text": "What does @Optional() do on a constructor parameter?",
+      "answer": "Allows undefined if that token is not registered."
+    }
+  ]
+}

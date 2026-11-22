@@ -11,9 +11,11 @@ type RoundResultProps = {
   score: number
   total: number
   onReplay: () => void
+  canReplay: boolean
+  onBackToPack: () => void
 }
 
-export function RoundResult({ pack, score, total, onReplay }: RoundResultProps) {
+export function RoundResult({ pack, score, total, onReplay, canReplay, onBackToPack }: RoundResultProps) {
   const { t } = useTranslation()
   const missed = total - score
 
@@ -37,14 +39,20 @@ export function RoundResult({ pack, score, total, onReplay }: RoundResultProps) 
         <Stat label={t('quiz.game.incorrect')} value={missed} />
       </Stack>
 
-      <Button
-        variant="contained"
-        size="large"
-        startIcon={<PlayArrowIcon />}
-        onClick={onReplay}
-      >
-        {t('quiz.game.playAgain')}
-      </Button>
+      <Stack direction="row" spacing={2} useFlexGap sx={{ flexWrap: 'wrap', justifyContent: 'center' }}>
+        <Button
+          variant="contained"
+          size="large"
+          startIcon={<PlayArrowIcon />}
+          onClick={onReplay}
+          disabled={!canReplay}
+        >
+          {t('quiz.game.playAgain')}
+        </Button>
+        <Button variant="outlined" size="large" onClick={onBackToPack}>
+          {t('quiz.game.backToPack')}
+        </Button>
+      </Stack>
     </Stack>
   )
 }

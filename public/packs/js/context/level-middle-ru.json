@@ -1,0 +1,408 @@
+{
+  "stack": "js",
+  "topic": "context",
+  "level": "middle",
+  "locale": "ru",
+  "questions": [
+    {
+      "id": 261,
+      "type": "code",
+      "language": "js",
+      "text": "function sum(a, b) {\n  console.log(this.n + a + b);\n}\nsum.call({ n: 1 }, 2, 3);\nsum.apply({ n: 1 }, [4, 5]);",
+      "options": [
+        "6, 6",
+        "10, 6",
+        "6, 10",
+        "7, 9"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 262,
+      "type": "code",
+      "language": "js",
+      "text": "function sum(a, b) {\n  console.log(this.n + a + b);\n}\nconst sumFrom = sum.bind({ n: 1 }, 2);\nsumFrom(3);\nsumFrom(4);",
+      "options": [
+        "5, 6",
+        "6, 7",
+        "7, 8",
+        "3, 4"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 263,
+      "type": "code",
+      "language": "js",
+      "text": "function show() {\n  console.log(this.n);\n}\nconst show1 = show.bind({ n: 1 });\nshow1.call({ n: 2 });\nshow1.apply({ n: 3 });",
+      "options": [
+        "2, 3",
+        "1, 2",
+        "1, 3",
+        "1, 1"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 264,
+      "type": "code",
+      "language": "js",
+      "text": "const box = {\n  n: 1,\n  show(x) {\n    console.log(x + this.n);\n  },\n};\n[2, 3].forEach(box.show, box);",
+      "options": [
+        "2, 3",
+        "1, 1",
+        "3, 4",
+        "3, 5"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 265,
+      "type": "code",
+      "language": "js",
+      "text": "const box = {\n  n: 2,\n  run() {\n    [1, 4].forEach((x) => console.log(x + this.n));\n  },\n};\nbox.run();",
+      "options": [
+        "1, 4",
+        "3, 6",
+        "2, 2",
+        "5, 8"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 266,
+      "type": "code",
+      "language": "js",
+      "text": "class Box {\n  n = 1;\n  method() {\n    console.log(this.n);\n  }\n  field = () => {\n    console.log(this.n);\n  };\n}\nconst box = new Box();\nconst method = box.method;\nconst field = box.field;\ntry {\n  method();\n} catch {\n  console.log(2);\n}\nfield();",
+      "options": [
+        "1, 1",
+        "2, 2",
+        "1, 2",
+        "2, 1"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 267,
+      "type": "code",
+      "language": "js",
+      "text": "const outer = {\n  n: 1,\n  make() {\n    const inner = {\n      n: 2,\n      show: () => console.log(this.n),\n    };\n    inner.show();\n    console.log(inner.n);\n  },\n};\nouter.make();",
+      "options": [
+        "2, 1",
+        "1, 2",
+        "2, 2",
+        "1, 1"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 268,
+      "type": "code",
+      "language": "js",
+      "text": "function Box(n) {\n  this.n = n;\n  return this.n;\n}\nconst Bound = Box.bind({ n: 9 });\nconsole.log(new Bound(1).n);\nconsole.log(Bound(2));",
+      "options": [
+        "9, 9",
+        "1, 9",
+        "9, 2",
+        "1, 2"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 269,
+      "type": "text",
+      "text": "Чем call отличается от apply?",
+      "options": [
+        "call принимает аргументы по одному, apply — массивом. this задают оба",
+        "apply задаёт this, call — нет",
+        "call вызывает функцию сразу, apply только связывает this",
+        "Разницы нет: оба игнорируют первый аргумент"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 270,
+      "type": "text",
+      "text": "Можно ли у функции после bind подменить this через call?",
+      "options": [
+        "Да, последний call всегда побеждает",
+        "Да, если передать тот же объект",
+        "Нет: this от bind уже зафиксирован, call его не меняет",
+        "Нет, потому что bind ничего не возвращает"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 271,
+      "type": "text",
+      "text": "Зачем forEach и map принимают второй аргумент thisArg?",
+      "options": [
+        "Он становится this обычного колбэка на время обхода",
+        "Он подменяет this и у стрелки тоже",
+        "Это начальный аккумулятор, как у reduce",
+        "Это число итераций"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 272,
+      "type": "text",
+      "text": "Что делает new с функцией, которую уже связали через bind?",
+      "options": [
+        "new использует связанный объект и не создаёт новый",
+        "new игнорирует связанный this и создаёт новый объект. Привязанные аргументы остаются",
+        "Такую функцию нельзя вызвать через new",
+        "new сбрасывает и this, и привязанные аргументы"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 273,
+      "type": "boolean",
+      "text": "Второй bind заменяет this, зафиксированный первым bind.",
+      "correct": false
+    },
+    {
+      "id": 274,
+      "type": "boolean",
+      "text": "call и apply могут подменить this у стрелки.",
+      "correct": false
+    },
+    {
+      "id": 275,
+      "type": "boolean",
+      "text": "Обычный метод класса, вынутый из экземпляра, теряет this.",
+      "correct": true
+    },
+    {
+      "id": 276,
+      "type": "boolean",
+      "text": "Поле-стрелка класса помнит экземпляр, даже если вызвать поле отдельно.",
+      "correct": true
+    },
+    {
+      "id": 277,
+      "type": "recall",
+      "text": "Как устроен приём const self = this во вложенной функции?",
+      "answer": "self запоминает this метода в переменной. Внутренняя функция читает self из замыкания: её собственный this к объекту уже не относится."
+    },
+    {
+      "id": 278,
+      "type": "recall",
+      "text": "Почему стрелка в колбэке forEach видит this метода, а обычная function — нет?",
+      "answer": "Стрелка не имеет своего this и берёт его у метода. Обычная function получает this от forEach: без thisArg в строгом режиме это undefined."
+    },
+    {
+      "id": 279,
+      "type": "recall",
+      "text": "Где лежит метод класса и где лежит поле-стрелка, и как это влияет на this?",
+      "answer": "Метод один на прототипе, this приходит из вызова. Поле-стрелка создаётся на каждом экземпляре и замыкает его this."
+    },
+    {
+      "id": 280,
+      "type": "recall",
+      "text": "Что остаётся от bind, если функцию потом вызвали через new?",
+      "answer": "Связанный this отбрасывается: new создаёт свой объект. Аргументы, привязанные через bind, по-прежнему подставляются впереди."
+    },
+    {
+      "id": 321,
+      "type": "code",
+      "language": "js",
+      "text": "function Box(n) {\n  this.n = n;\n}\nBox.prototype.read = function () {\n  console.log(this.n);\n};\nconst a = new Box(1);\nconst b = new Box(2);\na.read();\nb.read();",
+      "options": [
+        "1, 1",
+        "2, 1",
+        "1, 2",
+        "2, 2"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 322,
+      "type": "code",
+      "language": "js",
+      "text": "'use strict';\nconst box = {\n  n: 1,\n  show() {\n    console.log(this.n);\n  },\n};\nconst { show } = box;\ntry {\n  show();\n} catch {\n  console.log(2);\n}\nbox.show();",
+      "options": [
+        "1, 1",
+        "1, 2",
+        "2, 2",
+        "2, 1"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 323,
+      "type": "code",
+      "language": "js",
+      "text": "function Box(n) {\n  this.n = n;\n  this.fromThis = function () {\n    console.log(this.n);\n  };\n  this.fromArg = function () {\n    console.log(n);\n  };\n}\nconst box = new Box(1);\nbox.fromThis.call({ n: 2 });\nbox.fromArg.call({ n: 2 });",
+      "options": [
+        "1, 1",
+        "2, 2",
+        "2, 1",
+        "1, 2"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 324,
+      "type": "code",
+      "language": "js",
+      "text": "class Base {\n  n = 1;\n  show() {\n    console.log(this.n);\n  }\n}\nclass Child extends Base {\n  n = 2;\n  run() {\n    super.show();\n  }\n}\nnew Child().run();",
+      "options": [
+        "1",
+        "2",
+        "3",
+        "0"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 325,
+      "type": "code",
+      "language": "js",
+      "text": "class Box {\n  constructor(n) {\n    this.n = n;\n  }\n  add(x) {\n    console.log(this.n + x);\n  }\n}\nconst box = new Box(1);\nbox.add(2);\nbox.add.call({ n: 3 }, 4);",
+      "options": [
+        "3, 7",
+        "3, 5",
+        "1, 4",
+        "3, 3"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 326,
+      "type": "code",
+      "language": "js",
+      "text": "const box = {\n  n: 1,\n  show() {\n    console.log(this.n);\n  },\n};\nsetTimeout(box.show.bind({ n: 2 }), 0);",
+      "options": [
+        "1",
+        "0",
+        "2",
+        "3"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 327,
+      "type": "code",
+      "language": "js",
+      "text": "const box = {\n  n: 1,\n  run(fn) {\n    fn.call(this);\n  },\n};\nbox.run(function () {\n  console.log(this.n);\n});\nbox.run(function () {\n  console.log(this.n + 2);\n});",
+      "options": [
+        "1, 2",
+        "1, 1",
+        "2, 3",
+        "1, 3"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 328,
+      "type": "code",
+      "language": "js",
+      "text": "'use strict';\nconst box = {\n  n: 1,\n  show() {\n    console.log(this.n);\n  },\n};\ntry {\n  [0].forEach(box.show);\n} catch {\n  console.log(2);\n}\n[0].forEach(box.show, box);",
+      "options": [
+        "1, 1",
+        "2, 1",
+        "1, 2",
+        "2, 2"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 329,
+      "type": "text",
+      "text": "Что происходит с this при const { show } = box?",
+      "options": [
+        "show остаётся связанным с box",
+        "Связь с box теряется: дальше это обычная функция без объекта перед вызовом",
+        "this навсегда становится undefined, даже при box.show()",
+        "Деструктуризация вызывает show сразу"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 330,
+      "type": "text",
+      "text": "Почему один метод на прототипе печатает разный n у двух экземпляров?",
+      "options": [
+        "Движок копирует метод в каждый экземпляр со своим n",
+        "Метод один, а this при вызове a.read() — это a, при b.read() — это b",
+        "Прототип хранит отдельный this на каждый new",
+        "Второй экземпляр затирает n первого"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 331,
+      "type": "text",
+      "text": "Чему равен this внутри метода, вызванного через super.show()?",
+      "options": [
+        "Отдельному объекту базового класса",
+        "Прототипу, на котором лежит show",
+        "Тому же экземпляру наследника, на котором вызвали метод",
+        "undefined: super сбрасывает this"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 332,
+      "type": "text",
+      "text": "Чем функция, которая читает аргумент конструктора, отличается от функции, которая читает this.n?",
+      "options": [
+        "Аргумент запомнен замыканием, call с другим объектом его не подменит. this.n зависит от вызова",
+        "Обе читают одно и то же: this конструктора навсегда",
+        "Аргумент конструктора и есть this",
+        "Замыкание видит this того call, которым функцию вызвали"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 333,
+      "type": "boolean",
+      "text": "const { show } = box сохраняет this равным box.",
+      "correct": false
+    },
+    {
+      "id": 334,
+      "type": "boolean",
+      "text": "Метод на прототипе при вызове a.read() получает this, равный a.",
+      "correct": true
+    },
+    {
+      "id": 335,
+      "type": "boolean",
+      "text": "super.show() подставляет this базового экземпляра, отдельного от наследника.",
+      "correct": false
+    },
+    {
+      "id": 336,
+      "type": "boolean",
+      "text": "Функция, замкнувшая аргумент конструктора, меняет ответ, если вызвать её через call с другим объектом.",
+      "correct": false
+    },
+    {
+      "id": 337,
+      "type": "recall",
+      "text": "Почему деструктуризация метода теряет объект?",
+      "answer": "const { show } = box копирует ссылку на функцию. Вызов show() идёт уже без объекта слева, поэтому this больше не box."
+    },
+    {
+      "id": 338,
+      "type": "recall",
+      "text": "Как один метод прототипа обслуживает разные экземпляры?",
+      "answer": "Функция лежит на прототипе одна. При вызове экземпляр.метод() this равен этому экземпляру, поэтому читается его собственный n."
+    },
+    {
+      "id": 339,
+      "type": "recall",
+      "text": "Какой объект становится this при super.method()?",
+      "answer": "Тот же экземпляр, на котором вызвали метод наследника. super только выбирает функцию базы, this не подменяется на отдельный объект базы."
+    },
+    {
+      "id": 340,
+      "type": "recall",
+      "text": "Когда функция в конструкторе читает параметр, а не this, что меняет call?",
+      "answer": "Ничего в этом значении. Параметр лежит в замыкании. call подменит только this, если функция читает this.n."
+    }
+  ]
+}

@@ -6,6 +6,7 @@
   "nav": {
     "home": "Home",
     "about": "About",
+    "settings": "Settings",
     "open": "Open menu",
     "close": "Hide menu",
     "collapse": "Collapse menu"
@@ -13,6 +14,9 @@
   "home": {
     "title": "Home",
     "description": "Select a pack from the menu.",
+    "unfinished": {
+      "title": "Unfinished games"
+    },
     "activity": {
       "title": "Activity",
       "summary": "{{count}} answers in the last year",
@@ -38,6 +42,31 @@
       }
     }
   },
+  "header": {
+    "rating": "{{level}} · {{score}}",
+    "ratingLabel": "Level {{level}}, {{score}} points"
+  },
+  "settings": {
+    "title": "Settings",
+    "ratingTitle": "Rating",
+    "points": "A correct answer scores by pack level: junior +1, middle +2, senior +3.",
+    "streak": "The multiplier is how many days in a row you played before today. Seven days in a row before today multiply the answer by 7. Yesterday only is ×1. A gap yesterday is also ×1.",
+    "levels": "Level 0 is under 1000 points. Each next threshold doubles: 2000, 4000, 8000, 16000, 32000.",
+    "resetTitle": "Statistics",
+    "resetDescription": "Reset deletes activity, points, and rating history on this device.",
+    "reset": "Reset all statistics",
+    "resetConfirmTitle": "Reset statistics?",
+    "resetConfirmBody": "Activity, points, and growth history will be deleted.",
+    "resetConfirm": "Reset",
+    "cancel": "Cancel",
+    "crookedTitle": "Crooked questions",
+    "crookedDescription": "Questions you flagged during a round. The list stays on this device only.",
+    "crookedShow": "Show crooked questions",
+    "crookedEmpty": "No flagged questions yet.",
+    "crookedItem": "ID {{id}}",
+    "crookedCopy": "Copy all",
+    "crookedCopied": "Copied"
+  },
   "about": {
     "title": "About",
     "description": "Starter layout with MUI, routing, i18n, and theme switching."
@@ -50,10 +79,23 @@
       "go": "Go",
       "sql": "SQL",
       "nest": "Nest",
+      "node": "Node.js",
       "react": "React"
     },
     "topics": {
-      "eventLoop": "Event Loop"
+      "eventLoop": "Event Loop",
+      "scope": "Scope",
+      "context": "Context",
+      "prototypes": "Prototypes",
+      "modules": "Modules",
+      "promises": "Promises",
+      "base": "Base",
+      "slices": "Slices",
+      "goroutines": "Goroutines",
+      "channels": "Channels",
+      "contexts": "Contexts",
+      "pointers": "Pointers",
+      "maps": "Maps"
     },
     "levels": {
       "junior": "Junior",
@@ -66,6 +108,10 @@
     "error": "Failed to load the pack.",
     "notFound": "Pack not found.",
     "question": "Question {{n}}",
+    "crooked": {
+      "flag": "Mark as a crooked question",
+      "unflag": "Remove from crooked questions"
+    },
     "game": {
       "play": "Play",
       "title": "Score more points",
@@ -73,18 +119,48 @@
       "subtitleAll": "All questions from this pack",
       "packSize_one": "The pack has {{count}} question.",
       "packSize_other": "The pack has {{count}} questions.",
+      "packCoverage": "{{percent}}% answered.",
       "packUntouched": "{{n}} you haven't touched yet.",
       "packAllTouched": "You've already answered all of them.",
+      "packEverWrong": "You've missed {{n}} before.",
+      "packNoMistakes": "No mistakes in this set yet.",
       "roundSize": "Number of questions",
+      "typeFilter": "Question types",
+      "poolMode": "Question set",
+      "modes": {
+        "all": "All",
+        "untouched": "New",
+        "everWrong": "Mistakes"
+      },
+      "types": {
+        "all": "All",
+        "code": "Code",
+        "text": "Text",
+        "boolean": "True / false",
+        "recall": "I know / I don't"
+      },
       "all": "All",
       "progress": "{{current}}/{{total}}",
+      "headerScore": "{{correct}} correct / {{errors}}",
+      "errorCount_one": "{{count}} error",
+      "errorCount_other": "{{count}} errors",
+      "log": "Log",
       "next": "Next",
       "correct": "Correct",
       "incorrect": "Incorrect",
+      "true": "True",
+      "false": "False",
+      "know": "I know",
+      "dontKnow": "I don't know",
+      "answer": "Answer",
       "resultTitle": "Result",
       "resultScore": "{{score}} of {{total}}",
       "resultPoints": "Points",
-      "playAgain": "Play again"
+      "playAgain": "Play again",
+      "backToPack": "Pack settings",
+      "unfinished": "Game in progress",
+      "continue": "Continue",
+      "discard": "Delete"
     }
   },
   "theme": {

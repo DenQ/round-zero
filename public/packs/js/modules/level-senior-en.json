@@ -1,0 +1,208 @@
+{
+  "stack": "js",
+  "topic": "modules",
+  "level": "senior",
+  "locale": "en",
+  "questions": [
+    {
+      "id": 701,
+      "type": "code",
+      "language": "js",
+      "text": "import * as ns from 'data:text/javascript,export const a = 1; export default 2';\nconsole.log(Object.keys(ns).length);",
+      "options": [
+        "1",
+        "0",
+        "3",
+        "2"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 702,
+      "type": "code",
+      "language": "js",
+      "text": "let sync = 0;\nlet pending;\ntry {\n  pending = import('data:text/javascript,throw 1');\n  sync = 1;\n} catch {\n  sync = 2;\n}\nlet later = 0;\ntry {\n  await pending;\n} catch {\n  later = 1;\n}\nconsole.log(sync);\nconsole.log(later);",
+      "options": [
+        "2, 1",
+        "1, 1",
+        "1, 0",
+        "2, 0"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 703,
+      "type": "code",
+      "language": "js",
+      "text": "console.log(1);\nimport { n } from 'data:text/javascript,console.log(2); await Promise.resolve(); console.log(3); export const n = 4';\nconsole.log(n);",
+      "options": [
+        "1, 2, 3, 4",
+        "1, 2, 4, 3",
+        "2, 3, 1, 4",
+        "2, 1, 3, 4"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 704,
+      "type": "code",
+      "language": "js",
+      "text": "const a = 'data:text/javascript,' + encodeURIComponent('export const n = 1; export const a = 2');\nconst b = 'data:text/javascript,' + encodeURIComponent('export const n = 3; export const b = 4');\nconst ns = await import('data:text/javascript,' + encodeURIComponent('export * from ' + JSON.stringify(a) + '\\nexport * from ' + JSON.stringify(b)));\nconsole.log(ns.a);\nconsole.log(ns.b);\nconsole.log('n' in ns ? 1 : 0);",
+      "options": [
+        "2, 4, 1",
+        "1, 3, 1",
+        "1, 3, 0",
+        "2, 4, 0"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 705,
+      "type": "code",
+      "language": "js",
+      "text": "const mod = await import('data:text/javascript,export function url(){ return import.meta.url }');\nconsole.log(mod.url() === import.meta.url ? 0 : 1);",
+      "options": [
+        "1",
+        "0",
+        "2",
+        "3"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 706,
+      "type": "code",
+      "language": "js",
+      "text": "console.log(1);\nconst mod = await import('data:text/javascript,console.log(2); await Promise.resolve(); console.log(3); export const n = 4');\nconsole.log(mod.n);",
+      "options": [
+        "1, 2, 4, 3",
+        "1, 2, 3, 4",
+        "2, 3, 1, 4",
+        "1, 3, 2, 4"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 707,
+      "type": "code",
+      "language": "js",
+      "text": "const leaf = 'data:text/javascript,' + encodeURIComponent('export const n = 4; export default 5');\nconst ns = await import('data:text/javascript,' + encodeURIComponent('export * as box from ' + JSON.stringify(leaf)));\nconsole.log(ns.box.n);\nconsole.log(ns.box.default);",
+      "options": [
+        "5, 4",
+        "4, 0",
+        "4, 5",
+        "0, 5"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 708,
+      "type": "code",
+      "language": "js",
+      "text": "const leaf = 'data:text/javascript,' + encodeURIComponent('export const n = 4; export const m = 6');\nconst mid = 'data:text/javascript,' + encodeURIComponent('export * from ' + JSON.stringify(leaf));\nconst ns = await import('data:text/javascript,' + encodeURIComponent('export * from ' + JSON.stringify(mid)));\nconsole.log(ns.n);\nconsole.log(ns.m);",
+      "options": [
+        "6, 4",
+        "0, 0",
+        "5, 5",
+        "4, 6"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 709,
+      "type": "text",
+      "text": "While a module is suspended on top-level await, can a sibling that the parent imports separately still evaluate?",
+      "options": [
+        "Yes. A sibling that is not waiting on that await can evaluate. The parent body starts once all of its static dependencies have finished",
+        "No. Top-level await freezes the whole graph until this module resumes",
+        "Yes, and the parent body runs interleaved with that wait",
+        "No. The sibling is not even instantiated"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 710,
+      "type": "text",
+      "text": "What does the property descriptor of a namespace export say, and can an importer write to it?",
+      "options": [
+        "writable: false, configurable: true. Assignment succeeds silently",
+        "writable: true, configurable: false. Assignment and delete still throw TypeError. Only the module that declared the binding can change it",
+        "writable: true, configurable: true. The importer can store a new value",
+        "There is no descriptor: an export is not an own property"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 711,
+      "type": "text",
+      "text": "When can a function on the other side of a cycle read a let or const?",
+      "options": [
+        "Only before initialization. After that the binding is closed",
+        "Never. The cycle keeps the binding unavailable for the rest of the program",
+        "After that binding's initializer has run. The read is live and sees later assignments. A direct read during initialization throws ReferenceError",
+        "Immediately at instantiation, before any body, and the final value is already there"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 712,
+      "type": "text",
+      "text": "What does import() resolve a string that starts with ./ against?",
+      "options": [
+        "process.cwd(), because the string is computed at runtime",
+        "The page URL, even when the call is inside a nested module",
+        "The directory that contains package.json",
+        "The URL of the current module, like a static import. Only the string itself is computed at runtime"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 713,
+      "type": "boolean",
+      "text": "At the top level of a module, this refers to globalThis.",
+      "correct": false
+    },
+    {
+      "id": 714,
+      "type": "boolean",
+      "text": "await inside an export function suspends the module graph the way top-level await does.",
+      "correct": false
+    },
+    {
+      "id": 715,
+      "type": "boolean",
+      "text": "A syntax error in the target module makes import() throw on the line that calls it.",
+      "correct": false
+    },
+    {
+      "id": 716,
+      "type": "boolean",
+      "text": "export * as name from also adds a default export to the current module.",
+      "correct": false
+    },
+    {
+      "id": 717,
+      "type": "recall",
+      "text": "How does instantiating a module differ from evaluating its body?",
+      "answer": "Instantiation creates the bindings: function is already initialized, var is undefined, let and const are not. Evaluation then runs the bodies. A cyclic read of let before its initializer throws during evaluation."
+    },
+    {
+      "id": 718,
+      "type": "recall",
+      "text": "What is the Symbol.toStringTag of a module namespace object?",
+      "answer": "The string Module."
+    },
+    {
+      "id": 719,
+      "type": "recall",
+      "text": "How do you load a module only when one branch of a condition runs?",
+      "answer": "Call import() inside that branch. A static import is unconditional and can only appear at the top level."
+    },
+    {
+      "id": 720,
+      "type": "recall",
+      "text": "What key does the module map use for a module?",
+      "answer": "The absolute URL after the specifier is resolved. The same source text at another URL is a different instance."
+    }
+  ]
+}

@@ -1,0 +1,408 @@
+{
+  "stack": "js",
+  "topic": "promises",
+  "level": "middle",
+  "locale": "ru",
+  "questions": [
+    {
+      "id": 581,
+      "type": "code",
+      "language": "js",
+      "text": "Promise.resolve(1)\n  .then(\n    () => {\n      throw 2;\n    },\n    () => console.log(3),\n  )\n  .catch((n) => console.log(n));",
+      "options": [
+        "2",
+        "3",
+        "3, 2",
+        "2, 3"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 582,
+      "type": "code",
+      "language": "js",
+      "text": "Promise.reject(1)\n  .then(\n    () => console.log(0),\n    (n) => console.log(n),\n  )\n  .catch(() => console.log(2));",
+      "options": [
+        "1, 2",
+        "1",
+        "2",
+        "0, 1"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 583,
+      "type": "code",
+      "language": "js",
+      "text": "Promise.resolve(1)\n  .finally(() => 9)\n  .then((n) => console.log(n));",
+      "options": [
+        "9",
+        "1, 9",
+        "1",
+        "undefined"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 584,
+      "type": "code",
+      "language": "js",
+      "text": "Promise.resolve(1)\n  .finally(() => {\n    throw 4;\n  })\n  .then(\n    (n) => console.log(n),\n    (n) => console.log(n),\n  );",
+      "options": [
+        "1",
+        "1, 4",
+        "undefined",
+        "4"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 585,
+      "type": "code",
+      "language": "js",
+      "text": "Promise.resolve(1)\n  .finally(() => Promise.reject(4))\n  .then(\n    () => console.log(1),\n    (n) => console.log(n),\n  );",
+      "options": [
+        "4",
+        "1",
+        "1, 4",
+        "undefined"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 586,
+      "type": "code",
+      "language": "js",
+      "text": "Promise.resolve()\n  .then(() => Promise.resolve(1))\n  .then((n) => console.log(n));\nPromise.resolve()\n  .then(() => 2)\n  .then((n) => console.log(n));",
+      "options": [
+        "1, 2",
+        "2, 1",
+        "1",
+        "2"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 587,
+      "type": "code",
+      "language": "js",
+      "text": "const thenable = {\n  then(resolve) {\n    resolve(7);\n  },\n};\nPromise.resolve(thenable).then((n) => console.log(n));\nconsole.log(8);",
+      "options": [
+        "7, 8",
+        "7",
+        "8, 7",
+        "8"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 588,
+      "type": "code",
+      "language": "js",
+      "text": "const inner = Promise.resolve(1);\nPromise.reject(inner).catch((v) => console.log(v === inner ? 1 : 0));",
+      "options": [
+        "0",
+        "undefined",
+        "1, 0",
+        "1"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 589,
+      "type": "text",
+      "text": "Почему обработчик отклонения у того же then не ловит throw из обработчика успеха?",
+      "options": [
+        "Этот обработчик видит только отклонение того промиса, на котором вызвали then. throw отклоняет промис, который вернул then",
+        "Оба обработчика сидят в одном try вокруг всего then",
+        "throw внутри then — синхронное исключение для того, кто вызвал then",
+        "Обработчик отклонения всегда выполняется раньше обработчика успеха"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 590,
+      "type": "text",
+      "text": "Что finally может изменить в предыдущем завершении?",
+      "options": [
+        "Ничего. Колбэк только наблюдает",
+        "throw или возвращённый отклонённый thenable заменяют его. Обычное значение — нет",
+        "Возвращённое значение всегда становится следующим успехом",
+        "Он умеет только превратить отклонение в успех"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 591,
+      "type": "text",
+      "text": "Что Promise.resolve делает с thenable?",
+      "options": [
+        "Читает свойство value",
+        "Оборачивает объект как успех и пропускает then",
+        "Вызывает then и принимает то завершение, о котором сообщит thenable",
+        "Бросает ошибку, потому что значение не нативный промис"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 592,
+      "type": "text",
+      "text": "Что Promise.reject делает с промисом, переданным как причина?",
+      "options": [
+        "Ждёт этот промис и отклоняется его значением",
+        "Завершается успехом, если этот промис успешен",
+        "Разворачивает один уровень, как Promise.resolve",
+        "Отклоняется самим объектом промиса и не принимает его завершение"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 593,
+      "type": "text",
+      "text": "Чем Promise.any отличается от Promise.race?",
+      "options": [
+        "any завершается первым успехом и пропускает отклонения, пока отклонён не каждый вход",
+        "any — другое имя для race",
+        "any ждёт, пока завершится каждый вход",
+        "any отклоняется на первом отклонении"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 594,
+      "type": "text",
+      "text": "Почему try/catch вокруг return promise не ловит отклонение этого промиса?",
+      "options": [
+        "return внутри try запрещён",
+        "Отклонение случится позже, когда вернённый промис завершится. Без await async-функция не бросает в этот catch",
+        "catch внутри async-функции ловит только синхронный throw до первой строки",
+        "Возвращённый промис всегда успешен"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 595,
+      "type": "boolean",
+      "text": "Второй колбэк then(onFulfilled, onRejected) ловит throw из onFulfilled.",
+      "correct": false
+    },
+    {
+      "id": 596,
+      "type": "boolean",
+      "text": "Обычное значение, возвращённое из finally, оставляет прежний успех на месте.",
+      "correct": true
+    },
+    {
+      "id": 597,
+      "type": "boolean",
+      "text": "Promise.resolve принимает thenable, вызывая его then.",
+      "correct": true
+    },
+    {
+      "id": 598,
+      "type": "boolean",
+      "text": "Promise.reject принимает завершение промиса, переданного как причина.",
+      "correct": false
+    },
+    {
+      "id": 599,
+      "type": "boolean",
+      "text": "Promise.any может завершиться успехом более позднего входа, даже если ранний вход уже отклонён.",
+      "correct": true
+    },
+    {
+      "id": 600,
+      "type": "boolean",
+      "text": "Array forEach дожидается async-колбэков до строки, которая идёт после цикла.",
+      "correct": false
+    },
+    {
+      "id": 601,
+      "type": "recall",
+      "text": "Что обрабатывает второй аргумент then?",
+      "answer": "Отклонение того промиса, на котором вызвали then. throw из первого аргумента мимо него проходит."
+    },
+    {
+      "id": 602,
+      "type": "recall",
+      "text": "Когда finally заменяет предыдущее завершение?",
+      "answer": "Когда колбэк бросает исключение или возвращает отклонённый thenable. Обычное значение отбрасывается."
+    },
+    {
+      "id": 603,
+      "type": "recall",
+      "text": "Чем завершается Promise.allSettled?",
+      "answer": "Массивом объектов-результатов, по одному на вход. Отклонённый вход не отклоняет этот промис."
+    },
+    {
+      "id": 604,
+      "type": "recall",
+      "text": "Чем отклоняется Promise.any, если отклонён каждый вход?",
+      "answer": "AggregateError. Список errors хранит причину каждого отклонения."
+    },
+    {
+      "id": 605,
+      "type": "recall",
+      "text": "Как в async-функции дождаться каждого элемента массива по очереди?",
+      "answer": "for...of с await в теле. forEach не ждёт async-колбэки."
+    },
+    {
+      "id": 606,
+      "type": "recall",
+      "text": "Что происходит с новым промисом, если его executor бросил исключение?",
+      "answer": "Промис отклоняется брошенным значением."
+    },
+    {
+      "id": 607,
+      "type": "code",
+      "language": "js",
+      "text": "Promise.allSettled([\n  Promise.resolve(1),\n  Promise.reject(2),\n]).then((xs) => {\n  console.log(xs[0].status === 'fulfilled' ? 1 : 0);\n  console.log(xs[1].status === 'rejected' ? 2 : 0);\n});",
+      "options": [
+        "1, 2",
+        "2, 1",
+        "1",
+        "0, 2"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 608,
+      "type": "code",
+      "language": "js",
+      "text": "Promise.any([\n  Promise.reject(1),\n  Promise.resolve(2),\n  Promise.reject(3),\n]).then((n) => console.log(n));",
+      "options": [
+        "1",
+        "2",
+        "3",
+        "1, 2"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 609,
+      "type": "code",
+      "language": "js",
+      "text": "Promise.any([\n  Promise.reject(1),\n  Promise.reject(2),\n]).catch((e) => console.log(e.errors.length));",
+      "options": [
+        "1",
+        "0",
+        "2",
+        "undefined"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 610,
+      "type": "code",
+      "language": "js",
+      "text": "Promise.resolve(6)\n  .then(null)\n  .then((n) => console.log(n));",
+      "options": [
+        "null",
+        "0",
+        "undefined",
+        "6"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 611,
+      "type": "code",
+      "language": "js",
+      "text": "async function f() {\n  try {\n    return Promise.reject(1);\n  } catch {\n    return 2;\n  }\n}\nf().then(\n  (n) => console.log(n),\n  (n) => console.log(n),\n);",
+      "options": [
+        "1",
+        "2",
+        "1, 2",
+        "undefined"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 612,
+      "type": "code",
+      "language": "js",
+      "text": "async function f() {\n  try {\n    return await Promise.reject(1);\n  } catch {\n    return 2;\n  }\n}\nf().then((n) => console.log(n));",
+      "options": [
+        "1",
+        "2",
+        "undefined",
+        "1, 2"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 613,
+      "type": "code",
+      "language": "js",
+      "text": "const out = [];\n[1, 2].forEach(async (id) => {\n  await Promise.resolve();\n  out.push(id);\n});\nconsole.log(out.length);",
+      "options": [
+        "2",
+        "1",
+        "0",
+        "undefined"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 614,
+      "type": "code",
+      "language": "js",
+      "text": "new Promise(() => {\n  throw 5;\n}).catch((n) => console.log(n));",
+      "options": [
+        "undefined",
+        "0",
+        "pending",
+        "5"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 615,
+      "type": "text",
+      "text": "Что означает аргумент then, который не является функцией?",
+      "options": [
+        "Цепочка отклоняется",
+        "Остаток цепочки пропускается",
+        "Обработчика нет. Значение успеха передаётся дальше",
+        "Этот аргумент становится следующим значением успеха"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 616,
+      "type": "text",
+      "text": "Что даёт Promise.allSettled, если часть входов отклонилась?",
+      "options": [
+        "Отклонение, как у Promise.all",
+        "Массив только успешных значений",
+        "Причину первого отклонения",
+        "Успешный массив объектов-результатов, по одному на вход, каждый помечен как fulfilled или rejected"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 617,
+      "type": "boolean",
+      "text": "throw внутри executor отклоняет новый промис.",
+      "correct": true
+    },
+    {
+      "id": 618,
+      "type": "boolean",
+      "text": "Внутри try/catch return отклонённого промиса и return await этого промиса завершают async-функцию одинаково.",
+      "correct": false
+    },
+    {
+      "id": 619,
+      "type": "recall",
+      "text": "Какое дополнительное ожидание появляется, если колбэк then возвращает промис, а не число?",
+      "answer": "Цепочка принимает этот промис. Следующий then ждёт его, а не получает обычное значение на том же шаге."
+    },
+    {
+      "id": 620,
+      "type": "recall",
+      "text": "Что then делает с успехом, если аргумент-обработчик не функция?",
+      "answer": "Пропускает значение дальше. null и другие не-функции обработчиками не считаются."
+    }
+  ]
+}

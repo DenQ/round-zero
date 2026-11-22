@@ -1,0 +1,408 @@
+{
+  "stack": "react",
+  "topic": "base",
+  "level": "middle",
+  "locale": "en",
+  "questions": [
+    {
+      "id": 821,
+      "type": "code",
+      "language": "jsx",
+      "text": "import { useEffect } from 'react'\nfunction App() {\n  useEffect(() => {\n    console.log(2)\n  })\n  console.log(1)\n  return null\n}",
+      "options": [
+        "1, 2",
+        "2, 1",
+        "1",
+        "2"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 822,
+      "type": "code",
+      "language": "jsx",
+      "text": "import { useEffect } from 'react'\nfunction App() {\n  useEffect(() => {\n    console.log(2)\n  })\n  useEffect(() => {\n    console.log(3)\n  })\n  console.log(1)\n  return null\n}",
+      "options": [
+        "2, 3, 1",
+        "1, 2, 3",
+        "1, 3, 2",
+        "3, 2, 1"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 823,
+      "type": "code",
+      "language": "jsx",
+      "text": "import { useEffect } from 'react'\nfunction Child() {\n  useEffect(() => {\n    console.log(2)\n  })\n  console.log(1)\n  return null\n}\nfunction App() {\n  useEffect(() => {\n    console.log(4)\n  })\n  console.log(3)\n  return <Child />\n}",
+      "options": [
+        "3, 4, 1, 2",
+        "1, 2, 3, 4",
+        "3, 1, 2, 4",
+        "3, 1, 4, 2"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 824,
+      "type": "code",
+      "language": "jsx",
+      "text": "import { useEffect } from 'react'\nfunction Hidden() {\n  useEffect(() => {\n    console.log(1)\n  })\n  return null\n}\nfunction App() {\n  console.log(2)\n  return false && <Hidden />\n}",
+      "options": [
+        "2, 1",
+        "1",
+        "1, 2",
+        "2"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 825,
+      "type": "code",
+      "language": "jsx",
+      "text": "import { useEffect } from 'react'\nfunction App() {\n  useEffect(() => {\n    console.log(1)\n  })\n  return null\n}",
+      "options": [
+        "1",
+        "0",
+        "undefined",
+        "1, 1"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 826,
+      "type": "code",
+      "language": "jsx",
+      "text": "import { useEffect, useState } from 'react'\nfunction App() {\n  const [n, setN] = useState(0)\n  console.log(n)\n  useEffect(() => {\n    setN(n + 1)\n    setN(n + 1)\n  }, [])\n  return null\n}",
+      "options": [
+        "0, 2",
+        "0, 1",
+        "0, 1, 1",
+        "1"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 827,
+      "type": "code",
+      "language": "jsx",
+      "text": "import { useEffect, useState } from 'react'\nfunction App() {\n  const [n, setN] = useState(0)\n  console.log(n)\n  useEffect(() => {\n    setN((x) => x + 1)\n    setN((x) => x + 1)\n  }, [])\n  return null\n}",
+      "options": [
+        "0, 1",
+        "0, 1, 2",
+        "0, 2",
+        "2"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 828,
+      "type": "code",
+      "language": "jsx",
+      "text": "import { useEffect, useState } from 'react'\nfunction App() {\n  const [item, setItem] = useState({ n: 1 })\n  console.log(1)\n  useEffect(() => {\n    item.n = 2\n    setItem(item)\n  }, [])\n  return null\n}",
+      "options": [
+        "1, 1",
+        "1, 2",
+        "2",
+        "1"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 829,
+      "type": "code",
+      "language": "jsx",
+      "text": "import { useEffect, useState } from 'react'\nfunction App() {\n  const [item, setItem] = useState({ n: 1 })\n  console.log(item.n)\n  useEffect(() => {\n    setItem({ n: 2 })\n  }, [])\n  return null\n}",
+      "options": [
+        "1, 2",
+        "1",
+        "2",
+        "1, 1"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 830,
+      "type": "code",
+      "language": "jsx",
+      "text": "import { useEffect, useState } from 'react'\nfunction App() {\n  const [n, setN] = useState(0)\n  console.log(n)\n  useEffect(() => {\n    if (n < 3) setN(n + 1)\n  })\n  return null\n}",
+      "options": [
+        "0, 1",
+        "0, 1, 2, 3",
+        "0",
+        "0, 1, 2"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 831,
+      "type": "code",
+      "language": "jsx",
+      "text": "import { useEffect, useState } from 'react'\nfunction App() {\n  const [n, setN] = useState(0)\n  console.log(n)\n  useEffect(() => {\n    setN(1)\n  }, [])\n  return null\n}",
+      "options": [
+        "0",
+        "0, 1, 1",
+        "0, 1",
+        "1"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 832,
+      "type": "code",
+      "language": "jsx",
+      "text": "import { useEffect, useState } from 'react'\nfunction App() {\n  const [n, setN] = useState(0)\n  useEffect(() => {\n    console.log(n)\n    if (n === 0) setN(1)\n    return () => console.log(9)\n  })\n  return null\n}",
+      "options": [
+        "9, 0, 1",
+        "0, 1",
+        "0, 1, 9",
+        "0, 9, 1"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 833,
+      "type": "code",
+      "language": "jsx",
+      "text": "import { useEffect, useState } from 'react'\nfunction App() {\n  const [a, setA] = useState(0)\n  const [b, setB] = useState(0)\n  console.log(a)\n  console.log(b)\n  useEffect(() => {\n    setA(1)\n    setB(2)\n  }, [])\n  return null\n}",
+      "options": [
+        "0, 0, 1, 2",
+        "0, 0, 1, 0, 1, 2",
+        "0, 0, 1, 2, 2",
+        "1, 2"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 834,
+      "type": "code",
+      "language": "jsx",
+      "text": "import { useEffect, useState } from 'react'\nfunction App() {\n  const [n, setN] = useState(0)\n  console.log(n)\n  useEffect(() => {\n    if (n < 2) setN((x) => x + 1)\n  }, [{}])\n  return null\n}",
+      "options": [
+        "0, 1",
+        "0, 1, 2",
+        "0",
+        "0, 1, 2, 2"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 835,
+      "type": "code",
+      "language": "jsx",
+      "text": "import { useEffect, useState } from 'react'\nfunction App() {\n  const [n, setN] = useState(0)\n  console.log(n)\n  useEffect(() => {\n    if (n < 2) setN((x) => x + 1)\n  }, [0])\n  return null\n}",
+      "options": [
+        "0, 1, 2",
+        "0",
+        "0, 1",
+        "1"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 836,
+      "type": "code",
+      "language": "jsx",
+      "text": "import { useEffect, useState } from 'react'\nfunction App() {\n  const [n] = useState(1)\n  const next = n + 2\n  useEffect(() => {\n    console.log(next)\n  })\n  return null\n}",
+      "options": [
+        "1",
+        "2",
+        "1, 3",
+        "3"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 837,
+      "type": "text",
+      "text": "How do two setN(x => x + 1) calls in one effect differ from two setN(n + 1) calls?",
+      "options": [
+        "The function sees the update already queued. Both setN(n + 1) calls close over the same n",
+        "They do not differ. Both forms end on the same value",
+        "setN(n + 1) sees a fresher n than the function does",
+        "The function form is forbidden inside an effect"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 838,
+      "type": "text",
+      "text": "How many extra renders do setA and setB produce when called one after another in one effect?",
+      "options": [
+        "Two. Each setter renders on its own",
+        "One. Updates from the same effect fold into one render",
+        "None, until the whole effect and a timer finish",
+        "Three: after the effect and after each setter"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 839,
+      "type": "text",
+      "text": "Why keep a value that is fully derived from props out of state?",
+      "options": [
+        "State may not be read in a component that also has props",
+        "Props arrive after state, so the copy is always fresher",
+        "State remembers the first value and does not follow later props. Compute it during render",
+        "React resets that state on every render"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 840,
+      "type": "text",
+      "text": "When does the useEffect body run relative to the component function?",
+      "options": [
+        "Before return, along with the rest of the body",
+        "Instead of render, if the dependency array is empty",
+        "Only on a click, even with no handler",
+        "After the render has been committed. Not while the component function is running"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 841,
+      "type": "text",
+      "text": "What does an empty effect dependency array do?",
+      "options": [
+        "Keeps the run to mount. Later renders do not repeat this effect",
+        "Prevents the first run",
+        "Repeats the effect on every render",
+        "Runs the effect before the component function"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 842,
+      "type": "text",
+      "text": "When does an effect cleanup run?",
+      "options": [
+        "Right after the component return, before the effect",
+        "Before the next run of this effect and on unmount. It does not run before the very first run",
+        "Only if the dependency array is empty",
+        "Before every render, even with no effect"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 843,
+      "type": "text",
+      "text": "Where does a request that should happen only on a click belong?",
+      "options": [
+        "In the render body, next to return",
+        "In a useEffect with no dependency array",
+        "In the event handler. An effect after render does not know that a click happened",
+        "In the useState initial value"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 844,
+      "type": "text",
+      "text": "Why can setItem(item) after item.n = 2 fail to produce a new render?",
+      "options": [
+        "Mutating an object is blocked and the setter is discarded",
+        "The n field is not part of state, so no render is needed",
+        "An effect is not allowed to call a setter",
+        "The setter received the same reference. React compares it with Object.is and skips the render"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 845,
+      "type": "boolean",
+      "text": "setA and setB in one effect always produce two separate extra renders.",
+      "correct": false
+    },
+    {
+      "id": 846,
+      "type": "boolean",
+      "text": "A child’s useEffect runs before the parent’s useEffect.",
+      "correct": true
+    },
+    {
+      "id": 847,
+      "type": "boolean",
+      "text": "Cleanup runs before the effect’s very first run.",
+      "correct": false
+    },
+    {
+      "id": 848,
+      "type": "boolean",
+      "text": "A fresh object in the dependency array counts as a change on every render.",
+      "correct": true
+    },
+    {
+      "id": 849,
+      "type": "boolean",
+      "text": "A component that did not mount still runs its useEffect.",
+      "correct": false
+    },
+    {
+      "id": 850,
+      "type": "boolean",
+      "text": "A setter function receives the latest queued value, not the n closed over by that render.",
+      "correct": true
+    },
+    {
+      "id": 851,
+      "type": "boolean",
+      "text": "An effect with an empty dependency array runs after every render.",
+      "correct": false
+    },
+    {
+      "id": 852,
+      "type": "boolean",
+      "text": "A controlled field shows the text from state through value.",
+      "correct": true
+    },
+    {
+      "id": 853,
+      "type": "recall",
+      "text": "What runs first: the component body or its useEffect?",
+      "answer": "The component body. The effect runs after that render."
+    },
+    {
+      "id": 854,
+      "type": "recall",
+      "text": "What final n do two setN(n + 1) calls in one effect produce when n is 0 in that render?",
+      "answer": "1. Both calls close over 0 and set 1. There is one extra render."
+    },
+    {
+      "id": 855,
+      "type": "recall",
+      "text": "What final n do two setN(x => x + 1) calls in one effect produce when n is 0?",
+      "answer": "2. The second function sees the 1 queued by the first."
+    },
+    {
+      "id": 856,
+      "type": "recall",
+      "text": "Which dependency array keeps an effect to mount only?",
+      "answer": "An empty array []. With no array, the effect runs after every render."
+    },
+    {
+      "id": 857,
+      "type": "recall",
+      "text": "How does React compare values in a dependency array?",
+      "answer": "With Object.is. A new object on every render is a different dependency."
+    },
+    {
+      "id": 858,
+      "type": "recall",
+      "text": "Where do you keep a number that is fully derived from props?",
+      "answer": "Compute it during render. A copy in state stays on the first value."
+    },
+    {
+      "id": 859,
+      "type": "recall",
+      "text": "Why does an effect with no dependency array loop if every run calls setState?",
+      "answer": "The state update renders the component again, and that render runs the effect again."
+    },
+    {
+      "id": 860,
+      "type": "recall",
+      "text": "What happens to a request that should run only after a click if you put it in render?",
+      "answer": "It fires during render, with no click. A click needs a handler."
+    }
+  ]
+}

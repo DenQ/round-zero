@@ -1,0 +1,1008 @@
+{
+  "stack": "ts",
+  "topic": "base",
+  "level": "senior",
+  "locale": "ru",
+  "questions": [
+    {
+      "id": 1401,
+      "type": "code",
+      "language": "ts",
+      "text": "enum E { A = 1 }\nenum E { B = 2 }\nconsole.log(E.A)\nconsole.log(E.B)",
+      "options": [
+        "1, 2",
+        "1, undefined",
+        "2, 1",
+        "undefined, 2"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1402,
+      "type": "code",
+      "language": "ts",
+      "text": "namespace N { export const a = 1 }\nnamespace N { export const b = 2 }\nconsole.log(N.a + N.b)",
+      "options": [
+        "1",
+        "3",
+        "2",
+        "undefined"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1403,
+      "type": "code",
+      "language": "ts",
+      "text": "declare const n: number\ntry {\n  console.log(n)\n} catch {\n  console.log(0)\n}",
+      "options": [
+        "undefined",
+        "null",
+        "0",
+        "1"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1404,
+      "type": "code",
+      "language": "ts",
+      "text": "class A {\n  constructor() {\n    this.n = 1\n    console.log(this.m)\n  }\n}\nclass B extends A {\n  n = 2\n  m = 4\n}\nconst b = new B()\nconsole.log(b.m)\nconsole.log(b.n)",
+      "options": [
+        "4, 4, 1",
+        "undefined, 4, 1",
+        "1, 4, 2",
+        "undefined, 4, 2"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1405,
+      "type": "code",
+      "language": "ts",
+      "text": "function a(value: unknown, context: unknown) { console.log(1) }\nfunction b(value: unknown, context: unknown) { console.log(2) }\n@a\n@b\nclass A {}\nconsole.log(3)",
+      "options": [
+        "2, 1, 3",
+        "1, 2, 3",
+        "3, 2, 1",
+        "1, 3, 2"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1406,
+      "type": "code",
+      "language": "ts",
+      "text": "function d(value: unknown, context: { kind: string }) {\n  console.log(context.kind)\n  return value\n}\nclass A {\n  @d\n  m() { return 1 }\n}\nconsole.log(new A().m())",
+      "options": [
+        "1, method",
+        "method, 1",
+        "field, 1",
+        "method, undefined"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1407,
+      "type": "code",
+      "language": "ts",
+      "text": "function d(value: any, context: unknown) {\n  return function () { return value.call(this) + 1 }\n}\nclass A {\n  @d\n  m() { return 1 }\n}\nconsole.log(new A().m())",
+      "options": [
+        "1",
+        "0",
+        "2",
+        "undefined"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1408,
+      "type": "code",
+      "language": "ts",
+      "text": "function a(value: unknown, context: unknown) {\n  return function () { return 1 }\n}\nfunction b(value: unknown, context: unknown) {\n  return function () { return 2 }\n}\nclass A {\n  @a\n  @b\n  m() { return 3 }\n}\nconsole.log(new A().m())",
+      "options": [
+        "2",
+        "3",
+        "undefined",
+        "1"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1409,
+      "type": "code",
+      "language": "ts",
+      "text": "function dec(value: any, context: unknown) {\n  return class extends value {\n    n() { return 9 }\n  }\n}\n@dec\nclass A {\n  n() { return 1 }\n}\nconsole.log(new A().n())",
+      "options": [
+        "9",
+        "1",
+        "undefined",
+        "0"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1410,
+      "type": "code",
+      "language": "ts",
+      "text": "let n = 0\n{\n  using x = {\n    [Symbol.dispose]() { n = 3 }\n  }\n}\nconsole.log(n)",
+      "options": [
+        "0",
+        "3",
+        "1",
+        "undefined"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1411,
+      "type": "code",
+      "language": "ts",
+      "text": "const xs: number[] = []\n{\n  using a = { [Symbol.dispose]() { xs.push(1) } }\n  using b = { [Symbol.dispose]() { xs.push(2) } }\n}\nconsole.log(xs[0])\nconsole.log(xs[1])",
+      "options": [
+        "1, 2",
+        "1, 1",
+        "2, 1",
+        "2, 2"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1412,
+      "type": "code",
+      "language": "ts",
+      "text": "let n = 1\n{\n  using x = null\n}\nconsole.log(n)",
+      "options": [
+        "0",
+        "null",
+        "undefined",
+        "1"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1413,
+      "type": "code",
+      "language": "ts",
+      "text": "enum E { A = 1 }\nE.A = 9\nconsole.log(E.A)\nconsole.log(E[1])\nconsole.log(E[9])",
+      "options": [
+        "9, A, undefined",
+        "9, undefined, A",
+        "1, A, undefined",
+        "9, A, 9"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1414,
+      "type": "code",
+      "language": "ts",
+      "text": "enum E { A = 0, B = 0 }\nconsole.log(E[0])",
+      "options": [
+        "A",
+        "B",
+        "0",
+        "undefined"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1415,
+      "type": "code",
+      "language": "ts",
+      "text": "const s = \"b\"\nenum E { A = s }\nconsole.log(E.A)\nconsole.log(E[\"b\"])",
+      "options": [
+        "b, A",
+        "undefined, b",
+        "b, undefined",
+        "b, b"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1416,
+      "type": "code",
+      "language": "ts",
+      "text": "enum E { A = -1, B }\nconsole.log(E.B)",
+      "options": [
+        "-1",
+        "1",
+        "undefined",
+        "0"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1417,
+      "type": "code",
+      "language": "ts",
+      "text": "enum E { A = \"a\", B = A }\nconsole.log(E.B)",
+      "options": [
+        "a",
+        "A",
+        "b",
+        "undefined"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1418,
+      "type": "code",
+      "language": "ts",
+      "text": "namespace N { export enum E { A = 4 } }\nconsole.log(N.E.A)\nconsole.log(N.E[4])",
+      "options": [
+        "A, 4",
+        "4, A",
+        "4, undefined",
+        "undefined, A"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1419,
+      "type": "code",
+      "language": "ts",
+      "text": "class A { n = 1 }\ninterface A { m: number }\nconsole.log(new A().m)",
+      "options": [
+        "1",
+        "0",
+        "undefined",
+        "null"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1420,
+      "type": "code",
+      "language": "ts",
+      "text": "abstract class A { abstract n(): number }\nclass B extends A {}\nconsole.log(typeof new B().n)",
+      "options": [
+        "function",
+        "number",
+        "object",
+        "undefined"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1421,
+      "type": "code",
+      "language": "ts",
+      "text": "class A { m() { return 1 } }\nclass B { m = () => 2 }\nconsole.log(typeof A.prototype.m)\nconsole.log(typeof B.prototype.m)",
+      "options": [
+        "function, undefined",
+        "function, function",
+        "undefined, function",
+        "undefined, undefined"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1422,
+      "type": "code",
+      "language": "ts",
+      "text": "type Meters = number & { readonly __brand: \"m\" }\nconst n = 5 as Meters\nconsole.log(typeof n)",
+      "options": [
+        "object",
+        "number",
+        "undefined",
+        "string"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1423,
+      "type": "code",
+      "language": "ts",
+      "text": "class Meters {\n  #brand = 0\n  constructor(public n: number) {}\n}\nconsole.log(new Meters(4).n)\nconsole.log(Object.keys(new Meters(4)).length)",
+      "options": [
+        "4, 2",
+        "4, 0",
+        "4, 1",
+        "0, 1"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1424,
+      "type": "code",
+      "language": "ts",
+      "text": "class A {\n  #n = 5\n  static read(x: A) { return x.#n }\n}\nclass B extends A {}\nconsole.log(A.read(new B()))",
+      "options": [
+        "undefined",
+        "0",
+        "1",
+        "5"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1425,
+      "type": "code",
+      "language": "ts",
+      "text": "function f(): never { throw new Error(\"x\") }\ntry {\n  f()\n} catch {\n  console.log(1)\n}",
+      "options": [
+        "1",
+        "0",
+        "undefined",
+        "x"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1426,
+      "type": "code",
+      "language": "ts",
+      "text": "type R = { [K in \"a\" | \"b\"]: number }\nconst o: R = { a: 1, b: 2 }\nconsole.log(o.a + o.b)",
+      "options": [
+        "1",
+        "3",
+        "2",
+        "undefined"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1427,
+      "type": "code",
+      "language": "ts",
+      "text": "type T = `id-${number}`\nconst s: T = \"id-4\"\nconsole.log(s)",
+      "options": [
+        "T",
+        "4",
+        "id-4",
+        "undefined"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1428,
+      "type": "code",
+      "language": "ts",
+      "text": "type T = 1 extends number ? 2 : 3\nconst n: T = 2\nconsole.log(n)",
+      "options": [
+        "1",
+        "3",
+        "undefined",
+        "2"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1429,
+      "type": "code",
+      "language": "ts",
+      "text": "const o = { n: 1, m: 2 } as { n: number }\nconsole.log(o.m)",
+      "options": [
+        "2",
+        "1",
+        "undefined",
+        "0"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1430,
+      "type": "code",
+      "language": "ts",
+      "text": "function f<T = number>(x: T) { return x }\nconsole.log(typeof f(\"a\"))",
+      "options": [
+        "number",
+        "string",
+        "undefined",
+        "object"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1431,
+      "type": "code",
+      "language": "ts",
+      "text": "const t = [1] as const\n;(t as unknown as number[]).push(2)\nconsole.log(t.length)",
+      "options": [
+        "1",
+        "0",
+        "2",
+        "3"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1432,
+      "type": "code",
+      "language": "ts",
+      "text": "class A { constructor(public n = 3) {} }\nconsole.log(new A().n)",
+      "options": [
+        "undefined",
+        "0",
+        "1",
+        "3"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1433,
+      "type": "code",
+      "language": "ts",
+      "text": "class A { constructor(public n?: number) {} }\nconsole.log(new A().n)",
+      "options": [
+        "undefined",
+        "0",
+        "null",
+        "1"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1434,
+      "type": "code",
+      "language": "ts",
+      "text": "class A { accessor n = 1 }\nconst a = new A()\na.n = 2\nconsole.log(a.n)",
+      "options": [
+        "1",
+        "2",
+        "undefined",
+        "0"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1435,
+      "type": "code",
+      "language": "ts",
+      "text": "const x: { t: \"a\"; n: number } | { t: \"b\"; s: string } = { t: \"a\", n: 5 }\nconsole.log(x.n)",
+      "options": [
+        "a",
+        "undefined",
+        "5",
+        "0"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1436,
+      "type": "code",
+      "language": "ts",
+      "text": "const s = Symbol(\"a\") as unique symbol\nconsole.log(typeof s)",
+      "options": [
+        "object",
+        "string",
+        "undefined",
+        "symbol"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1437,
+      "type": "code",
+      "language": "ts",
+      "text": "function f(x: { a: number } | { b: string }) {\n  return \"a\" in x ? x.a : 0\n}\nconsole.log(f({ a: 4 }))",
+      "options": [
+        "4",
+        "0",
+        "a",
+        "undefined"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1438,
+      "type": "code",
+      "language": "ts",
+      "text": "const f: () => void = () => 1\nconsole.log(f())",
+      "options": [
+        "undefined",
+        "1",
+        "null",
+        "0"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1439,
+      "type": "code",
+      "language": "ts",
+      "text": "class A { declare n: number }\nconsole.log(Object.hasOwn(new A(), \"n\"))",
+      "options": [
+        "true",
+        "undefined",
+        "false",
+        "0"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1440,
+      "type": "code",
+      "language": "ts",
+      "text": "namespace N {\n  export namespace M { export const n = 6 }\n}\nconsole.log(N.M.n)",
+      "options": [
+        "undefined",
+        "0",
+        "1",
+        "6"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1441,
+      "type": "text",
+      "text": "Что даёт слияние двух блоков enum с одним именем?",
+      "options": [
+        "Один объект enum с членами обоих блоков",
+        "Два объекта, второй затеняет первый",
+        "Ошибку компиляции всегда",
+        "Только типы, без объекта"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1442,
+      "type": "text",
+      "text": "Что даёт слияние двух блоков namespace?",
+      "options": [
+        "Кортеж из двух объектов",
+        "Один объект с экспортами обоих блоков",
+        "Класс-наследник",
+        "Стирание обоих блоков"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1443,
+      "type": "text",
+      "text": "Что declare делает со значением?",
+      "options": [
+        "Создаёт переменную со значением undefined",
+        "Замораживает значение",
+        "Сообщает проверке типов, что имя есть, и не выпускает для него JS",
+        "Превращает значение в тип never"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1444,
+      "type": "text",
+      "text": "Когда относительно конструктора базы выполняются инициализаторы полей наследника?",
+      "options": [
+        "До вызова super()",
+        "До полей базового класса",
+        "Только при первом чтении поля",
+        "После того как конструктор базы вернулся"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1445,
+      "type": "text",
+      "text": "В каком порядке выполняются декораторы, записанные стопкой на классе?",
+      "options": [
+        "Нижний выполняется первым",
+        "Верхний выполняется первым",
+        "Оба выполняются при new",
+        "Порядок не задан"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1446,
+      "type": "text",
+      "text": "Что может вернуть декоратор класса?",
+      "options": [
+        "Только void",
+        "Конструктор на замену. Исходный класс приходит аргументом",
+        "Список методов",
+        "Экземпляр класса"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1447,
+      "type": "text",
+      "text": "Что может вернуть декоратор метода?",
+      "options": [
+        "Новый класс",
+        "Только имя метода",
+        "Функцию, которой заменяется этот метод",
+        "Ничего. Возврат игнорируется"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1448,
+      "type": "text",
+      "text": "Когда using вызывает Symbol.dispose?",
+      "options": [
+        "В момент входа в блок",
+        "При сборке мусора",
+        "Только если вызвать dispose вручную",
+        "Когда выполнение покидает блок"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1449,
+      "type": "text",
+      "text": "В каком порядке освобождаются два binding в одном блоке using?",
+      "options": [
+        "Более поздний первым",
+        "Более ранний первым",
+        "Оба одновременно",
+        "Только первый"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1450,
+      "type": "text",
+      "text": "Что делает using null?",
+      "options": [
+        "Бросает TypeError",
+        "Ничего. null допустим, и вызывать у него нечего",
+        "Вызывает Object.dispose",
+        "Записывает null в Symbol.dispose"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1451,
+      "type": "text",
+      "text": "Что происходит с обратным отображением числового enum, если записать члену новое значение?",
+      "options": [
+        "Старая запись удаляется, новая создаётся",
+        "Объект enum замораживается и запись падает",
+        "Старая обратная запись остаётся. Новая не создаётся",
+        "Обратное отображение пересобирается целиком"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1452,
+      "type": "text",
+      "text": "Если два числовых члена хранят одно значение, чьё имя остаётся в обратном отображении?",
+      "options": [
+        "Более раннего члена",
+        "Обоих через запятую",
+        "Ничьё. Обратная запись становится undefined",
+        "Более позднего члена"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1453,
+      "type": "text",
+      "text": "Появляется ли обратное отображение у строкового члена enum, посчитанного из переменной?",
+      "options": [
+        "Нет",
+        "Да, от строки к имени",
+        "Да, но только если строка из одной буквы",
+        "Да, в отдельном объекте"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1454,
+      "type": "text",
+      "text": "Что слияние интерфейса с классом добавляет в рантайме?",
+      "options": [
+        "Собственное свойство со значением undefined",
+        "Ничего. Поле не создаётся",
+        "Метод на прототипе",
+        "Вторую цепочку прототипов"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1455,
+      "type": "text",
+      "text": "Где лежит метод класса по сравнению с полем, в котором хранится функция?",
+      "options": [
+        "Оба на прототипе",
+        "Оба на экземпляре",
+        "Метод на прототипе. Поле — собственное свойство экземпляра",
+        "Метод на экземпляре, поле на прототипе"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1456,
+      "type": "text",
+      "text": "Чем фиктивная марка number & { __brand: \"m\" } является в рантайме?",
+      "options": [
+        "Объектом с полем __brand",
+        "Symbol",
+        "Экземпляром класса Brand",
+        "По-прежнему числом. Марка стирается"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1457,
+      "type": "text",
+      "text": "Откуда можно прочитать поле #?",
+      "options": [
+        "Только из тела класса, которое его объявило, в том числе у экземпляра наследника",
+        "Из любого наследника через this.#",
+        "Через строковый ключ снаружи",
+        "Только из статического блока, не из метода"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 1458,
+      "type": "text",
+      "text": "Чем условный тип A extends B ? C : D становится в JS?",
+      "options": [
+        "Функцией, которая выбирает ветку при вызове",
+        "Ничем. В JS остаётся только значение, которое вы сами записали",
+        "Объектом { true: C, false: D }",
+        "Тернарным оператором над значениями"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 1459,
+      "type": "text",
+      "text": "Что отображаемый тип выпускает сам по себе?",
+      "options": [
+        "Proxy, который проверяет ключи",
+        "Класс с геттером на каждый ключ",
+        "Ничего. Объект, который вы собрали, остаётся обычным объектом",
+        "Замороженную копию"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 1460,
+      "type": "text",
+      "text": "Что параметр типа по умолчанию T = number делает со строковым аргументом?",
+      "options": [
+        "Превращает строку в number",
+        "Бросает ошибку, потому что умолчание — number",
+        "Оборачивает строку в объект Number",
+        "Ничего со значением. Умолчание нужно только когда аргумент типа опущен, и оно стирается"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 1461,
+      "type": "boolean",
+      "text": "Слитые блоки enum делят один объект.",
+      "correct": true
+    },
+    {
+      "id": 1462,
+      "type": "boolean",
+      "text": "declare const выпускает var со значением undefined.",
+      "correct": false
+    },
+    {
+      "id": 1463,
+      "type": "boolean",
+      "text": "Поля наследника инициализируются до выполнения super().",
+      "correct": false
+    },
+    {
+      "id": 1464,
+      "type": "boolean",
+      "text": "В стопке декораторов нижний выполняется первым.",
+      "correct": true
+    },
+    {
+      "id": 1465,
+      "type": "boolean",
+      "text": "Декоратор метода может подменить метод.",
+      "correct": true
+    },
+    {
+      "id": 1466,
+      "type": "boolean",
+      "text": "Последний using в блоке освобождается первым.",
+      "correct": true
+    },
+    {
+      "id": 1467,
+      "type": "boolean",
+      "text": "using null бросает ошибку.",
+      "correct": false
+    },
+    {
+      "id": 1468,
+      "type": "boolean",
+      "text": "Присваивание E.A = 9 обновляет обратное отображение.",
+      "correct": false
+    },
+    {
+      "id": 1469,
+      "type": "boolean",
+      "text": "Интерфейс, слитый с классом, добавляет собственное свойство.",
+      "correct": false
+    },
+    {
+      "id": 1470,
+      "type": "boolean",
+      "text": "Абстрактный метод устанавливается как функция, которая бросает ошибку.",
+      "correct": false
+    },
+    {
+      "id": 1471,
+      "type": "boolean",
+      "text": "Стрелка, записанная в поле класса, лежит на прототипе.",
+      "correct": false
+    },
+    {
+      "id": 1472,
+      "type": "boolean",
+      "text": "typeof у unique symbol отличается от symbol.",
+      "correct": false
+    },
+    {
+      "id": 1473,
+      "type": "boolean",
+      "text": "Поле # базового класса можно прочитать его же статическим методом у экземпляра наследника.",
+      "correct": true
+    },
+    {
+      "id": 1474,
+      "type": "boolean",
+      "text": "Шаблонный литеральный тип меняет строку в рантайме.",
+      "correct": false
+    },
+    {
+      "id": 1475,
+      "type": "boolean",
+      "text": "Утверждение типа удаляет лишнее свойство из объекта.",
+      "correct": false
+    },
+    {
+      "id": 1476,
+      "type": "boolean",
+      "text": "accessor даёт поле, которое можно записать и прочитать.",
+      "correct": true
+    },
+    {
+      "id": 1477,
+      "type": "boolean",
+      "text": "Поле-дискриминант объединения — настоящее свойство.",
+      "correct": true
+    },
+    {
+      "id": 1478,
+      "type": "boolean",
+      "text": "tsc встраивает const enum и не выпускает объект enum.",
+      "correct": true
+    },
+    {
+      "id": 1479,
+      "type": "boolean",
+      "text": "import type выпускает привязку значения.",
+      "correct": false
+    },
+    {
+      "id": 1480,
+      "type": "boolean",
+      "text": "При совпадении значений числовых членов в обратном отображении остаётся более позднее имя.",
+      "correct": true
+    },
+    {
+      "id": 1481,
+      "type": "recall",
+      "text": "Какое ключевое слово описывает имя только для проверки типов?",
+      "answer": "declare."
+    },
+    {
+      "id": 1482,
+      "type": "recall",
+      "text": "Какая форма импорта стирается и не может быть значением?",
+      "answer": "import type."
+    },
+    {
+      "id": 1483,
+      "type": "recall",
+      "text": "Какая форма enum встраивается tsc и не оставляет объект?",
+      "answer": "const enum."
+    },
+    {
+      "id": 1484,
+      "type": "recall",
+      "text": "Какой метод вызывает using?",
+      "answer": "Symbol.dispose."
+    },
+    {
+      "id": 1485,
+      "type": "recall",
+      "text": "Какой декоратор в стопке выполняется первым?",
+      "answer": "Нижний."
+    },
+    {
+      "id": 1486,
+      "type": "recall",
+      "text": "Что декоратор класса получает аргументом?",
+      "answer": "Конструктор класса."
+    },
+    {
+      "id": 1487,
+      "type": "recall",
+      "text": "Где хранится метод класса?",
+      "answer": "На прототипе."
+    },
+    {
+      "id": 1488,
+      "type": "recall",
+      "text": "Где хранится поле класса?",
+      "answer": "На экземпляре."
+    },
+    {
+      "id": 1489,
+      "type": "recall",
+      "text": "Что от условного типа остаётся в JS?",
+      "answer": "Ничего."
+    },
+    {
+      "id": 1490,
+      "type": "recall",
+      "text": "Что делает infer и что от него остаётся в JS?",
+      "answer": "Достаёт тип для проверки. В JS не остаётся ничего."
+    },
+    {
+      "id": 1491,
+      "type": "recall",
+      "text": "Чьё имя хранит обратное отображение, если два числовых члена равны?",
+      "answer": "Более позднего."
+    },
+    {
+      "id": 1492,
+      "type": "recall",
+      "text": "Есть ли у строкового члена enum обратное отображение?",
+      "answer": "Нет."
+    },
+    {
+      "id": 1493,
+      "type": "recall",
+      "text": "Чем фиктивная марка пересечения является в рантайме?",
+      "answer": "Исходным значением."
+    },
+    {
+      "id": 1494,
+      "type": "recall",
+      "text": "Когда инициализируются поля наследника относительно конструктора базы?",
+      "answer": "После конструктора базы."
+    },
+    {
+      "id": 1495,
+      "type": "recall",
+      "text": "Что декоратор класса может вернуть вместо исходного класса?",
+      "answer": "Другой конструктор."
+    },
+    {
+      "id": 1496,
+      "type": "recall",
+      "text": "В каком порядке using вызывает dispose у нескольких binding?",
+      "answer": "В обратном."
+    },
+    {
+      "id": 1497,
+      "type": "recall",
+      "text": "Что происходит со старым обратным отображением, если изменить значение члена enum?",
+      "answer": "Оно остаётся."
+    },
+    {
+      "id": 1498,
+      "type": "recall",
+      "text": "Что читается из поля наследника внутри конструктора базы?",
+      "answer": "undefined."
+    },
+    {
+      "id": 1499,
+      "type": "recall",
+      "text": "Что возвращает typeof у unique symbol?",
+      "answer": "symbol."
+    },
+    {
+      "id": 1500,
+      "type": "recall",
+      "text": "Чем становятся два слитых блока namespace?",
+      "answer": "Одним объектом."
+    }
+  ]
+}

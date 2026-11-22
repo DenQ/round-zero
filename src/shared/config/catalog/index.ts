@@ -19,17 +19,118 @@ export const catalog = [
     labelKey: 'catalog.stacks.js',
     topics: [
       {
+        slug: 'scope',
+        labelKey: 'catalog.topics.scope',
+        levels: PACK_LEVELS,
+      },
+      {
+        slug: 'context',
+        labelKey: 'catalog.topics.context',
+        levels: PACK_LEVELS,
+      },
+      {
+        slug: 'prototypes',
+        labelKey: 'catalog.topics.prototypes',
+        levels: PACK_LEVELS,
+      },
+      {
+        slug: 'modules',
+        labelKey: 'catalog.topics.modules',
+        levels: PACK_LEVELS,
+      },
+      {
+        slug: 'promises',
+        labelKey: 'catalog.topics.promises',
+        levels: PACK_LEVELS,
+      },
+      {
         slug: 'event-loop',
         labelKey: 'catalog.topics.eventLoop',
         levels: PACK_LEVELS,
       },
     ],
   },
-  { slug: 'ts', labelKey: 'catalog.stacks.ts', topics: [] },
-  { slug: 'go', labelKey: 'catalog.stacks.go', topics: [] },
+  {
+    slug: 'ts',
+    labelKey: 'catalog.stacks.ts',
+    topics: [
+      {
+        slug: 'base',
+        labelKey: 'catalog.topics.base',
+        levels: PACK_LEVELS,
+      },
+    ],
+  },
+  {
+    slug: 'go',
+    labelKey: 'catalog.stacks.go',
+    topics: [
+      {
+        slug: 'slices',
+        labelKey: 'catalog.topics.slices',
+        levels: PACK_LEVELS,
+      },
+      {
+        slug: 'goroutines',
+        labelKey: 'catalog.topics.goroutines',
+        levels: PACK_LEVELS,
+      },
+      {
+        slug: 'channels',
+        labelKey: 'catalog.topics.channels',
+        levels: PACK_LEVELS,
+      },
+      {
+        slug: 'contexts',
+        labelKey: 'catalog.topics.contexts',
+        levels: PACK_LEVELS,
+      },
+      {
+        slug: 'pointers',
+        labelKey: 'catalog.topics.pointers',
+        levels: PACK_LEVELS,
+      },
+      {
+        slug: 'maps',
+        labelKey: 'catalog.topics.maps',
+        levels: PACK_LEVELS,
+      },
+    ],
+  },
   { slug: 'sql', labelKey: 'catalog.stacks.sql', topics: [] },
-  { slug: 'nest', labelKey: 'catalog.stacks.nest', topics: [] },
-  { slug: 'react', labelKey: 'catalog.stacks.react', topics: [] },
+  {
+    slug: 'nest',
+    labelKey: 'catalog.stacks.nest',
+    topics: [
+      {
+        slug: 'base',
+        labelKey: 'catalog.topics.base',
+        levels: PACK_LEVELS,
+      },
+    ],
+  },
+  {
+    slug: 'node',
+    labelKey: 'catalog.stacks.node',
+    topics: [
+      {
+        slug: 'base',
+        labelKey: 'catalog.topics.base',
+        levels: PACK_LEVELS,
+      },
+    ],
+  },
+  {
+    slug: 'react',
+    labelKey: 'catalog.stacks.react',
+    topics: [
+      {
+        slug: 'base',
+        labelKey: 'catalog.topics.base',
+        levels: PACK_LEVELS,
+      },
+    ],
+  },
 ] as const satisfies readonly CatalogStack[]
 
 export function getQuizPath(stack: PackStack, topic: string, level: PackLevel): string {

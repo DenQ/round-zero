@@ -1,0 +1,408 @@
+{
+  "stack": "react",
+  "topic": "base",
+  "level": "junior",
+  "locale": "ru",
+  "questions": [
+    {
+      "id": 781,
+      "type": "code",
+      "language": "jsx",
+      "text": "function Child() {\n  console.log(2)\n  return null\n}\nfunction App() {\n  const node = <Child />\n  console.log(1)\n  return node\n}",
+      "options": [
+        "1, 2",
+        "2, 1",
+        "1",
+        "2"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 782,
+      "type": "code",
+      "language": "jsx",
+      "text": "function A() {\n  console.log(1)\n  return null\n}\nfunction B() {\n  console.log(2)\n  return null\n}\nfunction App() {\n  return (\n    <>\n      <A />\n      <B />\n    </>\n  )\n}",
+      "options": [
+        "2, 1",
+        "1, 2",
+        "1",
+        "2"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 783,
+      "type": "code",
+      "language": "jsx",
+      "text": "function Inner() {\n  console.log(3)\n  return null\n}\nfunction Child() {\n  console.log(2)\n  return <Inner />\n}\nfunction App() {\n  console.log(1)\n  return <Child />\n}",
+      "options": [
+        "3, 2, 1",
+        "1, 3, 2",
+        "1, 2, 3",
+        "2, 1, 3"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 784,
+      "type": "code",
+      "language": "jsx",
+      "text": "function Child({ n }) {\n  console.log(n)\n  return null\n}\nfunction App() {\n  const show = false\n  return (\n    <>\n      {show && <Child n={1} />}\n      <Child n={2} />\n    </>\n  )\n}",
+      "options": [
+        "1, 2",
+        "1",
+        "2, 1",
+        "2"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 785,
+      "type": "code",
+      "language": "jsx",
+      "text": "function Child({ n }) {\n  console.log(n)\n  return null\n}\nfunction App() {\n  const items = [2, 1]\n  return items.map((n) => <Child key={n} n={n} />)\n}",
+      "options": [
+        "2, 1",
+        "1, 2",
+        "1",
+        "2"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 786,
+      "type": "code",
+      "language": "jsx",
+      "text": "function App() {\n  console.log(1)\n  function handleClick() {\n    console.log(2)\n  }\n  return <button onClick={handleClick()}>Go</button>\n}",
+      "options": [
+        "1",
+        "1, 2",
+        "2",
+        "2, 1"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 787,
+      "type": "code",
+      "language": "jsx",
+      "text": "import { useState } from 'react'\nfunction App() {\n  const [n] = useState(4)\n  console.log(n)\n  return null\n}",
+      "options": [
+        "0",
+        "undefined",
+        "4",
+        "1"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 788,
+      "type": "code",
+      "language": "jsx",
+      "text": "import { useState } from 'react'\nfunction App() {\n  const [n] = useState(() => 5)\n  console.log(n)\n  return null\n}",
+      "options": [
+        "0",
+        "undefined",
+        "1",
+        "5"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 789,
+      "type": "code",
+      "language": "jsx",
+      "text": "function Child({ children }) {\n  console.log(children)\n  return children\n}\nfunction App() {\n  return <Child>3</Child>\n}",
+      "options": [
+        "3",
+        "undefined",
+        "0",
+        "[object Object]"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 790,
+      "type": "code",
+      "language": "jsx",
+      "text": "function Child({ n }) {\n  console.log(n)\n  return null\n}\nfunction App() {\n  return <Child n={1 + 2} />\n}",
+      "options": [
+        "1",
+        "3",
+        "2",
+        "1, 2"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 791,
+      "type": "code",
+      "language": "jsx",
+      "text": "function Inner() {\n  console.log(2)\n  return null\n}\nfunction Child({ children }) {\n  console.log(1)\n  return null\n}\nfunction App() {\n  return (\n    <Child>\n      <Inner />\n    </Child>\n  )\n}",
+      "options": [
+        "1, 2",
+        "2",
+        "1",
+        "2, 1"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 792,
+      "type": "code",
+      "language": "jsx",
+      "text": "function Child(props) {\n  console.log(props.key)\n  return null\n}\nfunction App() {\n  return <Child key=\"a\" />\n}",
+      "options": [
+        "a",
+        "null",
+        "0",
+        "undefined"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 793,
+      "type": "code",
+      "language": "jsx",
+      "text": "function Child(props) {\n  console.log(props.class)\n  console.log(props.className)\n  return null\n}\nfunction App() {\n  return <Child className=\"box\" />\n}",
+      "options": [
+        "undefined, box",
+        "box",
+        "box, box",
+        "undefined, undefined"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 794,
+      "type": "code",
+      "language": "jsx",
+      "text": "function A() {\n  console.log(1)\n  return null\n}\nfunction B() {\n  console.log(2)\n  return null\n}\nfunction App() {\n  const n = 0\n  return n === 0 ? <A /> : <B />\n}",
+      "options": [
+        "2",
+        "1",
+        "1, 2",
+        "0"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 795,
+      "type": "code",
+      "language": "jsx",
+      "text": "function Child({ n }) {\n  console.log(n)\n  return null\n}\nfunction App() {\n  return <Child {...{ n: 1 }} n={2} />\n}",
+      "options": [
+        "1",
+        "1, 2",
+        "2",
+        "2, 1"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 796,
+      "type": "code",
+      "language": "jsx",
+      "text": "function Child({ children }) {\n  console.log(Array.isArray(children) ? 2 : 1)\n  return children\n}\nfunction App() {\n  return (\n    <Child>\n      <span>a</span>\n    </Child>\n  )\n}",
+      "options": [
+        "2",
+        "0",
+        "undefined",
+        "1"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 797,
+      "type": "text",
+      "text": "Что остаётся на экране от {count && <span>{count}</span>}, когда count равен 0?",
+      "options": [
+        "Число 0. Для && ноль сам становится узлом",
+        "Ничего. 0 для React то же самое, что false",
+        "Текст \"false\"",
+        "Ошибка рендера. 0 нельзя вставлять в JSX"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 798,
+      "type": "text",
+      "text": "Когда React вызывает функцию компонента снова?",
+      "options": [
+        "Один раз за жизнь экземпляра. Дальше меняется только DOM",
+        "На каждый рендер этого места в дереве, в том числе когда заново рендерится родитель",
+        "Только если вызов стоит внутри useEffect",
+        "Только когда меняется внешний DOM, не state"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 799,
+      "type": "text",
+      "text": "Что сеттер делает с константой из useState в том же вызове компонента?",
+      "options": [
+        "Сразу подменяет её",
+        "Подменяет её и DOM ещё до return",
+        "Ничего. Константа хранит значение этого рендера, новое значение придёт следующим вызовом",
+        "Такой вызов запрещён синтаксисом"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 800,
+      "type": "text",
+      "text": "Делят ли два соседних <Counter /> один state?",
+      "options": [
+        "Да. Одно имя компонента значит один state",
+        "Да, если у них нет key",
+        "Да, потому что у них общий родитель",
+        "Нет. У каждого экземпляра свой state"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 801,
+      "type": "text",
+      "text": "Зачем элементу списка передают key?",
+      "options": [
+        "Чтобы React узнал тот же элемент списка при следующем рендере",
+        "Чтобы key оказался в props ребёнка",
+        "Чтобы отсортировать массив",
+        "Key нужен только полям ввода"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 802,
+      "type": "text",
+      "text": "Как в React задать CSS-класс DOM-элементу?",
+      "options": [
+        "Атрибутом class, как в HTML",
+        "Пропом className. Имя class React в DOM-элемент не кладёт",
+        "И class, и className пишут один и тот же класс",
+        "Пропом css"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 803,
+      "type": "text",
+      "text": "Что из null, false, undefined и 0 React не рисует?",
+      "options": [
+        "Все четыре",
+        "Только null",
+        "null, false и undefined. Число 0 остаётся на экране",
+        "Только 0"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 804,
+      "type": "text",
+      "text": "Увидит ли родитель новое значение, если ребёнок запишет его в props?",
+      "options": [
+        "Да. Объект props общий с родителем, и запись всплывает",
+        "Да, если prop был объектом",
+        "Да. React после рендера копирует изменения props наверх",
+        "Нет. Props это вход текущего рендера. Запись в них не меняет state родителя"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 805,
+      "type": "boolean",
+      "text": "return null всё равно выполняет тело компонента.",
+      "correct": true
+    },
+    {
+      "id": 806,
+      "type": "boolean",
+      "text": "Запись <Child /> сразу вызывает функцию Child.",
+      "correct": false
+    },
+    {
+      "id": 807,
+      "type": "boolean",
+      "text": "false && <Child /> не вызывает функцию Child.",
+      "correct": true
+    },
+    {
+      "id": 808,
+      "type": "boolean",
+      "text": "Один дочерний элемент всегда приходит в children массивом.",
+      "correct": false
+    },
+    {
+      "id": 809,
+      "type": "boolean",
+      "text": "Два соседних элемента в return без фрагмента и без массива — синтаксическая ошибка.",
+      "correct": true
+    },
+    {
+      "id": 810,
+      "type": "boolean",
+      "text": "onClick={handleClick()} только сохраняет функцию и не вызывает её во время рендера.",
+      "correct": false
+    },
+    {
+      "id": 811,
+      "type": "boolean",
+      "text": "У каждого экземпляра компонента свой state.",
+      "correct": true
+    },
+    {
+      "id": 812,
+      "type": "boolean",
+      "text": "Внутри ребёнка props.key равен key, переданному снаружи.",
+      "correct": false
+    },
+    {
+      "id": 813,
+      "type": "recall",
+      "text": "Что показывает на экране выражение {0}?",
+      "answer": "Число 0. Ноль React рисует, в отличие от null, false и undefined."
+    },
+    {
+      "id": 814,
+      "type": "recall",
+      "text": "Какой prop задаёт CSS-класс DOM-элемента?",
+      "answer": "className. Prop class React к DOM-элементу не переносит."
+    },
+    {
+      "id": 815,
+      "type": "recall",
+      "text": "Когда React вызывает функцию, переданную в useState?",
+      "answer": "Один раз, при монтировании экземпляра. Её результат становится начальным state."
+    },
+    {
+      "id": 816,
+      "type": "recall",
+      "text": "Что будет, если компонент получил children, но не вернул их?",
+      "answer": "Вложенный элемент не монтируется. Его функция не вызывается."
+    },
+    {
+      "id": 817,
+      "type": "recall",
+      "text": "В каком порядке React вызывает функции соседних компонентов?",
+      "answer": "Слева направо, в том порядке, в каком дети стоят в родителе."
+    },
+    {
+      "id": 818,
+      "type": "recall",
+      "text": "Меняет ли сеттер константу useState в текущем вызове?",
+      "answer": "Нет. Новое значение видно только со следующего рендера."
+    },
+    {
+      "id": 819,
+      "type": "recall",
+      "text": "Попадает ли key в props ребёнка?",
+      "answer": "Нет. key React забирает себе. В props его нет."
+    },
+    {
+      "id": 820,
+      "type": "recall",
+      "text": "Почему в onClick передают саму функцию, а не её вызов?",
+      "answer": "Вызов со скобками выполняется во время рендера. В onClick нужна функция, которую React вызовет по событию."
+    }
+  ]
+}

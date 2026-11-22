@@ -1,0 +1,408 @@
+{
+  "stack": "js",
+  "topic": "promises",
+  "level": "senior",
+  "locale": "ru",
+  "questions": [
+    {
+      "id": 621,
+      "type": "code",
+      "language": "js",
+      "text": "let resolve;\nconst p = new Promise((r) => {\n  resolve = r;\n});\nresolve(p);\np.then(\n  () => console.log(1),\n  (e) => console.log(e.name === 'TypeError' ? 2 : 0),\n);",
+      "options": [
+        "2",
+        "1",
+        "0",
+        "undefined"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 622,
+      "type": "code",
+      "language": "js",
+      "text": "Promise.resolve({\n  then(resolve, reject) {\n    resolve(1);\n    reject(2);\n  },\n}).then(\n  (n) => console.log(n),\n  (n) => console.log(n),\n);",
+      "options": [
+        "2",
+        "1",
+        "1, 2",
+        "2, 1"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 623,
+      "type": "code",
+      "language": "js",
+      "text": "Promise.resolve({\n  then() {\n    throw 6;\n  },\n}).catch((n) => console.log(n));",
+      "options": [
+        "undefined",
+        "0",
+        "6",
+        "TypeError"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 624,
+      "type": "code",
+      "language": "js",
+      "text": "Promise.resolve(1)\n  .finally(() => Promise.resolve(9))\n  .then((n) => console.log(n));",
+      "options": [
+        "9",
+        "1, 9",
+        "undefined",
+        "1"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 625,
+      "type": "code",
+      "language": "js",
+      "text": "const { promise, resolve } = Promise.withResolvers();\nconsole.log(typeof resolve === 'function' ? 1 : 0);\nresolve(4);\npromise.then((n) => console.log(n));",
+      "options": [
+        "1, 4",
+        "4",
+        "1",
+        "0, 4"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 626,
+      "type": "code",
+      "language": "js",
+      "text": "async function f() {\n  const n = await {\n    then(resolve) {\n      resolve(3);\n    },\n  };\n  console.log(n);\n}\nf();\nconsole.log(8);",
+      "options": [
+        "3, 8",
+        "8, 3",
+        "3",
+        "8"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 627,
+      "type": "code",
+      "language": "js",
+      "text": "Promise.all([\n  {\n    then(resolve) {\n      resolve(1);\n    },\n  },\n  2,\n]).then(([a, b]) => {\n  console.log(a);\n  console.log(b);\n});",
+      "options": [
+        "2, 1",
+        "1",
+        "1, 2",
+        "2"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 628,
+      "type": "code",
+      "language": "js",
+      "text": "Promise.any([]).catch((e) => console.log(e.errors.length));",
+      "options": [
+        "1",
+        "undefined",
+        "TypeError",
+        "0"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 629,
+      "type": "text",
+      "text": "Что будет, если resolve вызвать с тем же промисом, который он завершает?",
+      "options": [
+        "Промис отклоняется с TypeError. Промис не может принять сам себя",
+        "Промис завершается успехом с undefined",
+        "Промис остаётся pending",
+        "Вызов игнорируется, и более поздний resolve всё ещё может завершить его"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 630,
+      "type": "text",
+      "text": "Если thenable вызовет и resolve, и reject, какой вызов учитывается?",
+      "options": [
+        "reject, потому что ошибка важнее",
+        "Первый вызов. Следующие застают промис уже завершённым",
+        "Оба вызова становятся отдельными результатами",
+        "Ни один. Промис отклоняется с TypeError"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 631,
+      "type": "text",
+      "text": "Что делает с предыдущим значением fulfilled-промис, возвращённый из finally?",
+      "options": [
+        "Подменяет значение",
+        "Отклоняет цепочку",
+        "Цепочка сохраняет прежнее значение. Успешный thenable из finally его не перебивает",
+        "Оборачивает прежнее значение в массив"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 632,
+      "type": "text",
+      "text": "Что возвращает Promise.withResolvers?",
+      "options": [
+        "Подкласс промиса",
+        "Промис, который сам станет успешным на следующем тике",
+        "Тот же результат, что Promise.race от пустого списка",
+        "Промис и функции resolve и reject, которые его завершают, без executor"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 633,
+      "type": "text",
+      "text": "Почему обычное значение может выиграть Promise.race?",
+      "options": [
+        "Каждый вход проходит через Promise.resolve. Обычное значение уже успешно, поэтому им можно завершить гонку",
+        "race пропускает всё, что не промис",
+        "race бросает ошибку, если вход не промис",
+        "Обычное значение ставится в очередь после каждого промиса"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 634,
+      "type": "text",
+      "text": "Когда выполнится второй job() в await job(); await job() по сравнению с запуском обоих до любого await?",
+      "options": [
+        "В обеих формах второй вызов ждёт успеха первого",
+        "Если оба запущены заранее, они вызываются до продолжений. Два await подряд вызывают следующий job только после возобновления первого await",
+        "Первый await сразу запускает каждый job в функции",
+        "В обеих формах job вызывается только на следующем таймере"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 635,
+      "type": "boolean",
+      "text": "Завершение промиса им самим отклоняет этот промис с TypeError.",
+      "correct": true
+    },
+    {
+      "id": 636,
+      "type": "boolean",
+      "text": "Если thenable вызовет resolve, а затем reject, побеждает отклонение.",
+      "correct": false
+    },
+    {
+      "id": 637,
+      "type": "boolean",
+      "text": "Успешный промис, возвращённый из finally, сохраняет прежнее значение успеха.",
+      "correct": true
+    },
+    {
+      "id": 638,
+      "type": "boolean",
+      "text": "Promise.any от пустого списка завершается успехом с пустым массивом.",
+      "correct": false
+    },
+    {
+      "id": 639,
+      "type": "boolean",
+      "text": "Promise.race прогоняет каждый вход через Promise.resolve, поэтому обычное значение может выиграть.",
+      "correct": true
+    },
+    {
+      "id": 640,
+      "type": "boolean",
+      "text": "В await job(); await job() второй вызов начинается до возобновления первого await.",
+      "correct": false
+    },
+    {
+      "id": 641,
+      "type": "recall",
+      "text": "Какая ошибка завершает промис, который резолвят им самим?",
+      "answer": "TypeError. Промис отклоняется, потому что ему пришлось бы ждать самого себя."
+    },
+    {
+      "id": 642,
+      "type": "recall",
+      "text": "Какой вызов побеждает, если thenable вызвал и resolve, и reject?",
+      "answer": "Первый. После завершения промиса остальные вызовы игнорируются."
+    },
+    {
+      "id": 643,
+      "type": "recall",
+      "text": "Какие три поля возвращает Promise.withResolvers?",
+      "answer": "promise, resolve и reject. resolve и reject завершают этот промис."
+    },
+    {
+      "id": 644,
+      "type": "recall",
+      "text": "Что делает Promise.any от пустого списка?",
+      "answer": "Отклоняется с AggregateError, у которого список errors пуст."
+    },
+    {
+      "id": 645,
+      "type": "recall",
+      "text": "Почему then у Promise.all([]) всё равно асинхронный?",
+      "answer": "Успех ставится реакцией в очередь. Уже известный результат не делает then синхронным."
+    },
+    {
+      "id": 646,
+      "type": "recall",
+      "text": "В каком порядке Promise.any складывает причины, если отклонён каждый вход?",
+      "answer": "В порядке входов, в AggregateError.errors."
+    },
+    {
+      "id": 647,
+      "type": "code",
+      "language": "js",
+      "text": "Promise.race([3, Promise.resolve(1)]).then((n) => console.log(n));",
+      "options": [
+        "3",
+        "1",
+        "3, 1",
+        "undefined"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 648,
+      "type": "code",
+      "language": "js",
+      "text": "const order = [];\nfunction job(id) {\n  order.push(id);\n  return Promise.resolve(id);\n}\nasync function seq() {\n  await job(1);\n  await job(2);\n}\nasync function par() {\n  const a = job(3);\n  const b = job(4);\n  await a;\n  await b;\n}\npar();\nseq();\nconsole.log(order.join(''));",
+      "options": [
+        "3412",
+        "341",
+        "1234",
+        "34"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 649,
+      "type": "code",
+      "language": "js",
+      "text": "const p = Promise.reject(1);\np.catch((n) => console.log(n));\np.catch((n) => console.log(n + 1));",
+      "options": [
+        "1",
+        "2",
+        "1, 2",
+        "2, 1"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 650,
+      "type": "code",
+      "language": "js",
+      "text": "async function f() {\n  return Promise.resolve(5);\n}\nf().then((v) => console.log(typeof v === 'number' ? 1 : 0));",
+      "options": [
+        "0",
+        "5",
+        "object",
+        "1"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 651,
+      "type": "code",
+      "language": "js",
+      "text": "const a = new Promise((_, reject) => {\n  queueMicrotask(() => reject(1));\n});\nconst b = Promise.reject(2);\nPromise.all([a, b]).catch((n) => console.log(n));",
+      "options": [
+        "2",
+        "1",
+        "1, 2",
+        "0"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 652,
+      "type": "code",
+      "language": "js",
+      "text": "let n = 0;\nPromise.all([]).then(() => {\n  n = 1;\n});\nconsole.log(n);",
+      "options": [
+        "1",
+        "0",
+        "undefined",
+        "[]"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 653,
+      "type": "code",
+      "language": "js",
+      "text": "Promise.any([\n  Promise.reject(4),\n  Promise.reject(5),\n]).catch((e) => {\n  console.log(e.errors[0]);\n  console.log(e.errors[1]);\n});",
+      "options": [
+        "5, 4",
+        "4",
+        "4, 5",
+        "5"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 654,
+      "type": "code",
+      "language": "js",
+      "text": "async function f() {\n  return {\n    then(resolve) {\n      resolve(Promise.resolve(7));\n    },\n  };\n}\nf().then((v) => console.log(typeof v === 'number' ? v : 0));",
+      "options": [
+        "0",
+        "object",
+        "undefined",
+        "7"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 655,
+      "type": "text",
+      "text": "Забирает ли один catch отклонение так, что второй catch на том же промисе молчит?",
+      "options": [
+        "Да. У отклонения один потребитель",
+        "Да. Второй catch всегда вешается слишком поздно",
+        "Нет. Каждый catch регистрирует свою реакцию, и отклонение приходит каждому уже повешенному обработчику",
+        "Только если оба обработчика переданы вторым аргументом then"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 656,
+      "type": "text",
+      "text": "Что async-функция делает с return somePromise?",
+      "options": [
+        "Вызывающий получает somePromise как упакованное значение",
+        "Вызывающий получает сам somePromise, а обёртка async остаётся pending",
+        "return промиса из async-функции — синтаксическая ошибка",
+        "Она принимает somePromise. Промис вызывающего завершается этим результатом, а не объектом промиса"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 657,
+      "type": "boolean",
+      "text": "Два обработчика catch на одном отклонённом промисе выполняются оба.",
+      "correct": true
+    },
+    {
+      "id": 658,
+      "type": "boolean",
+      "text": "Async-функция, которая возвращает промис, принимает его, а не завершается объектом этого промиса.",
+      "correct": true
+    },
+    {
+      "id": 659,
+      "type": "recall",
+      "text": "В чём разница между запуском двух задач и последующим await и await первой до запуска второй?",
+      "answer": "Первая форма вызывает обе до любого продолжения. Вторая вызывает следующую задачу только после возобновления предыдущего await."
+    },
+    {
+      "id": 660,
+      "type": "recall",
+      "text": "Что увидит второй catch на том же промисе?",
+      "answer": "То же отклонение. Уже повешенные обработчики его не съедают."
+    }
+  ]
+}

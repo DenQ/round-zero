@@ -1,0 +1,408 @@
+{
+  "stack": "js",
+  "topic": "prototypes",
+  "level": "junior",
+  "locale": "en",
+  "questions": [
+    {
+      "id": 361,
+      "type": "code",
+      "language": "js",
+      "text": "const proto = { n: 1 };\nconst obj = Object.create(proto);\nconsole.log(obj.n);",
+      "options": [
+        "1",
+        "0",
+        "2",
+        "3"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 362,
+      "type": "code",
+      "language": "js",
+      "text": "const proto = { n: 1 };\nconst obj = Object.create(proto);\nobj.n = 2;\nconsole.log(obj.n);",
+      "options": [
+        "1",
+        "2",
+        "0",
+        "3"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 363,
+      "type": "code",
+      "language": "js",
+      "text": "const proto = { n: 1 };\nconst obj = Object.create(proto);\nobj.n = 2;\nconsole.log(proto.n);\nconsole.log(obj.n);",
+      "options": [
+        "2, 1",
+        "2, 2",
+        "1, 2",
+        "1, 1"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 364,
+      "type": "code",
+      "language": "js",
+      "text": "const proto = { n: 1 };\nconst obj = Object.create(proto);\nobj.n = 2;\ndelete obj.n;\nconsole.log(obj.n);",
+      "options": [
+        "2",
+        "0",
+        "3",
+        "1"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 365,
+      "type": "code",
+      "language": "js",
+      "text": "const proto = {\n  show() {\n    console.log(this.n);\n  },\n};\nconst obj = Object.create(proto);\nobj.n = 2;\nobj.show();",
+      "options": [
+        "2",
+        "1",
+        "0",
+        "3"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 366,
+      "type": "code",
+      "language": "js",
+      "text": "function Box(n) {\n  this.n = n;\n}\nBox.prototype.read = function () {\n  console.log(this.n);\n};\nnew Box(1).read();\nnew Box(2).read();",
+      "options": [
+        "2, 1",
+        "1, 2",
+        "1, 1",
+        "2, 2"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 367,
+      "type": "code",
+      "language": "js",
+      "text": "function Box() {}\nfunction Bag() {}\nconsole.log(new Box() instanceof Box ? 1 : 0);\nconsole.log(new Box() instanceof Bag ? 1 : 0);",
+      "options": [
+        "0, 1",
+        "1, 1",
+        "1, 0",
+        "0, 0"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 368,
+      "type": "code",
+      "language": "js",
+      "text": "const proto = { a: 1 };\nconst obj = Object.create(proto);\nobj.b = 2;\nconsole.log(Object.keys(obj).length);",
+      "options": [
+        "2",
+        "0",
+        "3",
+        "1"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 369,
+      "type": "text",
+      "text": "Where does the search continue when the key is missing on the object itself?",
+      "options": [
+        "Along the [[Prototype]] chain until the key is found or the chain ends",
+        "Only through the object’s own keys",
+        "Through the local variables of the function that created the object",
+        "Through the list returned by Object.keys"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 370,
+      "type": "text",
+      "text": "What does obj.n = 2 do when n exists only on the prototype as an ordinary writable property?",
+      "options": [
+        "Rewrites n on the prototype",
+        "Creates an own n on obj. The prototype stays unchanged",
+        "Deletes n from the prototype",
+        "Throws a TypeError"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 371,
+      "type": "text",
+      "text": "What does new connect to the prototype?",
+      "options": [
+        "The constructor’s name",
+        "The argument list",
+        "The new object’s [[Prototype]] becomes Constructor.prototype",
+        "A copy of every property of the prototype"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 372,
+      "type": "text",
+      "text": "What does obj instanceof Box check?",
+      "options": [
+        "Whether the constructor’s name matches",
+        "How many own keys the object has",
+        "What the call Box() returned",
+        "Whether Box.prototype is in obj’s prototype chain"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 373,
+      "type": "boolean",
+      "text": "A property found on the prototype counts as an own property of the object.",
+      "correct": false
+    },
+    {
+      "id": 374,
+      "type": "boolean",
+      "text": "obj.method() sets this to obj even when the function lives on the prototype.",
+      "correct": true
+    },
+    {
+      "id": 375,
+      "type": "boolean",
+      "text": "Deleting an own property can reveal a same-named property on the prototype again.",
+      "correct": true
+    },
+    {
+      "id": 376,
+      "type": "boolean",
+      "text": "Two instances share fields written through this when the shared method lives on the prototype.",
+      "correct": false
+    },
+    {
+      "id": 377,
+      "type": "recall",
+      "text": "Which call creates an object with a chosen prototype?",
+      "answer": "Object.create(proto). The prototype is the first argument."
+    },
+    {
+      "id": 378,
+      "type": "recall",
+      "text": "How do you check that a key lives on the object itself?",
+      "answer": "Object.hasOwn(obj, key). The in operator also walks the prototype."
+    },
+    {
+      "id": 379,
+      "type": "recall",
+      "text": "What does Object.getPrototypeOf(obj) return?",
+      "answer": "That object’s [[Prototype]] link. It returns null when there is no prototype."
+    },
+    {
+      "id": 380,
+      "type": "recall",
+      "text": "What does the in operator check?",
+      "answer": "Whether the key exists on the object or further along the prototype chain."
+    },
+    {
+      "id": 381,
+      "type": "code",
+      "language": "js",
+      "text": "const proto = { a: 1 };\nconst obj = Object.create(proto);\nconsole.log(Object.hasOwn(obj, 'a') ? 1 : 0);\nconsole.log('a' in obj ? 1 : 0);",
+      "options": [
+        "0, 1",
+        "1, 0",
+        "1, 1",
+        "0, 0"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 382,
+      "type": "code",
+      "language": "js",
+      "text": "const obj = Object.create(null);\nobj.n = 1;\nconsole.log(obj.n);\nconsole.log(Object.getPrototypeOf(obj) === null ? 0 : 2);",
+      "options": [
+        "1, 2",
+        "1, 0",
+        "0, 0",
+        "0, 2"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 383,
+      "type": "code",
+      "language": "js",
+      "text": "function Box() {}\nBox.prototype.n = 1;\nconst box = new Box();\nBox.prototype.n = 2;\nconsole.log(box.n);",
+      "options": [
+        "1",
+        "0",
+        "2",
+        "3"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 384,
+      "type": "code",
+      "language": "js",
+      "text": "function Box() {}\nconst box = new Box();\nconsole.log(Object.getPrototypeOf(box) === Box.prototype ? 1 : 0);",
+      "options": [
+        "0",
+        "2",
+        "3",
+        "1"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 385,
+      "type": "code",
+      "language": "js",
+      "text": "const list = [1];\nconsole.log(list.map === Array.prototype.map ? 1 : 0);",
+      "options": [
+        "1",
+        "0",
+        "2",
+        "3"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 386,
+      "type": "code",
+      "language": "js",
+      "text": "const proto = { a: 1 };\nconst obj = Object.create(proto);\nobj.b = 2;\nlet n = 0;\nfor (const key in obj) n += 1;\nconsole.log(n);",
+      "options": [
+        "1",
+        "2",
+        "0",
+        "3"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 387,
+      "type": "code",
+      "language": "js",
+      "text": "const obj = {};\nconsole.log(obj.toString === Object.prototype.toString ? 1 : 0);",
+      "options": [
+        "0",
+        "2",
+        "1",
+        "3"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 388,
+      "type": "code",
+      "language": "js",
+      "text": "function Box() {}\nBox.prototype.read = function () {\n  console.log(1);\n};\nconst box = new Box();\nbox.read = function () {\n  console.log(2);\n};\nbox.read();",
+      "options": [
+        "1",
+        "0",
+        "3",
+        "2"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 389,
+      "type": "text",
+      "text": "What does Object.create(null) return?",
+      "options": [
+        "An object whose [[Prototype]] is null",
+        "An object whose prototype is Object.prototype",
+        "An empty array",
+        "A copy of the value null"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 390,
+      "type": "text",
+      "text": "How does for...in differ from Object.keys?",
+      "options": [
+        "They are the same: both take only own keys",
+        "for...in visits enumerable keys on prototypes. Object.keys takes only own enumerable keys",
+        "Object.keys visits the prototype, while for...in stops at the object",
+        "Both include non-enumerable keys"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 391,
+      "type": "text",
+      "text": "Why is a method on Box.prototype one function for every instance?",
+      "options": [
+        "new copies the function onto each object",
+        "Each call creates a new function",
+        "The function lives on the shared prototype, and instances find it through the chain",
+        "The engine merges every instance into one object"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 392,
+      "type": "text",
+      "text": "Why does a change to Box.prototype.n show up on an instance that has no own n?",
+      "options": [
+        "The instance stores a copy and gets a notification",
+        "new rebuilds the instance on every read",
+        "The property is moved onto the instance when it changes",
+        "Each read walks the chain and takes the current value"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 393,
+      "type": "boolean",
+      "text": "instanceof is true for every pair of object and function.",
+      "correct": false
+    },
+    {
+      "id": 394,
+      "type": "boolean",
+      "text": "{} and Object.create(Object.prototype) have the same prototype.",
+      "correct": true
+    },
+    {
+      "id": 395,
+      "type": "boolean",
+      "text": "new copies the prototype’s keys onto the instance.",
+      "correct": false
+    },
+    {
+      "id": 396,
+      "type": "boolean",
+      "text": "An ordinary object’s chain reaches Object.prototype, and the next link is null.",
+      "correct": true
+    },
+    {
+      "id": 397,
+      "type": "recall",
+      "text": "What prototype does an object created with the literal {} have?",
+      "answer": "Object.prototype."
+    },
+    {
+      "id": 398,
+      "type": "recall",
+      "text": "How does one instance replace a method that lives on the prototype?",
+      "answer": "Assign its own function to that same name on the instance. Other instances still find the prototype method."
+    },
+    {
+      "id": 399,
+      "type": "recall",
+      "text": "What does Box.prototype.constructor usually hold?",
+      "answer": "The function Box itself."
+    },
+    {
+      "id": 400,
+      "type": "recall",
+      "text": "What does a read return when the key is neither on the object nor in the chain?",
+      "answer": "undefined. For an ordinary object that is not an error."
+    }
+  ]
+}

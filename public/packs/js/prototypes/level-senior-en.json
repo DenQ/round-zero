@@ -1,0 +1,808 @@
+{
+  "stack": "js",
+  "topic": "prototypes",
+  "level": "senior",
+  "locale": "en",
+  "questions": [
+    {
+      "id": 461,
+      "type": "code",
+      "language": "js",
+      "text": "const proto = { n: 1 };\nconst obj = { __proto__: proto };\nconsole.log(obj.n);\nconsole.log(Object.hasOwn(obj, '__proto__') ? 1 : 0);",
+      "options": [
+        "1, 0",
+        "1, 1",
+        "0, 0",
+        "0, 1"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 462,
+      "type": "code",
+      "language": "js",
+      "text": "const obj = { ['__proto__']: 1 };\nconsole.log(obj.__proto__);\nconsole.log(Object.getPrototypeOf(obj) === Object.prototype ? 2 : 0);",
+      "options": [
+        "2, 1",
+        "1, 2",
+        "1, 1",
+        "2, 2"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 463,
+      "type": "code",
+      "language": "js",
+      "text": "const obj = { __proto__: null, n: 1 };\nconsole.log(Object.getPrototypeOf(obj) === null ? 0 : 1);\nconsole.log(obj.n);",
+      "options": [
+        "1, 1",
+        "0, 0",
+        "0, 1",
+        "1, 0"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 464,
+      "type": "code",
+      "language": "js",
+      "text": "const proto = { n: 3 };\nconst obj = {};\nobj.__proto__ = proto;\nconsole.log(obj.n);\nconsole.log(Object.hasOwn(obj, '__proto__') ? 1 : 0);",
+      "options": [
+        "3, 1",
+        "0, 0",
+        "0, 1",
+        "3, 0"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 465,
+      "type": "code",
+      "language": "js",
+      "text": "const obj = Object.create(null);\nlet code = 0;\ntry {\n  obj.toString();\n  code = 1;\n} catch {\n  code = 2;\n}\nconsole.log(code);\nconsole.log(Object.prototype.toString.call(obj) === '[object Object]' ? 3 : 0);",
+      "options": [
+        "2, 3",
+        "1, 3",
+        "2, 0",
+        "1, 0"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 466,
+      "type": "code",
+      "language": "js",
+      "text": "const proto = { [Symbol.toStringTag]: 'Box' };\nconst obj = Object.create(proto);\nconsole.log(Object.prototype.toString.call(obj) === '[object Box]' ? 1 : 0);",
+      "options": [
+        "0",
+        "1",
+        "2",
+        "3"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 467,
+      "type": "code",
+      "language": "js",
+      "text": "function Box() {}\nfunction Bag() {}\nBox.prototype.constructor = Bag;\nconsole.log(new Box() instanceof Box ? 1 : 0);\nconsole.log(new Box() instanceof Bag ? 1 : 0);",
+      "options": [
+        "0, 1",
+        "1, 1",
+        "1, 0",
+        "0, 0"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 468,
+      "type": "code",
+      "language": "js",
+      "text": "const Box = {\n  [Symbol.hasInstance](value) {\n    return value === 1;\n  },\n};\nconsole.log(1 instanceof Box ? 1 : 0);\nconsole.log(2 instanceof Box ? 1 : 0);",
+      "options": [
+        "0, 1",
+        "1, 1",
+        "0, 0",
+        "1, 0"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 469,
+      "type": "text",
+      "text": "What does a __proto__ key do in an object literal?",
+      "options": [
+        "It sets [[Prototype]] and is not stored as an own property",
+        "It creates an ordinary own property whose value is the prototype",
+        "It copies the prototype’s keys into the new object",
+        "It changes the prototype of Object.prototype"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 470,
+      "type": "text",
+      "text": "How is a computed ['__proto__'] key different from writing __proto__: proto in a literal?",
+      "options": [
+        "Both forms do the same thing",
+        "A computed name is an ordinary own key. It does not change [[Prototype]]",
+        "The computed key sets the prototype, and the short form creates a property",
+        "The computed key removes Object.prototype"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 471,
+      "type": "text",
+      "text": "Does writing to the constructor property change the result of instanceof?",
+      "options": [
+        "Yes, instanceof compares obj.constructor with the function",
+        "Yes, but only when the property is enumerable",
+        "No. instanceof looks for Constructor.prototype in the chain and does not read the constructor property",
+        "instanceof looks at constructor and ignores the chain"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 472,
+      "type": "text",
+      "text": "What does Symbol.hasInstance change for the right-hand operand of instanceof?",
+      "options": [
+        "Nothing: instanceof always walks [[Prototype]]",
+        "The method changes the left operand’s prototype",
+        "The method runs only for class",
+        "That method replaces the ordinary chain check"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 473,
+      "type": "boolean",
+      "text": "The literal { __proto__: null } still receives the Object.prototype chain.",
+      "correct": false
+    },
+    {
+      "id": 474,
+      "type": "boolean",
+      "text": "The assignment obj.__proto__ = proto creates an own __proto__ property.",
+      "correct": false
+    },
+    {
+      "id": 475,
+      "type": "boolean",
+      "text": "For class B extends null, the object B.prototype does not have Object.prototype in its chain.",
+      "correct": true
+    },
+    {
+      "id": 476,
+      "type": "boolean",
+      "text": "An async function has a prototype property, like an ordinary function.",
+      "correct": false
+    },
+    {
+      "id": 477,
+      "type": "recall",
+      "text": "Which two links does class B extends null create?",
+      "answer": "B.prototype’s [[Prototype]] is null. The function B’s [[Prototype]] is Function.prototype."
+    },
+    {
+      "id": 478,
+      "type": "recall",
+      "text": "What does Object.prototype.toString.call return for a null-prototype object with no @@toStringTag?",
+      "answer": "[object Object]."
+    },
+    {
+      "id": 479,
+      "type": "recall",
+      "text": "What happens when a proxy’s setPrototypeOf trap returns false?",
+      "answer": "Object.setPrototypeOf throws a TypeError."
+    },
+    {
+      "id": 480,
+      "type": "recall",
+      "text": "Why does Object.setPrototypeOf throw on a frozen object?",
+      "answer": "The object is non-extensible, so its [[Prototype]] can no longer be changed."
+    },
+    {
+      "id": 481,
+      "type": "code",
+      "language": "js",
+      "text": "function Box() {}\nconst Bound = Box.bind(null);\nconsole.log(Object.hasOwn(Bound, 'prototype') ? 1 : 0);\nconsole.log(new Bound() instanceof Box ? 1 : 0);",
+      "options": [
+        "0, 1",
+        "1, 0",
+        "1, 1",
+        "0, 0"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 482,
+      "type": "code",
+      "language": "js",
+      "text": "'use strict';\nclass Box {}\nlet code = 0;\ntry {\n  Box.prototype = {};\n  code = 1;\n} catch {\n  code = 2;\n}\nconsole.log(code);",
+      "options": [
+        "1",
+        "2",
+        "0",
+        "3"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 483,
+      "type": "code",
+      "language": "js",
+      "text": "let code = 0;\ntry {\n  Object.setPrototypeOf(Object.prototype, {});\n  code = 1;\n} catch {\n  code = 2;\n}\nconsole.log(code);",
+      "options": [
+        "1",
+        "0",
+        "2",
+        "3"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 484,
+      "type": "code",
+      "language": "js",
+      "text": "'use strict';\nconst proto = {\n  get n() {\n    return 1;\n  },\n};\nconst obj = Object.create(proto);\nlet code = 0;\ntry {\n  obj.n = 2;\n  code = 2;\n} catch {\n  code = 3;\n}\nconsole.log(code);\nconsole.log(obj.n);",
+      "options": [
+        "2, 2",
+        "3, 2",
+        "2, 1",
+        "3, 1"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 485,
+      "type": "code",
+      "language": "js",
+      "text": "const proto = {\n  set n(value) {\n    this.x = value;\n  },\n};\nconst obj = {};\nReflect.set(proto, 'n', 4, obj);\nconsole.log(obj.x);\nconsole.log(Object.hasOwn(proto, 'x') ? 1 : 0);",
+      "options": [
+        "4, 0",
+        "4, 1",
+        "0, 0",
+        "0, 1"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 486,
+      "type": "code",
+      "language": "js",
+      "text": "const proto = {\n  get n() {\n    return this.x;\n  },\n};\nconsole.log(Reflect.get(proto, 'n', { x: 7 }));",
+      "options": [
+        "0",
+        "7",
+        "1",
+        "8"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 487,
+      "type": "code",
+      "language": "js",
+      "text": "const proto = {};\nObject.defineProperty(proto, 'n', { value: 1, writable: false });\nconst obj = Object.create(proto);\nObject.defineProperty(obj, 'n', { value: 5 });\nconsole.log(obj.n);\nconsole.log(proto.n);",
+      "options": [
+        "1, 1",
+        "5, 5",
+        "5, 1",
+        "1, 5"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 488,
+      "type": "code",
+      "language": "js",
+      "text": "const proto = {\n  hasOwnProperty: () => true,\n};\nconst obj = Object.create(proto);\nconsole.log(obj.hasOwnProperty('n') ? 1 : 0);\nconsole.log(Object.hasOwn(obj, 'n') ? 1 : 0);",
+      "options": [
+        "0, 1",
+        "1, 1",
+        "0, 0",
+        "1, 0"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 489,
+      "type": "text",
+      "text": "Where does new take the prototype for a function wrapped with bind?",
+      "options": [
+        "From the target function. The bound function itself has no prototype property",
+        "bind creates its own prototype and new uses that",
+        "new is always forbidden for a bound function",
+        "The prototype becomes the this that bind fixed"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 490,
+      "type": "text",
+      "text": "Why can the [[Prototype]] of Object.prototype not be changed?",
+      "options": [
+        "It can: the next link becomes the object you pass",
+        "It is an immutable prototype exotic object. Object.setPrototypeOf throws a TypeError",
+        "The ban exists only in strict mode, otherwise the prototype changes",
+        "The constructor property changes, not the chain"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 491,
+      "type": "text",
+      "text": "How do you create an own property over an inherited one with writable: false?",
+      "options": [
+        "Assignment is enough in any mode",
+        "You have to delete the property from the prototype",
+        "Object.defineProperty on the object itself. Ordinary assignment does not do this",
+        "No operation can shadow that property"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 492,
+      "type": "text",
+      "text": "Why does Object.hasOwn stay reliable when hasOwnProperty is overridden?",
+      "options": [
+        "It deletes the foreign hasOwnProperty first",
+        "It calls hasOwnProperty from Object’s prototype",
+        "It compares the key with the string constructor",
+        "It does not look up a method on the object and does not call a property from the chain"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 493,
+      "type": "boolean",
+      "text": "An ordinary function has [[Prototype]] equal to Function.prototype.",
+      "correct": true
+    },
+    {
+      "id": 494,
+      "type": "boolean",
+      "text": "In strict mode, Box.prototype = {} on a class throws a TypeError.",
+      "correct": true
+    },
+    {
+      "id": 495,
+      "type": "boolean",
+      "text": "A property written on Object.prototype becomes visible on ordinary objects.",
+      "correct": true
+    },
+    {
+      "id": 496,
+      "type": "boolean",
+      "text": "Object.getOwnPropertyNames also lists inherited names.",
+      "correct": false
+    },
+    {
+      "id": 497,
+      "type": "recall",
+      "text": "What does a sloppy assignment to an inherited property with writable: false do?",
+      "answer": "It changes nothing. No own property appears, and the prototype value stays. In strict mode the same step throws a TypeError."
+    },
+    {
+      "id": 498,
+      "type": "recall",
+      "text": "What does 'toString' in Object.create(null) return?",
+      "answer": "false. Object.prototype is not in the chain, so that name is absent."
+    },
+    {
+      "id": 499,
+      "type": "recall",
+      "text": "Does an ordinary read of proxy.n use the getPrototypeOf trap?",
+      "answer": "No, when there is no get trap. The read goes through the target and the target’s own prototype."
+    },
+    {
+      "id": 500,
+      "type": "recall",
+      "text": "What does an async function lack, compared with an ordinary function, regarding prototypes and new?",
+      "answer": "Its own prototype property. Calling it with new throws a TypeError."
+    },
+    {
+      "id": 501,
+      "type": "code",
+      "language": "js",
+      "text": "const proto = {};\nObject.defineProperty(proto, 'n', { value: 1, enumerable: false });\nconst obj = Object.create(proto);\nconsole.log('n' in obj ? 1 : 0);\nlet seen = 0;\nfor (const key in obj) {\n  if (key === 'n') seen = 1;\n}\nconsole.log(seen);",
+      "options": [
+        "1, 0",
+        "0, 1",
+        "1, 1",
+        "0, 0"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 502,
+      "type": "code",
+      "language": "js",
+      "text": "const proto = { a: 1 };\nconst obj = Object.create(proto);\nobj.b = 2;\nconsole.log(Object.getOwnPropertyNames(obj).length);",
+      "options": [
+        "2",
+        "1",
+        "0",
+        "3"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 503,
+      "type": "code",
+      "language": "js",
+      "text": "Object.prototype.n = 1;\nconst obj = {};\nconsole.log(obj.n);\ndelete Object.prototype.n;",
+      "options": [
+        "0",
+        "2",
+        "1",
+        "3"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 504,
+      "type": "code",
+      "language": "js",
+      "text": "const proto = { a: 1 };\nconst obj = Object.create(proto);\nobj.b = 2;\nconsole.log(JSON.stringify(obj) === '{\"b\":2}' ? 2 : 0);",
+      "options": [
+        "0",
+        "1",
+        "3",
+        "2"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 505,
+      "type": "code",
+      "language": "js",
+      "text": "const proto = { a: 1 };\nconst obj = Object.create(proto);\nobj.b = 2;\nconst copy = { ...obj };\nconsole.log(copy.a === undefined ? 0 : 1);\nconsole.log(copy.b);",
+      "options": [
+        "0, 2",
+        "1, 2",
+        "0, 1",
+        "1, 1"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 506,
+      "type": "code",
+      "language": "js",
+      "text": "class Box {\n  #n = 1;\n  read() {\n    return this.#n;\n  }\n}\nconst box = new Box();\nconsole.log(box.read());\nconsole.log('#n' in box ? 1 : 0);",
+      "options": [
+        "1, 1",
+        "1, 0",
+        "0, 0",
+        "0, 1"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 507,
+      "type": "code",
+      "language": "js",
+      "text": "class A {\n  n() {\n    return this.x;\n  }\n}\nclass B extends A {\n  n() {\n    return super.n();\n  }\n}\nconst obj = { x: 4, n: B.prototype.n };\nconsole.log(obj.n());",
+      "options": [
+        "1",
+        "0",
+        "4",
+        "2"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 508,
+      "type": "code",
+      "language": "js",
+      "text": "const arrow = () => {};\nconsole.log(Object.hasOwn(arrow, 'prototype') ? 1 : 0);",
+      "options": [
+        "1",
+        "2",
+        "3",
+        "0"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 509,
+      "type": "text",
+      "text": "How does the in operator differ from for...in for a non-enumerable inherited name?",
+      "options": [
+        "in sees that name. for...in skips it",
+        "Both skip it",
+        "Both show it",
+        "for...in sees it, and in returns false"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 510,
+      "type": "text",
+      "text": "Does the in operator see a private field #n?",
+      "options": [
+        "Yes, if you evaluate '#n' in obj",
+        "No. A private field is not a string key on the prototype chain",
+        "Yes, because the field lives on prototype",
+        "Yes, but only inside the class"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 511,
+      "type": "text",
+      "text": "What stays fixed when a method that uses super is copied onto another object and called?",
+      "options": [
+        "super starts the search at the new object",
+        "Both super and this come from the home object",
+        "The super search still starts at the home object’s prototype. this becomes the new receiver of the call",
+        "Such a method cannot be called from another object"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 512,
+      "type": "text",
+      "text": "What part of the prototype machinery is missing on an arrow function?",
+      "options": [
+        "The [[Prototype]] link to Function.prototype",
+        "The ability to be an object method",
+        "The closure over outer variables",
+        "Its own prototype property. An arrow cannot be called with new"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 513,
+      "type": "boolean",
+      "text": "Object.getOwnPropertyDescriptor sees a descriptor that lives only on the prototype.",
+      "correct": false
+    },
+    {
+      "id": 514,
+      "type": "boolean",
+      "text": "JSON.stringify includes enumerable inherited keys.",
+      "correct": false
+    },
+    {
+      "id": 515,
+      "type": "boolean",
+      "text": "Object spread copies enumerable inherited keys.",
+      "correct": false
+    },
+    {
+      "id": 516,
+      "type": "boolean",
+      "text": "The third argument of Reflect.get becomes this inside a getter.",
+      "correct": true
+    },
+    {
+      "id": 517,
+      "type": "recall",
+      "text": "What does map return for an Array subclass when Symbol.species was left at the default?",
+      "answer": "An instance of that subclass. The default species is the constructor itself."
+    },
+    {
+      "id": 518,
+      "type": "recall",
+      "text": "What is the [[Prototype]] of the iterator returned by calling a generator function?",
+      "answer": "The prototype object of that generator function."
+    },
+    {
+      "id": 519,
+      "type": "recall",
+      "text": "What is the [[Prototype]] of Function.prototype?",
+      "answer": "Object.prototype."
+    },
+    {
+      "id": 520,
+      "type": "recall",
+      "text": "Is a bound function an instance of Function?",
+      "answer": "Yes. Its [[Prototype]] is Function.prototype, even though it has no prototype property of its own."
+    },
+    {
+      "id": 521,
+      "type": "code",
+      "language": "js",
+      "text": "class MyArray extends Array {\n  static get [Symbol.species]() {\n    return Array;\n  }\n}\nconst mapped = new MyArray(1, 2).map((x) => x);\nconsole.log(mapped instanceof MyArray ? 1 : 0);\nconsole.log(mapped instanceof Array ? 1 : 0);",
+      "options": [
+        "0, 1",
+        "1, 0",
+        "1, 1",
+        "0, 0"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 522,
+      "type": "code",
+      "language": "js",
+      "text": "'use strict';\nconst obj = Object.freeze({});\nlet code = 0;\ntry {\n  Object.setPrototypeOf(obj, {});\n  code = 1;\n} catch {\n  code = 2;\n}\nconsole.log(code);",
+      "options": [
+        "1",
+        "2",
+        "0",
+        "3"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 523,
+      "type": "code",
+      "language": "js",
+      "text": "function Box() {}\nconst proxy = new Proxy({}, {\n  getPrototypeOf() {\n    return Box.prototype;\n  },\n});\nconsole.log(proxy instanceof Box ? 1 : 0);",
+      "options": [
+        "0",
+        "2",
+        "1",
+        "3"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 524,
+      "type": "code",
+      "language": "js",
+      "text": "const proto = { n: 1 };\nconst obj = Object.create(proto);\nconsole.log(Object.getOwnPropertyDescriptor(obj, 'n') === undefined ? 0 : 1);",
+      "options": [
+        "1",
+        "2",
+        "3",
+        "0"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 525,
+      "type": "code",
+      "language": "js",
+      "text": "function Box() {}\nconst obj = Object.create(Box.prototype);\nconsole.log(obj instanceof Box ? 1 : 0);\nconsole.log(Object.hasOwn(obj, 'constructor') ? 1 : 0);",
+      "options": [
+        "1, 0",
+        "0, 1",
+        "1, 1",
+        "0, 0"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 526,
+      "type": "code",
+      "language": "js",
+      "text": "function f() {}\nconsole.log(Object.getPrototypeOf(f) === Function.prototype ? 1 : 0);\nconsole.log(Object.getPrototypeOf(Function.prototype) === Object.prototype ? 1 : 0);",
+      "options": [
+        "1, 0",
+        "1, 1",
+        "0, 1",
+        "0, 0"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 527,
+      "type": "code",
+      "language": "js",
+      "text": "class B extends null {}\nconsole.log(Object.getPrototypeOf(B.prototype) === null ? 0 : 1);\nconsole.log(Object.getPrototypeOf(B) === Function.prototype ? 1 : 0);",
+      "options": [
+        "1, 0",
+        "0, 0",
+        "0, 1",
+        "1, 1"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 528,
+      "type": "code",
+      "language": "js",
+      "text": "function* gen() {}\nconst it = gen();\nconsole.log(Object.getPrototypeOf(it) === gen.prototype ? 1 : 0);\nconsole.log(it instanceof gen ? 1 : 0);",
+      "options": [
+        "1, 0",
+        "0, 1",
+        "0, 0",
+        "1, 1"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 529,
+      "type": "text",
+      "text": "How does Symbol.species affect map on an Array subclass?",
+      "options": [
+        "map builds the result with the species constructor, not always with the same subclass",
+        "species changes the prototype of the original array",
+        "species disables Array.prototype methods",
+        "map ignores species and always returns an Array"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": 530,
+      "type": "text",
+      "text": "Which internal operation does instanceof read, and what does that mean for a proxy?",
+      "options": [
+        "[[Get]] of the constructor key",
+        "[[GetPrototypeOf]]. A getPrototypeOf trap can make instanceof true",
+        "[[OwnPropertyKeys]] of the left operand",
+        "A proxy has no effect on instanceof"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": 531,
+      "type": "text",
+      "text": "Where does Object.prototype.toString read @@toStringTag from?",
+      "options": [
+        "Only among the own keys of Object.prototype",
+        "From the constructor name in the source text",
+        "It looks for it along the chain of the object it was called for",
+        "From the species property"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": 532,
+      "type": "text",
+      "text": "What does a strict assignment to an inherited getter with no setter do?",
+      "options": [
+        "It creates an own property and hides the getter",
+        "It installs a default setter on the prototype",
+        "It changes the getter’s result to the assigned value",
+        "It throws a TypeError. No own property is created, and the getter still returns the previous value"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": 533,
+      "type": "boolean",
+      "text": "The third argument of Reflect.set can become the setter’s this even when the setter lives on another object.",
+      "correct": true
+    },
+    {
+      "id": 534,
+      "type": "boolean",
+      "text": "Calling toString as a method on Object.create(null) throws a TypeError.",
+      "correct": true
+    },
+    {
+      "id": 535,
+      "type": "boolean",
+      "text": "An own property named __proto__ shadows the getter from Object.prototype.",
+      "correct": true
+    },
+    {
+      "id": 536,
+      "type": "boolean",
+      "text": "Object.create(Box.prototype) produces an object for which instanceof Box is true, even though the constructor did not run.",
+      "correct": true
+    },
+    {
+      "id": 537,
+      "type": "recall",
+      "text": "What does Object.setPrototypeOf return when the prototype change succeeds?",
+      "answer": "The same object that was passed in."
+    },
+    {
+      "id": 538,
+      "type": "recall",
+      "text": "Why does delete Box.prototype throw in strict mode when Box is declared with class?",
+      "answer": "A class’s prototype property is non-configurable. It cannot be deleted."
+    },
+    {
+      "id": 539,
+      "type": "recall",
+      "text": "Where is a private field stored relative to the prototype?",
+      "answer": "In an internal slot of the instance. It is not on prototype, and the string key '#n' does not read it."
+    },
+    {
+      "id": 540,
+      "type": "recall",
+      "text": "Does the name prototype appear in Object.keys for class Box?",
+      "answer": "No. A class’s prototype property is non-enumerable, so Object.keys does not show it."
+    }
+  ]
+}
